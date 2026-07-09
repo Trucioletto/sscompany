@@ -1,0 +1,13 @@
+# Local dev helper, not part of the site
+avvia-sito.sh
+
+# Sources used to generate og-image.png and apple-touch-icon.png.
+# Keep them locally; they must never be served from the public domain.
+og-image.svg
+touch-icon-src.svg
+
+# Original logo exports from the designer
+Copia di spinne software logo.svg
+Copia di spinne software logo (1).svg
+
+.DS_Store

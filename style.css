@@ -1,0 +1,426 @@
+/* ---------- Font ---------- */
+
+/* Inter, subset to the glyphs this page uses plus headroom, with the variable
+   weight axis clipped to the 400-600 range the design actually spans.
+   Self-hosted: no third-party request, no GDPR exposure, works offline and
+   where Google is blocked.
+   font-display: optional — the preloaded 21KB file almost always wins its
+   block period, and on a slow connection the fallback simply stays, so the
+   page never reflows. A swap would shift the text after paint.
+   Two declarations must stay in step with the binary: the unicode-range
+   (declaring a codepoint the font lacks makes the browser drop the font for it)
+   and font-weight (declaring a range the axis does not carry invites synthesis). */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: optional;
+  src: url("fonts/inter.woff2") format("woff2");
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AB, U+00B7, U+00BB, U+00C0,
+    U+00C8-00C9, U+00CC, U+00D2, U+00D9, U+00E0, U+00E8-00E9, U+00EC, U+00F2,
+    U+00F9, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
+
+/* ---------- Design tokens ---------- */
+
+:root {
+  --bg: #ffffff;
+  --text: #0e1220;
+  --text-muted: #5a6478;
+  --brand: #4563ff;
+  --brand-dark: #3d5bfa;
+
+  /* The logo width doubles as the measure for the description,
+     so the wordmark and the copy share one column. */
+  --column: 23rem;
+}
+
+/* ---------- Base ---------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #ffffff;
+  background-color: var(--bg);
+  color: #0e1220;
+  color: var(--text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(69, 99, 255, 0.18);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+
+/* Every rule below states a plain value first and the modern one second.
+   A browser that cannot parse min()/max()/clamp()/env()/var() discards that
+   declaration and keeps the plain one. Without the fallback the `* { padding: 0 }`
+   reset would win and the text would sit flush against the screen edge. */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  padding-block: clamp(1.25rem, 4vh, 2rem);
+  padding-left: max(clamp(1.5rem, 5vw, 2rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1.5rem, 5vw, 2rem), env(safe-area-inset-right));
+}
+
+.hero-content {
+  text-align: center;
+  width: 100%;
+  max-width: 23rem;
+  max-width: var(--column);
+}
+
+/* Gentle staggered fade-in */
+.logo,
+.description,
+.cta {
+  animation: fade-in 1.4s ease-out both;
+}
+
+.description {
+  animation-delay: 0.25s;
+}
+
+.cta {
+  animation-delay: 0.5s;
+}
+
+/* ---------- Logo ---------- */
+
+/* The SVG viewBox is cropped to the artwork, so this box is the wordmark
+   itself: margins below are true optical gaps, not padding around empty space. */
+/* Fallback is fluid-then-capped, never a fixed width: a plain `width: 23rem`
+   would overflow a 360px phone on any browser that drops the min() below. */
+.logo {
+  width: 100%;
+  max-width: 23rem;
+  width: min(var(--column), 72vw);
+  height: auto;
+  display: block;
+  margin: 0 auto 1.25rem;
+  margin-bottom: clamp(1rem, 2.4vh, 1.5rem);
+}
+
+/* ---------- Description ---------- */
+
+.description {
+  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.5;
+  text-wrap: balance;
+  color: #5a6478;
+  color: var(--text-muted);
+  max-width: 23rem;
+  max-width: var(--column);
+  margin: 0 auto 3rem;
+  margin-bottom: clamp(1.75rem, 5vh, 3rem);
+}
+
+/* ---------- CTA ---------- */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  background: #4563ff;
+  background: var(--brand);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.875rem 2rem;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+/* A margin, not `gap`: flexbox gap is unsupported on Safari < 14.1 and on the
+   older WebViews still common outside Europe, where the icon would touch the label. */
+.cta svg {
+  margin-right: 0.5rem;
+}
+
+/* :hover and :focus-visible are separate rules on purpose. In one selector list,
+   a browser that does not know :focus-visible discards the WHOLE rule — taking
+   the hover state with it. */
+.cta:hover {
+  background: #3d5bfa;
+  background: var(--brand-dark);
+}
+
+.cta:focus-visible {
+  background: var(--brand-dark);
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 3px;
+}
+
+/* Fallback for browsers without :focus-visible — they get a ring on click too,
+   which is the safe failure mode. The second rule silences that where supported. */
+.cta:focus {
+  outline: 2px solid #3d5bfa;
+  outline-offset: 3px;
+}
+
+.cta:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---------- Legal pages (privacy) ---------- */
+
+/* A reading column, not a hero: left-aligned, narrower measure. Reuses the
+   same white, the same Inter, the same blue. Nothing new is introduced. */
+.legal {
+  flex: 1;
+  width: 100%;
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem;
+  padding-block: clamp(2.5rem, 8vh, 5rem);
+  padding-left: max(clamp(1.5rem, 5vw, 2rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1.5rem, 5vw, 2rem), env(safe-area-inset-right));
+  animation: fade-in 1.4s ease-out both;
+}
+
+.legal-logo {
+  display: inline-block;
+  margin-bottom: 3rem;
+}
+
+.legal-logo img {
+  width: 9rem;
+  height: auto;
+  display: block;
+}
+
+.legal h1 {
+  font-size: 2rem;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.legal h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.legal p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #5a6478;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.legal .lede {
+  font-size: 1.1rem;
+  color: #0e1220;
+  color: var(--text);
+}
+
+.legal strong {
+  font-weight: 600;
+  color: #0e1220;
+  color: var(--text);
+}
+
+.legal a {
+  color: #4563ff;
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal a:hover {
+  color: #3d5bfa;
+  color: var(--brand-dark);
+}
+
+.legal a:focus-visible {
+  color: var(--brand-dark);
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 2px;
+}
+
+.legal a:focus {
+  outline: 2px solid #3d5bfa;
+  outline-offset: 2px;
+}
+
+.legal a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.legal .back {
+  margin-top: 3rem;
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  padding-bottom: max(1.5rem, calc(1rem + env(safe-area-inset-bottom)));
+  font-size: 0.85rem;
+  color: #5a6478;
+  color: var(--text-muted);
+  animation: fade-in 1.4s ease-out 0.7s both;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #4563ff;
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+footer a:focus-visible {
+  color: var(--brand);
+  text-decoration: underline;
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 2px;
+}
+
+footer a:focus {
+  outline: 2px solid #3d5bfa;
+  outline-offset: 2px;
+}
+
+footer a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Thin separator between the copyright line and the privacy link. */
+.footer-sep {
+  margin: 0 0.5rem;
+  opacity: 0.4;
+}
+
+/* Landscape phones and other short viewports: shrink the wordmark
+   so the whole composition still fits on one screen. */
+@media (max-height: 520px) {
+  .logo {
+    max-width: 15rem;
+    width: min(15rem, 45vw);
+  }
+
+  footer {
+    padding-block: 1rem;
+    padding-bottom: max(1rem, calc(0.5rem + env(safe-area-inset-bottom)));
+  }
+}
+
+/* Screens smaller than any current phone: the label would wrap and the
+   stack would outgrow the viewport. Reclaim the few pixels needed. */
+@media (max-width: 300px), (max-height: 400px) {
+  /* Must keep max()+env(): a bare padding-inline here would override the
+     base rule's safe-area insets, and (max-height: 400px) is exactly the
+     landscape phone case where the notch sits on the side. */
+  .hero {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .description {
+    margin-bottom: 1.5rem;
+  }
+
+  /* At this size the label fits on one line only without the wide padding.
+     nowrap is safe here but not at large text-zoom, so it stays scoped. */
+  .cta {
+    padding: 0.875rem 1rem;
+    white-space: nowrap;
+  }
+
+  footer {
+    padding-block: 0.75rem;
+    padding-bottom: max(0.75rem, calc(0.5rem + env(safe-area-inset-bottom)));
+  }
+}
+
+/* In Windows High Contrast the button's background is stripped, leaving the
+   label with no affordance. Restore an outline in that mode only. */
+@media (forced-colors: active) {
+  .cta {
+    border: 1px solid LinkText;
+  }
+}
+
+/* Printed, the white label on a dropped-out background would vanish and the
+   destination would be lost. */
+@media print {
+  .cta {
+    background: none;
+    color: #4563ff;
+    color: var(--brand);
+    border: 1px solid #4563ff;
+    border: 1px solid var(--brand);
+  }
+
+  .cta::after {
+    content: " (" attr(href) ")";
+    font-weight: 400;
+  }
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .description,
+  .cta,
+  footer {
+    animation: none;
+  }
+  .cta {
+    transition: none;
+  }
+}
