@@ -7,7 +7,8 @@ in a browser to see it exactly as it ships.
 
 ```
 index.html            the page (the logo is an inline SVG; JSON-LD at the bottom of <head>)
-privacy.html          privacy notice; update it if the controller or contact changes
+privacy/index.html    privacy notice, served at /privacy/ — its asset paths are
+                      root-absolute because it sits one level deep
 404.html              custom not-found page; GitHub Pages serves it for any unknown URL
 style.css             all styles, including the @font-face
 fonts/inter.woff2     Inter, subset to the glyphs in use, weight axis clipped to 400–600
@@ -124,7 +125,7 @@ the LinkedIn Post Inspector rather than waiting for the cache to expire.
 
 ## Legal
 
-`privacy.html` names **Manuel Luci** as the data controller, with
+`privacy/index.html` names **Manuel Luci** as the data controller, with
 `manuelluci173@gmail.com` as the contact address. GDPR Art. 13 requires only
 those two things: an identity and a way to reach it. Update the page if either
 changes — in particular, replace the natural person with the legal entity once a

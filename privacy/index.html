@@ -13,7 +13,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://spinnesoftware.com/privacy.html">
+  <meta property="og:url" content="https://spinnesoftware.com/privacy/">
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Privacy — Spinne Software">
@@ -32,21 +32,23 @@
   <meta name="twitter:image" content="https://spinnesoftware.com/og-image.png">
   <meta name="twitter:image:alt" content="Spinne Software logo">
 
-  <link rel="canonical" href="https://spinnesoftware.com/privacy.html">
+  <!-- This page lives at /privacy/index.html so the URL reads /privacy/ with no
+       extension. Its asset paths must therefore be root-absolute, not relative. -->
+  <link rel="canonical" href="https://spinnesoftware.com/privacy/">
   <meta name="theme-color" content="#ffffff">
-  <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
-  <link rel="icon" href="favicon-96.png" type="image/png" sizes="96x96">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css">
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
   <main class="legal">
     <a class="legal-logo" href="/" aria-label="Spinne Software — back to home">
-      <img src="logo.svg" alt="Spinne Software" width="216" height="90">
+      <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
     </a>
 
     <h1>Privacy Notice</h1>
