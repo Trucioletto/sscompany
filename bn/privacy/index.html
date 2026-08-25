@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/bn/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,11 +241,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>গোপনীয়তা বিজ্ঞপ্তি</h1>
 
         <p class="lede">এই ওয়েবসাইটটি এমনভাবে বানানো, যাতে প্রযুক্তিগতভাবে যতটা কম সম্ভব ততটুকুই আপনার সম্পর্কে জানে। এটি কোনো কুকি বসায় না, কোনো অ্যানালিটিক্স চালায় না এবং তৃতীয় পক্ষের কোনো কনটেন্ট বসানো নেই, তাই এটি আপনার কোনো প্রোফাইল তৈরি করে না এবং আপনার সম্পর্কে কিছুই এই সাইটের বাইরে যায় না। পাতা পড়ার সময় কেউ যে তথ্যটুকু পায়, তা হলো একটি পাতা পাঠাতে প্রতিটি ওয়েব সার্ভারের যতটুকু কারিগরি বিবরণ লাগে ঠিক ততটুকু। নিচে তার পুরো বিবরণ দেওয়া হলো।</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>সংক্ষেপে</h2>
+          <ul>
+            <li>কুকি নেই, অ্যানালিটিক্স নেই</li>
+            <li>কোনো ধরনের তৃতীয় পক্ষের কনটেন্ট নেই</li>
+            <li>শুধু সার্ভার লগ এন্ট্রি, রাখে হোস্ট</li>
+            <li>মেল থাকে যতক্ষণ না আপনি মুছতে বলেন</li>
+            <li>কিছু বিক্রি নয়, কিছু ভাগ নয়</li>
+          </ul>
+        </div>
 
         <h2>দায়িত্ব কার</h2>
         <p>
@@ -307,33 +321,21 @@
         <p>এই বিজ্ঞপ্তি বদলালে সংশোধিত সংস্করণটি এই পাতাতেই প্রকাশ করা হবে। সর্বশেষ হালনাগাদ করা হয়েছে 25 আগস্ট 2026 তারিখে।</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>সংক্ষেপে</h2>
-          <ul>
-            <li>কুকি নেই, অ্যানালিটিক্স নেই</li>
-            <li>কোনো ধরনের তৃতীয় পক্ষের কনটেন্ট নেই</li>
-            <li>শুধু সার্ভার লগ এন্ট্রি, রাখে হোস্ট</li>
-            <li>মেল থাকে যতক্ষণ না আপনি মুছতে বলেন</li>
-            <li>কিছু বিক্রি নয়, কিছু ভাগ নয়</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>নিয়ন্ত্রক</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>VAT</dt><dd>IT 18636231005</dd></div>
-            <div><dt>ইমেল</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Spinne-কে লিখুন</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ko/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,11 +241,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>개인정보 처리방침</h1>
 
         <p class="lede">이 웹사이트는 기술적으로 가능한 한 이용자에 관해 적게 알도록 만들어졌습니다. 쿠키를 설정하지 않고, 분석 도구를 돌리지 않으며, 제3자 콘텐츠를 삽입하지 않습니다. 따라서 이용자에 관한 프로필을 만들지 않고, 이용자에 관한 어떤 것도 이 사이트를 벗어나지 않습니다. 페이지를 읽을 때 누구든 수신하는 데이터는 웹 서버가 페이지를 보내기 위해 필요로 하는 몇 가지 기술적 정보뿐이며, 아래에 전부 설명합니다.</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>요약</h2>
+          <ul>
+            <li>쿠키 없음, 분석 도구 없음</li>
+            <li>어떤 종류의 제3자 콘텐츠도 없음</li>
+            <li>서버 로그 기록만, 호스팅 사업자가 보관</li>
+            <li>메일은 삭제를 요청할 때까지 보관</li>
+            <li>판매하지 않음, 공유하지 않음</li>
+          </ul>
+        </div>
 
         <h2>책임 주체</h2>
         <p>
@@ -307,33 +321,21 @@
         <p>본 고지가 변경되면 개정된 내용을 이 페이지에 게시합니다. 최종 갱신일은 2026년 8월 25일입니다.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>요약</h2>
-          <ul>
-            <li>쿠키 없음, 분석 도구 없음</li>
-            <li>어떤 종류의 제3자 콘텐츠도 없음</li>
-            <li>서버 로그 기록만, 호스팅 사업자가 보관</li>
-            <li>메일은 삭제를 요청할 때까지 보관</li>
-            <li>판매하지 않음, 공유하지 않음</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>개인정보처리자</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>부가가치세</dt><dd>IT 18636231005</dd></div>
-            <div><dt>이메일</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Spinne에 문의하기</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

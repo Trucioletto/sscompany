@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ar/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,13 +241,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>أين ينتهي المحرّر ويبدأ النموذج.</h1>
 
         <p class="lede">في معظم الأدوات هناك درز. تُصدِّر، وترفع، وتنتظر، وتنزّل، ثم تعيد النتيجة إلى مكانها وتتمنى أن تكون محاذاتها ما زالت سليمة. على جانب من ذلك الدرز مشروعك، وعلى الجانب الآخر برنامج لم يسمع به قط. أما Sparkle فلا درز فيه، وإزالته هي معظم الهندسة التي في هذه الصفحة.</p>
 
-        <h2 id="document">المحرّر مستند والعمليات التي تغيّره</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">شكل البناء</h2>
+
+        <dl class="identity">
+          <div><dt>المستند</dt><dd>واحد لكل مشروع؛ والعمليات هي المدخل الوحيد</dd></div>
+          <div><dt>المساعد</dt><dd>يُصدِر عمليات المحرّر نفسها، لا شيفرة</dd></div>
+          <div><dt>التراجع</dt><dd>عملية واحدة، نقطة تراجع واحدة</dd></div>
+          <div><dt>التزامن</dt><dd>compare-and-swap على عملية الرأس</dd></div>
+          <div><dt>التنفيذ</dt><dd>محجوزة من مخزن الخطط، وإعادتها آمنة</dd></div>
+          <div><dt>نماذج محلية</dt><dd>داخل المحرّر، على الإطارات المحمّلة أصلاً</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">المحرّر مستند والعمليات التي تغيّره</h2>
 
         <p>تحت اللوحات، المحرّر شيء واحد: مستند يصف ما الذي يحدث ومتى، ومجموعة عمليات مسمّاة هي الطريق الوحيد إلى تغييره. قسّم مقطعاً، أعِد توقيته، اضبط لوناً، أضِف مسار ترجمات. ولا شيء غير ذلك يمسّ المستند.</p>
 
@@ -290,39 +304,26 @@
         <p>المُظلِّلات نفسها ترسم التنقّل والعرض النهائي، فما توافق عليه هو ما تسلّمه. ومن دون ذلك يصير كل تعديل بالذكاء الاصطناعي مؤقتاً: تقبل صورة ثم تعيد فحص الملف لاحقاً، وذلك هو الدرز يعود للظهور عند الطرف الآخر من المسار.</p>
 
         <p>وباجتماع ذلك كله — مستند واحد، ومجموعة عمليات واحدة، وتراجع واحد، ورأس واحد، وتنفيذ واحد، ومسار عرض واحد — يكفّ السؤال المثير للاهتمام عن أن يكون: ما جودة النموذج. ويصير: كم يرخص أن تعترض عليه. وهذا هو الجزء الذي نبنيه.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">ما يكلّفه هذا</h2>
+
+        <p>تمرير المساعد عبر عمليات المحرّر نفسها يعني أنه لا يستطيع إلا ما يستطيعه المحرّر. ونموذج يستطيع كتابة شيفرة عشوائية سيكون أقدر، وأصعب كثيراً من حيث التراجع عنه ومراجعته والثقة به. تلك كانت المقايضة، وقد اختيرت عن قصد.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>شكل البناء</h2>
-          <dl class="rail-facts">
-            <div><dt>المستند</dt><dd>واحد لكل مشروع؛ والعمليات هي المدخل الوحيد</dd></div>
-            <div><dt>المساعد</dt><dd>يُصدِر عمليات المحرّر نفسها، لا شيفرة</dd></div>
-            <div><dt>التراجع</dt><dd>عملية واحدة، نقطة تراجع واحدة</dd></div>
-            <div><dt>التزامن</dt><dd>compare-and-swap على عملية الرأس</dd></div>
-            <div><dt>التنفيذ</dt><dd>محجوزة من مخزن الخطط، وإعادتها آمنة</dd></div>
-            <div><dt>نماذج محلية</dt><dd>داخل المحرّر، على الإطارات المحمّلة أصلاً</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>ما يكلّفه هذا</h2>
-          <p>تمرير المساعد عبر عمليات المحرّر نفسها يعني أنه لا يستطيع إلا ما يستطيعه المحرّر. ونموذج يستطيع كتابة شيفرة عشوائية سيكون أقدر، وأصعب كثيراً من حيث التراجع عنه ومراجعته والثقة به. تلك كانت المقايضة، وقد اختيرت عن قصد.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">تحدّث إلى Spinne</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">تحدّث إلى Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

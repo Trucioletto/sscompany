@@ -1,4 +1,4 @@
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>{{page.h1}}</h1>
 
@@ -16,6 +16,16 @@
 
         <p>{{page.one_p1}}</p>
 
+        <h2 id="name">{{page.rail_name}}</h2>
+
+        <p>{{page.rail_name_body}}</p>
+
+        <h2 id="decided">{{page.h2_decided}}</h2>
+
+        <p>{{page.decided_p1}}</p>
+
+        <p>{{page.decided_p2}}</p>
+
         <h2 id="built">{{page.h2_built}}</h2>
 
         <p>
@@ -24,7 +34,7 @@
           <a href="{{nav.sparkle_href}}">{{page.built_link_what}}</a> &middot; <a href="{{nav.how_href}}">{{page.built_link_how}}</a>{{punct.stop}}
         </p>
 
-        <h2 id="compliance">{{page.h2_compliance}}</h2>
+        <h2 id="compliance" class="key">{{page.h2_compliance}}</h2>
 
         <p>{{page.compliance_intro}}</p>
 
@@ -35,11 +45,15 @@
           <li><strong>{{page.compliance.3.head}}</strong> {{page.compliance.3.body}}</li>
         </ul>
 
+        <!-- The registered identity, once. The rail used to carry a four-row
+             copy of four of these seven rows, 300px to the right of the table
+             they were copied from. -->
         <h2 id="company-details">{{page.h2_details}}</h2>
 
         <dl class="identity">
           <div><dt>{{facts.legal_name}}</dt><dd>Spinne Software di Luci Manuel</dd></div>
           <div><dt>{{facts.legal_form}}</dt><dd>{{facts.legal_form_value}}</dd></div>
+          <div><dt>{{facts.founder}}</dt><dd>Manuel Luci</dd></div>
           <div><dt>{{facts.vat_number}}</dt><dd>IT 18636231005</dd></div>
           <div><dt>{{facts.register}}</dt><dd>{{facts.register_value}}</dd></div>
           <div><dt>{{facts.email}}</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
@@ -54,29 +68,12 @@
         <p>{{page.talking_p1}}</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>{{page.rail_registered}}</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>{{facts.vat}}</dt><dd>IT 18636231005</dd></div>
-            <div><dt>REA</dt><dd>{{facts.rea_value}}</dd></div>
-            <div><dt>{{facts.founder}}</dt><dd>Manuel Luci</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>{{page.rail_name}}</h2>
-          <p>{{page.rail_name_body}}</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Spinne%20Software">{{cta.talk}}</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
-            <a href="mailto:spinnesoftware@pec.it">PEC</a>&nbsp;&middot;
-            <a href="https://www.linkedin.com/company/spinne-software/" target="_blank" rel="noopener">LinkedIn</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Spinne%20Software">{{cta.talk}}</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>&nbsp;&middot;
+          <a href="https://www.linkedin.com/company/spinne-software/" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+      </section>
     </div>

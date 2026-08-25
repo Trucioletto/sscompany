@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/de/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,11 +242,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Datenschutzerklärung</h1>
 
         <p class="lede">Diese Website ist so gebaut, dass sie so wenig über Sie erfährt, wie es technisch möglich ist. Sie setzt keine Cookies, führt keine Analyse durch und bindet keine Inhalte Dritter ein; sie erstellt also kein Profil von Ihnen, und nichts über Sie verlässt diese Seite. Die einzigen Daten, die beim Lesen einer Seite überhaupt jemand erhält, sind die wenigen technischen Angaben, die jeder Webserver braucht, um Ihnen eine Seite zu schicken. Sie sind unten vollständig beschrieben.</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>Kurz gefasst</h2>
+          <ul>
+            <li>Keine Cookies, keine Analyse</li>
+            <li>Keinerlei Inhalte Dritter</li>
+            <li>Nur Serverprotokolle, beim Hoster</li>
+            <li>E-Mails bleiben, bis Sie um Löschung bitten</li>
+            <li>Nichts verkauft, nichts weitergegeben</li>
+          </ul>
+        </div>
 
         <h2>Wer verantwortlich ist</h2>
         <p>
@@ -308,33 +322,21 @@
         <p>Ändert sich diese Erklärung, wird die überarbeitete Fassung auf dieser Seite veröffentlicht. Zuletzt aktualisiert am 25. August 2026.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Kurz gefasst</h2>
-          <ul>
-            <li>Keine Cookies, keine Analyse</li>
-            <li>Keinerlei Inhalte Dritter</li>
-            <li>Nur Serverprotokolle, beim Hoster</li>
-            <li>E-Mails bleiben, bis Sie um Löschung bitten</li>
-            <li>Nichts verkauft, nichts weitergegeben</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>Verantwortlicher</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>USt-IdNr.</dt><dd>IT 18636231005</dd></div>
-            <div><dt>E-Mail</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Kontakt zu Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

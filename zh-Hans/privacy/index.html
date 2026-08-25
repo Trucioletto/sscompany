@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/zh-Hans/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,11 +241,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>隐私声明</h1>
 
         <p class="lede">本网站在技术允许的范围内，尽可能少地了解你。它不设置Cookie、不运行任何数据分析、不嵌入任何第三方内容，因此它不会为你建立画像，关于你的任何信息也不会离开本站。你阅读页面时任何人收到的数据，只有每一台网页服务器为了把页面发送给你所必需的那几项技术细节。下文对它们有完整说明。</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>简而言之</h2>
+          <ul>
+            <li>不使用Cookie，不做数据分析</li>
+            <li>没有任何形式的第三方内容</li>
+            <li>只有服务器日志记录，由托管方保存</li>
+            <li>邮件一直保留，直到你要求删除</li>
+            <li>不出售，不共享</li>
+          </ul>
+        </div>
 
         <h2>谁是责任方</h2>
         <p>
@@ -307,33 +321,21 @@
         <p>若本声明发生变更，修订后的版本将发布在本页。最近一次更新于2026年8月25日。</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>简而言之</h2>
-          <ul>
-            <li>不使用Cookie，不做数据分析</li>
-            <li>没有任何形式的第三方内容</li>
-            <li>只有服务器日志记录，由托管方保存</li>
-            <li>邮件一直保留，直到你要求删除</li>
-            <li>不出售，不共享</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>数据控制者</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>增值税</dt><dd>IT 18636231005</dd></div>
-            <div><dt>电子邮件</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">联系Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

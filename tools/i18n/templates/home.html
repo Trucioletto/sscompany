@@ -1,17 +1,33 @@
-    <div class="wrap layout">
-      <div>
+    <div class="page">
+      <article class="doc home">
         <h1>{{page.h1}}</h1>
 
         <p class="lede">{{page.lede}}</p>
 
+        <h2 id="values">{{page.h2_values}}</h2>
+
         <ul class="home-what">
-          <li>{{page.what.0}}</li>
-          <li>{{page.what.1}}</li>
-          <li>{{page.what.2}}</li>
-          <li>{{page.what.3}}</li>
+          <li><strong>{{page.what.0.name}}</strong> {{page.what.0.body}}</li>
+          <li><strong>{{page.what.1.name}}</strong> {{page.what.1.body}}</li>
+          <li><strong>{{page.what.2.name}}</strong> {{page.what.2.body}}</li>
+          <li><strong>{{page.what.3.name}}</strong> {{page.what.3.body}}</li>
+          <li><strong>{{page.what.4.name}}</strong> {{page.what.4.body}}</li>
+          <li><strong>{{page.what.5.name}}</strong> {{page.what.5.body}}</li>
         </ul>
 
-        <h2 id="sparkle" class="lockup">
+        <!-- The motto stays in English in every language, like the company name
+             it belongs to: it is a brand line, not a sentence. The paragraph
+             under it is translated, because that is what explains it to a reader
+             who does not speak the motto.
+
+             It sits here, between what the company values and what it has built,
+             and not next to the pull quote further down — both are about the
+             web, and two spider metaphors 400px apart halve each other. -->
+        <h2 id="name" translate="no">{{page.rail_motto}}</h2>
+
+        <p>{{page.rail_motto_body}}</p>
+
+        <h2 id="sparkle" class="lockup key">
           <a href="https://sparkle.software">
             <img src="/sparkle-lockup.png" alt="{{page.h2_sparkle}}" width="172" height="36" decoding="async">
           </a>
@@ -32,30 +48,23 @@
         <p class="pull">{{page.pull}}</p>
 
         <p>{{page.next_p2}}</p>
-      </div>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>{{page.rail_company}}</h2>
-          <dl class="rail-facts">
-            <div><dt>{{facts.legal_name}}</dt><dd>Spinne Software di Luci Manuel</dd></div>
-            <div><dt>{{facts.registered}}</dt><dd>{{facts.registered_value}}</dd></div>
-            <div><dt>{{facts.vat}}</dt><dd>IT 18636231005</dd></div>
-            <div><dt>{{facts.products}}</dt><dd><a href="https://sparkle.software">Sparkle</a>{{facts.preview_paren}}</dd></div>
-          </dl>
-        </div>
+        <h2 id="engineering">{{page.rail_engineering}}</h2>
 
-        <div class="rail-block">
-          <h2>{{page.rail_engineering}}</h2>
-          <p>{{page.rail_engineering_body}}</p>
-        </div>
+        <p>{{page.rail_engineering_body}}</p>
 
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Spinne%20Software">{{cta.talk}}</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
-            <a href="https://www.linkedin.com/company/spinne-software/" target="_blank" rel="noopener">LinkedIn</a>
-          </p>
-        </div>
-      </aside>
+        <p class="more">
+          <a href="{{nav.how_href}}">{{nav.how}}</a>
+        </p>
+      </article>
+
+      <!-- The one action on the page, at the end of the argument rather than in
+           a sticky column beside it. See .close in style.css. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Spinne%20Software">{{cta.talk}}</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="https://www.linkedin.com/company/spinne-software/" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+      </section>
     </div>

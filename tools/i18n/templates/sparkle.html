@@ -1,4 +1,4 @@
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>{{page.h1}}</h1>
 
@@ -20,7 +20,7 @@
 
         <p>{{page.preview_p2}}</p>
 
-        <h2 id="ai">{{page.h2_ai}}</h2>
+        <h2 id="ai" class="key">{{page.h2_ai}}</h2>
 
         <p>{{page.ai_p1}}</p>
 
@@ -30,11 +30,32 @@
 
         <p>{{page.ai_p4}}</p>
 
+        <h2 id="short">{{page.rail_short}}</h2>
+
+        <p>{{page.rail_short_body}}</p>
+
         <h2 id="export">{{page.h2_export}}</h2>
 
         <p>{{page.export_p1}}</p>
 
         <p>{{page.export_p2}}</p>
+
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">{{page.rail_hood}}</h2>
+
+        <dl class="identity">
+          <div><dt>{{page.spec.rendering}}</dt><dd>{{page.spec.rendering_v}}</dd></div>
+          <div><dt>{{page.spec.local_ai}}</dt><dd>{{page.spec.local_ai_v}}</dd></div>
+          <div><dt>{{page.spec.speech}}</dt><dd>{{page.spec.speech_v}}</dd></div>
+          <div><dt>{{page.spec.encoding}}</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>{{page.spec.formats}}</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>{{page.spec.colour}}</dt><dd>{{page.spec.colour_v}}</dd></div>
+          <div><dt>{{page.spec.audio}}</dt><dd>{{page.spec.audio_v}}</dd></div>
+        </dl>
 
         <h2 id="who">{{page.h2_who}}</h2>
 
@@ -45,34 +66,14 @@
         <p>{{page.status_p1}}</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>{{page.rail_hood}}</h2>
-          <dl class="rail-facts">
-            <div><dt>{{page.spec.rendering}}</dt><dd>{{page.spec.rendering_v}}</dd></div>
-            <div><dt>{{page.spec.local_ai}}</dt><dd>{{page.spec.local_ai_v}}</dd></div>
-            <div><dt>{{page.spec.speech}}</dt><dd>{{page.spec.speech_v}}</dd></div>
-            <div><dt>{{page.spec.encoding}}</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>{{page.spec.formats}}</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>{{page.spec.colour}}</dt><dd>{{page.spec.colour_v}}</dd></div>
-            <div><dt>{{page.spec.audio}}</dt><dd>{{page.spec.audio_v}}</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>{{page.rail_short}}</h2>
-          <p>{{page.rail_short_body}}</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            {{cta.open_sparkle}}
-          </a>
-          <p class="cta-note">
-            {{cta.or_write}}
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          {{cta.open_sparkle}}
+        </a>
+        <p class="cta-note">
+          {{cta.or_write}}
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>

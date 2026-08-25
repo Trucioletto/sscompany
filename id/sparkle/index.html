@@ -210,7 +210,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/id/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -253,11 +253,11 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Editor video dengan mesin di bawahnya.</h1>
 
-        <p class="lede">Sparkle adalah aplikasi desktop untuk orang yang menyunting video sebagai mata pencaharian. Rendering GPU, model AI yang berjalan di mesin Anda sendiri, encoding perangkat keras yang menyesuaikan diri dengan chip Anda — dan filosofi editorial yang tidak pernah menyentuh hasil suntingan Anda tanpa diminta.</p>
+        <p class="lede">Sparkle adalah aplikasi desktop untuk orang yang menyunting video sebagai mata pencaharian. Rendering GPU, model AI yang berjalan di mesin Anda sendiri, encoding perangkat keras yang menyesuaikan diri dengan chip Anda — dan asisten yang tidak pernah menyentuh hasil suntingan Anda tanpa diminta.</p>
 
         <h2 id="problem">Sebagian besar penyuntingan bukanlah menyunting</h2>
 
@@ -275,15 +275,19 @@
 
         <p>Rekaman berat mendapat proxy dan jalur penyusuran yang dibangun untuk timeline panjang, dan itulah perbedaan antara editor tempat Anda bisa berpikir dan editor yang harus Anda tunggu.</p>
 
-        <h2 id="ai">Sebagian besar AI berjalan di mesin Anda</h2>
+        <h2 id="ai" class="key">Sebagian besar AI berjalan di mesin Anda</h2>
 
         <p>Penghapusan latar, segmentasi subjek, dan estimasi kedalaman berjalan sebagai model lokal di perangkat keras Anda sendiri. Rekaman mentah satu sore penuh tidak perlu diunggah agar berguna, dan rekaman yang diembargo tetap diembargo.</p>
 
-        <p>Pengubahan ucapan menjadi teks juga dapat berjalan secara lokal, pada model Whisper yang disertakan bersama editornya. Tersedia pula mesin cloud, dan pengaturan bawaan memilih salah satunya lebih dulu, sehingga ke mana audio Anda pergi adalah sebuah pengaturan, bukan sebuah asumsi.</p>
+        <p>Pengubahan ucapan menjadi teks juga dapat berjalan secara lokal, pada model Whisper yang diunduh editornya sekali lalu dipakai tanpa jaringan. Tersedia pula mesin cloud, dan pengaturan bawaan memilih salah satunya lebih dulu, sehingga ke mana audio Anda pergi adalah sebuah pengaturan, bukan sebuah asumsi.</p>
 
         <p>Mask mengikuti objek antar-frame menggunakan optical flow, bukan digambar ulang shot demi shot. Caption hadir dengan penanda waktu per kata, sehingga dapat diberi gaya, dipotong ulang, dan diekspor ke format yang diharapkan seluruh industri.</p>
 
         <p>Pekerjaan generatif yang lebih berat membutuhkan cloud, dan bagian itu dihitung di tempat yang dapat Anda lihat. Setiap akun memiliki saldo kredit; sebuah operasi mencadangkan perkiraan biayanya sebelum mulai dan menyelesaikannya sesuai biaya yang benar-benar terjadi. Tidak ada yang baru menemukan tagihannya di akhir bulan.</p>
+
+        <h2 id="short">Yang tidak akan dilakukannya</h2>
+
+        <p>Ia tidak mengambil alih hasil suntingan dari tangan Anda. Asistennya tidak menyentuh potongan yang tidak diminta untuk disentuhnya, dan tidak dapat melakukan apa pun yang tidak dapat dilakukan editornya sendiri — dan itulah sebabnya satu undo dapat mengembalikan bagian mana pun darinya.</p>
 
         <h2 id="export">Ekspor yang berbicara dengan perangkat keras Anda</h2>
 
@@ -291,51 +295,48 @@
 
         <p>Warna melewati pipeline 3D LUT, sehingga look yang dibangun di tempat lain tiba dalam keadaan utuh. Audio dinormalkan ke EBU R128 saat keluar, sebab pengiriman yang gagal memenuhi spesifikasi loudness adalah pengiriman yang harus dilakukan dua kali.</p>
 
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">Di balik kap mesin</h2>
+
+        <dl class="identity">
+          <div><dt>Rendering</dt><dd>Shader GPU, dipakai bersama pratinjau dan ekspor</dd></div>
+          <div><dt>AI lokal</dt><dd>ONNX Runtime — matting, segmentasi, kedalaman</dd></div>
+          <div><dt>Ucapan</dt><dd>Di perangkat atau cloud, penanda waktu per kata</dd></div>
+          <div><dt>Encoding</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>Format</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>Warna</dt><dd>Pipeline 3D LUT</dd></div>
+          <div><dt>Audio</dt><dd>Loudness EBU R128</dd></div>
+        </dl>
+
         <h2 id="who">Untuk siapa</h2>
 
-        <p>Editor dan tim pascaproduksi kecil — orang yang hidup di dalam timeline dan menghitung setiap jam yang dikembalikan perangkat lunaknya. Editor desktop-nya gratis. AI cloud dijual per kursi, sehingga tiga editor membayar tiga kursi, bukan tingkat lisensi yang dikarang seseorang.</p>
+        <p>Editor dan tim pascaproduksi kecil — orang yang hidup di dalam timeline dan menghitung setiap jam yang dikembalikan perangkat lunaknya. Editor desktop-nya gratis. AI cloud dijual per kursi, sehingga tiga editor membayar tiga kursi, bukan tingkat lisensi yang dikarang seseorang. Saldo kredit yang disebut di atas adalah cara mengukur pekerjaan cloud di dalam satu kursi.</p>
 
         <h2 id="status">Posisinya hari ini</h2>
 
         <p>Sparkle berada dalam <strong>pratinjau privat</strong>. Editor, layanan cloud, akun, dan penagihan sudah dibangun dan berjalan; akses dibuka bertahap, sebab perangkat lunak yang menangani rekaman orang lain dan uang orang lain layak dilepas perlahan.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Di balik kap mesin</h2>
-          <dl class="rail-facts">
-            <div><dt>Rendering</dt><dd>Shader GPU, dipakai bersama pratinjau dan ekspor</dd></div>
-            <div><dt>AI lokal</dt><dd>ONNX Runtime — matting, segmentasi, kedalaman</dd></div>
-            <div><dt>Ucapan</dt><dd>Di perangkat atau cloud, penanda waktu per kata</dd></div>
-            <div><dt>Encoding</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>Format</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>Warna</dt><dd>Pipeline 3D LUT</dd></div>
-            <div><dt>Audio</dt><dd>Loudness EBU R128</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>Yang tidak akan dilakukannya</h2>
-          <p>Ia tidak mengambil alih hasil suntingan dari tangan Anda. Asistennya tidak menyentuh potongan yang tidak diminta untuk disentuhnya, dan tidak dapat melakukan apa pun yang tidak dapat dilakukan editornya sendiri — dan itulah sebabnya satu undo dapat mengembalikan bagian mana pun darinya.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            Buka sparkle.software
-          </a>
-          <p class="cta-note">
-            Atau tulis ke
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          Buka sparkle.software
+        </a>
+        <p class="cta-note">
+          Atau tulis ke
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

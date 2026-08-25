@@ -210,7 +210,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/fr/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -253,11 +253,11 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Un logiciel de montage vidéo avec un moteur dessous.</h1>
 
-        <p class="lede">Sparkle est une application de bureau pour ceux qui montent pour vivre. Rendu GPU, modèles d'IA qui tournent sur votre propre machine, encodage matériel qui s'adapte à votre silicium — et un parti pris éditorial qui ne touche jamais au montage sans qu'on le lui demande.</p>
+        <p class="lede">Sparkle est une application de bureau pour ceux qui montent pour vivre. Rendu GPU, modèles d'IA qui tournent sur votre propre machine, encodage matériel qui s'adapte à votre silicium — et un assistant qui ne touche jamais au montage sans qu'on le lui demande.</p>
 
         <h2 id="problem">L'essentiel d'un montage n'est pas du montage</h2>
 
@@ -275,15 +275,19 @@
 
         <p>Les images lourdes reçoivent des proxys et un chemin de défilement conçu pour les longues timelines, ce qui fait la différence entre un logiciel dans lequel on pense et un logiciel que l'on attend.</p>
 
-        <h2 id="ai">L'essentiel de l'IA tourne sur votre machine</h2>
+        <h2 id="ai" class="key">L'essentiel de l'IA tourne sur votre machine</h2>
 
         <p>La suppression de l'arrière-plan, la segmentation du sujet et l'estimation de profondeur sont des modèles locaux qui tournent sur votre propre matériel. Un après-midi de rushes n'a pas besoin d'être téléversé pour devenir exploitable, et des images sous embargo restent sous embargo.</p>
 
-        <p>La transcription de la parole peut elle aussi tourner en local, sur un modèle Whisper livré avec le logiciel. Il existe également des moteurs cloud, et la configuration par défaut s'adresse d'abord à l'un d'eux : la destination de votre audio est donc un réglage, pas une supposition.</p>
+        <p>La transcription de la parole peut elle aussi tourner en local, sur un modèle Whisper que le logiciel télécharge une fois puis utilise sans réseau. Il existe également des moteurs cloud, et la configuration par défaut s'adresse d'abord à l'un d'eux : la destination de votre audio est donc un réglage, pas une supposition.</p>
 
         <p>Les masques suivent le mouvement d'image en image par flux optique, au lieu d'être redessinés plan par plan. Les sous-titres arrivent avec un calage au mot, ce qui permet de les styliser, de les recouper et de les exporter dans les formats attendus par le reste de la profession.</p>
 
         <p>Les travaux génératifs les plus lourds passent par le cloud, et cette partie est décomptée là où on peut la voir. Chaque compte détient un solde de crédits ; une opération réserve ce qu'elle pourrait coûter avant de démarrer, puis se règle sur ce qu'elle a réellement coûté. Personne ne découvre une facture à la fin du mois.</p>
+
+        <h2 id="short">Ce qu'il ne fera pas</h2>
+
+        <p>Il ne vous prend pas le montage. L'assistant ne touche pas à une coupe qu'on ne lui a pas demandé de toucher, et il ne peut rien faire que le logiciel lui-même ne sache faire — c'est la raison pour laquelle une seule annulation suffit à revenir en arrière.</p>
 
         <h2 id="export">Un export qui parle à votre matériel</h2>
 
@@ -291,51 +295,48 @@
 
         <p>La couleur passe par une chaîne 3D LUT : un étalonnage construit ailleurs arrive intact. L'audio est normalisé en EBU R128 à la sortie, parce qu'une livraison recalée sur la norme de sonie est une livraison que l'on fait deux fois.</p>
 
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">Sous le capot</h2>
+
+        <dl class="identity">
+          <div><dt>Rendu</dt><dd>Shaders GPU, partagés par l'aperçu et l'export</dd></div>
+          <div><dt>IA locale</dt><dd>ONNX Runtime — détourage, segmentation, profondeur</dd></div>
+          <div><dt>Parole</dt><dd>Sur la machine ou dans le cloud, calage au mot</dd></div>
+          <div><dt>Encodage</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>Formats</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>Couleur</dt><dd>Chaîne 3D LUT</dd></div>
+          <div><dt>Audio</dt><dd>Sonie EBU R128</dd></div>
+        </dl>
+
         <h2 id="who">À qui il s'adresse</h2>
 
-        <p>Monteurs et petites équipes de post-production — des gens qui vivent dans une timeline et qui remarquent chaque heure que le logiciel leur rend. Le logiciel de bureau est gratuit. L'IA cloud se vend au poste : trois monteurs paient trois postes, pas un palier de licence inventé par quelqu'un.</p>
+        <p>Monteurs et petites équipes de post-production — des gens qui vivent dans une timeline et qui remarquent chaque heure que le logiciel leur rend. Le logiciel de bureau est gratuit. L'IA cloud se vend au poste : trois monteurs paient trois postes, pas un palier de licence inventé par quelqu'un. Le solde de crédits évoqué plus haut est la façon dont le travail cloud est mesuré à l'intérieur d'un poste.</p>
 
         <h2 id="status">Où en est le produit</h2>
 
         <p>Sparkle est en <strong>préversion privée</strong>. Le logiciel, les services cloud, les comptes et la facturation sont construits et en service ; l'accès s'ouvre progressivement, parce qu'un logiciel qui manipule les images et l'argent des autres mérite d'être lâché lentement.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Sous le capot</h2>
-          <dl class="rail-facts">
-            <div><dt>Rendu</dt><dd>Shaders GPU, partagés par l'aperçu et l'export</dd></div>
-            <div><dt>IA locale</dt><dd>ONNX Runtime — détourage, segmentation, profondeur</dd></div>
-            <div><dt>Parole</dt><dd>Sur la machine ou dans le cloud, calage au mot</dd></div>
-            <div><dt>Encodage</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>Formats</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>Couleur</dt><dd>Chaîne 3D LUT</dd></div>
-            <div><dt>Audio</dt><dd>Sonie EBU R128</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>Ce qu'il ne fera pas</h2>
-          <p>Il ne vous prend pas le montage. L'assistant ne touche pas à une coupe qu'on ne lui a pas demandé de toucher, et il ne peut rien faire que le logiciel lui-même ne sache faire — c'est la raison pour laquelle une seule annulation suffit à revenir en arrière.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            Ouvrir sparkle.software
-          </a>
-          <p class="cta-note">
-            Ou écrire à
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          Ouvrir sparkle.software
+        </a>
+        <p class="cta-note">
+          Ou écrire à
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

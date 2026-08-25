@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/bn/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,13 +241,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>এডিটর যেখানে শেষ, মডেল যেখানে শুরু।</h1>
 
         <p class="lede">বেশির ভাগ টুলে একটি সেলাই থাকে। আপনি এক্সপোর্ট করেন, আপলোড করেন, অপেক্ষা করেন, ডাউনলোড করেন, ফলটা আবার জায়গামতো বসিয়ে আশা করেন যে সব এখনো মিলে আছে। ওই সেলাইয়ের এক পাশে আপনার প্রজেক্ট; অন্য পাশে এমন একটি প্রোগ্রাম, যে প্রজেক্টটির নামও কোনোদিন শোনেনি। Sparkle-এ ওই সেলাই নেই, আর এই পাতার ইঞ্জিনিয়ারিংয়ের বেশির ভাগটাই সেটিকে তুলে ফেলার কাজ।</p>
 
-        <h2 id="document">এডিটর মানে একটি ডকুমেন্ট আর তা বদলানোর অপারেশনগুলো</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">গড়নটা</h2>
+
+        <dl class="identity">
+          <div><dt>ডকুমেন্ট</dt><dd>প্রতি প্রজেক্টে একটি; ঢোকার পথ কেবল অপারেশন</dd></div>
+          <div><dt>অ্যাসিস্ট্যান্ট</dt><dd>কোড নয়, এডিটরের নিজের অপারেশন</dd></div>
+          <div><dt>Undo</dt><dd>এক অপারেশন, এক checkpoint</dd></div>
+          <div><dt>কনকারেন্সি</dt><dd>head operation-এ compare-and-swap</dd></div>
+          <div><dt>এক্সিকিউশন</dt><dd>plan store থেকে claim করা, replay-নিরাপদ</dd></div>
+          <div><dt>লোকাল মডেল</dt><dd>একই প্রসেসে, আগেই লোড হওয়া ফ্রেমে</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">এডিটর মানে একটি ডকুমেন্ট আর তা বদলানোর অপারেশনগুলো</h2>
 
         <p>প্যানেলগুলোর নিচে এডিটর আসলে একটিই জিনিস: একটি ডকুমেন্ট, যেটি বলে কখন কী ঘটে, আর নাম দেওয়া একগুচ্ছ অপারেশন, যেগুলোই সেটি বদলানোর একমাত্র উপায়। ক্লিপ ভাগ করা, তার গতি বদলানো, রং বসানো, ক্যাপশন ট্র্যাক যোগ করা। ডকুমেন্টে আর কিছুই হাত দেয় না।</p>
 
@@ -290,39 +304,26 @@
         <p>একই শেডার স্ক্রাব আর চূড়ান্ত রেন্ডার দুটোই আঁকে, তাই আপনি যেটি অনুমোদন করেন সেটিই আপনি পাঠান। এটি না থাকলে প্রতিটি AI এডিটই সাময়িক: আপনি একটি ছবি মেনে নিতেন আর ফাইলটি পরে আবার যাচাই করতেন — অর্থাৎ পাইপলাইনের অন্য প্রান্তে ওই সেলাইয়েরই ফিরে আসা।</p>
 
         <p>সব মিলিয়ে — একটি ডকুমেন্ট, একগুচ্ছ অপারেশন, একটি undo, একটি head, একটি এক্সিকিউশন, একটি রেন্ডার পথ — আকর্ষণীয় প্রশ্নটি তখন আর এই থাকে না যে মডেলটি কতটা ভালো। প্রশ্নটি হয়ে দাঁড়ায়, তার সঙ্গে দ্বিমত করা কত সস্তা। আমরা ওই অংশটাই বানাই।</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">এর দাম</h2>
+
+        <p>অ্যাসিস্ট্যান্টকে এডিটরের নিজের অপারেশনের মধ্য দিয়ে চালানো মানে এডিটর যা পারে সে কেবল ততটুকুই পারে। যে মডেল ইচ্ছেমতো কোড লিখতে পারত সে আরও বেশি পারত, কিন্তু তাকে undo করা, পর্যালোচনা করা বা বিশ্বাস করা অনেক কঠিন হতো। এই বিনিময়টি জেনেবুঝেই করা হয়েছে।</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>গড়নটা</h2>
-          <dl class="rail-facts">
-            <div><dt>ডকুমেন্ট</dt><dd>প্রতি প্রজেক্টে একটি; ঢোকার পথ কেবল অপারেশন</dd></div>
-            <div><dt>অ্যাসিস্ট্যান্ট</dt><dd>কোড নয়, এডিটরের নিজের অপারেশন</dd></div>
-            <div><dt>Undo</dt><dd>এক অপারেশন, এক checkpoint</dd></div>
-            <div><dt>কনকারেন্সি</dt><dd>head operation-এ compare-and-swap</dd></div>
-            <div><dt>এক্সিকিউশন</dt><dd>plan store থেকে claim করা, replay-নিরাপদ</dd></div>
-            <div><dt>লোকাল মডেল</dt><dd>একই প্রসেসে, আগেই লোড হওয়া ফ্রেমে</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>এর দাম</h2>
-          <p>অ্যাসিস্ট্যান্টকে এডিটরের নিজের অপারেশনের মধ্য দিয়ে চালানো মানে এডিটর যা পারে সে কেবল ততটুকুই পারে। যে মডেল ইচ্ছেমতো কোড লিখতে পারত সে আরও বেশি পারত, কিন্তু তাকে undo করা, পর্যালোচনা করা বা বিশ্বাস করা অনেক কঠিন হতো। এই বিনিময়টি জেনেবুঝেই করা হয়েছে।</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne-কে লিখুন</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne-কে লিখুন</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

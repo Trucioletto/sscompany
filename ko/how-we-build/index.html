@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ko/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,13 +241,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>편집기가 끝나고 모델이 시작되는 자리.</h1>
 
         <p class="lede">대부분의 도구에는 이음매가 있습니다. 내보내고, 업로드하고, 기다리고, 내려받고, 결과를 도로 가져다 놓고, 아직 아귀가 맞기를 바랍니다. 그 이음매의 한쪽에는 당신의 프로젝트가 있고, 다른 쪽에는 그 프로젝트를 들어 본 적 없는 프로그램이 있습니다. Sparkle에는 그 이음매가 없으며, 그것을 없애는 일이 이 페이지에 적힌 엔지니어링의 대부분입니다.</p>
 
-        <h2 id="document">편집기는 문서 하나와 그것을 바꾸는 작업들입니다</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">전체 구조</h2>
+
+        <dl class="identity">
+          <div><dt>문서</dt><dd>프로젝트당 하나. 들어가는 길은 작업뿐</dd></div>
+          <div><dt>어시스턴트</dt><dd>코드가 아니라 편집기의 작업을 발행</dd></div>
+          <div><dt>되돌리기</dt><dd>작업 하나, 체크포인트 하나</dd></div>
+          <div><dt>동시성</dt><dd>헤드 작업에 대한 비교 후 교환</dd></div>
+          <div><dt>실행</dt><dd>플랜 저장소에서 점유, 리플레이 안전</dd></div>
+          <div><dt>로컬 모델</dt><dd>같은 프로세스, 이미 불러온 프레임</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">편집기는 문서 하나와 그것을 바꾸는 작업들입니다</h2>
 
         <p>패널들 아래에서 편집기는 한 가지입니다. 무엇이 언제 일어나는지 기술하는 문서, 그리고 그 문서를 바꾸는 유일한 방법인 이름 붙은 작업 한 벌입니다. 클립을 자르고, 속도를 다시 잡고, 색을 지정하고, 자막 트랙을 더합니다. 그 밖의 어떤 것도 문서에 손대지 않습니다.</p>
 
@@ -290,39 +304,26 @@
         <p>스크럽과 최종 렌더링을 같은 셰이더가 그리므로, 당신이 승인한 것이 곧 납품하는 것입니다. 그것이 없으면 모든 AI 편집은 잠정적입니다. 그림을 승인해 놓고 파일은 나중에 다시 확인하게 되는데, 그것이 파이프라인 반대쪽 끝에 이음매가 다시 나타난 모습입니다.</p>
 
         <p>문서 하나, 작업 한 벌, 되돌리기 하나, 헤드 하나, 실행 한 번, 렌더링 경로 하나. 이것을 한데 놓고 보면 흥미로운 질문은 더 이상 모델이 얼마나 좋은가가 아닙니다. 얼마나 싸게 모델에 반대할 수 있는가가 됩니다. 우리가 만드는 부분이 바로 그것입니다.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">그 대가</h2>
+
+        <p>어시스턴트를 편집기 자신의 작업으로만 통과시킨다는 것은, 편집기가 할 수 있는 일만 어시스턴트도 할 수 있다는 뜻입니다. 임의의 코드를 쓸 수 있는 모델이라면 더 많은 것을 할 수 있겠지만, 되돌리고 검토하고 신뢰하기는 훨씬 어려울 것입니다. 그것이 우리가 한 교환이고, 의도적으로 그렇게 했습니다.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>전체 구조</h2>
-          <dl class="rail-facts">
-            <div><dt>문서</dt><dd>프로젝트당 하나. 들어가는 길은 작업뿐</dd></div>
-            <div><dt>어시스턴트</dt><dd>코드가 아니라 편집기의 작업을 발행</dd></div>
-            <div><dt>되돌리기</dt><dd>작업 하나, 체크포인트 하나</dd></div>
-            <div><dt>동시성</dt><dd>헤드 작업에 대한 비교 후 교환</dd></div>
-            <div><dt>실행</dt><dd>플랜 저장소에서 점유, 리플레이 안전</dd></div>
-            <div><dt>로컬 모델</dt><dd>같은 프로세스, 이미 불러온 프레임</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>그 대가</h2>
-          <p>어시스턴트를 편집기 자신의 작업으로만 통과시킨다는 것은, 편집기가 할 수 있는 일만 어시스턴트도 할 수 있다는 뜻입니다. 임의의 코드를 쓸 수 있는 모델이라면 더 많은 것을 할 수 있겠지만, 되돌리고 검토하고 신뢰하기는 훨씬 어려울 것입니다. 그것이 우리가 한 교환이고, 의도적으로 그렇게 했습니다.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne에 문의하기</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne에 문의하기</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

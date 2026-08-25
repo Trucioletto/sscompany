@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/es/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,11 +242,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Aviso de privacidad</h1>
 
         <p class="lede">Este sitio web está hecho para saber de quien lo visita lo menos que técnicamente es posible. No instala cookies, no ejecuta analítica y no incrusta contenido de terceros, de modo que no elabora ningún perfil y nada relativo al visitante sale de este sitio. Los únicos datos que alguien recibe al leer una página son el puñado de detalles técnicos que todo servidor web necesita para poder enviar una página. Se describen íntegramente más abajo.</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>En resumen</h2>
+          <ul>
+            <li>Sin cookies, sin analítica</li>
+            <li>Sin contenido de terceros de ningún tipo</li>
+            <li>Solo registros del servidor, que conserva el alojamiento</li>
+            <li>El correo se conserva hasta que pida su borrado</li>
+            <li>Nada vendido, nada compartido</li>
+          </ul>
+        </div>
 
         <h2>Quién es el responsable</h2>
         <p>
@@ -308,33 +322,21 @@
         <p>Si este aviso cambia, la versión revisada se publicará en esta página. Se actualizó por última vez el 25 de agosto de 2026.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>En resumen</h2>
-          <ul>
-            <li>Sin cookies, sin analítica</li>
-            <li>Sin contenido de terceros de ningún tipo</li>
-            <li>Solo registros del servidor, que conserva el alojamiento</li>
-            <li>El correo se conserva hasta que pida su borrado</li>
-            <li>Nada vendido, nada compartido</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>El responsable</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>IVA</dt><dd>IT 18636231005</dd></div>
-            <div><dt>Correo</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Hablar con Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

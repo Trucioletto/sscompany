@@ -210,7 +210,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/pt-BR/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -253,11 +253,11 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Um editor de vídeo com um motor por baixo.</h1>
 
-        <p class="lede">Sparkle é um aplicativo de desktop para quem edita para viver. Renderização em GPU, modelos de IA que rodam na sua própria máquina, codificação por hardware que se adapta ao seu silício — e uma filosofia editorial que nunca mexe no seu corte sem que você peça.</p>
+        <p class="lede">Sparkle é um aplicativo de desktop para quem edita para viver. Renderização em GPU, modelos de IA que rodam na sua própria máquina, codificação por hardware que se adapta ao seu silício — e um assistente que nunca mexe no seu corte sem que você peça.</p>
 
         <h2 id="problem">A maior parte de uma edição não é editar</h2>
 
@@ -275,15 +275,19 @@
 
         <p>Material pesado ganha proxies e um caminho de navegação feito para linhas do tempo longas, o que é a diferença entre um editor em que se pensa e um editor pelo qual se espera.</p>
 
-        <h2 id="ai">A maior parte da IA roda na sua máquina</h2>
+        <h2 id="ai" class="key">A maior parte da IA roda na sua máquina</h2>
 
         <p>Remoção de fundo, segmentação de sujeito e estimativa de profundidade rodam como modelos locais no seu próprio hardware. Uma tarde de brutos não precisa ser enviada para se tornar útil, e material sob embargo continua sob embargo.</p>
 
-        <p>A transcrição de fala também pode rodar localmente, em um modelo Whisper que vem com o editor. Há motores em nuvem também, e o padrão recorre primeiro a um deles, de modo que o destino do seu áudio é uma configuração, e não um pressuposto.</p>
+        <p>A transcrição de fala também pode rodar localmente, em um modelo Whisper que o editor baixa uma vez e depois usa sem rede. Há motores em nuvem também, e o padrão recorre primeiro a um deles, de modo que o destino do seu áudio é uma configuração, e não um pressuposto.</p>
 
         <p>As máscaras acompanham os quadros por fluxo óptico, em vez de serem redesenhadas plano a plano. As legendas chegam com marcação de tempo por palavra, então podem ser estilizadas, recortadas e exportadas nos formatos que o resto do setor espera.</p>
 
         <p>O trabalho generativo mais pesado precisa da nuvem, e essa parte é medida onde você pode ver. Cada conta mantém um saldo de créditos; uma operação reserva o que pode custar antes de começar e acerta pelo que custou de fato. Ninguém descobre uma fatura no fim do mês.</p>
+
+        <h2 id="short">O que ele não faz</h2>
+
+        <p>Ele não tira a edição das suas mãos. O assistente não mexe em um corte sem que alguém tenha pedido, e não consegue fazer nada que o próprio editor não consiga fazer — que é a razão pela qual um único desfazer reverte qualquer coisa que ele tenha feito.</p>
 
         <h2 id="export">Exportação que conversa com o seu hardware</h2>
 
@@ -291,51 +295,48 @@
 
         <p>A cor passa por um pipeline de 3D LUT, de modo que um look criado em outro lugar chega intacto. O áudio é normalizado em EBU R128 na saída, porque uma entrega que não passa na especificação de loudness é uma entrega feita duas vezes.</p>
 
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">Por baixo do capô</h2>
+
+        <dl class="identity">
+          <div><dt>Renderização</dt><dd>Shaders de GPU, compartilhados por prévia e exportação</dd></div>
+          <div><dt>IA local</dt><dd>ONNX Runtime — matting, segmentação, profundidade</dd></div>
+          <div><dt>Fala</dt><dd>No dispositivo ou na nuvem, tempo por palavra</dd></div>
+          <div><dt>Codificação</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>Formatos</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>Cor</dt><dd>Pipeline de 3D LUT</dd></div>
+          <div><dt>Áudio</dt><dd>Loudness EBU R128</dd></div>
+        </dl>
+
         <h2 id="who">Para quem é</h2>
 
-        <p>Montadores e pequenas equipes de pós-produção — gente que vive dentro de uma linha do tempo e percebe cada hora que o software devolve. O editor de desktop é gratuito. A IA em nuvem é vendida por assento, então três montadores pagam por três assentos, e não por um nível de licença que alguém inventou.</p>
+        <p>Montadores e pequenas equipes de pós-produção — gente que vive dentro de uma linha do tempo e percebe cada hora que o software devolve. O editor de desktop é gratuito. A IA em nuvem é vendida por assento, então três montadores pagam por três assentos, e não por um nível de licença que alguém inventou. O saldo de créditos descrito acima é como se mede o trabalho em nuvem dentro de um assento.</p>
 
         <h2 id="status">Onde está hoje</h2>
 
         <p>O Sparkle está em <strong>prévia privada</strong>. Editor, serviços de nuvem, contas e cobrança estão construídos e em operação; o acesso é liberado aos poucos, porque um software que lida com o material dos outros e com o dinheiro dos outros merece ser solto devagar.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Por baixo do capô</h2>
-          <dl class="rail-facts">
-            <div><dt>Renderização</dt><dd>Shaders de GPU, compartilhados por prévia e exportação</dd></div>
-            <div><dt>IA local</dt><dd>ONNX Runtime — matting, segmentação, profundidade</dd></div>
-            <div><dt>Fala</dt><dd>No dispositivo ou na nuvem, tempo por palavra</dd></div>
-            <div><dt>Codificação</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>Formatos</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>Cor</dt><dd>Pipeline de 3D LUT</dd></div>
-            <div><dt>Áudio</dt><dd>Loudness EBU R128</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>O que ele não faz</h2>
-          <p>Ele não tira a edição das suas mãos. O assistente não mexe em um corte sem que alguém tenha pedido, e não consegue fazer nada que o próprio editor não consiga fazer — que é a razão pela qual um único desfazer reverte qualquer coisa que ele tenha feito.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            Abrir sparkle.software
-          </a>
-          <p class="cta-note">
-            Ou escreva para
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          Abrir sparkle.software
+        </a>
+        <p class="cta-note">
+          Ou escreva para
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

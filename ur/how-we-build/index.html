@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ur/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,13 +241,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>ایڈیٹر کہاں ختم ہوتا ہے اور ماڈل کہاں شروع۔</h1>
 
         <p class="lede">زیادہ تر اوزاروں میں ایک جوڑ ہوتا ہے۔ آپ ایکسپورٹ کرتے ہیں، اپ لوڈ کرتے ہیں، انتظار کرتے ہیں، ڈاؤن لوڈ کرتے ہیں، نتیجہ واپس رکھتے ہیں اور امید کرتے ہیں کہ وہ اب بھی ٹھیک بیٹھے گا۔ اس جوڑ کی ایک طرف آپ کا پروجیکٹ ہے؛ دوسری طرف ایک ایسا پروگرام جس نے اس کا نام تک نہیں سنا۔ Sparkle میں یہ جوڑ نہیں ہے، اور اسی کو ختم کرنا اس صفحے پر بیان کی گئی زیادہ تر انجینئرنگ ہے۔</p>
 
-        <h2 id="document">ایڈیٹر ایک دستاویز ہے اور وہ عمل جو اسے بدلتے ہیں</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">اس کی ساخت</h2>
+
+        <dl class="identity">
+          <div><dt>دستاویز</dt><dd>فی پروجیکٹ ایک؛ اندر جانے کا واحد راستہ عمل</dd></div>
+          <div><dt>اسسٹنٹ</dt><dd>ایڈیٹر ہی کے عمل بھیجتا ہے، کوڈ نہیں</dd></div>
+          <div><dt>undo</dt><dd>ایک عمل، ایک checkpoint</dd></div>
+          <div><dt>ہم وقتی</dt><dd>head عمل پر compare-and-swap</dd></div>
+          <div><dt>عمل درآمد</dt><dd>plan store سے claim شدہ، replay محفوظ</dd></div>
+          <div><dt>مقامی ماڈل</dt><dd>اسی پروسیس میں، پہلے سے لوڈ فریموں پر</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">ایڈیٹر ایک دستاویز ہے اور وہ عمل جو اسے بدلتے ہیں</h2>
 
         <p>پینلوں کے نیچے ایڈیٹر ایک ہی چیز ہے: ایک دستاویز جو بتاتی ہے کہ کیا کب ہوتا ہے، اور نامزد عمل کا ایک مجموعہ جو اسے بدلنے کا واحد راستہ ہے۔ کلپ کو تقسیم کرنا، اس کی ٹائمنگ بدلنا، رنگ مقرر کرنا، کیپشن ٹریک شامل کرنا۔ ان کے سوا کوئی چیز دستاویز کو نہیں چھوتی۔</p>
 
@@ -290,39 +304,26 @@
         <p>وہی شیڈرز اسکرب بھی بناتے ہیں اور حتمی رینڈر بھی، اس لیے جسے آپ منظور کرتے ہیں وہی آپ ڈیلیور کرتے ہیں۔ اس کے بغیر ہر AI ایڈٹ عارضی رہتا ہے: آپ ایک تصویر قبول کر رہے ہوتے اور فائل بعد میں دوبارہ جانچ رہے ہوتے — یعنی وہی جوڑ، پائپ لائن کے دوسرے سرے پر دوبارہ نمودار۔</p>
 
         <p>یہ سب مل کر — ایک دستاویز، عمل کا ایک ہی مجموعہ، ایک undo، ایک head، ایک بار عمل درآمد، ایک ہی رینڈر راستہ — دلچسپ سوال کو بدل دیتے ہیں: اب سوال یہ نہیں رہتا کہ ماڈل کتنا اچھا ہے، بلکہ یہ کہ اس سے اختلاف کرنا کتنا سستا ہے۔ ہم یہی حصہ بناتے ہیں۔</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">اس کی قیمت</h2>
+
+        <p>اسسٹنٹ کو ایڈیٹر ہی کے عمل سے گزارنے کا مطلب یہ ہے کہ وہ صرف وہی کر سکتا ہے جو ایڈیٹر کر سکتا ہے۔ جو ماڈل جیسا چاہے کوڈ لکھ سکتا، وہ زیادہ صلاحیت والا ہوتا اور اسے undo کرنا، جانچنا یا اس پر بھروسہ کرنا کہیں مشکل ہوتا۔ سودا یہی تھا، اور سوچ سمجھ کر کیا گیا۔</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>اس کی ساخت</h2>
-          <dl class="rail-facts">
-            <div><dt>دستاویز</dt><dd>فی پروجیکٹ ایک؛ اندر جانے کا واحد راستہ عمل</dd></div>
-            <div><dt>اسسٹنٹ</dt><dd>ایڈیٹر ہی کے عمل بھیجتا ہے، کوڈ نہیں</dd></div>
-            <div><dt>undo</dt><dd>ایک عمل، ایک checkpoint</dd></div>
-            <div><dt>ہم وقتی</dt><dd>head عمل پر compare-and-swap</dd></div>
-            <div><dt>عمل درآمد</dt><dd>plan store سے claim شدہ، replay محفوظ</dd></div>
-            <div><dt>مقامی ماڈل</dt><dd>اسی پروسیس میں، پہلے سے لوڈ فریموں پر</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>اس کی قیمت</h2>
-          <p>اسسٹنٹ کو ایڈیٹر ہی کے عمل سے گزارنے کا مطلب یہ ہے کہ وہ صرف وہی کر سکتا ہے جو ایڈیٹر کر سکتا ہے۔ جو ماڈل جیسا چاہے کوڈ لکھ سکتا، وہ زیادہ صلاحیت والا ہوتا اور اسے undo کرنا، جانچنا یا اس پر بھروسہ کرنا کہیں مشکل ہوتا۔ سودا یہی تھا، اور سوچ سمجھ کر کیا گیا۔</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne سے رابطہ</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne سے رابطہ</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

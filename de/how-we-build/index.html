@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/de/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,13 +242,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Wo der Editor endet und das Modell beginnt.</h1>
 
         <p class="lede">In den meisten Werkzeugen gibt es eine Naht. Sie exportieren, laden hoch, warten, laden herunter, setzen das Ergebnis wieder ein und hoffen, dass es noch zusammenpasst. Auf der einen Seite dieser Naht liegt Ihr Projekt, auf der anderen ein Programm, das nie von ihm gehört hat. Sparkle hat diese Naht nicht, und sie zu entfernen ist der größte Teil der Technik auf dieser Seite.</p>
 
-        <h2 id="document">Ein Editor ist ein Dokument und die Operationen, die es ändern</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">Der Aufbau</h2>
+
+        <dl class="identity">
+          <div><dt>Dokument</dt><dd>Eines pro Projekt; nur Operationen ändern es</dd></div>
+          <div><dt>Assistent</dt><dd>Erzeugt Operationen des Editors, keinen Code</dd></div>
+          <div><dt>Undo</dt><dd>Eine Operation, ein Checkpoint</dd></div>
+          <div><dt>Nebenläufigkeit</dt><dd>Compare-and-Swap auf die Head-Operation</dd></div>
+          <div><dt>Ausführung</dt><dd>Claim beim Plan-Store, Replay-sicher</dd></div>
+          <div><dt>Lokale Modelle</dt><dd>Im Prozess, auf schon geladenen Bildern</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">Ein Editor ist ein Dokument und die Operationen, die es ändern</h2>
 
         <p>Unter den Panels ist ein Editor eine einzige Sache: ein Dokument, das beschreibt, was wann passiert, und ein Satz benannter Operationen, die der einzige Weg sind, es zu ändern. Einen Clip teilen, sein Tempo ändern, eine Farbe setzen, eine Untertitelspur hinzufügen. Sonst fasst nichts das Dokument an.</p>
 
@@ -291,39 +305,26 @@
         <p>Dieselben Shader zeichnen das Scrubbing und das endgültige Rendering; was Sie abnehmen, ist das, was Sie ausliefern. Ohne das wäre jede KI-Änderung vorläufig: Sie würden ein Bild abnehmen und die Datei später noch einmal prüfen — die Naht, die am anderen Ende der Pipeline wieder auftaucht.</p>
 
         <p>Zusammengenommen — ein Dokument, ein Satz von Operationen, ein Undo, ein Head, eine Ausführung, ein Render-Pfad — ist die interessante Frage nicht mehr, wie gut das Modell ist. Sie lautet, wie billig man ihm widersprechen kann. Das ist der Teil, den wir bauen.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">Was es kostet</h2>
+
+        <p>Einen Assistenten über die Operationen des Editors zu führen heißt, dass er nur kann, was der Editor kann. Ein Modell, das beliebigen Code schreiben könnte, wäre mächtiger; es rückgängig zu machen, zu prüfen und ihm zu trauen wäre sehr viel schwerer. Das war der Handel, und er wurde bewusst eingegangen.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Der Aufbau</h2>
-          <dl class="rail-facts">
-            <div><dt>Dokument</dt><dd>Eines pro Projekt; nur Operationen ändern es</dd></div>
-            <div><dt>Assistent</dt><dd>Erzeugt Operationen des Editors, keinen Code</dd></div>
-            <div><dt>Undo</dt><dd>Eine Operation, ein Checkpoint</dd></div>
-            <div><dt>Nebenläufigkeit</dt><dd>Compare-and-Swap auf die Head-Operation</dd></div>
-            <div><dt>Ausführung</dt><dd>Claim beim Plan-Store, Replay-sicher</dd></div>
-            <div><dt>Lokale Modelle</dt><dd>Im Prozess, auf schon geladenen Bildern</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>Was es kostet</h2>
-          <p>Einen Assistenten über die Operationen des Editors zu führen heißt, dass er nur kann, was der Editor kann. Ein Modell, das beliebigen Code schreiben könnte, wäre mächtiger; es rückgängig zu machen, zu prüfen und ihm zu trauen wäre sehr viel schwerer. Das war der Handel, und er wurde bewusst eingegangen.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Kontakt zu Spinne</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Kontakt zu Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

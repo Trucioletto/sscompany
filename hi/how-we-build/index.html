@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/hi/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,13 +241,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>एडिटर कहाँ खत्म होता है और मॉडल कहाँ शुरू।</h1>
 
         <p class="lede">ज़्यादातर टूल में एक सीवन होती है। आप एक्सपोर्ट करते हैं, अपलोड करते हैं, इंतज़ार करते हैं, डाउनलोड करते हैं, नतीजा वापस अपनी जगह रखते हैं और उम्मीद करते हैं कि वह अब भी ठीक बैठेगा। उस सीवन के एक तरफ़ आपका प्रोजेक्ट है; दूसरी तरफ़ एक ऐसा प्रोग्राम, जिसने उसका नाम तक नहीं सुना। Sparkle में वह सीवन है ही नहीं, और उसे हटाना ही इस पेज पर बताई गई ज़्यादातर इंजीनियरिंग है।</p>
 
-        <h2 id="document">एडिटर यानी एक डॉक्यूमेंट और उसे बदलने वाले ऑपरेशंस</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">इसकी बनावट</h2>
+
+        <dl class="identity">
+          <div><dt>डॉक्यूमेंट</dt><dd>प्रति प्रोजेक्ट एक; अंदर का रास्ता सिर्फ़ ऑपरेशंस</dd></div>
+          <div><dt>असिस्टेंट</dt><dd>कोड नहीं, एडिटर के अपने ऑपरेशंस भेजता है</dd></div>
+          <div><dt>Undo</dt><dd>एक ऑपरेशन, एक checkpoint</dd></div>
+          <div><dt>कनकरेंसी</dt><dd>हेड ऑपरेशन पर compare-and-swap</dd></div>
+          <div><dt>एक्ज़ीक्यूशन</dt><dd>प्लान स्टोर से claim; replay-safe</dd></div>
+          <div><dt>लोकल मॉडल</dt><dd>उसी प्रोसेस में, पहले से लोड फ़्रेम पर</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">एडिटर यानी एक डॉक्यूमेंट और उसे बदलने वाले ऑपरेशंस</h2>
 
         <p>पैनलों के नीचे एडिटर एक ही चीज़ है: एक डॉक्यूमेंट, जो बताता है कि कब क्या होता है, और नाम वाले ऑपरेशंस का एक सेट, जो उसे बदलने का इकलौता रास्ता है। क्लिप स्प्लिट करना, उसकी टाइमिंग बदलना, रंग सेट करना, कैप्शन ट्रैक जोड़ना। डॉक्यूमेंट को इनके अलावा कुछ नहीं छूता।</p>
 
@@ -290,39 +304,26 @@
         <p>स्क्रब और आखिरी रेंडर, दोनों वही शेडर बनाते हैं, इसलिए आप जिसे मंज़ूर करते हैं, वही डिलीवर होता है। इसके बिना हर AI एडिट अस्थायी रहती है: आप एक तस्वीर मंज़ूर कर रहे होते और फ़ाइल बाद में दोबारा जाँच रहे होते — यानी वही सीवन पाइपलाइन के दूसरे सिरे पर फिर उभर आती।</p>
 
         <p>सब मिलाकर देखें — एक डॉक्यूमेंट, ऑपरेशंस का एक सेट, एक undo, एक हेड, एक एक्ज़ीक्यूशन, एक रेंडर पाथ — तो दिलचस्प सवाल यह रह ही नहीं जाता कि मॉडल कितना अच्छा है। सवाल यह बन जाता है कि उससे असहमत होना आपको कितना सस्ता पड़ता है। हम वही हिस्सा बनाते हैं।</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">इसकी कीमत</h2>
+
+        <p>असिस्टेंट को एडिटर के अपने ऑपरेशंस से होकर चलाने का मतलब है कि वह उतना ही कर सकता है जितना एडिटर कर सकता है। जो मॉडल मनचाहा कोड लिख सकता, वह ज़्यादा सक्षम होता — और उसे undo करना, जाँचना या उस पर भरोसा करना कहीं ज़्यादा मुश्किल। यही सौदा था, और यह जान-बूझकर किया गया था।</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>इसकी बनावट</h2>
-          <dl class="rail-facts">
-            <div><dt>डॉक्यूमेंट</dt><dd>प्रति प्रोजेक्ट एक; अंदर का रास्ता सिर्फ़ ऑपरेशंस</dd></div>
-            <div><dt>असिस्टेंट</dt><dd>कोड नहीं, एडिटर के अपने ऑपरेशंस भेजता है</dd></div>
-            <div><dt>Undo</dt><dd>एक ऑपरेशन, एक checkpoint</dd></div>
-            <div><dt>कनकरेंसी</dt><dd>हेड ऑपरेशन पर compare-and-swap</dd></div>
-            <div><dt>एक्ज़ीक्यूशन</dt><dd>प्लान स्टोर से claim; replay-safe</dd></div>
-            <div><dt>लोकल मॉडल</dt><dd>उसी प्रोसेस में, पहले से लोड फ़्रेम पर</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>इसकी कीमत</h2>
-          <p>असिस्टेंट को एडिटर के अपने ऑपरेशंस से होकर चलाने का मतलब है कि वह उतना ही कर सकता है जितना एडिटर कर सकता है। जो मॉडल मनचाहा कोड लिख सकता, वह ज़्यादा सक्षम होता — और उसे undo करना, जाँचना या उस पर भरोसा करना कहीं ज़्यादा मुश्किल। यही सौदा था, और यह जान-बूझकर किया गया था।</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne से बात करें</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne से बात करें</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

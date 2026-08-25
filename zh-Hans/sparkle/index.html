@@ -209,7 +209,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/zh-Hans/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -252,11 +252,11 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>一款下面装着引擎的视频剪辑软件。</h1>
 
-        <p class="lede">Sparkle是一款桌面应用，写给靠剪辑吃饭的人。GPU渲染、跑在你自己机器上的AI模型、随你的芯片而变的硬件编码——以及一条剪辑原则：不经你开口，绝不动你的剪辑。</p>
+        <p class="lede">Sparkle是一款桌面应用，写给靠剪辑吃饭的人。GPU渲染、跑在你自己机器上的AI模型、随你的芯片而变的硬件编码——以及一个助手：不经你开口，绝不动你的剪辑。</p>
 
         <h2 id="problem">剪辑的大部分工作不是剪辑</h2>
 
@@ -274,15 +274,19 @@
 
         <p>重素材有代理文件，还有一条为长时间线设计的拖动路径。一个能让你边想边剪的剪辑软件，和一个让你干等的剪辑软件，差别就在这里。</p>
 
-        <h2 id="ai">大部分AI跑在你自己的机器上</h2>
+        <h2 id="ai" class="key">大部分AI跑在你自己的机器上</h2>
 
         <p>背景移除、主体分割和深度估计，都以本地模型的形式跑在你自己的硬件上。一下午的样片不必上传就能派上用场，处于保密期的素材也仍然留在保密期内。</p>
 
-        <p>语音转文字同样可以在本地跑，用的是随剪辑软件一起分发的Whisper模型。云端引擎也有，默认会先去找云端，因此你的音频去了哪里是一项设置，而不是一个假设。</p>
+        <p>语音转文字同样可以在本地跑，用的是剪辑软件下载一次、此后无需联网即可使用的Whisper模型。云端引擎也有，默认会先去找云端，因此你的音频去了哪里是一项设置，而不是一个假设。</p>
 
         <p>遮罩靠光流在帧与帧之间跟踪，不必一个镜头一个镜头重画。字幕带有逐词时间码，因此可以设置样式、重新剪切，并导出为行业其余环节所预期的格式。</p>
 
         <p>更重的生成式任务需要云端，这部分的计量放在你看得见的地方。每个账户都有一份点数余额；一项操作在开始前先预留它可能花掉的额度，结束后按实际花掉的结算。没有人会到月底才发现一张账单。</p>
+
+        <h2 id="short">它不会做什么</h2>
+
+        <p>它不会把剪辑的决定权从你手里拿走。不经你开口，助手不动任何一处剪辑；它也做不到剪辑软件本身做不到的事——正因如此，一次撤销就能把其中任何一步收回。</p>
 
         <h2 id="export">会与你的硬件对话的导出</h2>
 
@@ -290,51 +294,48 @@
 
         <p>色彩走的是3D LUT管线，因此在别处调好的风格能够原样抵达。音频在导出时按EBU R128做响度标准化，因为一次不符合响度规范的交付，等于要交付两次。</p>
 
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">引擎盖之下</h2>
+
+        <dl class="identity">
+          <div><dt>渲染</dt><dd>GPU着色器，预览与导出共用</dd></div>
+          <div><dt>本地AI</dt><dd>ONNX Runtime——抠像、分割、深度</dd></div>
+          <div><dt>语音</dt><dd>本地或云端，逐词时间码</dd></div>
+          <div><dt>编码</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>格式</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>色彩</dt><dd>3D LUT管线</dd></div>
+          <div><dt>音频</dt><dd>EBU R128响度</dd></div>
+        </dl>
+
         <h2 id="who">它是给谁用的</h2>
 
-        <p>剪辑师和小型后期团队——那些活在时间线里、软件还回来的每一个小时都察觉得到的人。桌面剪辑软件免费。云端AI按席位售卖，因此三位剪辑师买三个席位，而不是买某人凭空想出来的授权档位。</p>
+        <p>剪辑师和小型后期团队——那些活在时间线里、软件还回来的每一个小时都察觉得到的人。桌面剪辑软件免费。云端AI按席位售卖，因此三位剪辑师买三个席位，而不是买某人凭空想出来的授权档位。上面说的点数余额，就是一个席位里云端用量的计量方式。</p>
 
         <h2 id="status">目前的状态</h2>
 
         <p>Sparkle处于<strong>不公开预览</strong>阶段。剪辑软件、云服务、账户和计费都已建成并在运行；开放是逐步进行的，因为一款同时经手别人素材和别人钱的软件，值得慢慢放出来。</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>引擎盖之下</h2>
-          <dl class="rail-facts">
-            <div><dt>渲染</dt><dd>GPU着色器，预览与导出共用</dd></div>
-            <div><dt>本地AI</dt><dd>ONNX Runtime——抠像、分割、深度</dd></div>
-            <div><dt>语音</dt><dd>本地或云端，逐词时间码</dd></div>
-            <div><dt>编码</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>格式</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>色彩</dt><dd>3D LUT管线</dd></div>
-            <div><dt>音频</dt><dd>EBU R128响度</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>它不会做什么</h2>
-          <p>它不会把剪辑的决定权从你手里拿走。不经你开口，助手不动任何一处剪辑；它也做不到剪辑软件本身做不到的事——正因如此，一次撤销就能把其中任何一步收回。</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            访问sparkle.software
-          </a>
-          <p class="cta-note">
-            或来信至
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          访问sparkle.software
+        </a>
+        <p class="cta-note">
+          或来信至
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

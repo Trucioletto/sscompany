@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ja/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,13 +241,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>編集ソフトが終わり、モデルが始まる場所。</h1>
 
         <p class="lede">多くの道具には継ぎ目があります。書き出して、アップロードして、待って、ダウンロードして、戻ってきたものを置き直し、まだ位置が合っていることを願う。その継ぎ目の片側にはあなたのプロジェクトがあり、反対側には、そのプロジェクトを一度も知らないプログラムがあります。Sparkle に継ぎ目はありません。それを無くすことが、このページに書かれた技術のほとんどです。</p>
 
-        <h2 id="document">編集ソフトとは、ドキュメントと、それを変える操作のこと</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">全体のかたち</h2>
+
+        <dl class="identity">
+          <div><dt>ドキュメント</dt><dd>プロジェクトにひとつ。入口は操作だけ</dd></div>
+          <div><dt>アシスタント</dt><dd>コードではなく、編集ソフト自身の操作を発行</dd></div>
+          <div><dt>取り消し</dt><dd>操作ひとつ、チェックポイントひとつ</dd></div>
+          <div><dt>同時実行</dt><dd>先頭操作へのコンペアアンドスワップ</dd></div>
+          <div><dt>実行</dt><dd>プランストアで実行権を確保。リプレイ安全</dd></div>
+          <div><dt>手元で動くモデル</dt><dd>同じプロセス内、読み込み済みのフレームに</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">編集ソフトとは、ドキュメントと、それを変える操作のこと</h2>
 
         <p>パネルの下にある編集ソフトの正体は、ひとつです。いつ何が起きるかを記述したドキュメントと、それを変える唯一の手段である、名前の付いた操作の集まり。クリップを分割する、速度を変える、色を決める、字幕トラックを足す。ドキュメントに触れるものは、ほかにありません。</p>
 
@@ -290,39 +304,26 @@
         <p>再生ヘッドを動かしているときの絵も、最終レンダリングも、同じシェーダーが描きます。だから、承認したものが、そのまま納品するものになります。そうでなければ、AI による編集はどれも暫定です。絵を承認しておいて、ファイルはあとから確認し直すことになる。それは、パイプラインの反対側に継ぎ目が現れているということです。</p>
 
         <p>ひとつのドキュメント、ひとつの操作の集まり、ひとつの取り消し、ひとつの先頭、ひとつの実行、ひとつのレンダリング経路。これらが揃うと、面白い問いはモデルの出来ではなくなります。どれだけ安く、モデルに異を唱えられるか。私たちが作っているのは、その部分です。</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">その代償</h2>
+
+        <p>アシスタントを編集ソフト自身の操作に通すということは、編集ソフトにできることしかできない、ということです。任意のコードを書けるモデルなら、もっと多くのことができ、その代わり、取り消すのも、確かめるのも、信じるのも、はるかに難しくなります。これは引き換えであり、意図して選びました。</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>全体のかたち</h2>
-          <dl class="rail-facts">
-            <div><dt>ドキュメント</dt><dd>プロジェクトにひとつ。入口は操作だけ</dd></div>
-            <div><dt>アシスタント</dt><dd>コードではなく、編集ソフト自身の操作を発行</dd></div>
-            <div><dt>取り消し</dt><dd>操作ひとつ、チェックポイントひとつ</dd></div>
-            <div><dt>同時実行</dt><dd>先頭操作へのコンペアアンドスワップ</dd></div>
-            <div><dt>実行</dt><dd>プランストアで実行権を確保。リプレイ安全</dd></div>
-            <div><dt>手元で動くモデル</dt><dd>同じプロセス内、読み込み済みのフレームに</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>その代償</h2>
-          <p>アシスタントを編集ソフト自身の操作に通すということは、編集ソフトにできることしかできない、ということです。任意のコードを書けるモデルなら、もっと多くのことができ、その代わり、取り消すのも、確かめるのも、信じるのも、はるかに難しくなります。これは引き換えであり、意図して選びました。</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne に連絡する</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne に連絡する</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

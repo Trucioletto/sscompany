@@ -51,6 +51,12 @@ VideoToolbox · x264 · x265 · SVT-AV1 · H.264 · HEVC · AV1 · DNxHR · HDR 
 legal form as the Italian register records it — but the surrounding words are
 translated.
 
+`pages.home.rail_motto` is **Weave the web**, and it stays in English in all
+fifteen languages. It is the company's motto, which is a name rather than a
+sentence: translating it produces fifteen different mottos and the company then
+has none. The paragraph under it, `rail_motto_body`, IS translated — it is the
+thing that explains the motto to a reader who does not speak it.
+
 If your language conventionally writes an acronym differently (for example GDPR
 is *RGPD* in French and Spanish, *DSGVO* in German), use your language's
 standard form. That is a translation, not a rename.
@@ -94,10 +100,17 @@ These carry the voice and must be **adapted, not translated literally**. Find
 the equivalent that a native reader would find natural and slightly dry. If a
 literal rendering would be baffling, write the nearest true thing instead.
 
-- `Every product leaves machinery behind.`
+- `Hard technology, simple software.` — the home page h1, and the shortest
+  statement of what the company is. Two halves, and the contrast between them is
+  the whole sentence: the difficulty is real and it is on our side of the screen.
+  Not "powerful and easy", which is a brochure saying nothing.
 - `Spiders do not spin for the pleasure of it. The structure is what makes
   everything after it possible.` — *Spinne* is German for spider; the company is
   named after it. The web metaphor must survive.
+- `Independence is not a preference. It is the difference between choosing and
+  being told.` — the /about/ pull quote. "Being told" is being handed someone
+  else's roadmap, not being given advice. It sits in a 26-character measure, so
+  the shorter your rendering the better.
 - `The machine takes the labour. You keep the cut.` — "the cut" is the editor's
   creative decision, not a wound.
 - `Money deserves accounting, not hope.`
@@ -116,6 +129,11 @@ reading column and a 16.5rem rail, and long words break it.
 - `nav.*`, `facts.*` and `cta.*` are **interface labels in a narrow column**.
   Keep them at or below the English character count. `nav.how` has about 14
   characters of room.
+- `pages.home.what` is the six values, each `{name, body}`. The **name** is one
+  word in a cell about 26 characters wide — one word in your language too, and if
+  the obvious noun is a four-syllable abstraction, prefer the plain word a trade
+  publication would use. The **body** is one sentence that makes the value
+  checkable rather than decorative; keep it to a single sentence.
 - Headings (`h1`, `h2_*`) should not grow by more than about a third.
 - Body paragraphs may run long.
 - German, Finnish-style compounds and Tamil-style agglutination: prefer two
@@ -156,11 +174,19 @@ characters, not `\uXXXX` escapes. Then run:
 no glyph in the declared font subsets, which is how a stray curly quote or an
 en-dash in a language that does not use one gets caught.
 
-Before a release, also run:
+Then, before a release:
 
+    python3 tools/i18n/coverage.py
     python3 tools/i18n/sweep.py
 
-It renders all 76 pages at four widths in headless Chrome and fails on anything
+`coverage.py` answers the question the other checks cannot: is this language
+actually translated, and translated whole. It finds a value left in English, a
+clause left in English inside a translated sentence, prose on a non-Latin page
+with none of that page's own script, a paragraph that arrived truncated and a
+paragraph that lost sentences. It measures the fragment families as ONE string,
+because where a clause sits inside a group is your choice (see section 4).
+
+`sweep.py` renders all 76 pages at four widths in headless Chrome and fails on anything
 the markup checks cannot see: a word too long to break pushing the page
 sideways, an image that does not load, an unfilled template token, a tap target
 under the 24px minimum. It found nav labels 11px wide in Korean, Urdu, Hindi and

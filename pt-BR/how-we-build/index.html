@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/pt-BR/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,13 +242,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Onde o editor termina e o modelo começa.</h1>
 
         <p class="lede">Na maioria das ferramentas existe uma emenda. Você exporta, envia, espera, baixa, coloca o resultado de volta e torce para que continue alinhado. De um lado dessa emenda está o seu projeto; do outro, um programa que nunca ouviu falar dele. O Sparkle não tem essa emenda, e eliminá-la é a maior parte da engenharia desta página.</p>
 
-        <h2 id="document">Um editor é um documento e as operações que o alteram</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">A estrutura</h2>
+
+        <dl class="identity">
+          <div><dt>Documento</dt><dd>Um por projeto; operações são a única entrada</dd></div>
+          <div><dt>Assistente</dt><dd>Emite as operações do editor, não código</dd></div>
+          <div><dt>Desfazer</dt><dd>Uma operação, um checkpoint</dd></div>
+          <div><dt>Concorrência</dt><dd>Compare-and-swap na operação head</dd></div>
+          <div><dt>Execução</dt><dd>Claim no plan store, à prova de replay</dd></div>
+          <div><dt>Modelos locais</dt><dd>No processo, nos quadros já carregados</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">Um editor é um documento e as operações que o alteram</h2>
 
         <p>Por baixo dos painéis, um editor é uma coisa só: um documento que descreve o que acontece e quando, e um conjunto de operações nomeadas que são o único jeito de alterá-lo. Dividir um clipe, remapear o tempo, definir uma cor, adicionar uma faixa de legendas. Nada além disso toca o documento.</p>
 
@@ -291,39 +305,26 @@
         <p>Os mesmos shaders desenham a navegação e a renderização final, então o que você aprova é o que você entrega. Sem isso, toda edição feita por IA é provisória: você estaria aceitando uma imagem e reconferindo o arquivo depois, que é a emenda reaparecendo na outra ponta do pipeline.</p>
 
         <p>Tudo junto — um documento, um conjunto de operações, um desfazer, um head, uma execução, um caminho de renderização —, a pergunta interessante deixa de ser o quanto o modelo é bom. Passa a ser o quão barato é discordar dele. É essa a parte que construímos.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">O que isso custa</h2>
+
+        <p>Fazer o assistente passar pelas próprias operações do editor significa que ele só consegue fazer o que o editor faz. Um modelo capaz de escrever código arbitrário seria mais poderoso — e desfazê-lo, revisá-lo e confiar nele seria muito mais difícil. Essa foi a troca, e ela foi feita de propósito.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>A estrutura</h2>
-          <dl class="rail-facts">
-            <div><dt>Documento</dt><dd>Um por projeto; operações são a única entrada</dd></div>
-            <div><dt>Assistente</dt><dd>Emite as operações do editor, não código</dd></div>
-            <div><dt>Desfazer</dt><dd>Uma operação, um checkpoint</dd></div>
-            <div><dt>Concorrência</dt><dd>Compare-and-swap na operação head</dd></div>
-            <div><dt>Execução</dt><dd>Claim no plan store, à prova de replay</dd></div>
-            <div><dt>Modelos locais</dt><dd>No processo, nos quadros já carregados</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>O que isso custa</h2>
-          <p>Fazer o assistente passar pelas próprias operações do editor significa que ele só consegue fazer o que o editor faz. Um modelo capaz de escrever código arbitrário seria mais poderoso — e desfazê-lo, revisá-lo e confiar nele seria muito mais difícil. Essa foi a troca, e ela foi feita de propósito.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Fale com a Spinne</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Fale com a Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

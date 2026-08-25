@@ -210,7 +210,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -253,11 +253,11 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>A video editor with an engine under it.</h1>
 
-        <p class="lede">Sparkle is a desktop application for people who cut for a living. GPU rendering, AI models that run on your own machine, hardware encoding that adapts to your silicon — and an editorial philosophy that never touches your cut without being asked.</p>
+        <p class="lede">Sparkle is a desktop application for people who cut for a living. GPU rendering, AI models that run on your own machine, hardware encoding that adapts to your silicon — and an assistant that never touches your cut without being asked.</p>
 
         <h2 id="problem">Most of an edit is not editing</h2>
 
@@ -275,15 +275,19 @@
 
         <p>Heavy footage gets proxies and a scrub path built for long timelines, which is the difference between an editor you can think in and one you wait for.</p>
 
-        <h2 id="ai">Most of the AI runs on your machine</h2>
+        <h2 id="ai" class="key">Most of the AI runs on your machine</h2>
 
         <p>Background removal, subject segmentation and depth estimation run as local models on your own hardware. An afternoon of rushes does not have to be uploaded to become useful, and footage under embargo stays under embargo.</p>
 
-        <p>Speech to text can run locally too, on a Whisper model that ships with the editor. There are cloud engines as well and the default reaches for one first, so where your audio goes is a setting rather than an assumption.</p>
+        <p>Speech to text can run locally too, on a Whisper model the editor fetches once and then runs without a network. There are cloud engines as well and the default reaches for one first, so where your audio goes is a setting rather than an assumption.</p>
 
         <p>Masks track across frames using optical flow rather than being redrawn shot by shot. Captions arrive with word-level timing, so they can be styled, re-cut and exported to the formats the rest of the industry expects.</p>
 
         <p>The heavier generative work needs the cloud, and that part is metered where you can see it. Every account holds a balance of credits; an operation reserves what it might cost before it starts and settles for what it actually cost. Nobody discovers a bill at the end of the month.</p>
+
+        <h2 id="short">What it will not do</h2>
+
+        <p>It does not take the edit off you. The assistant does not touch a cut it was not asked to touch, and it cannot do anything the editor itself cannot do — which is the reason a single undo takes any of it back.</p>
 
         <h2 id="export">Export that talks to your hardware</h2>
 
@@ -291,51 +295,48 @@
 
         <p>Colour goes through a 3D LUT pipeline, so a look built elsewhere arrives intact. Audio is normalised to EBU R128 on the way out, because a delivery that fails loudness spec is a delivery you make twice.</p>
 
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">Under the hood</h2>
+
+        <dl class="identity">
+          <div><dt>Rendering</dt><dd>GPU shaders, shared by preview and export</dd></div>
+          <div><dt>Local AI</dt><dd>ONNX Runtime — matting, segmentation, depth</dd></div>
+          <div><dt>Speech</dt><dd>On-device or cloud, word-level timing</dd></div>
+          <div><dt>Encoding</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>Formats</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>Colour</dt><dd>3D LUT pipeline</dd></div>
+          <div><dt>Audio</dt><dd>EBU R128 loudness</dd></div>
+        </dl>
+
         <h2 id="who">Who it is for</h2>
 
-        <p>Editors and small post-production teams — people who live in a timeline and notice every hour the software gives back. The desktop editor is free. Cloud AI is sold per seat, so three editors pay for three seats rather than a licence tier somebody invented.</p>
+        <p>Editors and small post-production teams — people who live in a timeline and notice every hour the software gives back. The desktop editor is free. Cloud AI is sold per seat, so three editors pay for three seats rather than a licence tier somebody invented. The credit balance above is how the cloud work inside a seat is metered.</p>
 
         <h2 id="status">Where it is today</h2>
 
         <p>Sparkle is in <strong>private preview</strong>. Editor, cloud services, accounts and billing are built and running; access opens gradually, because software that handles other people's footage and other people's money deserves to be let out slowly.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Under the hood</h2>
-          <dl class="rail-facts">
-            <div><dt>Rendering</dt><dd>GPU shaders, shared by preview and export</dd></div>
-            <div><dt>Local AI</dt><dd>ONNX Runtime — matting, segmentation, depth</dd></div>
-            <div><dt>Speech</dt><dd>On-device or cloud, word-level timing</dd></div>
-            <div><dt>Encoding</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>Formats</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>Colour</dt><dd>3D LUT pipeline</dd></div>
-            <div><dt>Audio</dt><dd>EBU R128 loudness</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>What it will not do</h2>
-          <p>It does not take the edit off you. The assistant does not touch a cut it was not asked to touch, and it cannot do anything the editor itself cannot do — which is the reason a single undo takes any of it back.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            Open sparkle.software
-          </a>
-          <p class="cta-note">
-            Or write to
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          Open sparkle.software
+        </a>
+        <p class="cta-note">
+          Or write to
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

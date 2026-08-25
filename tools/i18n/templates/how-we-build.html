@@ -1,10 +1,24 @@
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>{{page.h1}}</h1>
 
         <p class="lede">{{page.lede}}</p>
 
-        <h2 id="document">{{page.h2_document}}</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">{{page.rail_shape}}</h2>
+
+        <dl class="identity">
+          <div><dt>{{page.shape.doc}}</dt><dd>{{page.shape.doc_v}}</dd></div>
+          <div><dt>{{page.shape.ops}}</dt><dd>{{page.shape.ops_v}}</dd></div>
+          <div><dt>{{page.shape.undo}}</dt><dd>{{page.shape.undo_v}}</dd></div>
+          <div><dt>{{page.shape.conc}}</dt><dd>{{page.shape.conc_v}}</dd></div>
+          <div><dt>{{page.shape.once}}</dt><dd>{{page.shape.once_v}}</dd></div>
+          <div><dt>{{page.shape.models}}</dt><dd>{{page.shape.models_v}}</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">{{page.h2_document}}</h2>
 
         <p>{{page.document_p1}}</p>
 
@@ -47,31 +61,18 @@
         <p>{{page.parity_p1}}</p>
 
         <p>{{page.parity_p2}}</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">{{page.rail_cost}}</h2>
+
+        <p>{{page.rail_cost_body}}</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>{{page.rail_shape}}</h2>
-          <dl class="rail-facts">
-            <div><dt>{{page.shape.doc}}</dt><dd>{{page.shape.doc_v}}</dd></div>
-            <div><dt>{{page.shape.ops}}</dt><dd>{{page.shape.ops_v}}</dd></div>
-            <div><dt>{{page.shape.undo}}</dt><dd>{{page.shape.undo_v}}</dd></div>
-            <div><dt>{{page.shape.conc}}</dt><dd>{{page.shape.conc_v}}</dd></div>
-            <div><dt>{{page.shape.once}}</dt><dd>{{page.shape.once_v}}</dd></div>
-            <div><dt>{{page.shape.models}}</dt><dd>{{page.shape.models_v}}</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>{{page.rail_cost}}</h2>
-          <p>{{page.rail_cost_body}}</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">{{cta.talk}}</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">{{cta.talk}}</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>

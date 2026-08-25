@@ -209,7 +209,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ko/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -252,11 +252,11 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>엔진이 밑에 깔린 영상 편집기.</h1>
 
-        <p class="lede">Sparkle은 편집으로 먹고사는 사람들을 위한 데스크톱 애플리케이션입니다. GPU 렌더링, 사용자 자신의 기기에서 돌아가는 AI 모델, 실리콘에 맞춰 가는 하드웨어 인코딩, 그리고 요청받지 않는 한 편집에 손대지 않는 편집 철학을 갖췄습니다.</p>
+        <p class="lede">Sparkle은 편집으로 먹고사는 사람들을 위한 데스크톱 애플리케이션입니다. GPU 렌더링, 사용자 자신의 기기에서 돌아가는 AI 모델, 실리콘에 맞춰 가는 하드웨어 인코딩, 그리고 요청받지 않는 한 편집에 손대지 않는 어시스턴트를 갖췄습니다.</p>
 
         <h2 id="problem">편집 작업의 대부분은 편집이 아닙니다</h2>
 
@@ -274,15 +274,19 @@
 
         <p>무거운 촬영본에는 프록시와 긴 타임라인을 염두에 두고 만든 스크럽 경로가 붙습니다. 생각하면서 쓸 수 있는 편집기와 기다려야 하는 편집기의 차이가 거기서 갈립니다.</p>
 
-        <h2 id="ai">AI의 대부분은 사용자 기기에서 돌아갑니다</h2>
+        <h2 id="ai" class="key">AI의 대부분은 사용자 기기에서 돌아갑니다</h2>
 
         <p>배경 제거, 피사체 세그멘테이션, 깊이 추정은 사용자 자신의 하드웨어에서 로컬 모델로 돌아갑니다. 오후 내내 찍은 촬영본을 쓸모 있게 만들자고 업로드할 필요가 없고, 엠바고가 걸린 촬영본은 엠바고 안에 그대로 남습니다.</p>
 
-        <p>음성 인식도 로컬에서 돌릴 수 있습니다. 편집기에 함께 배포되는 Whisper 모델을 씁니다. 클라우드 엔진도 있고 기본값은 클라우드를 먼저 찾으므로, 오디오가 어디로 가는지는 가정이 아니라 설정입니다.</p>
+        <p>음성 인식도 로컬에서 돌릴 수 있습니다. 편집기가 한 번 내려받아 그다음부터는 네트워크 없이 쓰는 Whisper 모델을 씁니다. 클라우드 엔진도 있고 기본값은 클라우드를 먼저 찾으므로, 오디오가 어디로 가는지는 가정이 아니라 설정입니다.</p>
 
         <p>마스크는 샷마다 다시 그리는 대신 옵티컬 플로로 프레임을 가로질러 추적합니다. 자막은 단어 단위 타이밍과 함께 나오므로, 스타일을 입히고 다시 자르고 업계의 나머지가 기대하는 형식으로 내보낼 수 있습니다.</p>
 
         <p>무거운 생성 작업에는 클라우드가 필요하고, 그 부분은 눈에 보이는 곳에서 계량됩니다. 모든 계정은 크레딧 잔액을 보유합니다. 작업은 시작하기 전에 들 수 있는 비용을 예약하고, 실제로 든 비용으로 정산합니다. 월말에 청구서를 발견하는 사람은 없습니다.</p>
+
+        <h2 id="short">하지 않는 일</h2>
+
+        <p>편집을 당신에게서 가져가지 않습니다. 어시스턴트는 요청받지 않은 편집에는 손대지 않고, 편집기 자신이 할 수 없는 일은 어떤 것도 할 수 없습니다. 되돌리기 한 번으로 그중 무엇이든 되돌릴 수 있는 이유가 바로 그것입니다.</p>
 
         <h2 id="export">하드웨어와 대화하는 내보내기</h2>
 
@@ -290,51 +294,48 @@
 
         <p>색은 3D LUT 파이프라인을 거치므로 다른 곳에서 만든 룩이 그대로 도착합니다. 오디오는 나가는 길에 EBU R128로 정규화됩니다. 라우드니스 규격을 통과하지 못한 납품은 두 번 하게 되는 납품이기 때문입니다.</p>
 
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">내부 구조</h2>
+
+        <dl class="identity">
+          <div><dt>렌더링</dt><dd>GPU 셰이더, 미리보기와 내보내기 공유</dd></div>
+          <div><dt>로컬 AI</dt><dd>ONNX Runtime — 매팅, 세그멘테이션, 깊이</dd></div>
+          <div><dt>음성</dt><dd>기기 내 또는 클라우드, 단어 단위 타이밍</dd></div>
+          <div><dt>인코딩</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>포맷</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>색상</dt><dd>3D LUT 파이프라인</dd></div>
+          <div><dt>오디오</dt><dd>EBU R128 라우드니스</dd></div>
+        </dl>
+
         <h2 id="who">누구를 위한 도구인가</h2>
 
-        <p>편집자와 소규모 포스트프로덕션 팀입니다. 타임라인 안에서 살고, 소프트웨어가 돌려주는 한 시간 한 시간을 알아채는 사람들입니다. 데스크톱 편집기는 무료입니다. 클라우드 AI는 좌석 단위로 판매하므로, 편집자가 세 명이면 누군가 지어낸 라이선스 등급이 아니라 좌석 세 개 값을 냅니다.</p>
+        <p>편집자와 소규모 포스트프로덕션 팀입니다. 타임라인 안에서 살고, 소프트웨어가 돌려주는 한 시간 한 시간을 알아채는 사람들입니다. 데스크톱 편집기는 무료입니다. 클라우드 AI는 좌석 단위로 판매하므로, 편집자가 세 명이면 누군가 지어낸 라이선스 등급이 아니라 좌석 세 개 값을 냅니다. 위에서 말한 크레딧 잔액은 좌석 하나 안에서 클라우드 작업량을 재는 방식입니다.</p>
 
         <h2 id="status">지금 상태</h2>
 
         <p>Sparkle은 <strong>비공개 프리뷰</strong> 단계입니다. 편집기, 클라우드 서비스, 계정, 결제는 모두 만들어져 돌아가고 있습니다. 접근 권한은 천천히 열립니다. 남의 촬영본과 남의 돈을 다루는 소프트웨어는 천천히 내보낼 자격이 있기 때문입니다.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>내부 구조</h2>
-          <dl class="rail-facts">
-            <div><dt>렌더링</dt><dd>GPU 셰이더, 미리보기와 내보내기 공유</dd></div>
-            <div><dt>로컬 AI</dt><dd>ONNX Runtime — 매팅, 세그멘테이션, 깊이</dd></div>
-            <div><dt>음성</dt><dd>기기 내 또는 클라우드, 단어 단위 타이밍</dd></div>
-            <div><dt>인코딩</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>포맷</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>색상</dt><dd>3D LUT 파이프라인</dd></div>
-            <div><dt>오디오</dt><dd>EBU R128 라우드니스</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>하지 않는 일</h2>
-          <p>편집을 당신에게서 가져가지 않습니다. 어시스턴트는 요청받지 않은 편집에는 손대지 않고, 편집기 자신이 할 수 없는 일은 어떤 것도 할 수 없습니다. 되돌리기 한 번으로 그중 무엇이든 되돌릴 수 있는 이유가 바로 그것입니다.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            sparkle.software 열기
-          </a>
-          <p class="cta-note">
-            또는 이메일:
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          sparkle.software 열기
+        </a>
+        <p class="cta-note">
+          또는 이메일:
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

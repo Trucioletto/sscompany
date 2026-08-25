@@ -138,34 +138,54 @@
      34rem at 17px measures 55 to 66 characters and averages about 60. The old
      comment here said a flat 64, which was the top of the range presented as the
      whole of it. 60 is inside the 45-75 band and is the number to hold. */
-  --read: 34rem;
-  --rail: 16.5rem;
-  /* 4rem, on the scale, rather than the 5rem it started as: the gap is a
-     spacing decision and belongs to the same system as everything else. */
-  --gap: 4rem;
-  /* 62.5rem, not 62. box-sizing is border-box, so --wrap caps the border box and
-     the padding is subtracted from it: 62rem − 2 × 4rem left 864px for a grid
-     that asks for 34 + 4 + 16.5 = 54.5rem = 872px. The reading column absorbed
-     the 8px difference silently, so --read rendered 536px and never the 544px
-     documented above. 62.5rem − 128px = 872px exactly. */
-  --wrap: 62.5rem;
+  /* ONE CONTAINER FOR THE WHOLE SITE, AND A FIXED GUTTER.
+
+     There were two, and that was the defect. The masthead and the footer sat in
+     a 52rem box padded with clamp(1.5rem, 5vw, 4rem); the text sat in a 37rem
+     box padded with a flat 24px. Two boxes, two padding rules, both centred —
+     so the distance between the company's wordmark and the first word of its
+     own prose was not a constant. Measured:
+
+         viewport   592    640    768    832   1024   1280   1440
+         indent    -5.6  +16.0  +73.6 +102.4  +92.8  +80.0  +80.0
+
+     It inverts sign at 600px, peaks at 832 and then RETREATS as the window
+     keeps growing, because a vw padding inside a capped box eats the box from
+     the inside once the cap stops it growing. Nobody chose that curve. Two
+     readers on two laptops were looking at two different compositions of the
+     same page, and neither was the one anyone drew.
+
+     One box, one gutter, no vw anywhere in it: the masthead, the prose and the
+     footer share a single inline-start edge at every width, in every language,
+     in both directions.
+
+     42rem = 672px box, 624px of content, and that IS the measure — see the
+     note under .page. The floor is the masthead, not taste: its three atoms
+     measure 96 + 343 + 147 = 586px in Indonesian, the longest of the fifteen,
+     and 624 clears that with the language menu's own 24px margin still on it. */
+  --gutter: 1.5rem;
+  --page: 42rem;
 }
 
-/* THE ONE BREAKPOINT: 61rem = 976px. It is not a device width, it is
-   (--read + --gap + --rail) ÷ 0.9 rounded up — the width at which the two-column
-   grid first fits at full size, given that .wrap padding is 5vw there. It has to
-   be written as a literal below because a custom property cannot be read inside a
-   media query; this comment is the only place the derivation lives, so it is the
-   thing to change if a token changes.
+/* NO LAYOUT BREAKPOINT AT ALL, WHICH IS THE POINT.
 
-   It replaces a pair — max-width: 56.1875rem and min-width: 56.25rem — that was
-   wrong twice. The pair left the open interval 899-900px matching NEITHER rule
-   (reachable at fractional zoom and on fractional-DPR displays), where the page
-   rendered a 544px column against 265px of empty sheet: the exact failure the
-   narrower cap existed to prevent. And 900px was 76px too early — at 901px the
-   grid had 811px for the 872px it wanted, so the reading column shrank to 483px.
-   The measure got NARROWER as the window got WIDER, by 7 characters, in one
-   pixel of resize. */
+   There used to be one: 61rem = 976px, derived as (--measure + --gap + --rail) ÷
+   0.9 — the width at which a two-column grid first fitted. That grid is gone
+   and so are the two tokens named in its derivation.
+   The page is one column at every width, so there is no width at which it
+   changes shape and no number to keep in step. What is left are component
+   queries — the phone menu at 33rem, the values grid at 38rem, the identity
+   table at 32rem, the footer at 40rem — each owned by the component that
+   measures it, which is where a breakpoint belongs.
+
+   Why the rail went: it held the company's registry facts, the brand motto, a
+   cross-link and THE ONLY CALL TO ACTION ON THE PAGE. Provenance belongs in a
+   margin; a call to action does not. It was `position: sticky` with
+   `max-height: calc(100dvh - 4rem); overflow-y: auto`, so on a 1366x768 laptop
+   the button was 188px below the fold of a nested scroller with no visible
+   scrollbar — present in the markup and unreachable in the room. Below 976px
+   the whole thing already stacked into one column, so the split was the
+   exception and the exception was the half that broke. */
 
 /* ---------- Base ---------- */
 
@@ -222,56 +242,46 @@ body {
   border: 0;
 }
 
-/* ---------- The container and the grid ---------- */
+/* ---------- The container ---------- */
 
-/* One column is the default state, so the narrow cap is the default too. The
-   wide cap is granted, once, where the rail arrives. Written the other way round
-   it needed a second query to take the wide cap back, and the two edges did not
-   meet. */
-.wrap {
+/* ONE BOX. The masthead, everything in main, and the footer are all .page, so
+   there is exactly one inline-start edge on the site and it does not move —
+   not between blocks, not between pages, not as the window resizes.
+
+   The gutter is FIXED at 24px and never viewport-relative. A vw gutter inside a
+   capped box makes the content narrower as the window gets wider, which is the
+   curve documented on --page above. env() still wins where a notch is wider,
+   and it is the one fallback in this file that does real work: an engine
+   without env() drops the whole max() and the text sits against the notch. */
+.page {
   width: 100%;
   max-width: 42rem;
-  margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-left: max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-left));
-  padding-right: max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-right));
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  padding-inline: max(var(--gutter), env(safe-area-inset-left))
+                  max(var(--gutter), env(safe-area-inset-right));
 }
 
-/* Reading column plus a rail for provenance. The grid is left-aligned inside the
-   container, so what slack there is falls on the RIGHT — the rail hangs slightly
-   toward the text it annotates rather than sitting centred in its own space.
-   With --wrap at 62.5rem the slack is 28px at 1000px viewport and 0 from 1280px
-   up, where the container and the grid are the same width by construction. */
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 34rem);
-  grid-template-columns: minmax(0, var(--read));
-  justify-content: start;
-}
+/* THE MEASURE IS THE CONTAINER. THIS WAS TRIED THE OTHER WAY AND IT WAS WRONG.
 
-@media (min-width: 61rem) {
-  .wrap {
-    max-width: 62.5rem;
-    max-width: var(--wrap);
-  }
+   The first attempt capped every block in main at 34rem inside a 42rem
+   container and aligned it to the start, on the theory that the 80px left over
+   was "where the navigation tail and the footer's second column live". On a
+   diagram that is a reason. On the page it is 80px of white on ONE side of
+   every paragraph and nothing on the other, so the whole composition reads as
+   pushed toward the start edge — which is what it was, by 40px of optical
+   centre. An asymmetry that only a stylesheet can explain is not a composition.
 
-  .layout {
-    grid-template-columns: minmax(0, var(--read)) var(--rail);
-    column-gap: 4rem;
-    column-gap: var(--gap);
-  }
-}
+   So the container IS the measure. One inline-start edge, one inline-end edge,
+   the block centred in the viewport, nothing hanging off either side.
 
-/* 404 declares .layout but carries no rail. Without this the second track is
-   created and left empty, putting 264px of nothing beside the one thing on the
-   page. :has() is unsupported nowhere that matters and degrades to the old
-   behaviour rather than to a broken one. */
-@media (min-width: 61rem) {
-  .layout:has(> :only-child) {
-    grid-template-columns: minmax(0, var(--read));
-  }
-}
+   The cost is stated rather than hidden: 624px sets this site's prose at about
+   68 characters against the 60 that was counted at 34rem. 68 is inside the
+   45-75 band every source agrees on, and it buys a symmetric page and a
+   masthead that stays on one row in all fifteen languages — Indonesian, the
+   longest, needs 610px and gets 624. Eight characters for that is a trade
+   worth making. */
 
 /* ---------- Masthead ---------- */
 
@@ -713,7 +723,8 @@ body {
   row-gap: var(--s-1);
 }
 
-/* Uppercase and tracked, the same treatment as the rail labels. Before this the
+/* Uppercase and tracked, the same treatment as every other label in the file —
+   see .summary h2 and .footer-col h2, which are the other two. Before this the
    navigation was ordinary grey body text and belonged to no part of the system —
    the one element on the page that looked borrowed from another site. */
 /* white-space: nowrap so a label can never split mid-phrase — the nav may wrap
@@ -724,7 +735,7 @@ body {
   color: #5a6478;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 600;
@@ -761,13 +772,15 @@ body {
   border-bottom-color: var(--brand);
 }
 
+/* The wordmark bump is gone. The masthead comment above says "The wordmark is
+   one size, in one place, on every page" and then this block made it 120px from
+   40rem up and 96px below — the rule the file states about itself was not the
+   rule it followed. 96px everywhere, which also buys back the 24px the longest
+   navigation in the set (Indonesian: 343px of labels plus a 147px language
+   name) needs to stay on one row inside the 624px container. */
 @media (min-width: 40rem) {
   .masthead-inner {
     min-height: 5rem;
-  }
-
-  .mark img {
-    width: 7.5rem;
   }
 
   .site-nav {
@@ -777,12 +790,24 @@ body {
 
 /* ---------- Main ---------- */
 
-/* One fade on the whole page, no stagger. A staggered cascade arrives in reading
-   order, which is a one-dimensional idea; this composition has two columns. */
+/* One fade for the page as a whole, on load. It used to be the only motion on
+   the site and its note read: a stagger "arrives in reading order, which is a
+   one-dimensional idea; this composition has two columns." The composition has
+   one column now, so that objection has expired — but the answer is still not a
+   cascade down every paragraph. See the Motion section: four blocks per page
+   move, chosen by what they are, and everything else holds still. */
+/* 64px under the last line on a phone, 96 from 40rem up. This padding is the
+   whole gap between the end of the page and the footer's rule — the note below
+   deletes every margin that would otherwise add to it — so it is read as one
+   interval, and 96 was set against a 64px top padding and a wide page. On a
+   phone the top is 48 and the column is 342px, which made the closing gap twice
+   the opening one and, with the footer's own 32px of padding under the rule,
+   about 130px of white between the last sentence and the first word of the
+   colophon: a fifth of the screen. */
 main {
   flex: 1;
   padding-top: var(--s-6);
-  padding-bottom: var(--s-8);
+  padding-bottom: var(--s-7);
   animation: fade-in 0.3s ease-out both;
 }
 
@@ -794,7 +819,8 @@ main {
    intended it. The footer's margin is deleted below; main's padding already owns
    this gap. */
 .doc > *:last-child,
-.layout > div > *:last-child {
+.home > *:last-child,
+.close > *:last-child {
   margin-bottom: 0;
 }
 
@@ -807,24 +833,54 @@ main {
 @media (min-width: 40rem) {
   main {
     padding-top: var(--s-7);
+    padding-bottom: var(--s-8);
   }
 }
 
 /* ---------- Typography ---------- */
 
-/* ONE FLUID WINDOW, 640px to 1200px, for every size on the page.
-   Before this each clamp grew over its own band — h1 600-1067, .doc h1 722-1000,
-   .pull 800-1067, h2 1000-1190, .lede 950-1050 — five disjoint windows sharing
-   no endpoint. The hierarchy was therefore not fixed: h1:h2 peaked at 2.86 at
-   1024px and fell back to 2.56 by 1280, so a 27-inch monitor showed a FLATTER
-   hierarchy than a laptop. Every clamp below is written as an intercept plus a
-   slope that hits its floor at 640 and its ceiling at 1200, so the whole scale
-   grows together and locks together. The slope is (max - min) / 560px expressed
-   in vw; the intercept is min - slope x 640. */
+/* ONE FLUID WINDOW, 640px to 1200px, AND ONE LOCKED RATIO.
+
+   Sharing a window was step one and the comment that used to sit here claimed
+   it was the whole job: "the whole scale grows together and locks together."
+   It did not. Locking needs equal GROWTH FACTORS, and they were h1 1.78,
+   .doc h1 1.38, h2 1.19, .lede 1.10, body 1.00 — so h1:h2 still ran 1.71 at
+   640px, 2.00 at 768 and 2.56 at 1440. The hierarchy still changed shape with
+   the window, one layer up from where the old comment thought it had fixed it.
+
+   SIX RANKS, AND EVERY PAGE USES FOUR OF THEM. The first version of this
+   ladder had three and the page came out flat: every section heading the same
+   size, no title block worth the name, and the one line on each page that is
+   supposed to stop the reader set 1px away from the summary at the top. A
+   scale that never gives anything a moment is as broken as one whose ranks
+   collide — it just fails quietly instead of loudly.
+
+     hero    44-64   the home page's title, and nothing else on the site
+     h1      34-44   every other page's title
+     peak    28-34   the one section that is the reason the page exists,
+                     and the one line that stops the reader
+     h2      23-28   a section
+     lede    20-23   the standfirst (22-26 on the home page)
+     body    17      the argument
+     record  15      tables, captions, the footer
+     label   13      uppercase labels
+
+   Adjacent steps run 1.21 to 1.45 at every width. Nothing lands inside 1.15 of
+   its neighbour, which is where the eye stops reading a size change at all.
+
+   Under body there are three sizes and no more: 17 for prose, 15 for the record
+   blocks that annotate it, 13 for labels. There were seven, and four of them
+   sat inside a 20-25px band where no adjacent pair differed by as much as 1.15
+   — below the ratio at which an eye reads a size change at all. Four ranks that
+   the reader received as one.
+
+   Every clamp is an intercept plus a slope hitting its floor at 640 and its
+   ceiling at 1200. The slope is (max - min) / 560px expressed in vw; the
+   intercept is min - slope x 640. */
 h1 {
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  font-size: 2.25rem;
-  font-size: clamp(2.25rem, 0.5rem + 4.667vw, 4rem);
+  font-size: 2.125rem;
+  font-size: clamp(2.125rem, 1.411rem + 1.786vw, 2.75rem);
   /* 1.08, not 1.02. Fraunces' content area is 1.233em, so at 1.02 the line box
      was smaller than the glyph box and the leading went negative. Measured on
      the rendered page, the ink clearance between the descenders of one line and
@@ -835,29 +891,41 @@ h1 {
   line-height: 1.08;
   font-weight: 600;
   /* A serif needs less negative tracking than a grotesque: Inter wanted -0.022em,
-     Fraunces closes up on its own and starts to crowd below about -0.012em. */
-  letter-spacing: -0.012em;
+     Fraunces closes up on its own and starts to crowd below about -0.012em. And
+     tracking magnitude has to grow with size — this is the smaller of the two
+     h1 ranks now, so it takes the smaller value and the front door below takes
+     the larger. */
+  letter-spacing: -0.008em;
   color: #0e1220;
   color: var(--text);
   text-wrap: balance;
   margin-bottom: var(--s-4);
 }
 
-/* A title in a series, not a statement made once — but a series, not a different
-   system. At clamp(1.625rem, 3.6vw, 2.25rem) this was 36px against the home
-   page's 64px: the comment claimed "eight pixels and nothing else" and it was 28,
-   plus three other changed properties. Worse, 36px is only 1.44x the 25px h2
-   below it, so the four .doc pages had no top step at all while index.html had
-   2.56x — two pages, two hierarchies. 44px restores one clear step down from the
-   home page (1.45x) and 1.76x over its own h2, and does not change the line
-   count of any title on the site. */
-.doc h1 {
-  font-size: 2rem;
-  font-size: clamp(2rem, 1.25rem + 2vw, 2.75rem);
-  line-height: 1.1;
-  /* -0.008em, not -0.02em. Tracking magnitude must grow with size; -0.02em on a
-     32px serif was 1.7x harder in em than the 64px h1 got. */
-  letter-spacing: -0.008em;
+/* THE FRONT DOOR IS ONE STEP UP, AND THE STEP DOES NOT MOVE.
+
+   This was the other way round: h1 was the home page's 36-64px and .doc h1 the
+   inner pages' 32-44px, which made the ratio between them 1.13 at 640px and
+   1.45 at 1200. Two hierarchies for one site, and which one you got depended on
+   how wide your window was. Now the base rule is the one every page uses and
+   the home page takes a single override at a locked 1.25-1.30. Deleting the
+   .doc-scoped rule also closes the hole that let the home page — the only page
+   using a different container class — miss the inner-page treatment silently. */
+.home h1 {
+  font-size: 2.75rem;
+  font-size: clamp(2.75rem, 1.321rem + 3.571vw, 4rem);
+  letter-spacing: -0.012em;
+}
+
+/* The home page's standfirst is one rank above every other page's, and the air
+   under it is 96px rather than the 64 a section break gets. Between them those
+   two numbers are the whole hero: the title block is bigger than anything after
+   it and stands in more space than anything after it. No banner, no panel, no
+   tint — this site has never had a picture and does not need one to open. */
+.home .lede {
+  font-size: 1.375rem;
+  font-size: clamp(1.375rem, 1.089rem + 0.714vw, 1.625rem);
+  margin-bottom: var(--s-8);
 }
 
 /* The lede carries the second-largest type on the page. At 17px it was body copy
@@ -870,20 +938,24 @@ h1 {
    reads a size change at all. 20px floor makes it a real 1.18x step everywhere. */
 .lede {
   font-size: 1.25rem;
-  font-size: clamp(1.25rem, 1.107rem + 0.357vw, 1.375rem);
+  font-size: clamp(1.25rem, 1.036rem + 0.536vw, 1.4375rem);
   line-height: 1.5;
   /* -0.011em: Inter's own optical curve at this size. -0.005em was 0.1px per
      character, which is a placebo. */
   letter-spacing: -0.011em;
   color: #0e1220;
   color: var(--text);
-  margin-bottom: var(--s-5);
+  /* 24, not 32. On four of the five templates the 32 was collapsed away by the
+     first h2's 64 and never rendered at all; it showed up only on /privacy/,
+     where the lede is followed by the summary panel. A declaration that is live
+     on one page in five is not a rhythm, it is an accident with a number. */
+  margin-bottom: var(--s-4);
 }
 
 h2 {
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  font-size: 1.3125rem;
-  font-size: clamp(1.3125rem, 1.027rem + 0.714vw, 1.5625rem);
+  font-size: 1.4375rem;
+  font-size: clamp(1.4375rem, 1.08rem + 0.893vw, 1.75rem);
   line-height: 1.25;
   font-weight: 600;
   letter-spacing: -0.006em;
@@ -910,9 +982,23 @@ h3 {
   margin-bottom: var(--s-1);
 }
 
+/* THE ARGUMENT IS THE CONTENT, NOT A FOOTNOTE ON IT.
+
+   Every paragraph on the site was set in the annotation grey while the lede —
+   a summary of those paragraphs — was the only prose at full ink. The document
+   said: read the summary, the argument is small print. It also quietly broke
+   emphasis, because <strong> and <em> below only read as emphatic against a
+   baseline that had been lowered underneath them.
+
+   Three ranks of ink, and each one means something:
+     --text        the argument. Headings, prose, the pull quote, strong.
+     --text-muted  annotation ABOUT the page rather than in it: labels, the
+                   nav, the footer, the record blocks, the caption under the
+                   button. Every one of those sets it explicitly below.
+     --brand-ink   links, and the one action. */
 p {
-  color: #5a6478;
-  color: var(--text-muted);
+  color: #0e1220;
+  color: var(--text);
   margin-bottom: var(--s-4);
   /* Pulls a one-word last line back up. Ignored where unsupported. */
   text-wrap: pretty;
@@ -924,12 +1010,13 @@ strong {
   color: var(--text);
 }
 
-/* No italic exists in this font. A colour lift gives a second emphasis that is
-   distinguishable from <strong> and is not a sheared upright. */
+/* No italic exists in this font, and now that prose is full ink there is no
+   colour left to lift it with. 500 is a real instance in Inter's 400-600 range,
+   not a synthesised weight (font-synthesis is off), and it is a genuine second
+   rank under <strong> at 600. */
 em {
   font-style: normal;
-  color: #0e1220;
-  color: var(--text);
+  font-weight: 500;
 }
 
 a {
@@ -974,10 +1061,13 @@ a:hover {
      string wraps at 375px. */
   display: inline-block;
   padding: var(--s-1) 0;
-  font-size: 1.25rem;
+  /* Was 1.25rem. At 375px that made this link 20px against a 21px section
+     heading and 17px prose — 0.95x of the heading that governs it, and the
+     second-loudest thing in the column, for the least important link on the
+     page. It reads as an action through weight, colour and the chevron, which
+     is three signals; size was a fourth it had not earned. */
   font-weight: 600;
   line-height: 1.5;
-  letter-spacing: -0.011em;
   /* from-font is about 1.2px at 20px, which reads heavier than the 1px rules
      this site draws everywhere else. */
   text-decoration-thickness: 1px;
@@ -996,11 +1086,23 @@ a:hover {
   margin-inline-start: var(--s-1);
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
+  /* The nudge below is written BEFORE the rotation so it happens in the
+     element's upright space: listed after, a 3px push would travel along the
+     rotated axis and the chevron would drift downward as well as forward. */
   transform: translateY(-2px) rotate(-45deg);
+  transition: transform 0.18s ease;
+}
+
+.more a:hover::after {
+  transform: translateY(-2px) translateX(3px) rotate(-45deg);
 }
 
 .is-rtl .more a::after {
   transform: translateY(-2px) rotate(135deg);
+}
+
+.is-rtl .more a:hover::after {
+  transform: translateY(-2px) translateX(-3px) rotate(135deg);
 }
 
 /* THE PRODUCT'S OWN LOCKUP, AS THE HEADING OF ITS OWN SECTION.
@@ -1052,8 +1154,8 @@ a:hover {
 
 ul,
 ol {
-  color: #5a6478;
-  color: var(--text-muted);
+  color: #0e1220;
+  color: var(--text);
   margin: 0 0 var(--s-4);
   padding-inline-start: 0;
   list-style-position: outside;
@@ -1088,30 +1190,43 @@ li {
   border-inline-start: 2px solid #4563ff;
   border-inline-start-color: var(--brand);
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
-  /* 20-24px, down from 24-32. At 32 the aside was 28% LARGER than the h2 that
-     governed it: the loudest type on every interior page was a parenthetical.
-     An aside sits below its heading and above the body, which is where 24 is. */
-  font-size: clamp(1.25rem, 1rem + 0.667vw, 1.5rem);
+  font-size: 1.75rem;
+  /* THE PEAK RANK, shared with the one section heading that carries the page.
+     This was 24-32px once and got cut to 20-24 with the note that "the loudest
+     type on every interior page was a parenthetical" — true at the time,
+     because h2 was the only other rank and the quote outran it by 28%. It is
+     not true now: h1 is above it and the .key heading is level with it, so the
+     quote is the second voice on the page rather than the first. One per page,
+     and it is the line the page is for. */
+  font-size: clamp(1.75rem, 1.321rem + 1.071vw, 2.125rem);
   line-height: 1.25;
   letter-spacing: -0.01em;
   color: #0e1220;
   color: var(--text);
-  max-width: 26ch;
 }
 
-/* A heading must keep its downward bind whatever follows it. Without this the
-   h2's 16px collapses against the pull quote's 48px and the heading ends up
-   equidistant from the block above and the block below — belonging to neither. */
-h2 + .pull,
-h2 + .identity {
+/* A heading must keep its downward bind WHATEVER follows it. This named two
+   elements and there are four: the same collapse put `h2#values` 48px above its
+   own list on the home page and `h2#compliance` 48px above its own list on
+   /about/, with 64px above the heading — equidistant from the block above and
+   the block below, belonging to neither, which is the exact failure the rule
+   was written to prevent. `h2 + *` cannot fall out of step with the block
+   vocabulary the way a list of two selectors did. */
+h2 + * {
   margin-top: var(--s-3);
 }
 
-@media (min-width: 61rem) {
-  /* The negative margin has to cancel the padding AND the rule it hangs off,
-     or the quote's text sits 2px right of the axis that the top of this file
-     says never moves. */
+/* 42rem: the width at which the container reaches its cap and there is gutter
+   for the rule to hang in. Below it the container is fluid and its 24px of
+   padding is all that keeps the text off the screen edge, so nothing may reach
+   into it. The negative margin has to cancel the padding AND the rule it hangs
+   off, or the quote's text sits 2px inside the spine the rest of the page holds.
+
+   The quote also used to carry `max-width: 26ch`, which made it 414px at 1440,
+   394 at 1024 and 364 at 768 — a fourth column width, computed from a font
+   metric, moving with the viewport and different in every language. It is a
+   paragraph of the page it interrupts and it now measures like one. */
+@media (min-width: 42rem) {
   .pull {
     margin-inline-start: calc(-1 * (var(--s-4) + 2px));
   }
@@ -1136,36 +1251,51 @@ h2 + .identity {
   counter-reset: feature;
 }
 
-/* 38rem, not 34rem. 34rem was the reading-column token reused as a viewport
-   query, and at a 544px viewport the column is only 490px — so the two cells were
-   221px, a 26-character measure for 17px copy, and the longest item set as three
-   ragged lines. The switch now happens where a cell is at least 250px. */
-@media (min-width: 38rem) {
+/* Two columns from 37rem, the same width at which the identity table unfolds
+   and the footer opens. It used to be 38rem here, 32rem there and 48rem in the
+   footer: three numbers for one event, so a window dragged slowly across 600px
+   watched three separate blocks change their minds one after another. */
+@media (min-width: 37rem) {
   .home-what {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+/* Each cell is now a value and the sentence that makes it checkable, so the two
+   halves cannot be the same text: the name carries the weight and the sentence
+   is the quieter of the two. Sizes are inverted from the capability list this
+   replaced — the li now sets the SENTENCE, and the strong below it sets the
+   name — because the sentence is the longer of the two and inherits. */
 .home-what li {
   counter-increment: feature;
   margin: 0;
   padding-top: var(--s-3);
   border-top: 1px solid #e6e8ef;
   border-top-color: var(--rule);
-  font-size: 1.0625rem;
-  line-height: 1.45;
-  color: #0e1220;
-  color: var(--text);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #5a6478;
+  color: var(--text-muted);
   /* The cells are 26-30 characters wide, so an unbalanced rag leaves one word
      alone on the last line. h1 got this and the block that sits under it did not. */
   text-wrap: balance;
+}
+
+.home-what li strong {
+  display: block;
+  margin-bottom: var(--s-0);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #0e1220;
+  color: var(--text);
 }
 
 .home-what li::before {
   content: counter(feature, decimal-leading-zero);
   display: block;
   margin-bottom: var(--s-1);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.06em;
   font-weight: 600;
   color: #4563ff;
@@ -1173,55 +1303,125 @@ h2 + .identity {
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- The rail ---------- */
+/* ---------- The turn ---------- */
 
-/* Provenance — dates, counts, sources, the section list — belongs in the margin,
-   not in the reading flow where it competes with the argument. */
-.rail {
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: #5a6478;
-  color: var(--text-muted);
-  margin-top: var(--s-6);
-  padding-top: var(--s-4);
+/* ONE SECTION PER PAGE IS THE REASON THE PAGE EXISTS, AND IT SAYS SO.
+
+   Every h2 on a page was the same size with the same 64px above it, whether it
+   headed a four-paragraph thesis or a one-sentence aside. Eight equal peaks is
+   no peak. This marks exactly one heading per page — the product on the home
+   page, the local models on /sparkle/, the document-and-operations thesis on
+   /how-we-build/, the exact position on /about/ — and it marks it with the two
+   devices this system already owns: a hairline and space.
+
+   NOT with size. A step up from h2 (25-30px) lands on 32-38, which is the h1 of
+   the page it sits inside; the rank would have collided with the page title to
+   buy a difference the rule already states more clearly.
+
+   A rule ABOVE a heading appears in exactly two places on any page — here and
+   at the closing block — so the reader gets two horizontal lines per page and
+   both of them mean "the page turns here". A third would make them furniture. */
+/* 64 above the rule and 32 below it: 96px in total against a section break's
+   64, a step of 1.5. --s-8 was tried and read as a hole rather than a turn —
+   the reader looks for the missing block instead of noticing the emphasis. */
+.key {
+  margin-top: var(--s-7);
+  padding-top: var(--s-5);
+  border-top: 1px solid #e6e8ef;
+  border-top-color: var(--rule);
+  /* The peak rank. The first version marked this section with a rule and space
+     alone and left the type at h2 — which was too quiet to find while
+     scrolling, so the page still read as one long run of equal sections. Size
+     was available after all: at 28-34 it sits clear of the 34-44 h1 above it
+     and clear of the 23-28 h2 below. */
+  font-size: 1.75rem;
+  font-size: clamp(1.75rem, 1.321rem + 1.071vw, 2.125rem);
+}
+
+/* The Sparkle lockup is the home page's turn, and .lockup sets its own margins
+   from the section it used to be. Later in the file, so it wins. */
+.lockup.key {
+  margin-top: var(--s-7);
+}
+
+/* ---------- The closing block ---------- */
+
+/* WHERE THE ONE ACTION ON THE PAGE LIVES, NOW THAT IT IS NOT IN A MARGIN.
+
+   Every page ends with the same shape: a hairline, then the button, then the
+   addresses under it in the annotation grey. It is the last thing in <main>, in
+   source order and in reading order, which means it is also the last tab stop
+   before the footer instead of the twenty-sixth element of an <aside> the
+   keyboard reached after all of the prose anyway.
+
+   No box, no fill, no second colour. The rule and the space do the separating,
+   exactly as they do between two rows of .home-what. */
+/* 64 above the rule and 32 below it, not 64 and 48. In series those made 113px
+   with the hairline — the largest interval on the site, 1.76x the section break,
+   spent on separating the last sentence of the argument from the button that
+   answers it. No declaration intended it; it was two numbers added up. */
+.close {
+  margin-top: var(--s-7);
+  padding-top: var(--s-5);
   border-top: 1px solid #e6e8ef;
   border-top-color: var(--rule);
 }
 
-@media (min-width: 61rem) {
-  .rail {
-    /* Offset down — margin-top is already --s-6 above, so this query only
-       removes the stacked-state rule. Two columns that begin at the same y read
-       as a table; two that begin at different y read as a composition. */
-    padding-top: 0;
-    border-top: 0;
-    position: sticky;
-    top: var(--s-5);
-    align-self: start;
-    /* align-self: start means the rail is its own content height, so once it
-       pins, everything below the viewport edge is unreachable — you cannot
-       scroll an element that has stopped moving. The Sparkle rail is 754px tall;
-       on a 1366x768 laptop the usable height is about 620px, which put the only
-       call to action on that page permanently off screen. Bounding the height
-       and letting the overflow scroll is what makes sticky safe here. */
-    max-height: calc(100vh - 4rem);
-    max-height: calc(100dvh - 4rem);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
+.close .cta {
+  margin-top: var(--s-1);
 }
 
-/* The rail labels are interface, not headings — a display serif at 13px in
-   letterspaced caps loses every feature that made it worth loading and reads as
-   an odd sans. The serif belongs where it can be seen.
+/* .cta-note appears on four pages and had no rule anywhere — it fell through to
+   the rail's paragraph style, whose margin-bottom trapped 16px at the end of the
+   column and whose lack of a margin-top left the caption 6px under a 50px filled
+   button. */
+.cta-note {
+  margin-top: var(--s-2);
+  margin-bottom: 0;
+  font-size: 0.9375rem;
+  color: #5a6478;
+  color: var(--text-muted);
+}
 
-   ONE UPPERCASE LABEL TREATMENT, at two sizes. The site had four: 13px/0.04em
-   here, 12px/0.04em on .rail-facts dt, 12px/0.08em on the nav and the feature
-   counters, 11px/0.08em in the footer. Four sizes and two trackings for one
-   semantic job, with the SMALLER type getting LESS tracking — backwards, since
-   small letterspaced caps need more. 0.06em everywhere, 13px for a label that
-   heads a block and 12px for one that labels a row. */
-.rail h2 {
+/* Inline links in the note are 17px tall, which is under the 24px minimum and
+   they are not inline-in-a-sentence, so no exemption applies. */
+.cta-note a {
+  display: inline-block;
+  padding: var(--s-1) 0;
+}
+
+.cta-note a:not(.cta) {
+  color: #5a6478;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.cta-note a:not(.cta):hover {
+  color: #0e1220;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---------- The summary panel (privacy) ---------- */
+
+/* A privacy notice is the one document on this site whose reader wants the
+   answer before the argument, so its five-line summary goes at the TOP, under
+   the lede, rather than in a column beside twelve sections it summarises. Ruled
+   above and below and nowhere else: the site draws hairlines, not boxes. */
+.summary {
+  margin: var(--s-6) 0;
+  padding: var(--s-4) 0;
+  border-top: 1px solid #e6e8ef;
+  border-top-color: var(--rule);
+  border-bottom: 1px solid #e6e8ef;
+  border-bottom-color: var(--rule);
+}
+
+/* The one label treatment in the file, at the smaller of its two sizes: this
+   heads a panel, not a section, and setting it in the display serif would put
+   it at the same rank as the twelve section headings it stands in front of. */
+.summary h2 {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 0.8125rem;
   font-weight: 600;
@@ -1229,59 +1429,20 @@ h2 + .identity {
   text-transform: uppercase;
   color: #5a6478;
   color: var(--text-muted);
-  margin: 0 0 var(--s-2);
+  margin: 0 0 var(--s-3);
 }
 
-.rail p {
-  font-size: 0.875rem;
-  margin-bottom: var(--s-3);
-}
-
-/* Live: the rail on /how-we-build/ carries a six-item list, and without this the
-   global ul rule would indent it 24px off the axis inside a 264px column. */
-.rail ul {
+.summary ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.rail li {
-  margin-bottom: var(--s-1);
-}
-
-/* .cta-note appears on four pages and had no rule anywhere — it fell through to
-   .rail p, whose margin-bottom trapped 16px at the end of the rail and whose
-   lack of a margin-top left the caption 6px under a 50px filled button. */
-.cta-note {
-  margin-top: var(--s-2);
-  margin-bottom: 0;
-}
-
-/* Inline links in the rail are 17px tall, which is under the 24px minimum and
-   they are not inline-in-a-sentence, so no exemption applies. */
-.cta-note a {
-  display: inline-block;
-  padding: var(--s-1) 0;
-}
-
-/* :not(.cta) matters. The call to action lives in the rail, and `.rail a` at
-   specificity 0-2-0 would otherwise beat `.cta` at 0-1-0 and repaint the white
-   label in muted grey on the blue fill — which is exactly what it did. */
-.rail a:not(.cta) {
+  font-size: 0.9375rem;
   color: #5a6478;
   color: var(--text-muted);
-  text-decoration: none;
 }
 
-.rail a:not(.cta):hover {
-  color: #0e1220;
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.rail-block + .rail-block {
-  margin-top: var(--s-5);
+.summary li + li {
+  margin-top: var(--s-1);
 }
 
 /* ---------- CTA ---------- */
@@ -1300,7 +1461,7 @@ h2 + .identity {
   background: #3d5bfa;
   background: var(--brand-ink);
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.5;
   text-decoration: none;
@@ -1327,9 +1488,20 @@ h2 + .identity {
   flex: none;
 }
 
+/* The two states an action already had, given the time they were missing.
+   120ms on the press, not 200: a button that eases into being pressed feels
+   like it did not notice. */
+.cta {
+  transition: background-color 0.2s ease, transform 0.12s ease;
+}
+
 .cta:hover {
   background: #2f49d6;
   color: #ffffff;
+}
+
+.cta:active {
+  transform: translateY(1px);
 }
 
 .cta:focus-visible {
@@ -1369,16 +1541,29 @@ h2 + .identity {
    Cyrillic languages were misaligned, and only English and Italian happened to
    fit — which is what a number tuned on one language always does.
 
-   `max-content` on the first track means the column is as wide as the widest
-   label THAT LANGUAGE has, computed by the browser, in every language, with no
-   number to keep in step. The row wrappers become `display: contents` so the
-   two cells are grid items directly; the rule and the 44px band move onto the
-   cells, which is where they have to be once the div stops generating a box. */
+   `max-content` fixed that and introduced a worse one: the column is then as
+   wide as the widest label on THAT PAGE, so the same component landed on three
+   different axes — the value column starts at +72px on /sparkle/, +94px on
+   /how-we-build/ and +161px on /about/, an 89px swing, 16% of the measure, for
+   what is meant to be one table. Across languages the same track ran 130px in
+   Arabic and 178px in Russian.
+
+   A fraction has neither problem: the seam is at the same fraction of the
+   measure on every page, in every language, in both directions, and no label
+   can push it. 1 : 1.4 because the values are the longer half — "NVENC, Quick
+   Sync, AMD, VideoToolbox" against "Encoding". The row wrappers become
+   `display: contents` so the two cells are grid items directly; the rule and
+   the 44px band move onto the cells, which is where they have to be once the
+   div stops generating a box. */
+/* 48/48, the same symmetric interval the pull quote and the values grid get.
+   A block that interrupts prose is one event and it had four spacings: 48/48
+   here, 48/48 there, 32/48-plus-24-of-padding on the summary panel, and 24/32
+   on this table. */
 .identity {
   display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
   column-gap: var(--s-4);
-  margin: var(--s-4) 0 var(--s-5);
+  margin: var(--s-6) 0;
   font-size: 0.9375rem;
 }
 
@@ -1407,14 +1592,16 @@ h2 + .identity {
   color: #5a6478;
   color: var(--text-muted);
   margin: 0;
-  /* The same identifiers appear here and in the rail; only one of the two was
-     getting tabular figures. */
+  /* VAT and REA numbers are read digit by digit against a register entry, so
+     they get tabular figures wherever they appear. */
   font-variant-numeric: tabular-nums;
 }
 
-/* Stacked below 32rem: one column, the label above its value, and the rule only
-   under the pair rather than under each cell. */
-@media (max-width: 32rem) {
+/* Stacked below 37rem: one column, the label above its value, and the rule only
+   under the pair rather than under each cell. 37rem and not 32 so that every
+   two-track block on the site — this table, the values grid, the footer —
+   folds at the same width instead of at three. */
+@media (max-width: 37rem) {
   .identity {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1435,42 +1622,17 @@ h2 + .identity {
   }
 }
 
-/* Provenance as facts, not as a sentence. A run-on standfirst in the margin is
-   read as decoration; labelled rows are read as evidence. */
-.rail-facts {
-  margin: 0;
-}
+/* The spec tables on /sparkle/ and /how-we-build/ used to be .rail-facts: 12px
+   labels over 14px values in a 264px gutter. They are the most checkable content
+   on either page and they were set as marginalia. Moved into the flow they are
+   the same shape as the identity table on /about/ — a label and its value — so
+   they are the same component, and there is one fewer of them to keep in step.
 
-.rail-facts div {
-  padding: var(--s-1) 0;
-  border-bottom: 1px solid #e6e8ef;
-  border-bottom-color: var(--rule);
-}
-
-.rail-facts div:first-child {
-  border-top: 1px solid #e6e8ef;
-  border-top-color: var(--rule);
-}
-
-.rail-facts dt {
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  /* 1.3, not the inherited 1.6. The label and its value have to bind to each
-     other harder than one row binds to the next, and at 1.6 the gap inside a
-     pair was only about half the gap between pairs. */
-  line-height: 1.3;
-  color: #5a6478;
-  color: var(--text-muted);
-}
-
-.rail-facts dd {
-  margin: 0;
-  font-size: 0.875rem;
-  line-height: 1.45;
-  color: #0e1220;
-  color: var(--text);
-  font-variant-numeric: tabular-nums;
+   A link alone in a dd is a standalone target and gets no inline-in-a-sentence
+   exemption from the 24px minimum. */
+.identity dd > a:only-child {
+  display: inline-block;
+  padding: var(--s-0) 0;
 }
 
 /* ---------- Footer ---------- */
@@ -1489,8 +1651,8 @@ footer {
 }
 
 /* min-width: 0 on the tracks. 1.4fr means minmax(auto, 1.4fr), whose automatic
-   minimum is min-content — so unlike .layout's minmax(0, ...) tracks, these
-   CANNOT shrink below their longest unbreakable string. Measured at 640px, the
+   minimum is min-content, so these tracks CANNOT shrink below their longest
+   unbreakable string on their own. Measured at 640px, the
    width the 3-column footer switches on at, the contact track is 166.8px and
    "hello@spinnesoftware.com" is 166.8px: it fits by nothing at all, and the
    fallback face is wider. Past that the grid over-allocates, the footer
@@ -1506,22 +1668,89 @@ footer {
   min-width: 0;
 }
 
-@media (min-width: 40rem) {
-  /* 2fr, not 1.4fr. 1.4 / 1 / 1.2 produced three near-equal columns with no
-     lead; on a site whose stated job is being checked by counterparties, the
-     column holding the registered identity should be the one with weight. */
+/* The two labels a phone does not need. In three columns, "PAGES" and "CONTACT"
+   say which track is which. Stacked in one column they say nothing the content
+   below them has not already said — a row of page names is legibly navigation,
+   and an email address is legibly an address — and they cost two more lines of
+   the same grey letterspaced caps in a footer built entirely out of grey
+   letterspaced caps. The company's own name stays: it is the one heading that
+   carries information rather than a category. The nav keeps its aria-label, so
+   nothing is lost to a screen reader either way. */
+.footer-col:has(.footer-nav) h2,
+.footer-col:last-child h2 {
+  display: none;
+}
+
+/* Contacts wrap like the nav above them, for the same reason: three addresses
+   on three lines is 132px under a finger, and the first two fit on one line at
+   360px. */
+.footer-col:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--s-3);
+  row-gap: 0;
+}
+
+/* TWO TRACKS, NOT THREE, AND THE REASON IS ARITHMETIC.
+
+   The container is now 624px of content on every page. Three tracks at
+   2 / 1 / 1.3 with two 48px gutters leave the contact column 160px, against
+   the 167px "hello@spinnesoftware.com" measures unbroken in Inter — so the
+   site's own address would break mid-domain, which is what it already did
+   between 640 and 730px before this. Two tracks give it 288px.
+
+   Track 1 is the registered identity and spans both rows; track 2 stacks the
+   page list over the contacts. No markup changed: the three columns are placed
+   explicitly, which also means the DOM order a screen reader gets is still
+   company, pages, contact.
+
+   37rem, the one width at which every two-track block on the site folds. */
+@media (min-width: 37rem) {
   .footer-inner {
-    grid-template-columns: 2fr 1fr 1.3fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--s-6);
+    row-gap: var(--s-5);
+  }
+
+  /* The registered identity spans the band and the two short lists sit under
+     it. Spanning it down the first column instead was tried: its three lines
+     left 200px of nothing beside a column that ran on for two labels, which is
+     the same hole in miniature that this whole pass exists to remove. */
+  .footer-col:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer-col:first-child p {
+    max-width: 34rem;
+  }
+
+  /* Everything the phone footer folds, unfolded: three labelled tracks, one
+     page per line, one address per line. */
+  .footer-col:has(.footer-nav) h2,
+  .footer-col:last-child h2 {
+    display: block;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+  }
+
+  .footer-nav a {
+    white-space: normal;
+  }
+
+  .footer-col:last-child {
+    display: block;
   }
 }
 
 /* 12px, not 11px. 11px letterspaced caps in grey, thinned further by
    -webkit-font-smoothing, was the smallest type in the whole system and it was
-   labelling the company's own name. Now the same treatment as .rail-facts dt —
-   see the note on the rail labels. */
+   labelling the company's own name. Now the same treatment as every other label
+   in the file — see the note above .site-nav a. */
 .footer-col h2 {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 600;
@@ -1540,9 +1769,28 @@ footer {
   color: var(--text-muted);
 }
 
+/* A wrapped ROW on a phone, a column from 40rem up. Stacked, the five pages
+   spent five full lines — 174px, the tallest thing in the footer — to hold five
+   words, and the phone footer read as a site directory rather than as the end of
+   a page. Wrapped, the same five fit in two lines. The column returns the moment
+   there are three tracks to put it in, where a vertical list is what the track
+   is for. */
 .footer-nav {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: var(--s-3);
+  /* No row gap: each anchor already carries its own block padding (4px here,
+     12px under a finger), so the rows are separated by that and adding to it
+     would reopen the spacing this rule closes. */
+  row-gap: 0;
+}
+
+/* Only while they sit on one line. A label that wraps mid-word in a row of
+   labels loses which half belongs to which link; in the column below it there is
+   nothing to confuse it with and a long label in a narrow track must be free to
+   break. */
+.footer-nav a {
+  white-space: nowrap;
 }
 
 /* 4px of block padding, not 0.15rem and not 12px.
@@ -1651,7 +1899,7 @@ footer {
 }
 
 /* The legal line: small, tabular where it holds identifiers, and last.
-   max-width, because it sat directly in .wrap with none — so at 1440 it ran the
+   max-width, because it sat in the container with none — so at 1440 it ran the
    full 864px, which is 134 characters. Every other block on the site is capped
    at 34rem; the one string a partner actually reads for verification was set at
    twice the site's own maximum measure. */
@@ -1660,20 +1908,27 @@ footer {
    was a division without a difference — and it sat 32px under the columns and
    16px over the colophon, so it belonged to neither. 64px of air does the same
    job and does not draw attention to itself doing it. */
+/* 32px on a phone, 64 from 37rem up. The 64 is measured against the columns
+   sitting side by side, where it is the space under a band; stacked, it landed
+   under a single narrow column as a third of a screen of nothing between two
+   pieces of grey text — the largest gap on the page, spent on its smallest
+   type. */
 .colophon {
-  margin-top: var(--s-7);
-  font-size: 0.75rem;
+  margin-top: var(--s-5);
+  font-size: 0.8125rem;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
 }
 
-/* The measure belongs to the TEXT, not to the block. Capping .colophon itself
-   also capped its border-top, so the rule stopped at 544px while the columns
-   above it ran to 1150 — a hairline that separated nothing from nothing. */
+/* No cap of its own any more: the container is the measure, so this line ends
+   where every other line on the page ends. It used to run 864px — 134
+   characters — because it sat in a container with no cap at all. */
 .colophon p {
-  max-width: 34rem;
-  max-width: var(--read);
   margin: 0;
+  /* Explicit, because `p` is full ink now and would otherwise beat the muted
+     colour this line inherits from `footer`. */
+  color: #5a6478;
+  color: var(--text-muted);
 }
 
 /* The registered identity is the reason this footer exists. It was the smallest,
@@ -1684,7 +1939,217 @@ footer {
   color: var(--text);
 }
 
-/* ---------- Animations ---------- */
+/* Here rather than in the footer's other 37rem block, which sits above these
+   rules: same specificity, so from up there the base 32px would have overridden
+   the restore at every width. */
+@media (min-width: 37rem) {
+  .colophon {
+    margin-top: var(--s-7);
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/* FOUR MOMENTS A PAGE, AND THE REST NEVER MOVES.
+
+   The vocabulary is the one the design already has: this site is built out of
+   hairlines, and the company's own line about itself is that a web "is built
+   one thread at a time". So the rules draw themselves — each one grows from the
+   inline-start edge as its block comes into view — and the block it belongs to
+   rises 8px into place with it. Two coordinated gestures, read as one.
+
+   WHAT MOVES, AND WHY IT AND NOT SOMETHING ELSE:
+
+     .key    the one section that carries the page   rule draws + heading rises
+     .pull   the one line that stops the reader      rule draws down + text rises
+     .close  the one action                          rule draws + button rises
+     record  .identity, .home-what, .summary         fade only, no movement
+
+   Record blocks fade and do not travel: they are reference material and they
+   should not perform. Prose and section headings get nothing at all — and that
+   is the point. Animating every paragraph is what makes a page feel like it is
+   selling something; leaving 90% of it still is what makes the four moments
+   read as moments.
+
+   NO SCRIPT AND NO OBSERVER. animation-timeline: view() is CSS driving the
+   animation off the element's own position in the scroller, which means it also
+   costs nothing on the main thread. Everything below is inside a @supports, so
+   an engine without it renders the page static and complete rather than running
+   the whole set at once on the document timeline — which is exactly what an
+   unguarded `animation` shorthand would do.
+
+   The rules are drawn by RETRACTION, not construction: the border stays exactly
+   where it was declared and a curtain in the page colour uncovers it. That way
+   nothing about the box model, the print sheet or forced-colors mode depends on
+   the animation existing, and there is no second source of truth for where a
+   hairline is. */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* THE RANGE IS MEASURED ON THE VIEWPORT, NOT ON THE ELEMENT, and that is
+       the difference between an animation and a flicker.
+
+       `entry` was the obvious choice and it was wrong. The entry phase runs
+       from the moment an element touches the bottom edge until it is fully in
+       view, so its LENGTH IS THE ELEMENT'S OWN HEIGHT — 40px for a heading.
+       The whole reveal then happened inside 40px of scrolling, which at any
+       normal wheel speed is one frame. Measured: at the scroll position where
+       the heading first appeared, its rule was already drawn.
+
+       `cover` runs from first touch to last, so its length is the viewport plus
+       the element — about 940px for that same heading in a 900px window. A
+       quarter of that is roughly 240px of scrolling, which is a gesture the eye
+       can follow, and it scales with the window instead of with the block. */
+    /* WHERE ON THE SCREEN THE REVEAL HAPPENS, which turned out to matter more
+       than how long it lasts.
+
+       At cover 0% a block's top edge is exactly on the bottom edge of the
+       window; at cover 100% its bottom edge has left the top. So the top of a
+       block sits at `viewport - progress x (viewport + block)` — which means a
+       0%-to-22% range plays out entirely between 102% and 72% of screen
+       height. Measured on /sparkle/ in an 800px window: opacity 0 / 0.26 /
+       0.56 / 0.90 / 1 as the heading climbed from 102% to 72%. The whole
+       gesture finished in the bottom quarter, below where anyone is looking,
+       and by the time the block reached the reading zone it had been fully
+       resolved for 500px. Nothing was broken; it was simply happening off the
+       part of the screen the eye uses.
+
+       Starting at 15% puts the block's top at 84% of the window when the
+       reveal begins and 58% when it ends — it now happens on the way INTO the
+       reading zone rather than before it. */
+    :root {
+      --range-quiet: cover 12% cover 34%;
+      --range-block: cover 15% cover 38%;
+      --range-rule:  cover 18% cover 45%;
+    }
+
+    .key,
+    .close,
+    .pull {
+      position: relative;
+    }
+
+    /* The curtain over a horizontal rule. transform-origin is the END edge, so
+       shrinking it uncovers the rule from the START edge — left to right in
+       English, right to left in Arabic. inset-block-start is -1px because an
+       absolutely positioned box is laid out against the PADDING box, and the
+       border it has to cover sits just outside it. */
+    .key::before,
+    .close::before {
+      content: "";
+      position: absolute;
+      inset-block-start: -1px;
+      inset-inline-start: 0;
+      inline-size: 100%;
+      block-size: 1px;
+      background: #ffffff;
+      background: var(--bg);
+      transform-origin: right;
+      animation: uncover-x ease-out both;
+      animation-timeline: view();
+      animation-range: var(--range-rule);
+    }
+
+    /* The pull quote's rule is vertical and 2px, so its curtain retracts
+       downward and sits 2px outside the padding box instead of 1. */
+    .pull::before {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: -2px;
+      inline-size: 2px;
+      background: #ffffff;
+      background: var(--bg);
+      transform-origin: bottom;
+      animation: uncover-y ease-out both;
+      animation-timeline: view();
+      animation-range: var(--range-rule);
+    }
+
+    .is-rtl .key::before,
+    .is-rtl .close::before {
+      transform-origin: left;
+    }
+
+    /* EVERY SECTION HEADING, not only the four moment blocks. With just those
+       four, a page like /how-we-build/ has nine sections and eight of them do
+       nothing at all — you can scroll the length of the argument and never see
+       the site move. Headings are structure, so animating them is still a
+       decision about blocks rather than a cascade poured over every paragraph:
+       body copy stays exactly where it is, which is what keeps this from
+       reading as a page that is selling something.
+
+       ease-out, not linear. A linear fade spread over 200px of scrolling
+       changes about one percent per frame, which is a value a reader can
+       measure and not a thing a reader can see. Front-loaded, the block lands
+       and then settles. */
+    h2,
+    .key,
+    .pull,
+    .close > * {
+      animation: arrive ease-out both;
+      animation-timeline: view();
+      animation-range: var(--range-block);
+    }
+
+    /* Reference material fades and stays put. */
+    .identity,
+    .home-what,
+    .summary {
+      animation: settle ease-out both;
+      animation-timeline: view();
+      animation-range: var(--range-quiet);
+    }
+  }
+}
+
+@keyframes uncover-x {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes uncover-y {
+  from {
+    transform: scaleY(1);
+  }
+
+  to {
+    transform: scaleY(0);
+  }
+}
+
+/* 24px, not the 8 this started at. 8px of travel on a 30px heading is under a
+   third of its own cap height: it registers as a rendering imprecision rather
+   than as movement, and next to a fade that was already finishing off-screen it
+   added up to a reveal nobody could report seeing. 24 is one line of body copy
+   — far enough to read as arrival, short enough that a reader already looking
+   at the line does not watch it slide under them. */
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 
 @keyframes fade-in {
   from {
@@ -1718,6 +2183,16 @@ footer {
   .masthead::before {
     background: LinkText;
   }
+
+  /* The rule curtains are painted in --bg, and forced-colors is entitled to
+     substitute a colour that is not the page's. A curtain that does not match
+     its ground is a grey bar sitting on a hairline, so there are no curtains
+     here — the rules are simply drawn, which is what they were before. */
+  .key::before,
+  .close::before,
+  .pull::before {
+    display: none;
+  }
 }
 
 /* ---------- Print ---------- */
@@ -1730,7 +2205,9 @@ footer {
   .masthead::before,
   .pull-field,
   .site-nav,
-  .rail {
+  /* A filled blue pill that cannot be pressed is ink spent on nothing. The
+     address underneath it survives, which is the part paper can act on. */
+  .close .cta {
     display: none;
   }
 
@@ -1748,15 +2225,33 @@ footer {
     padding-bottom: var(--s-4);
   }
 
-  /* display: block removes the grid, and the inner article has no width of its
-     own, so body copy printed at about 76 characters — wider than anything the
-     screen ever shows. */
-  .layout {
-    display: block;
+  /* The container's cap is honoured by print anyway, but a printer resolves rem
+     against its own root size and some resolve vw against nothing at all, so
+     the measure is restated in the one place where the page has no viewport. */
+  .page {
+    max-width: var(--page);
   }
 
-  .layout > * {
-    max-width: var(--read);
+  /* Paper has no scroller, so a view() timeline has no progress to read and
+     every block waiting on one would print at the start of its animation —
+     which is opacity: 0. This is the one reset where forgetting it does not
+     degrade the page, it deletes it. */
+  h2,
+  .key,
+  .pull,
+  .close > *,
+  .identity,
+  .home-what,
+  .summary {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .key::before,
+  .close::before,
+  .pull::before {
+    display: none;
   }
 
   h1,
@@ -1873,10 +2368,12 @@ footer {
 .script-arab, .script-deva, .script-beng { line-height: 1.9; }
 
 /* The measure is set in rem, which is right for Latin and wrong for Han: a
-   34rem line at 17px holds about 60 Latin characters but only about 30 Han
-   ones, because each occupies a full em. Widening the column for the dense
-   scripts keeps the line count per paragraph in the same range. */
-.script-hans, .script-jpan, .script-kore { --read: 40rem; }
+   42rem line at 17px holds about 68 Latin characters but only about 34 Han
+   ones, because each occupies a full em. Widening the container for the dense
+   scripts keeps the line count per paragraph in the same range. It is the
+   container and no longer a separate token, because the container is the
+   measure — one number to move instead of two to keep in step. */
+.script-hans, .script-jpan, .script-kore { --page: 48rem; }
 
 /* ---------- Right to left ---------- */
 
@@ -1908,7 +2405,7 @@ footer {
    the page they are on; "Deutsch" always is. */
 .lang {
   position: relative;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   margin-inline-start: var(--s-4);
 }
 
@@ -1987,7 +2484,7 @@ footer {
 .lang li a {
   display: block;
   padding: var(--s-2) var(--s-3);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   letter-spacing: normal;
   text-transform: none;
   font-weight: 400;
@@ -2085,12 +2582,29 @@ footer {
    picks the hyphenation dictionary from it, and without it the property does
    nothing. overflow-wrap is the backstop for words the dictionary has no break
    for — a URL, a compound nobody has ever written down. */
+/* GATED TO THE WIDTHS THE MEASUREMENT WAS TAKEN AT. The two overflows above
+   happen at 375px, where the column is 327px. Ungated, the same property made
+   ENGLISH break at 1440px on a 544px column — /about/ set its pull quote as
+   "the differ-/ence between choosing and being told", and a hyphen in display
+   type at full width is a defect, not a correction. Above the container's cap
+   nothing needs it: the German h1 that overflowed 327px measures about 440px
+   against 544 once the column is full size. */
+/* The backstop is NOT gated: a URL or a compound the dictionary has no break
+   for can overflow at any width, and this is the rule that stops it. */
 h1,
 h2,
 h3,
 .pull {
-  hyphens: auto;
   overflow-wrap: break-word;
+}
+
+@media (max-width: 42rem) {
+  h1,
+  h2,
+  h3,
+  .pull {
+    hyphens: auto;
+  }
 }
 
 /* Body copy is NOT hyphenated: at 544px the measure is wide enough not to need
@@ -2103,11 +2617,4 @@ dd {
   overflow-wrap: break-word;
 }
 
-/* The privacy rail's contact row is the same shape as the identity table on
-   /about/: a link alone in a dd, which is a standalone target and gets no
-   inline-in-a-sentence exemption from the 24px minimum. It was 17px on all
-   fifteen privacy pages. */
-.rail-facts dd > a:only-child {
-  display: inline-block;
-  padding: var(--s-0) 0;
-}
+

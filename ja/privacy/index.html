@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ja/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,11 +241,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>プライバシー通知</h1>
 
         <p class="lede">本ウェブサイトは、技術的に可能な範囲で、訪問者について知ることが最も少なくなるように作られています。クッキーは設定せず、アクセス解析も行わず、第三者のコンテンツも埋め込みません。したがって、訪問者のプロファイルは作られず、訪問者に関する情報が本サイトの外へ出ることもありません。ページを読むときに受け取られるデータは、ページを送るためにどのウェブサーバーにも必要な、ごくわずかな技術情報だけです。その内容は、以下にすべて記載します。</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>要点</h2>
+          <ul>
+            <li>クッキーなし、アクセス解析なし</li>
+            <li>第三者のコンテンツは一切なし</li>
+            <li>サーバーログの記録のみ、保持はホスト事業者</li>
+            <li>メールは削除を求めるまで保管</li>
+            <li>販売なし、共有なし</li>
+          </ul>
+        </div>
 
         <h2>責任の所在</h2>
         <p>
@@ -307,33 +321,21 @@
         <p>本通知を変更した場合は、改定後の版を本ページに掲載します。最終更新日は2026年8月25日です。</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>要点</h2>
-          <ul>
-            <li>クッキーなし、アクセス解析なし</li>
-            <li>第三者のコンテンツは一切なし</li>
-            <li>サーバーログの記録のみ、保持はホスト事業者</li>
-            <li>メールは削除を求めるまで保管</li>
-            <li>販売なし、共有なし</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>管理者</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>付加価値税</dt><dd>IT 18636231005</dd></div>
-            <div><dt>メール</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Spinne に連絡する</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

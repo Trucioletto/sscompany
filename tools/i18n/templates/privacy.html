@@ -1,8 +1,22 @@
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>{{page.h1}}</h1>
 
         <p class="lede">{{page.lede}}</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>{{page.rail_summary}}</h2>
+          <ul>
+            <li>{{page.summary.0}}</li>
+            <li>{{page.summary.1}}</li>
+            <li>{{page.summary.2}}</li>
+            <li>{{page.summary.3}}</li>
+            <li>{{page.summary.4}}</li>
+          </ul>
+        </div>
 
         <h2>{{page.h2_who}}</h2>
         <p>
@@ -64,25 +78,13 @@
         <p>{{page.changes_p1}}</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>{{page.rail_summary}}</h2>
-          <ul>
-            <li>{{page.summary.0}}</li>
-            <li>{{page.summary.1}}</li>
-            <li>{{page.summary.2}}</li>
-            <li>{{page.summary.3}}</li>
-            <li>{{page.summary.4}}</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>{{facts.controller}}</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>{{facts.vat}}</dt><dd>IT 18636231005</dd></div>
-            <div><dt>{{facts.email}}</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">{{cta.talk}}</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>

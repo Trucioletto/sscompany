@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,13 +242,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Where the editor ends and the model begins.</h1>
 
         <p class="lede">In most tools there is a seam. You export, you upload, you wait, you download, you put the result back and hope it still lines up. On one side of that seam is your project; on the other is a program that has never heard of it. Sparkle does not have the seam, and removing it is most of the engineering on this page.</p>
 
-        <h2 id="document">An editor is a document and the operations that change it</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">The shape of it</h2>
+
+        <dl class="identity">
+          <div><dt>Document</dt><dd>One per project; operations are the only way in</dd></div>
+          <div><dt>Assistant</dt><dd>Emits the editor's own operations, not code</dd></div>
+          <div><dt>Undo</dt><dd>One operation, one checkpoint</dd></div>
+          <div><dt>Concurrency</dt><dd>Compare-and-swap on the head operation</dd></div>
+          <div><dt>Execution</dt><dd>Claimed from the plan store, replay-safe</dd></div>
+          <div><dt>Local models</dt><dd>In process, on the frames already loaded</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">An editor is a document and the operations that change it</h2>
 
         <p>Underneath the panels, an editor is one thing: a document describing what happens when, and a set of named operations that are the only way to change it. Split a clip, retime it, set a colour, add a caption track. Nothing else touches the document.</p>
 
@@ -291,39 +305,26 @@
         <p>The same shaders draw the scrub and the final render, so what you approve is what you ship. Without that, every AI edit is provisional: you would be accepting a picture and re-checking the file later, which is the seam reappearing at the other end of the pipeline.</p>
 
         <p>Taken together — one document, one set of operations, one undo, one head, one execution, one render path — the interesting question stops being how good the model is. It becomes how cheaply you can disagree with it. That is the part we build.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">What it costs</h2>
+
+        <p>Routing an assistant through the editor's own operations means it can only do what the editor can do. A model that could write arbitrary code would be more capable and much harder to undo, review or trust. That was the trade, and it was made deliberately.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>The shape of it</h2>
-          <dl class="rail-facts">
-            <div><dt>Document</dt><dd>One per project; operations are the only way in</dd></div>
-            <div><dt>Assistant</dt><dd>Emits the editor's own operations, not code</dd></div>
-            <div><dt>Undo</dt><dd>One operation, one checkpoint</dd></div>
-            <div><dt>Concurrency</dt><dd>Compare-and-swap on the head operation</dd></div>
-            <div><dt>Execution</dt><dd>Claimed from the plan store, replay-safe</dd></div>
-            <div><dt>Local models</dt><dd>In process, on the frames already loaded</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>What it costs</h2>
-          <p>Routing an assistant through the editor's own operations means it can only do what the editor can do. A model that could write arbitrary code would be more capable and much harder to undo, review or trust. That was the trade, and it was made deliberately.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Talk to Spinne</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Talk to Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

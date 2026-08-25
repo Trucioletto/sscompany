@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,11 +242,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Privacy notice</h1>
 
         <p class="lede">This website is built to learn as little about you as is technically possible. It sets no cookies, runs no analytics and embeds no third-party content, so it builds no profile of you and nothing about you leaves this site. The only data anyone receives when you read a page is the handful of technical details every web server needs in order to send it to you. They are described in full below.</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>In short</h2>
+          <ul>
+            <li>No cookies, no analytics</li>
+            <li>No third-party content of any kind</li>
+            <li>Server log entries only, kept by the host</li>
+            <li>Email kept until you ask for it to be deleted</li>
+            <li>Nothing sold, nothing shared</li>
+          </ul>
+        </div>
 
         <h2>Who is responsible</h2>
         <p>
@@ -308,33 +322,21 @@
         <p>If this notice changes, the revised version will be published on this page. It was last updated on 25 August 2026.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>In short</h2>
-          <ul>
-            <li>No cookies, no analytics</li>
-            <li>No third-party content of any kind</li>
-            <li>Server log entries only, kept by the host</li>
-            <li>Email kept until you ask for it to be deleted</li>
-            <li>Nothing sold, nothing shared</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>The controller</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>VAT</dt><dd>IT 18636231005</dd></div>
-            <div><dt>Email</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Talk to Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

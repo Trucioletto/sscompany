@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/id/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,13 +242,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Tempat editor berakhir dan model dimulai.</h1>
 
         <p class="lede">Pada sebagian besar alat ada sebuah sambungan. Anda mengekspor, mengunggah, menunggu, mengunduh, memasukkan hasilnya kembali, dan berharap semuanya masih pas. Di satu sisi sambungan itu ada proyek Anda; di sisi lain ada sebuah program yang belum pernah mendengar tentangnya. Sparkle tidak memiliki sambungan itu, dan menghilangkannya adalah sebagian besar rekayasa di halaman ini.</p>
 
-        <h2 id="document">Sebuah editor adalah satu dokumen dan operasi yang mengubahnya</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">Bentuknya</h2>
+
+        <dl class="identity">
+          <div><dt>Dokumen</dt><dd>Satu per proyek; operasi satu-satunya pintu</dd></div>
+          <div><dt>Asisten</dt><dd>Mengeluarkan operasi editor, bukan kode</dd></div>
+          <div><dt>Undo</dt><dd>Satu operasi, satu checkpoint</dd></div>
+          <div><dt>Konkurensi</dt><dd>Compare-and-swap pada operasi head</dd></div>
+          <div><dt>Eksekusi</dt><dd>Diklaim dari plan store, tahan replay</dd></div>
+          <div><dt>Model lokal</dt><dd>Dalam proses, pada frame yang sudah ada</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">Sebuah editor adalah satu dokumen dan operasi yang mengubahnya</h2>
 
         <p>Di balik panel-panelnya, sebuah editor adalah satu hal: sebuah dokumen yang menggambarkan apa yang terjadi dan kapan, serta sekumpulan operasi bernama yang merupakan satu-satunya cara mengubahnya. Memotong klip, mengubah temponya, menetapkan warna, menambahkan trek caption. Tidak ada hal lain yang menyentuh dokumen itu.</p>
 
@@ -291,39 +305,26 @@
         <p>Shader yang sama menggambar penyusuran dan render akhirnya, sehingga apa yang Anda setujui adalah apa yang Anda kirimkan. Tanpa itu, setiap suntingan AI bersifat sementara: Anda akan menyetujui sebuah gambar lalu memeriksa ulang berkasnya kemudian — dan itulah sambungan yang muncul kembali di ujung lain pipeline-nya.</p>
 
         <p>Bila semuanya disatukan — satu dokumen, satu kumpulan operasi, satu undo, satu head, satu eksekusi, satu jalur render — pertanyaan yang menarik bukan lagi seberapa bagus modelnya. Pertanyaannya menjadi seberapa murah Anda dapat tidak menyetujuinya. Bagian itulah yang kami bangun.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">Apa harganya</h2>
+
+        <p>Menyalurkan asisten melalui operasi milik editornya sendiri berarti ia hanya dapat melakukan apa yang dapat dilakukan editornya. Model yang mampu menulis kode sembarang akan lebih cakap, dan jauh lebih sulit dibatalkan, ditinjau, atau dipercaya. Itulah pertukarannya, dan itu diambil dengan sengaja.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Bentuknya</h2>
-          <dl class="rail-facts">
-            <div><dt>Dokumen</dt><dd>Satu per proyek; operasi satu-satunya pintu</dd></div>
-            <div><dt>Asisten</dt><dd>Mengeluarkan operasi editor, bukan kode</dd></div>
-            <div><dt>Undo</dt><dd>Satu operasi, satu checkpoint</dd></div>
-            <div><dt>Konkurensi</dt><dd>Compare-and-swap pada operasi head</dd></div>
-            <div><dt>Eksekusi</dt><dd>Diklaim dari plan store, tahan replay</dd></div>
-            <div><dt>Model lokal</dt><dd>Dalam proses, pada frame yang sudah ada</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>Apa harganya</h2>
-          <p>Menyalurkan asisten melalui operasi milik editornya sendiri berarti ia hanya dapat melakukan apa yang dapat dilakukan editornya. Model yang mampu menulis kode sembarang akan lebih cakap, dan jauh lebih sulit dibatalkan, ditinjau, atau dipercaya. Itulah pertukarannya, dan itu diambil dengan sengaja.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Hubungi Spinne</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Hubungi Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

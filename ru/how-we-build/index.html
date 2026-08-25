@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ru/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,13 +241,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Где кончается редактор и начинается модель.</h1>
 
         <p class="lede">В большинстве инструментов есть шов. Вы экспортируете, загружаете, ждете, скачиваете, вставляете результат обратно и надеетесь, что он все еще сходится. По одну сторону шва — ваш проект, по другую — программа, которая о нем никогда не слышала. У Sparkle такого шва нет, и убрать его — это и есть большая часть инженерной работы, описанной на этой странице.</p>
 
-        <h2 id="document">Редактор — это документ и операции, которые его меняют</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">Как это устроено</h2>
+
+        <dl class="identity">
+          <div><dt>Документ</dt><dd>Один на проект; войти можно только операциями</dd></div>
+          <div><dt>Ассистент</dt><dd>Выдает операции самого редактора, не код</dd></div>
+          <div><dt>Отмена</dt><dd>Операция — одна точка отмены</dd></div>
+          <div><dt>Конкурентность</dt><dd>Compare-and-swap по головной операции</dd></div>
+          <div><dt>Исполнение</dt><dd>Claim у хранилища планов, replay безопасен</dd></div>
+          <div><dt>Локальные модели</dt><dd>В одном процессе, на уже загруженных кадрах</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">Редактор — это документ и операции, которые его меняют</h2>
 
         <p>Под панелями редактор — это всего одно: документ, который описывает, что и когда происходит, и набор именованных операций — единственный способ его изменить. Разрезать клип, изменить его скорость, задать цвет, добавить дорожку субтитров. Ничто другое документа не касается.</p>
 
@@ -290,39 +304,26 @@
         <p>Одни и те же шейдеры рисуют перемотку и финальный рендер, поэтому вы отдаете именно то, что утвердили. Иначе любая правка ИИ остается предварительной: вы принимали бы картинку, а файл перепроверяли потом — и это тот же шов, только вернувшийся на другом конце конвейера.</p>
 
         <p>Все вместе — один документ, один набор операций, одна отмена, одна головная операция, одно исполнение, один тракт рендеринга — и интересным перестает быть вопрос, насколько хороша модель. Интересно другое: насколько дешево с ней можно не согласиться. Именно эту часть мы и строим.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">Чего это стоит</h2>
+
+        <p>Если пропускать ассистента через собственные операции редактора, он умеет ровно то, что умеет редактор. Модель, которая могла бы писать произвольный код, была бы способнее — и ее было бы куда труднее отменить, проверить и ей доверять. Это и был размен, и сделан он сознательно.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Как это устроено</h2>
-          <dl class="rail-facts">
-            <div><dt>Документ</dt><dd>Один на проект; войти можно только операциями</dd></div>
-            <div><dt>Ассистент</dt><dd>Выдает операции самого редактора, не код</dd></div>
-            <div><dt>Отмена</dt><dd>Операция — одна точка отмены</dd></div>
-            <div><dt>Конкурентность</dt><dd>Compare-and-swap по головной операции</dd></div>
-            <div><dt>Исполнение</dt><dd>Claim у хранилища планов, replay безопасен</dd></div>
-            <div><dt>Локальные модели</dt><dd>В одном процессе, на уже загруженных кадрах</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>Чего это стоит</h2>
-          <p>Если пропускать ассистента через собственные операции редактора, он умеет ровно то, что умеет редактор. Модель, которая могла бы писать произвольный код, была бы способнее — и ее было бы куда труднее отменить, проверить и ей доверять. Это и был размен, и сделан он сознательно.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Написать в Spinne</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Написать в Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

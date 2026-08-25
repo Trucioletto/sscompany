@@ -210,7 +210,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/de/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -253,11 +253,11 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Ein Videoeditor mit einer Engine darunter.</h1>
 
-        <p class="lede">Sparkle ist eine Desktop-Anwendung für Menschen, die vom Schneiden leben. GPU-Rendering, KI-Modelle, die auf der eigenen Maschine laufen, Hardware-Kodierung, die sich an das vorhandene Silizium anpasst — und eine Haltung zum Schnitt, die ihn nie ungefragt anfasst.</p>
+        <p class="lede">Sparkle ist eine Desktop-Anwendung für Menschen, die vom Schneiden leben. GPU-Rendering, KI-Modelle, die auf der eigenen Maschine laufen, Hardware-Kodierung, die sich an das vorhandene Silizium anpasst — und ein Assistent, der den Schnitt nie ungefragt anfasst.</p>
 
         <h2 id="problem">Das meiste an einem Schnitt ist kein Schneiden</h2>
 
@@ -275,15 +275,19 @@
 
         <p>Schweres Material bekommt Proxys und einen Scrub-Pfad, der für lange Timelines gebaut ist. Das ist der Unterschied zwischen einem Editor, in dem man denken kann, und einem, auf den man wartet.</p>
 
-        <h2 id="ai">Der größte Teil der KI läuft auf der eigenen Maschine</h2>
+        <h2 id="ai" class="key">Der größte Teil der KI läuft auf der eigenen Maschine</h2>
 
         <p>Freistellung des Hintergrunds, Segmentierung des Motivs und Tiefenschätzung laufen als lokale Modelle auf der eigenen Hardware. Ein Nachmittag Rohmaterial muss nicht hochgeladen werden, um brauchbar zu sein, und Material unter Sperrfrist bleibt unter Sperrfrist.</p>
 
-        <p>Auch die Spracherkennung kann lokal laufen, auf einem Whisper-Modell, das mit dem Editor ausgeliefert wird. Es gibt ebenso Cloud-Engines, und die Voreinstellung greift zuerst nach einer davon; wohin Ihr Ton geht, ist damit eine Einstellung und keine Annahme.</p>
+        <p>Auch die Spracherkennung kann lokal laufen, auf einem Whisper-Modell, das der Editor einmal herunterlädt und danach ohne Netz benutzt. Es gibt ebenso Cloud-Engines, und die Voreinstellung greift zuerst nach einer davon; wohin Ihr Ton geht, ist damit eine Einstellung und keine Annahme.</p>
 
         <p>Masken werden mit optischem Fluss von Bild zu Bild verfolgt, statt Einstellung für Einstellung neu gezeichnet zu werden. Untertitel kommen mit wortgenauem Timing, lassen sich also gestalten, neu schneiden und in die Formate exportieren, die der Rest der Branche erwartet.</p>
 
         <p>Die schwerere generative Arbeit braucht die Cloud, und dieser Teil wird sichtbar abgerechnet. Jedes Konto führt ein Guthaben an Credits; ein Vorgang reserviert vor dem Start, was er kosten könnte, und rechnet ab, was er tatsächlich gekostet hat. Niemand entdeckt am Monatsende eine Rechnung.</p>
+
+        <h2 id="short">Was es nicht tut</h2>
+
+        <p>Es nimmt Ihnen den Schnitt nicht ab. Der Assistent fasst nichts am Schnitt ungefragt an, und er kann nichts tun, was der Editor selbst nicht tun kann — und genau deshalb nimmt ein einziges Undo alles davon wieder zurück.</p>
 
         <h2 id="export">Ein Export, der mit der Hardware spricht</h2>
 
@@ -291,51 +295,48 @@
 
         <p>Farbe läuft durch eine Pipeline mit 3D LUT, ein anderswo gebauter Look kommt also unversehrt an. Der Ton wird beim Ausspielen auf EBU R128 normalisiert, denn eine Lieferung, die an der Lautheitsnorm scheitert, ist eine Lieferung, die man zweimal macht.</p>
 
+        <!-- The spec, in the flow and at full measure. It is the most checkable
+             thing on the page and it used to be 14px grey in a 264px gutter.
+             Same component as the identity table on /about/: a label and its
+             value, the label column as wide as the widest label THAT LANGUAGE
+             has, computed by the browser. -->
+        <h2 id="hood">Unter der Haube</h2>
+
+        <dl class="identity">
+          <div><dt>Rendering</dt><dd>GPU-Shader, geteilt von Vorschau und Export</dd></div>
+          <div><dt>Lokale KI</dt><dd>ONNX Runtime — Matting, Segmentierung, Tiefe</dd></div>
+          <div><dt>Sprache</dt><dd>Lokal oder Cloud, wortgenaues Timing</dd></div>
+          <div><dt>Kodierung</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
+          <div><dt>Formate</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
+          <div><dt>Farbe</dt><dd>Pipeline mit 3D LUT</dd></div>
+          <div><dt>Audio</dt><dd>Lautheit nach EBU R128</dd></div>
+        </dl>
+
         <h2 id="who">Für wen es gedacht ist</h2>
 
-        <p>Cutter und kleine Teams in der Postproduktion — Menschen, die in einer Timeline leben und jede Stunde bemerken, die die Software zurückgibt. Der Desktop-Editor ist kostenlos. Cloud-KI wird pro Arbeitsplatz verkauft; drei Cutter zahlen also für drei Plätze und nicht für eine Lizenzstufe, die sich jemand ausgedacht hat.</p>
+        <p>Cutter und kleine Teams in der Postproduktion — Menschen, die in einer Timeline leben und jede Stunde bemerken, die die Software zurückgibt. Der Desktop-Editor ist kostenlos. Cloud-KI wird pro Arbeitsplatz verkauft; drei Cutter zahlen also für drei Plätze und nicht für eine Lizenzstufe, die sich jemand ausgedacht hat. Das oben beschriebene Credit-Guthaben misst die Cloud-Arbeit innerhalb eines Platzes.</p>
 
         <h2 id="status">Wo es heute steht</h2>
 
         <p>Sparkle befindet sich in <strong>geschlossener Vorschau</strong>. Editor, Cloud-Dienste, Konten und Abrechnung sind gebaut und laufen; der Zugang öffnet sich schrittweise, denn Software, die fremdes Material und fremdes Geld anfasst, verdient es, langsam herausgelassen zu werden.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Unter der Haube</h2>
-          <dl class="rail-facts">
-            <div><dt>Rendering</dt><dd>GPU-Shader, geteilt von Vorschau und Export</dd></div>
-            <div><dt>Lokale KI</dt><dd>ONNX Runtime — Matting, Segmentierung, Tiefe</dd></div>
-            <div><dt>Sprache</dt><dd>Lokal oder Cloud, wortgenaues Timing</dd></div>
-            <div><dt>Kodierung</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-            <div><dt>Formate</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-            <div><dt>Farbe</dt><dd>Pipeline mit 3D LUT</dd></div>
-            <div><dt>Audio</dt><dd>Lautheit nach EBU R128</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>Was es nicht tut</h2>
-          <p>Es nimmt Ihnen den Schnitt nicht ab. Der Assistent fasst nichts am Schnitt ungefragt an, und er kann nichts tun, was der Editor selbst nicht tun kann — und genau deshalb nimmt ein einziges Undo alles davon wieder zurück.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="https://sparkle.software">
-            <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-            sparkle.software öffnen
-          </a>
-          <p class="cta-note">
-            Oder per E-Mail an
-            <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          sparkle.software öffnen
+        </a>
+        <p class="cta-note">
+          Oder per E-Mail an
+          <a href="mailto:hello@spinnesoftware.com?subject=Sparkle">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

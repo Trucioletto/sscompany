@@ -27,6 +27,12 @@ CONTENT = HERE / "content"
 
 # Deliberately short. A list of every noun would bury the real findings.
 TERMS = [
+    # Down to a single use, on /about/, since the home page was rewritten around
+    # the six values: the h1 it anchored ("every product leaves machinery
+    # behind") is gone and the home no longer inventories the plumbing. One use
+    # cannot be inconsistent with itself, so this term now falls out of the
+    # report — it is kept here because the word will come back the moment a
+    # second product exists, and dropping it would lose the reason it is watched.
     "machinery",
     "private preview",
     # /how-we-build/ turns on this one. The brief says it must be the same word
@@ -74,11 +80,12 @@ def main(argv) -> int:
     print()
     print("  READ THIS AS A POINTER, NOT AS THE RENDERING. The run is whatever")
     print("  the strings happen to have in common, which is not always the term:")
-    print("  for 'machinery' most columns show the word for PRODUCT, because the")
-    print("  sentence is \'every product leaves machinery behind\' and that word")
-    print("  co-occurs in all six. The metaphor was in fact stable everywhere:")
-    print("  seven columns do show the term itself, and the other seven were read")
-    print("  by hand. An attempt to filter ordinary vocabulary")
+    print("  a column often shows an ordinary word that co-occurs in every")
+    print("  sentence carrying the term, rather than the term itself. A row that")
+    print("  looks wrong here has usually been read by hand and is fine; a term")
+    print("  that has dropped to one use disappears from the table entirely,")
+    print("  because one use cannot disagree with itself.")
+    print("  An attempt to filter ordinary vocabulary")
     print("  out of this column made two other rows worse and was removed; the")
     print("  honest version of this tool says where to look and stops there.")
     print(f"  {'term':<22}{'uses':>5}   " + "".join(f"{l:>8}" for l in langs))

@@ -19,3 +19,10 @@ Copia di spinne software logo.svg
 Copia di spinne software logo (1).svg
 
 .DS_Store
+
+# Python bytecode. tools/ IS served from the public domain — everything in the
+# repo is — so a committed __pycache__ would publish compiled copies of the
+# build scripts to spinnesoftware.com. The scripts themselves stay tracked:
+# they are how the pages are generated and belong in the history.
+__pycache__/
+*.pyc

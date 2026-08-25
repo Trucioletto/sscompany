@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/fr/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,13 +242,27 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Où finit le logiciel de montage et où commence le modèle.</h1>
 
         <p class="lede">Dans la plupart des outils, il y a une couture. On exporte, on téléverse, on attend, on télécharge, on remet le résultat en place et on espère qu'il tombe encore juste. D'un côté de cette couture, il y a votre projet ; de l'autre, un programme qui n'en a jamais entendu parler. Sparkle n'a pas cette couture, et c'est sa suppression qui constitue l'essentiel de l'ingénierie décrite sur cette page.</p>
 
-        <h2 id="document">Un logiciel de montage, c'est un document et les opérations qui le modifient</h2>
+        <!-- The shape before the argument. Six rows that say what the system is,
+             placed where a reader deciding whether to read seven sections can
+             use them, rather than in a column beside the sections themselves. -->
+        <h2 id="shape">La forme générale</h2>
+
+        <dl class="identity">
+          <div><dt>Document</dt><dd>Un par projet ; les opérations, seule entrée</dd></div>
+          <div><dt>Assistant</dt><dd>Émet les opérations du logiciel, pas du code</dd></div>
+          <div><dt>Annuler</dt><dd>Une opération, un checkpoint</dd></div>
+          <div><dt>Concurrence</dt><dd>Compare-and-swap sur l'opération de tête</dd></div>
+          <div><dt>Exécution</dt><dd>Réservée au registre, sûre au rejeu</dd></div>
+          <div><dt>Modèles locaux</dt><dd>Dans le processus, images déjà chargées</dd></div>
+        </dl>
+
+        <h2 id="document" class="key">Un logiciel de montage, c'est un document et les opérations qui le modifient</h2>
 
         <p>Sous les panneaux, un logiciel de montage est une seule chose : un document qui décrit ce qui se passe et à quel moment, et un jeu d'opérations nommées qui sont la seule façon de le modifier. Scinder un clip, en changer la vitesse, fixer une couleur, ajouter une piste de sous-titres. Rien d'autre ne touche au document.</p>
 
@@ -291,39 +305,26 @@
         <p>Les mêmes shaders dessinent le défilement et le rendu final : ce que vous validez est ce que vous livrez. Sans cela, chaque modification de l'IA est provisoire — vous accepteriez une image pour revérifier le fichier plus tard, c'est-à-dire la couture qui réapparaît à l'autre bout de la chaîne.</p>
 
         <p>Mis bout à bout — un seul document, un seul jeu d'opérations, une seule annulation, une seule opération de tête, une seule exécution, un seul chemin de rendu — la question intéressante n'est plus de savoir si le modèle est bon. Elle devient : combien il en coûte de ne pas être d'accord avec lui. C'est cette partie-là que nous construisons.</p>
+
+        <!-- What it costs argues a position, so it is a section and not a note
+             in a margin. -->
+        <h2 id="cost">Ce que cela coûte</h2>
+
+        <p>Faire passer un assistant par les opérations du logiciel lui-même, c'est le limiter à ce que le logiciel sait faire. Un modèle capable d'écrire du code arbitraire serait plus puissant, et il serait bien plus difficile de l'annuler, de le relire et de lui faire confiance. C'était l'arbitrage, et il a été fait délibérément.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>La forme générale</h2>
-          <dl class="rail-facts">
-            <div><dt>Document</dt><dd>Un par projet ; les opérations, seule entrée</dd></div>
-            <div><dt>Assistant</dt><dd>Émet les opérations du logiciel, pas du code</dd></div>
-            <div><dt>Annuler</dt><dd>Une opération, un checkpoint</dd></div>
-            <div><dt>Concurrence</dt><dd>Compare-and-swap sur l'opération de tête</dd></div>
-            <div><dt>Exécution</dt><dd>Réservée au registre, sûre au rejeu</dd></div>
-            <div><dt>Modèles locaux</dt><dd>Dans le processus, images déjà chargées</dd></div>
-          </dl>
-        </div>
-
-        <div class="rail-block">
-          <h2>Ce que cela coûte</h2>
-          <p>Faire passer un assistant par les opérations du logiciel lui-même, c'est le limiter à ce que le logiciel sait faire. Un modèle capable d'écrire du code arbitraire serait plus puissant, et il serait bien plus difficile de l'annuler, de le relire et de lui faire confiance. C'était l'arbitrage, et il a été fait délibérément.</p>
-        </div>
-
-        <div class="rail-block">
-          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Contacter Spinne</a>
-          <p class="cta-note">
-            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
-          </p>
-        </div>
-      </aside>
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Contacter Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

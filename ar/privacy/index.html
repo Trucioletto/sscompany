@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ar/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,11 +241,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>إشعار الخصوصية</h1>
 
         <p class="lede">هذا الموقع مبني ليعرف عنك أقل ما يمكن تقنياً. لا يضع ملفات تعريف ارتباط، ولا يشغّل تحليلات، ولا يضمّن محتوى من طرف ثالث، فهو لا يبني عنك أي ملف تعريف ولا يغادر هذا الموقع أي شيء يخصّك. والبيانات الوحيدة التي يتلقاها أحد حين تقرأ صفحة هي التفاصيل التقنية القليلة التي يحتاجها كل خادم ويب كي يرسل إليك صفحة. وهي موصوفة بالكامل أدناه.</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>باختصار</h2>
+          <ul>
+            <li>لا ملفات تعريف ارتباط، ولا تحليلات</li>
+            <li>لا محتوى من طرف ثالث من أي نوع</li>
+            <li>قيود سجل الخادم فقط، يحتفظ بها المستضيف</li>
+            <li>البريد يُحفَظ إلى أن تطلب حذفه</li>
+            <li>لا شيء يُباع، ولا شيء يُشارَك</li>
+          </ul>
+        </div>
 
         <h2>الجهة المسؤولة</h2>
         <p>
@@ -307,33 +321,21 @@
         <p>إذا تغيّر هذا الإشعار، ستُنشر النسخة المعدّلة على هذه الصفحة. وقد جرى آخر تحديث له في 25 أغسطس 2026.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>باختصار</h2>
-          <ul>
-            <li>لا ملفات تعريف ارتباط، ولا تحليلات</li>
-            <li>لا محتوى من طرف ثالث من أي نوع</li>
-            <li>قيود سجل الخادم فقط، يحتفظ بها المستضيف</li>
-            <li>البريد يُحفَظ إلى أن تطلب حذفه</li>
-            <li>لا شيء يُباع، ولا شيء يُشارَك</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>المتحكم في البيانات</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>الرقم الضريبي</dt><dd>IT 18636231005</dd></div>
-            <div><dt>البريد الإلكتروني</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">تحدّث إلى Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/id/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -242,11 +242,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Pemberitahuan privasi</h1>
 
         <p class="lede">Situs web ini dibangun untuk mengetahui tentang Anda sesedikit mungkin secara teknis. Situs ini tidak menyetel cookie, tidak menjalankan analitik, dan tidak menyematkan konten pihak ketiga, sehingga tidak menyusun profil tentang Anda dan tidak ada apa pun tentang Anda yang keluar dari situs ini. Satu-satunya data yang diterima siapa pun saat Anda membaca sebuah halaman adalah segelintir detail teknis yang dibutuhkan setiap server web untuk mengirimkan sebuah halaman kepada Anda. Semuanya diuraikan selengkapnya di bawah ini.</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>Ringkasnya</h2>
+          <ul>
+            <li>Tanpa cookie, tanpa analitik</li>
+            <li>Tanpa konten pihak ketiga dalam bentuk apa pun</li>
+            <li>Hanya entri log server, disimpan penyedia hosting</li>
+            <li>Surel disimpan sampai Anda meminta penghapusannya</li>
+            <li>Tidak ada yang dijual, tidak ada yang dibagikan</li>
+          </ul>
+        </div>
 
         <h2>Siapa yang bertanggung jawab</h2>
         <p>
@@ -308,33 +322,21 @@
         <p>Jika pemberitahuan ini berubah, versi revisinya akan diterbitkan di halaman ini. Terakhir diperbarui pada 25 Agustus 2026.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Ringkasnya</h2>
-          <ul>
-            <li>Tanpa cookie, tanpa analitik</li>
-            <li>Tanpa konten pihak ketiga dalam bentuk apa pun</li>
-            <li>Hanya entri log server, disimpan penyedia hosting</li>
-            <li>Surel disimpan sampai Anda meminta penghapusannya</li>
-            <li>Tidak ada yang dijual, tidak ada yang dibagikan</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>Pengendali data</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>PPN</dt><dd>IT 18636231005</dd></div>
-            <div><dt>Email</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Hubungi Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>

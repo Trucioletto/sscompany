@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <div class="wrap masthead-inner">
+    <div class="page masthead-inner">
       <a class="mark" href="/ru/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
@@ -241,11 +241,25 @@
   </header>
 
   <main>
-    <div class="wrap layout">
+    <div class="page">
       <article class="doc">
         <h1>Уведомление о конфиденциальности</h1>
 
         <p class="lede">Этот сайт сделан так, чтобы узнавать о посетителе настолько мало, насколько это технически возможно. Он не устанавливает cookie, не ведет аналитику и не встраивает стороннее содержимое, поэтому не строит профиль посетителя, и ничего о нем не покидает этот сайт. Единственные данные, которые кто-либо получает при чтении страницы, — это несколько технических сведений, без которых ни один веб-сервер не может отправить страницу. Ниже они описаны полностью.</p>
+
+        <!-- A reader of a privacy notice wants the answer before the argument,
+             so the five lines that are the answer sit here rather than in a
+             column beside the twelve sections they summarise. -->
+        <div class="summary">
+          <h2>Коротко</h2>
+          <ul>
+            <li>Никаких cookie, никакой аналитики</li>
+            <li>Никакого стороннего содержимого</li>
+            <li>Только записи в журнале сервера, их хранит хостинг</li>
+            <li>Письма хранятся, пока вы не попросите их удалить</li>
+            <li>Ничего не продается и не передается</li>
+          </ul>
+        </div>
 
         <h2>Кто несет ответственность</h2>
         <p>
@@ -307,33 +321,21 @@
         <p>Если это уведомление изменится, новая редакция будет опубликована на этой странице. Последнее обновление — 25 августа 2026 года.</p>
       </article>
 
-      <aside class="rail">
-        <div class="rail-block">
-          <h2>Коротко</h2>
-          <ul>
-            <li>Никаких cookie, никакой аналитики</li>
-            <li>Никакого стороннего содержимого</li>
-            <li>Только записи в журнале сервера, их хранит хостинг</li>
-            <li>Письма хранятся, пока вы не попросите их удалить</li>
-            <li>Ничего не продается и не передается</li>
-          </ul>
-        </div>
-
-        <div class="rail-block">
-          <h2>Контролер</h2>
-          <dl class="rail-facts">
-            <div><dt>Spinne Software</dt><dd>di Luci Manuel</dd></div>
-            <div><dt>НДС</dt><dd>IT 18636231005</dd></div>
-            <div><dt>Почта</dt><dd><a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></dd></div>
-          </dl>
-        </div>
-      </aside>
+      <!-- A notice that lists rights and then offers no way to exercise them
+           ends on a dead end. Same closing block as every other page. -->
+      <section class="close">
+        <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Privacy">Написать в Spinne</a>
+        <p class="cta-note">
+          <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>&nbsp;&middot;
+          <a href="mailto:spinnesoftware@pec.it">PEC</a>
+        </p>
+      </section>
     </div>
 
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="page">
       <div class="footer-inner">
         <div class="footer-col">
           <h2>Spinne Software</h2>
