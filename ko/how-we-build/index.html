@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- One script, same-origin, and nothing else from anywhere: no cookie, no
+       storage, no network call, no third party. It replaces the browser's own
+       bounce at the top edge, which cannot hold anything that moves — see the
+       top of overscroll.js for the three measurements that established that. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+
+  <title>편집기가 끝나고 모델이 시작되는 자리 — Spinne Software</title>
+  <meta name="description" content="Sparkle을 만든 방식: 문서 하나, 그것을 바꾸는 작업 한 벌, 그리고 또 하나의 프로그램이 아니라 또 하나의 호출자인 어시스턴트.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://spinnesoftware.com/ko/how-we-build/">
+  <meta property="og:site_name" content="Spinne Software">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="편집기가 끝나고 모델이 시작되는 자리">
+  <meta property="og:description" content="대부분의 도구에는 편집기와 AI 사이에 이음매가 있습니다. 그것을 없애는 데 무엇이 필요했는지 적었습니다.">
+  <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
+  <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Spinne Software logo">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="개발 방식 — Spinne Software">
+  <meta name="twitter:description" content="모델은 쉬운 쪽입니다. 그 둘레의 전부가 편집기입니다.">
+  <meta name="twitter:image" content="https://spinnesoftware.com/og-image.png">
+  <meta name="twitter:image:alt" content="Spinne Software logo">
+
+  <link rel="canonical" href="https://spinnesoftware.com/ko/how-we-build/">
+  <!-- Reciprocal for every language, generated from one list. A cluster where
+       one page fails to point back is discarded whole. -->
+  <link rel="alternate" hreflang="en" href="https://spinnesoftware.com/how-we-build/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://spinnesoftware.com/zh-Hans/how-we-build/">
+  <link rel="alternate" hreflang="hi" href="https://spinnesoftware.com/hi/how-we-build/">
+  <link rel="alternate" hreflang="es" href="https://spinnesoftware.com/es/how-we-build/">
+  <link rel="alternate" hreflang="fr" href="https://spinnesoftware.com/fr/how-we-build/">
+  <link rel="alternate" hreflang="ar" href="https://spinnesoftware.com/ar/how-we-build/">
+  <link rel="alternate" hreflang="bn" href="https://spinnesoftware.com/bn/how-we-build/">
+  <link rel="alternate" hreflang="pt-BR" href="https://spinnesoftware.com/pt-BR/how-we-build/">
+  <link rel="alternate" hreflang="ru" href="https://spinnesoftware.com/ru/how-we-build/">
+  <link rel="alternate" hreflang="ur" href="https://spinnesoftware.com/ur/how-we-build/">
+  <link rel="alternate" hreflang="id" href="https://spinnesoftware.com/id/how-we-build/">
+  <link rel="alternate" hreflang="de" href="https://spinnesoftware.com/de/how-we-build/">
+  <link rel="alternate" hreflang="ja" href="https://spinnesoftware.com/ja/how-we-build/">
+  <link rel="alternate" hreflang="ko" href="https://spinnesoftware.com/ko/how-we-build/">
+  <link rel="alternate" hreflang="it" href="https://spinnesoftware.com/it/how-we-build/">
+  <link rel="alternate" hreflang="x-default" href="https://spinnesoftware.com/how-we-build/">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+  <link rel="stylesheet" href="/style.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://spinnesoftware.com/#organization",
+      "name": "Spinne Software",
+      "legalName": "Spinne Software di Luci Manuel",
+      "url": "https://spinnesoftware.com/",
+      "logo": "https://spinnesoftware.com/logo.svg",
+      "description": "Italian software company building its own products. Sparkle, an AI video editor, is the first.",
+      "vatID": "IT18636231005",
+      "identifier": "REA RM-1797481",
+      "email": "hello@spinnesoftware.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Manuel Luci"
+      },
+      "knowsLanguage": [
+        "en",
+        "zh-Hans",
+        "hi",
+        "es",
+        "fr",
+        "ar",
+        "bn",
+        "pt-BR",
+        "ru",
+        "ur",
+        "id",
+        "de",
+        "ja",
+        "ko",
+        "it"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Italy"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/spinne-software/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://spinnesoftware.com/#website",
+      "name": "Spinne Software",
+      "url": "https://spinnesoftware.com/",
+      "inLanguage": "ko",
+      "publisher": {
+        "@id": "https://spinnesoftware.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://spinnesoftware.com/ko/how-we-build/#webpage",
+      "url": "https://spinnesoftware.com/ko/how-we-build/",
+      "name": "편집기가 끝나고 모델이 시작되는 자리",
+      "description": "Sparkle을 만든 방식: 문서 하나, 그것을 바꾸는 작업 한 벌, 그리고 또 하나의 프로그램이 아니라 또 하나의 호출자인 어시스턴트.",
+      "inLanguage": "ko",
+      "isPartOf": {
+        "@id": "https://spinnesoftware.com/#website"
+      },
+      "about": {
+        "@id": "https://spinnesoftware.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://spinnesoftware.com/ko/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "편집기가 끝나고 모델이 시작되는 자리",
+          "item": "https://spinnesoftware.com/ko/how-we-build/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="script-kore">
+
+  <header class="masthead">
+    <!-- The field the top edge opens into, and the web spun across it.
+         Decoration with nothing to say, so aria-hidden and out of the tab
+         order. Four planes at four depths inside one CSS 3D scene. The
+         geometry is generated as the edges of a tessellation of a strongly
+         uneven point set, which is what makes every junction real, every cell
+         closed, and every cell different — three earlier attempts failed here:
+         a hub with spokes read as a diagram, loose near-neighbour threads read
+         as string, and a warp-and-weft lattice read as a grid. See style.css
+         for how it is laid down, and overscroll.js for what pulls it into
+         view. -->
+    <div class="pull-field" aria-hidden="true">
+      <div class="pull-scene">
+    <div class="pull-layer pull-l1"><svg class="pull-net" viewBox="0 0 1440 96" preserveAspectRatio="xMidYMax slice">
+     <path class="pull-a pull-g0" d="M324 117l69-8l69-11l69-17l69-21l69-25"/>
+     <path class="pull-n pull-g1" d="M316 79q7 12 16 22q12-3 24-8q8-13 15-27l14-2q4 4 9 7l36 1l16-21l24 5l10-6M1110 64q3 19 12 37q15-3 28-11q7 7 16 11q10-4 17-12q3-7 3-15q5-2 9-6M1019 101q8-10 13-21q12-8 21-20l8-1q9 9 21 14q15-2 28-9q7-6 11-14M245 57q9 0 17-1q18 16 38 30l16-7l5-22q4-3 7-7M632 57q16 1 30-7q5 16 19 25l-1 8q1 11 9 18q7 2 14 0M681 75q20-8 33-25q3 5 8 7q-1 11 5 21q-6 15-20 23M743 101q4-4 4-10q12 1 23-6q18 2 34-5q8-11 10-24l-3-6M558 101q16 5 31 0q4-4 4-10q-5-9-5-20q7-7 10-17q6-1 10-4M484 101q17-9 30-23q14 10 30 14q3 6 9 9M925 50q7 4 14 6q0 9 2 17q7 9 15 16l-9 12M832 101q8-7 12-17q-4-10-4-21q-14 0-26-7M266 101q-7 1-14 0q7-22 10-45l3-6M632 79q3 13 14 22q5 2 10 0q15-5 24-18M624 50q3 5 8 7q-4 11 0 22q-6 11-18 15l1 7M996 50q0 8 2 16q-13 15-28 28l1 7M757 50q4 6 10 8q-3 14 3 27q0 9 5 16"/>
+     <path class="pull-n pull-g2" d="M537 101q5-4 7-9q7-9 10-21q-4-10-4-21M897 94q23-9 44-21M859 50q11 9 24 14q8-6 13-14M470 56q4 23 11 45M873 101q4-4 6-8q5-1 9-4q4 3 9 5l2 7M1143 54q0 19 7 36M844 84q17 7 35 9M554 71q17 4 34 0M1162 50q9 15 24 24M430 72q4 15 11 29M1078 101l5-3q-2-12-1-25M394 71q0 15 2 30M1123 50q10 4 20 4l8-4M508 50q1 14 6 28M348 50l23 16M1032 80q7 11 17 21"/>
+     <path class="pull-n pull-g3" d="M804 80q3 12 11 21M840 63q10-4 18-13M593 91q10 5 21 3M722 57q10 0 18-7M767 58q10-1 17-8M304 50q8 4 17 7M291 101q5-7 9-15M970 94l14 7M385 64l4-14M1183 89q5 5 12 8M1047 50q2 6 6 10M1061 59q3-4 5-9M356 93l5 8M939 56l4-6M434 101l7 0M593 50l5 4M1083 98l5 3"/>
+    </svg></div>
+    <div class="pull-layer pull-l2"><svg class="pull-net" viewBox="0 0 1440 96" preserveAspectRatio="xMidYMax slice">
+     <path class="pull-a pull-g4" d="M410 120l85-10l84-14l85-19l85-25l85-29"/>
+     <path class="pull-n pull-g5" d="M574 42q3 4 7 6q16-1 32-6q5 5 11 8q23-2 45-8q25 3 51 0q-1 7 2 14q-4 24-16 46q-21-5-40-16q-20 5-41 5q-12 7-25 11M772 102q5-4 7-10q3-6 1-12q7-4 10-11q18-1 33-11l7 3q27-2 53-12l4-7q31 6 63 10l6-10M549 42q-17 7-36 8q-15 8-32 10q-6 16-16 29q0 7 2 13l8 0M1027 102l12-21q13-2 25-5q23-1 45-6l3-6q-4-11-3-22M1158 102q12-9 18-22q21-3 39-15q8 10 20 14q0 12 5 23l-5 0M883 102l7 0q1-4 1-9q26-4 52-10l8-16q0-8-1-15M987 42q15-1 29 0l-2 19q-12 12-23 25l4 16M405 102q10-17 15-35l-4-7q-20-3-40-9M222 102q4-8 5-16q5 0 9-1q11-6 21-14q3-14 4-29M171 102q5 2 11 0q11-13 15-29q-9-10-11-23q-4-3-6-8M596 102q-11-11-21-23q-15 9-32 15l4 8M1112 64q25 3 50-2q4-10 3-20M513 42l0 8q8 23 21 43q-4 5-10 9"/>
+     <path class="pull-n pull-g6" d="M321 42l7 10l-10 21q2 15 5 29M722 56q27 17 58 24M1235 79q23-10 42-27q-5-4-7-10M661 102q4-8 5-16q4-22 3-44M1058 42q2 17 6 34q0 13 3 26M328 52l34 7l14-8q1-4 1-9M624 50q-1 21 1 41q2 6 5 11M420 67q21 13 45 22M163 62q13-2 23-12q11-2 19-8M830 61q4 22 17 41M951 67l40 19M257 71q11 9 23 16l2 15M280 87q19-6 38-14"/>
+     <path class="pull-n pull-g7" d="M362 59q2 19 7 38M1105 102q5-3 9-8q-5-12-5-24M781 42q0 15 9 27M1176 80q5 13 16 22M1215 65q4-11 1-23M467 42q5 10 14 18M416 60q7-8 11-18M943 83q2 9 3 19M360 102q5-2 9-5l7 5M236 85q3 9 8 17M779 92q5 7 13 10M823 58q3-8 1-16M1114 94q4 5 10 8M706 102l2 0"/>
+    </svg></div>
+    <div class="pull-layer pull-l3"><svg class="pull-net" viewBox="0 0 1440 96" preserveAspectRatio="xMidYMax slice">
+     <path class="pull-a pull-g8" d="M636 126l82-13l81-17l82-24l82-30l81-34"/>
+     <path class="pull-n pull-g9" d="M1206 30q1 8 5 16q-3 9-10 16q0 22 9 42q22 6 44 0q10-10 12-24q23 9 48 6q6-1 9-6q26 11 54 11q-1 7 3 13q6 2 13 0M347 30q1 11 9 19q23 12 49 16q21-14 36-35q17 5 34 0q13 19 31 33q-1 21-6 41M210 104q10 3 20 0q14-35 18-73q12 12 29 15q7 24 23 43q18 5 36 2q2 7 6 13M776 104l32-9q4-25 9-49l25-16q24 11 47 23l6 51M932 30q20 6 40 14l12 19q31 8 62 14q24 16 51 27M46 35q20 8 42 9q37 7 75 5q8-8 10-19M673 30l45 32l27 42M675 104l43-42l31-32M558 104l5-12q-9-17-15-35q5-13 6-27q10 2 21 0M1040 104q5-13 6-27q8-23 15-47l21 0M563 92l62-3q14 8 29 15M1112 30q10 5 21 9q4 13 11 25q-3 21-13 40"/>
+     <path class="pull-n pull-g10" d="M46 98q22-9 39-25q6-14 3-29q4-6 5-14M441 30q7 38 20 74M1376 30q5 14 18 21q-3 22-17 40M1211 46q23 3 46-2q8-6 12-14M620 104q3-7 5-15q3-24 4-48M139 104q17-4 29-16q10 12 24 16M1144 64q29 2 57-2M1313 30q0 26 10 50M611 30q8 7 18 11q13-4 24-11M336 91q14-19 20-42M964 104q11-20 20-41M390 104q8-5 14-12q3-13 1-27"/>
+     <path class="pull-n pull-g11" d="M277 46q22-3 41-16M889 53l36-23M163 49q-2 20 5 39M85 73q7 18 21 31M784 30l33 16M1109 104q11 3 22 0q6 2 12 0M1310 104q5-8 4-18M291 104q6-6 9-15M404 92q4 7 11 12M972 44l8-14M1133 39l8-9M808 95l6 9"/>
+    </svg></div>
+    <div class="pull-layer pull-l4"><svg class="pull-net" viewBox="0 0 1440 96" preserveAspectRatio="xMidYMax slice">
+     <path class="pull-a pull-g12" d="M126 131l104-16l103-21l104-28l103-34l104-38"/>
+     <path class="pull-n pull-g13" d="M1019 105q25-10 47-25q-5-30-5-61q51 12 103 18q6-8 8-18q23 14 50 20q17-6 27-20M460 19q1 14 6 27q43-10 84-26q13 10 28 15q15-6 27-16q32 21 65 40l6 30l-8 16M-69 26q30 12 62 19q1 14 6 27q15 18 33 33q29-7 57-18q9-28 9-58q12-2 20-10M329 105q5-14 4-29q26-10 51-22l24 13q23 3 46 4q19 19 41 34M1224 105q9-7 12-17q23 14 49 17q17-14 24-34q-7-26-4-52q-9 3-17 0M676 89l76 16q17-13 35-25l12 2q11 11 21 23M120 105q38-14 71-38q-7-18-2-36q-10-3-16-12M877 19q19 19 44 30q14 3 28-3q12-11 15-27q12 3 24 0M1092 105q30 2 61 0q8-34 11-68M1416 105q12-9 19-21q6 1 13 1q25-19 48-39q6 2 13 3M248 105q23-30 39-65q-2-10 0-21q-5 1-10 0"/>
+     <path class="pull-n pull-g14" d="M1387 19q0 15 4 30q-18 22-42 37q-1 10 5 19M530 105q23-14 42-33q6-18 6-37M799 82q24-31 46-63M749 19l38 61M881 105q23-26 40-56M949 46q11 31 29 59M287 40q21 20 46 36M1391 49q20 20 44 35M670 59l35-40M-39 105q20-15 38-33M191 67q12 23 32 38"/>
+     <path class="pull-n pull-g15" d="M389 105q11-18 19-38M572 72q8 18 22 33M374 19q4 18 10 35M444 105q7-17 10-34M89 87q4 10 12 18q7 2 13 0M1066 80q10 14 23 25M-7 45q10-12 15-26M1484 19l12 27M189 31q15-1 26-12M1448 85q3 11 8 20M86 19q4 7 12 10M218 105l5 0"/>
+    </svg></div>
+      </div>
+    </div>
+
+    <div class="wrap masthead-inner">
+      <a class="mark" href="/ko/" aria-label="Spinne Software">
+        <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
+      </a>
+      <nav class="site-nav" aria-label="사이트">
+        <a href="/ko/sparkle/">Sparkle</a>
+        <a href="/ko/how-we-build/" aria-current="page">개발 방식</a>
+        <a href="/ko/about/">회사</a>
+      </nav>
+      <details class="lang">
+        <summary aria-label="Language — 한국어"><span lang="ko">한국어</span></summary>
+        <ul>
+        <li><a href="https://spinnesoftware.com/how-we-build/" hreflang="en" lang="en">English</a></li>
+        <li><a href="https://spinnesoftware.com/zh-Hans/how-we-build/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="https://spinnesoftware.com/hi/how-we-build/" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="https://spinnesoftware.com/es/how-we-build/" hreflang="es" lang="es">Español</a></li>
+        <li><a href="https://spinnesoftware.com/fr/how-we-build/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="https://spinnesoftware.com/ar/how-we-build/" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="https://spinnesoftware.com/bn/how-we-build/" hreflang="bn" lang="bn">বাংলা</a></li>
+        <li><a href="https://spinnesoftware.com/pt-BR/how-we-build/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="https://spinnesoftware.com/ru/how-we-build/" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="https://spinnesoftware.com/ur/how-we-build/" hreflang="ur" lang="ur">اردو</a></li>
+        <li><a href="https://spinnesoftware.com/id/how-we-build/" hreflang="id" lang="id">Bahasa Indonesia</a></li>
+        <li><a href="https://spinnesoftware.com/de/how-we-build/" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="https://spinnesoftware.com/ja/how-we-build/" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="https://spinnesoftware.com/ko/how-we-build/" hreflang="ko" lang="ko" aria-current="true">한국어</a></li>
+        <li><a href="https://spinnesoftware.com/it/how-we-build/" hreflang="it" lang="it">Italiano</a></li>
+        </ul>
+      </details>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap layout">
+      <article class="doc">
+        <h1>편집기가 끝나고 모델이 시작되는 자리.</h1>
+
+        <p class="lede">대부분의 도구에는 이음매가 있습니다. 내보내고, 업로드하고, 기다리고, 내려받고, 결과를 도로 가져다 놓고, 아직 아귀가 맞기를 바랍니다. 그 이음매의 한쪽에는 당신의 프로젝트가 있고, 다른 쪽에는 그 프로젝트를 들어 본 적 없는 프로그램이 있습니다. Sparkle에는 그 이음매가 없으며, 그것을 없애는 일이 이 페이지에 적힌 엔지니어링의 대부분입니다.</p>
+
+        <h2 id="document">편집기는 문서 하나와 그것을 바꾸는 작업들입니다</h2>
+
+        <p>패널들 아래에서 편집기는 한 가지입니다. 무엇이 언제 일어나는지 기술하는 문서, 그리고 그 문서를 바꾸는 유일한 방법인 이름 붙은 작업 한 벌입니다. 클립을 자르고, 속도를 다시 잡고, 색을 지정하고, 자막 트랙을 더합니다. 그 밖의 어떤 것도 문서에 손대지 않습니다.</p>
+
+        <p>구현 세부 사항처럼 들리지만, 이것이 아키텍처의 전부입니다. 작업이 유일한 문이 되고 나면, 되돌리기와 동시성과 리플레이, 무슨 일이 있었는지에 대한 감사처럼 나중에 중요해지는 모든 것이 그 문을 지나가는 기능마다 덧붙인 장치가 아니라 문 자체의 성질이 됩니다.</p>
+
+        <h2 id="caller">그래서 어시스턴트는 또 하나의 프로그램이 아니라 또 하나의 호출자입니다</h2>
+
+        <p>어시스턴트는 코드를 생성하지 않고, 프레임도 생성하지 않습니다. 메뉴 항목이 내는 것과 같은 이름 붙은 작업을, 같은 타입의 파라미터와 함께, 같은 문서로 발행합니다. 세로 버전을 잘라 달라고 하면 편집기가 이미 갖고 있던 그 작업을 호출합니다.</p>
+
+        <p>여기서 두 가지가 따라 나오고, 둘 다 요점입니다. 어시스턴트는 편집기가 할 수 없는 것을 표현할 수 없으므로, 나중에 프로젝트와 맞춰 봐야 하는 AI 산출물이라는 범주 자체가 없습니다. 그리고 어시스턴트가 한 일은 당신이 직접 할 수도 있었던 일입니다. 그래서 그것을 읽고, 바꾸고, 손으로 뜯어볼 수 있습니다.</p>
+
+        <h2 id="undo">작업 하나, 되돌리기 하나</h2>
+
+        <p>어시스턴트 작업 하나가 클립 백 개에 손댈 수 있습니다. 속도를 다시 잡고, 색을 다시 입히고, 자막 전부의 스타일을 바꿉니다. 그래도 그것은 체크포인트 하나로 접히므로, 되돌리기 한 번이면 요청하기 전으로 돌아갑니다.</p>
+
+        <p>이것은 편의 기능이 아닙니다. 편집 어시스턴트를 쓸 만하게 만드는 것은 얼마나 자주 맞히느냐가 아니라, 반대하는 데 얼마나 적은 값이 드느냐입니다. 깔끔하게 거절할 수 없는 어시스턴트는 감독해야 하는 어시스턴트이고, 감독하는 비용은 그 일을 직접 하는 비용보다 큽니다.</p>
+
+        <p class="pull">모델은 쉬운 쪽입니다. 그 둘레의 전부가 편집기입니다.</p>
+
+        <h2 id="hands">두 손, 하나의 문서</h2>
+
+        <p>긴 작업이 도는 동안에도 당신은 손을 멈추지 않으므로, 문서에는 저자가 둘이 됩니다. 이것을 순진하게 구현하면 편집 하나가 사라집니다. 느린 쪽이 마지막에 저장하면서 다른 쪽이 한 일을 소리 없이 덮어씁니다.</p>
+
+        <p>모든 저장은 문서의 현재 헤드 작업을 상대로 하는 비교 후 교환(CAS)입니다. 이미 움직인 버전 위에 쌓은 쓰기는 거부됩니다. 병합되지도 않고, 소리 없이 적용되지도 않습니다. 거부하는 편이 쓸모 있는 동작입니다. 거부된 저장은 사실을 상대로 다시 시도할 수 있지만, 잃어버린 편집은 그것을 만든 사람이 며칠 뒤에야 발견합니다.</p>
+
+        <h2 id="once">정확히 한 번, 아니면 아예 하지 않기</h2>
+
+        <p>어시스턴트 플랜의 한 단계는 언젠가 재시도, 더블 클릭, 끊긴 연결, 새로고침, 중간에 일어난 크래시, 또는 서로 자기 것이라고 믿는 실행기 둘 가운데 하나를 만납니다. 그중 무엇이든 편집을 두 번 적용할 수 있고, 타임라인에 두 번 적용된 편집은 중복이 아니라 다른 타임라인입니다.</p>
+
+        <p>그래서 실행기에는 판단할 권한이 없습니다. 무엇을 바꾸기 전에 실행기는 플랜 저장소에서 그 단계의 점유권을 받아야 하고, 저장소는 락 아래에서 그것을 원자적으로 부여합니다. 부여받은 점유권만이 편집을 승인하며, 리플레이는 문서에 손대지 않고 첫 번째 결과를 돌려줍니다. 작업이 일어났음을 증명하는 것은 브라우저 탭 안의 플래그가 아니라 기록된 작업 ID입니다.</p>
+
+        <h2 id="models">모델은 업로드 뒤가 아니라 타임라인 옆에 놓여 있습니다</h2>
+
+        <p>매팅, 세그멘테이션, 깊이는 편집기와 같은 프로세스에서, 편집기가 이미 손에 쥐고 있는 프레임 위에서 돌아갑니다. 내보내기도, 업로드도, 기다림도, 다시 불러오기도 없고, 나중에 아귀를 다시 맞출 것도 없습니다.</p>
+
+        <p>이것은 지연에 관한 설계 판단이고, 동시에 이음매가 대개 열어 두는 질문 하나를 닫습니다. 엠바고가 걸린 촬영본은 엠바고 안에 그대로 남습니다. 애초에 나간 적이 없기 때문입니다. 정말로 클라우드가 필요한 작업은 게이트웨이 하나를 거치고, 게이트웨이는 그 비용을 요청한 계정에 계량해 붙입니다.</p>
+
+        <h2 id="parity">내보내기 그 자체인 미리보기</h2>
+
+        <p>스크럽과 최종 렌더링을 같은 셰이더가 그리므로, 당신이 승인한 것이 곧 납품하는 것입니다. 그것이 없으면 모든 AI 편집은 잠정적입니다. 그림을 승인해 놓고 파일은 나중에 다시 확인하게 되는데, 그것이 파이프라인 반대쪽 끝에 이음매가 다시 나타난 모습입니다.</p>
+
+        <p>문서 하나, 작업 한 벌, 되돌리기 하나, 헤드 하나, 실행 한 번, 렌더링 경로 하나. 이것을 한데 놓고 보면 흥미로운 질문은 더 이상 모델이 얼마나 좋은가가 아닙니다. 얼마나 싸게 모델에 반대할 수 있는가가 됩니다. 우리가 만드는 부분이 바로 그것입니다.</p>
+      </article>
+
+      <aside class="rail">
+        <div class="rail-block">
+          <h2>전체 구조</h2>
+          <dl class="rail-facts">
+            <div><dt>문서</dt><dd>프로젝트당 하나. 들어가는 길은 작업뿐</dd></div>
+            <div><dt>어시스턴트</dt><dd>코드가 아니라 편집기의 작업을 발행</dd></div>
+            <div><dt>되돌리기</dt><dd>작업 하나, 체크포인트 하나</dd></div>
+            <div><dt>동시성</dt><dd>헤드 작업에 대한 비교 후 교환</dd></div>
+            <div><dt>실행</dt><dd>플랜 저장소에서 점유, 리플레이 안전</dd></div>
+            <div><dt>로컬 모델</dt><dd>같은 프로세스, 이미 불러온 프레임</dd></div>
+          </dl>
+        </div>
+
+        <div class="rail-block">
+          <h2>그 대가</h2>
+          <p>어시스턴트를 편집기 자신의 작업으로만 통과시킨다는 것은, 편집기가 할 수 있는 일만 어시스턴트도 할 수 있다는 뜻입니다. 임의의 코드를 쓸 수 있는 모델이라면 더 많은 것을 할 수 있겠지만, 되돌리고 검토하고 신뢰하기는 훨씬 어려울 것입니다. 그것이 우리가 한 교환이고, 의도적으로 그렇게 했습니다.</p>
+        </div>
+
+        <div class="rail-block">
+          <a class="cta" href="mailto:hello@spinnesoftware.com?subject=Engineering">Spinne에 문의하기</a>
+          <p class="cta-note">
+            <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>
+          </p>
+        </div>
+      </aside>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <h2>Spinne Software</h2>
+          <p>데스크톱 애플리케이션, 로컬 AI, 그리고 그 아래를 떠받치는 클라우드 시스템까지 자체 소프트웨어를 직접 만드는 이탈리아 회사입니다.</p>
+          <p class="footer-product">
+            <img src="/sparkle-mark.png" alt="" width="14" height="14" decoding="async">
+            <a href="https://sparkle.software">sparkle.software</a>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h2>페이지</h2>
+          <nav class="footer-nav" aria-label="페이지">
+            <a href="/ko/">홈</a>
+            <a href="/ko/sparkle/">Sparkle</a>
+            <a href="/ko/how-we-build/">개발 방식</a>
+            <a href="/ko/about/">회사</a>
+            <a href="/ko/privacy/">개인정보</a>
+          </nav>
+        </div>
+
+        <div class="footer-col">
+          <h2>연락처</h2>
+          <p><a class="is-plain" href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></p>
+          <p><a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> (PEC)</p>
+          <p><a href="https://www.linkedin.com/company/spinne-software/" target="_blank" rel="noopener">LinkedIn</a></p>
+        </div>
+      </div>
+
+      <div class="colophon">
+        <p>Spinne Software di Luci Manuel &middot; 이탈리아 개인사업자 &middot; 부가가치세 IT 18636231005 &middot; 로마&nbsp;기업등록부 REA RM-1797481</p>
+        <p>&copy; 2026 Spinne Software.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Deferred and last: the page is complete and readable before this runs,
+       and everything it does is a response to a gesture that has not happened
+       yet. -->
+  <script src="/overscroll.js" defer></script>
+
+</body>
+</html>

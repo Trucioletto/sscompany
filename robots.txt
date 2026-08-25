@@ -1,4 +1,48 @@
+# spinnesoftware.com
+#
+# Everything here is public and meant to be read, by people and by machines
+# alike. The explicit per-agent blocks below grant exactly what the wildcard
+# already grants; they exist because robots.txt matching is most-specific-wins,
+# and a named agent that finds no group of its own falls back to `*` — which is
+# fine today, and would silently stop being fine the day a restriction is added
+# to `*`. Naming them makes that mistake loud instead of quiet.
+
 User-agent: *
+Allow: /
+
+# Answer engines: crawl at retrieval time to cite a page in an answer.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Training / index crawlers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://spinnesoftware.com/sitemap.xml

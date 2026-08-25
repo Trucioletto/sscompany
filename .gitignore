@@ -1,5 +1,13 @@
+# Served publicly from the repo root, describes the internals, and goes stale.
+# Keep it local: a Disallow rule would only advertise the path.
+README.md
+
 # Local dev helper, not part of the site
 avvia-sito.sh
+
+# Internal strategy notes. Every file in the repo root is served from the public
+# domain, so this must never be published.
+GEO-STRATEGY.md
 
 # Sources used to generate og-image.png and apple-touch-icon.png.
 # Keep them locally; they must never be served from the public domain.

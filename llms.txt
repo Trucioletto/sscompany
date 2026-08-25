@@ -1,0 +1,27 @@
+# Spinne Software
+
+> Every product leaves machinery behind. Desktop software, local AI, and the cloud systems underneath. Sparkle is the first.
+
+Spinne Software makes its own software instead of taking contracts. It is one engineer in Rome, and the order of the work is deliberate: build the machinery once, then build the products that stand on it.
+
+## Pages
+
+- [Spinne Software](https://spinnesoftware.com/): Spinne Software builds its own products all the way down: GPU rendering, local AI, metered cloud, Italian e-invoicing. Sparkle is the first.
+- [A video editor with an engine under it](https://spinnesoftware.com/sparkle/): Sparkle is a desktop video editor: GPU rendering shared by preview and export, AI on your own machine, hardware encoding. In private preview.
+- [Where the editor ends and the model begins](https://spinnesoftware.com/how-we-build/): How Sparkle is built: one document, one set of operations on it, and an assistant that is another caller rather than another program.
+- [A technology company that ships](https://spinnesoftware.com/about/): Spinne Software builds its own products rather than taking contracts. Legal identity, what exists, and the diligence answers including the ones that are no.
+- [Privacy — Spinne Software](https://spinnesoftware.com/privacy/): How spinnesoftware.com handles personal data. No cookies, no analytics, no third-party services, nothing sold or shared.
+
+## Company
+
+- Legal name: Spinne Software di Luci Manuel
+- Legal form: Sole proprietorship (impresa individuale), Italy
+- Registered: Rome, Italy — REA RM-1797481
+- VAT number: IT 18636231005
+- Email: hello@spinnesoftware.com
+- Certified email (PEC): spinnesoftware@pec.it
+- Products: Sparkle (private preview) — https://sparkle.software
+
+## Languages
+
+This site is published in English, 简体中文, हिन्दी, Español, Français, العربية, বাংলা, Português, Русский, اردو, Bahasa Indonesia, Deutsch, 日本語, 한국어, Italiano. Every page declares the others in hreflang; https://spinnesoftware.com/sitemap.xml lists all of them.

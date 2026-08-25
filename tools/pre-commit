@@ -1,0 +1,51 @@
+#!/bin/sh
+# Refuse to commit an unfilled placeholder into an indexable page.
+#
+# Install once:  ln -sf ../../tools/pre-commit .git/hooks/pre-commit
+# (Hooks are not versioned by git, which is why this lives in tools/.)
+#
+# The README's publishing step is `git add .`, and that is exactly the command
+# that would otherwise ship "FILL: registered legal name" to production.
+
+status=0
+
+# The pages are GENERATED from tools/i18n/content/*.json. Editing a .html by
+# hand works, right up until the next build silently reverts it — and with
+# fifteen languages nobody notices which of the ninety files lost the change.
+# --check writes nothing and fails if any page on disk differs from what the
+# content files say it should be, which catches a hand-edit and a forgotten
+# rebuild with the same test. This runs unconditionally, before the staged-file
+# check below, because a stale page is stale whether or not it was staged.
+if [ -f tools/i18n/build.py ]; then
+  python3 tools/i18n/validate.py >/dev/null 2>&1 || {
+    echo "refusing to commit: a translation does not match the English source." >&2
+    echo "  run: python3 tools/i18n/validate.py" >&2
+    status=1; }
+  python3 tools/i18n/build.py --check >/dev/null 2>&1 || {
+    echo "refusing to commit: the built pages are stale or were edited by hand." >&2
+    echo "  run: python3 tools/i18n/build.py" >&2
+    status=1; }
+fi
+
+# check.sh validates the BUILT pages, which are stale or not depending on the
+# content files — not on whether a .html happened to be staged. It used to sit
+# below the early exit, so a commit that staged no HTML skipped it entirely and
+# the hook reported green while check.sh was failing. Run it first.
+if [ -f ./check.sh ]; then
+  ./check.sh >/dev/null 2>&1 || { echo "refusing to commit: ./check.sh fails." >&2; status=1; }
+fi
+
+staged=$(git diff --cached --name-only --diff-filter=ACM | grep '\.html$')
+[ -z "$staged" ] && exit $status
+
+for f in $staged; do
+  grep -q 'FILL:' "$f" || continue
+  if grep -q 'name="robots" content="noindex' "$f"; then
+    echo "note: $f has FILL: placeholders but is noindex — allowed."
+  else
+    echo "refusing to commit: $f contains a FILL: placeholder and is indexable." >&2
+    status=1
+  fi
+done
+
+exit $status
