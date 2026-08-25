@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -199,12 +203,22 @@
       <a class="mark" href="/id/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">Menu</span></summary>
+      </details>
       <nav class="site-nav" aria-label="Situs">
-        <a href="/id/sparkle/">Sparkle</a>
+        <a href="/id/sparkle/" translate="no">Sparkle</a>
         <a href="/id/how-we-build/">Cara membangun</a>
         <a href="/id/about/">Perusahaan</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — Bahasa Indonesia"><span lang="id">Bahasa Indonesia</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/privacy/" hreflang="en" lang="en">English</a></li>
@@ -271,7 +285,7 @@
         <p>Situs ini tidak ditujukan kepada anak-anak dan tidak meminta data pribadi dari siapa pun. Entri log teknis yang diuraikan di atas adalah satu-satunya data yang direkam, dan entri itu tidak digunakan untuk mengidentifikasi siapa pun, anak-anak maupun orang dewasa.</p>
 
         <h2>Apa yang tidak ada di sini</h2>
-        <p>Tanpa cookie. Tanpa penyimpanan lokal maupun penyimpanan sesi. Tanpa analitik atau pengukuran dalam bentuk apa pun. Tanpa piksel iklan atau pelacakan. Tanpa video, peta, atau widget media sosial yang disematkan. Tanpa formulir kontak. Tanpa buletin. Jenis hurufnya disajikan dari domain yang sama ini, bukan dari penyedia font, sehingga tidak ada permintaan tentang Anda yang keluar dari situs ini. Ada satu skrip, disajikan dari domain ini juga: skrip itu menggantikan pantulan bawaan peramban di tepi atas halaman. Ia tidak menyetel cookie, tidak membaca atau menulis penyimpanan apa pun, tidak melakukan permintaan jaringan, dan tidak mencatat apa pun.</p>
+        <p>Tanpa cookie. Tanpa penyimpanan lokal maupun penyimpanan sesi. Tanpa analitik atau pengukuran dalam bentuk apa pun. Tanpa piksel iklan atau pelacakan. Tanpa video, peta, atau widget media sosial yang disematkan. Tanpa formulir kontak. Tanpa buletin. Jenis hurufnya disajikan dari domain yang sama ini, bukan dari penyedia font, sehingga tidak ada permintaan tentang Anda yang keluar dari situs ini. Ada dua skrip, keduanya disajikan dari domain ini. Yang satu membaca bahasa yang diminta peramban dan, bila situs ini terbit dalam bahasa itu, mengganti alamatnya dengan versi tersebut; setelan itu dibaca sekali, tidak disimpan dan tidak dikirim ke mana pun. Yang lain menggantikan pantulan bawaan peramban di tepi atas halaman. Keduanya tidak menyetel cookie, tidak memakai penyimpanan apa pun, dan tidak mencatat apa pun.</p>
         <p>
           Selain rujukan di dalam pemberitahuan ini, halaman-halaman ini menautkan ke dua tempat: profil perusahaan di LinkedIn, dan
           <a href="https://sparkle.software">sparkle.software</a>, yaitu situs web terpisah yang dioperasikan oleh pengendali data yang sama. Tidak ada apa pun yang dikirim ke salah satunya kecuali Anda memilih untuk mengeklik, dan pada saat itu pemberitahuan privasi situs tersebut yang berlaku. Logo Sparkle yang ditampilkan pada halaman-halaman ini disajikan dari domain ini seperti setiap gambar lain di sini, sehingga menampilkannya tidak menghubungi siapa pun.
@@ -335,7 +349,7 @@
           <h2>Halaman</h2>
           <nav class="footer-nav" aria-label="Halaman">
             <a href="/id/">Beranda</a>
-            <a href="/id/sparkle/">Sparkle</a>
+            <a href="/id/sparkle/" translate="no">Sparkle</a>
             <a href="/id/how-we-build/">Cara membangun</a>
             <a href="/id/about/">Perusahaan</a>
             <a href="/id/privacy/">Privasi</a>

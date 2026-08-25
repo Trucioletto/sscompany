@@ -2,6 +2,7 @@
   "_note": "English is the source. Every other file in this directory is a translation OF this one; when a sentence changes here it is stale everywhere else until it is changed there too. Product names, the legal name, the VAT and REA numbers, the email addresses and the technology names (GPU, ONNX, NVENC, H.264, EBU R128, GDPR, SOC 2, ISO/IEC 27001) are never translated.",
   "nav": {
     "label": "Situs",
+    "menu": "Menu",
     "home": "Beranda",
     "sparkle": "Sparkle",
     "how": "Cara membangun",
@@ -243,7 +244,7 @@
       "h2_children": "Anak-anak",
       "children_p1": "Situs ini tidak ditujukan kepada anak-anak dan tidak meminta data pribadi dari siapa pun. Entri log teknis yang diuraikan di atas adalah satu-satunya data yang direkam, dan entri itu tidak digunakan untuk mengidentifikasi siapa pun, anak-anak maupun orang dewasa.",
       "h2_absent": "Apa yang tidak ada di sini",
-      "absent_p1": "Tanpa cookie. Tanpa penyimpanan lokal maupun penyimpanan sesi. Tanpa analitik atau pengukuran dalam bentuk apa pun. Tanpa piksel iklan atau pelacakan. Tanpa video, peta, atau widget media sosial yang disematkan. Tanpa formulir kontak. Tanpa buletin. Jenis hurufnya disajikan dari domain yang sama ini, bukan dari penyedia font, sehingga tidak ada permintaan tentang Anda yang keluar dari situs ini. Ada satu skrip, disajikan dari domain ini juga: skrip itu menggantikan pantulan bawaan peramban di tepi atas halaman. Ia tidak menyetel cookie, tidak membaca atau menulis penyimpanan apa pun, tidak melakukan permintaan jaringan, dan tidak mencatat apa pun.",
+      "absent_p1": "Tanpa cookie. Tanpa penyimpanan lokal maupun penyimpanan sesi. Tanpa analitik atau pengukuran dalam bentuk apa pun. Tanpa piksel iklan atau pelacakan. Tanpa video, peta, atau widget media sosial yang disematkan. Tanpa formulir kontak. Tanpa buletin. Jenis hurufnya disajikan dari domain yang sama ini, bukan dari penyedia font, sehingga tidak ada permintaan tentang Anda yang keluar dari situs ini. Ada dua skrip, keduanya disajikan dari domain ini. Yang satu membaca bahasa yang diminta peramban dan, bila situs ini terbit dalam bahasa itu, mengganti alamatnya dengan versi tersebut; setelan itu dibaca sekali, tidak disimpan dan tidak dikirim ke mana pun. Yang lain menggantikan pantulan bawaan peramban di tepi atas halaman. Keduanya tidak menyetel cookie, tidak memakai penyimpanan apa pun, dan tidak mencatat apa pun.",
       "absent_links_a": "Selain rujukan di dalam pemberitahuan ini, halaman-halaman ini menautkan ke dua tempat: profil perusahaan di LinkedIn, dan",
       "absent_links_b": ", yaitu situs web terpisah yang dioperasikan oleh pengendali data yang sama. Tidak ada apa pun yang dikirim ke salah satunya kecuali Anda memilih untuk mengeklik, dan pada saat itu pemberitahuan privasi situs tersebut yang berlaku. Logo Sparkle yang ditampilkan pada halaman-halaman ini disajikan dari domain ini seperti setiap gambar lain di sini, sehingga menampilkannya tidak menghubungi siapa pun.",
       "h2_rights": "Hak-hak Anda",

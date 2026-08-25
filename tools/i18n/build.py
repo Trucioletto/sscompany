@@ -184,8 +184,14 @@ def switcher(current: str, page_path: str) -> str:
             f'        <li><a href="{url_for(l["code"], page_path)}" hreflang="{l["code"]}"'
             f' lang="{l["code"]}"{aria}>{l["name"]}</a></li>'
         )
+    # translate="no" on the whole control. A language switcher lists each
+    # language in ITS OWN language, which is the only thing that makes it
+    # usable: somebody looking for 日本語 is looking for those three characters.
+    # A machine translator run over the page turns the list into the reader's
+    # current language — "English" arrives as "INGLESE" — and the control stops
+    # being a way out of the language you are stuck in.
     return (
-        '      <details class="lang">\n'
+        '      <details class="lang" translate="no">\n'
         f'        <summary aria-label="Language — {cur["name"]}">'
         f'<span lang="{cur["code"]}">{cur["name"]}</span></summary>\n'
         '        <ul>\n' + "\n".join(items) + "\n        </ul>\n"

@@ -2,6 +2,7 @@
   "_note": "English is the source. Every other file in this directory is a translation OF this one; when a sentence changes here it is stale everywhere else until it is changed there too. Product names, the legal name, the VAT and REA numbers, the email addresses and the technology names (GPU, ONNX, NVENC, H.264, EBU R128, GDPR, SOC 2, ISO/IEC 27001) are never translated.",
   "nav": {
     "label": "Sitio",
+    "menu": "Menú",
     "home": "Inicio",
     "sparkle": "Sparkle",
     "how": "Cómo se hace",
@@ -243,7 +244,7 @@
       "h2_children": "Menores",
       "children_p1": "Este sitio no está dirigido a menores y no solicita datos personales a nadie. Las entradas técnicas de registro descritas más arriba son los únicos datos que se recogen, y no se utilizan para identificar a nadie, menor o adulto.",
       "h2_absent": "Qué no hay aquí",
-      "absent_p1": "Sin cookies. Sin almacenamiento local ni de sesión. Sin analítica ni medición de ningún tipo. Sin píxeles de publicidad ni de seguimiento. Sin vídeos, mapas ni widgets sociales incrustados. Sin formulario de contacto. Sin boletín. La tipografía se sirve desde este mismo dominio y no desde un proveedor de fuentes, de modo que ninguna solicitud relativa al visitante sale de este sitio. Hay un único script, servido desde este dominio: sustituye el rebote del navegador en el borde superior de la página. No establece cookies, no lee ni escribe ningún almacenamiento, no hace ninguna petición de red y no registra nada.",
+      "absent_p1": "Sin cookies. Sin almacenamiento local ni de sesión. Sin analítica ni medición de ningún tipo. Sin píxeles de publicidad ni de seguimiento. Sin vídeos, mapas ni widgets sociales incrustados. Sin formulario de contacto. Sin boletín. La tipografía se sirve desde este mismo dominio y no desde un proveedor de fuentes, de modo que ninguna solicitud relativa al visitante sale de este sitio. Hay dos scripts, ambos servidos desde este dominio. Uno lee el idioma que pide el navegador y, si el sitio está publicado en él, sustituye la dirección por esa versión; el ajuste se lee una vez, no se guarda ni se envía a ninguna parte. El otro sustituye el rebote del navegador en el borde superior de la página. Ninguno establece cookies, usa almacenamiento alguno ni registra nada.",
       "absent_links_a": "Aparte de las referencias de este aviso, las páginas enlazan hacia fuera con dos sitios: un perfil de empresa en LinkedIn y",
       "absent_links_b": ", que es un sitio web distinto operado por el mismo responsable del tratamiento. No se envía nada a ninguno de los dos salvo que se decida hacer clic, momento en el que se aplica el aviso de privacidad de ese sitio. El logotipo de Sparkle que aparece en estas páginas se sirve desde este dominio, igual que todas las demás imágenes, de modo que mostrarlo no contacta con nadie.",
       "h2_rights": "Derechos del interesado",

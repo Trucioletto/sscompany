@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -199,12 +203,22 @@
       <a class="mark" href="/de/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">Menü</span></summary>
+      </details>
       <nav class="site-nav" aria-label="Seite">
-        <a href="/de/sparkle/">Sparkle</a>
+        <a href="/de/sparkle/" translate="no">Sparkle</a>
         <a href="/de/how-we-build/">Wie wir bauen</a>
         <a href="/de/about/">Firma</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — Deutsch"><span lang="de">Deutsch</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/privacy/" hreflang="en" lang="en">English</a></li>
@@ -271,7 +285,7 @@
         <p>Diese Seite richtet sich nicht an Kinder und fragt niemanden nach personenbezogenen Daten. Die oben beschriebenen technischen Protokolleinträge sind die einzigen erfassten Daten, und sie werden nicht dazu verwendet, jemanden zu identifizieren, ob Kind oder Erwachsener.</p>
 
         <h2>Was hier nicht ist</h2>
-        <p>Keine Cookies. Kein lokaler Speicher und kein Sitzungsspeicher. Keinerlei Analyse oder Messung. Keine Werbe- oder Tracking-Pixel. Keine eingebetteten Videos, Karten oder Social-Widgets. Kein Kontaktformular. Kein Newsletter. Die Schrift wird von derselben Domain ausgeliefert und nicht von einem Schriftanbieter, sodass keine Anfrage über Sie diese Seite verlässt. Es gibt genau ein Skript, ausgeliefert von dieser Domain: es ersetzt das Zurückfedern des Browsers am oberen Seitenrand. Es setzt kein Cookie, liest und schreibt keinen Speicher, stellt keine Netzwerkanfrage und zeichnet nichts auf.</p>
+        <p>Keine Cookies. Kein lokaler Speicher und kein Sitzungsspeicher. Keinerlei Analyse oder Messung. Keine Werbe- oder Tracking-Pixel. Keine eingebetteten Videos, Karten oder Social-Widgets. Kein Kontaktformular. Kein Newsletter. Die Schrift wird von derselben Domain ausgeliefert und nicht von einem Schriftanbieter, sodass keine Anfrage über Sie diese Seite verlässt. Es gibt zwei Skripte, beide von dieser Domain. Das eine liest die vom Browser angeforderte Sprache und ersetzt, sofern diese Seite darin veröffentlicht ist, die Adresse durch jene Fassung; die Einstellung wird einmal gelesen, nicht gespeichert und nirgendwohin gesendet. Das andere ersetzt das Zurückfedern des Browsers am oberen Seitenrand. Keines setzt ein Cookie, nutzt Speicher oder zeichnet etwas auf.</p>
         <p>
           Abgesehen von den Verweisen in dieser Erklärung verlinken die Seiten nach außen auf zwei Ziele: ein LinkedIn-Unternehmensprofil und
           <a href="https://sparkle.software">sparkle.software</a>, eine eigenständige Website desselben Verantwortlichen. An keines von beiden wird etwas gesendet, solange Sie nicht klicken; ab dann gilt die Datenschutzerklärung der jeweiligen Seite. Das auf diesen Seiten gezeigte Sparkle-Logo wird wie jedes andere Bild hier von dieser Domain ausgeliefert; seine Anzeige kontaktiert niemanden.
@@ -335,7 +349,7 @@
           <h2>Seiten</h2>
           <nav class="footer-nav" aria-label="Seiten">
             <a href="/de/">Start</a>
-            <a href="/de/sparkle/">Sparkle</a>
+            <a href="/de/sparkle/" translate="no">Sparkle</a>
             <a href="/de/how-we-build/">Wie wir bauen</a>
             <a href="/de/about/">Firma</a>
             <a href="/de/privacy/">Datenschutz</a>

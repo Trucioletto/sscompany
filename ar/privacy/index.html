@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -198,12 +202,22 @@
       <a class="mark" href="/ar/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">القائمة</span></summary>
+      </details>
       <nav class="site-nav" aria-label="الموقع">
-        <a href="/ar/sparkle/">Sparkle</a>
+        <a href="/ar/sparkle/" translate="no">Sparkle</a>
         <a href="/ar/how-we-build/">كيف نبني</a>
         <a href="/ar/about/">الشركة</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — العربية"><span lang="ar">العربية</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/privacy/" hreflang="en" lang="en">English</a></li>
@@ -270,7 +284,7 @@
         <p>هذا الموقع غير موجّه إلى الأطفال ولا يطلب من أحد بيانات شخصية. وقيود السجل التقنية الموصوفة أعلاه هي البيانات الوحيدة المسجّلة، وهي لا تُستخدم لتحديد هوية أحد، طفلاً كان أم بالغاً.</p>
 
         <h2>ما ليس موجوداً هنا</h2>
-        <p>لا ملفات تعريف ارتباط. لا تخزين محلي ولا تخزين جلسة. لا تحليلات ولا قياس من أي نوع. لا بكسلات إعلان أو تتبّع. لا فيديو مضمَّن ولا خرائط ولا أدوات تواصل اجتماعي. لا نموذج اتصال. لا نشرة بريدية. والخط الطباعي يُقدَّم من هذا النطاق نفسه لا من مزوّد خطوط، فلا يغادر هذا الموقع أي طلب يخصّك. وثمة سكربت واحد، يُقدَّم من هذا النطاق نفسه: يحلّ محل ارتداد المتصفح عند الحافة العليا للصفحة. لا يضع أي كوكي، ولا يقرأ أي مخزن ولا يكتب فيه، ولا يُجري أي طلب شبكي، ولا يسجّل شيئاً.</p>
+        <p>لا ملفات تعريف ارتباط. لا تخزين محلي ولا تخزين جلسة. لا تحليلات ولا قياس من أي نوع. لا بكسلات إعلان أو تتبّع. لا فيديو مضمَّن ولا خرائط ولا أدوات تواصل اجتماعي. لا نموذج اتصال. لا نشرة بريدية. والخط الطباعي يُقدَّم من هذا النطاق نفسه لا من مزوّد خطوط، فلا يغادر هذا الموقع أي طلب يخصّك. وثمة سكربتان، كلاهما يُقدَّم من هذا النطاق نفسه. الأول يقرأ اللغة التي يطلبها المتصفح، وإن كان الموقع منشوراً بها استبدل العنوان بتلك النسخة؛ ويُقرأ هذا الإعداد مرة واحدة، فلا يُحفظ ولا يُرسل إلى أي جهة. والثاني يحلّ محل ارتداد المتصفح عند الحافة العليا للصفحة. ولا أحدهما يضع كوكي، ولا يستخدم أي مخزن، ولا يسجّل شيئاً.</p>
         <p>
           وفيما عدا المراجع المذكورة في هذا الإشعار، تحيل هذه الصفحات إلى موضعين خارجيين: صفحة شركة على LinkedIn، وإلى
           <a href="https://sparkle.software">sparkle.software</a>، وهو موقع منفصل يديره المتحكم نفسه. ولا يُرسَل شيء إلى أيٍّ منهما ما لم تختر النقر، وعندها يسري إشعار الخصوصية الخاص بذلك الموقع. وشعار Sparkle المعروض في هذه الصفحات يُقدَّم من هذا النطاق كسائر الصور هنا، فعرضه لا يتصل بأحد.
@@ -334,7 +348,7 @@
           <h2>الصفحات</h2>
           <nav class="footer-nav" aria-label="الصفحات">
             <a href="/ar/">الرئيسية</a>
-            <a href="/ar/sparkle/">Sparkle</a>
+            <a href="/ar/sparkle/" translate="no">Sparkle</a>
             <a href="/ar/how-we-build/">كيف نبني</a>
             <a href="/ar/about/">الشركة</a>
             <a href="/ar/privacy/">الخصوصية</a>

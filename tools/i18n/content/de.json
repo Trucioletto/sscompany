@@ -2,6 +2,7 @@
   "_note": "English is the source. Every other file in this directory is a translation OF this one; when a sentence changes here it is stale everywhere else until it is changed there too. Product names, the legal name, the VAT and REA numbers, the email addresses and the technology names (GPU, ONNX, NVENC, H.264, EBU R128, GDPR, SOC 2, ISO/IEC 27001) are never translated.",
   "nav": {
     "label": "Seite",
+    "menu": "Menü",
     "home": "Start",
     "sparkle": "Sparkle",
     "how": "Wie wir bauen",
@@ -243,7 +244,7 @@
       "h2_children": "Kinder",
       "children_p1": "Diese Seite richtet sich nicht an Kinder und fragt niemanden nach personenbezogenen Daten. Die oben beschriebenen technischen Protokolleinträge sind die einzigen erfassten Daten, und sie werden nicht dazu verwendet, jemanden zu identifizieren, ob Kind oder Erwachsener.",
       "h2_absent": "Was hier nicht ist",
-      "absent_p1": "Keine Cookies. Kein lokaler Speicher und kein Sitzungsspeicher. Keinerlei Analyse oder Messung. Keine Werbe- oder Tracking-Pixel. Keine eingebetteten Videos, Karten oder Social-Widgets. Kein Kontaktformular. Kein Newsletter. Die Schrift wird von derselben Domain ausgeliefert und nicht von einem Schriftanbieter, sodass keine Anfrage über Sie diese Seite verlässt. Es gibt genau ein Skript, ausgeliefert von dieser Domain: es ersetzt das Zurückfedern des Browsers am oberen Seitenrand. Es setzt kein Cookie, liest und schreibt keinen Speicher, stellt keine Netzwerkanfrage und zeichnet nichts auf.",
+      "absent_p1": "Keine Cookies. Kein lokaler Speicher und kein Sitzungsspeicher. Keinerlei Analyse oder Messung. Keine Werbe- oder Tracking-Pixel. Keine eingebetteten Videos, Karten oder Social-Widgets. Kein Kontaktformular. Kein Newsletter. Die Schrift wird von derselben Domain ausgeliefert und nicht von einem Schriftanbieter, sodass keine Anfrage über Sie diese Seite verlässt. Es gibt zwei Skripte, beide von dieser Domain. Das eine liest die vom Browser angeforderte Sprache und ersetzt, sofern diese Seite darin veröffentlicht ist, die Adresse durch jene Fassung; die Einstellung wird einmal gelesen, nicht gespeichert und nirgendwohin gesendet. Das andere ersetzt das Zurückfedern des Browsers am oberen Seitenrand. Keines setzt ein Cookie, nutzt Speicher oder zeichnet etwas auf.",
       "absent_links_a": "Abgesehen von den Verweisen in dieser Erklärung verlinken die Seiten nach außen auf zwei Ziele: ein LinkedIn-Unternehmensprofil und",
       "absent_links_b": ", eine eigenständige Website desselben Verantwortlichen. An keines von beiden wird etwas gesendet, solange Sie nicht klicken; ab dann gilt die Datenschutzerklärung der jeweiligen Seite. Das auf diesen Seiten gezeigte Sparkle-Logo wird wie jedes andere Bild hier von dieser Domain ausgeliefert; seine Anzeige kontaktiert niemanden.",
       "h2_rights": "Ihre Rechte",

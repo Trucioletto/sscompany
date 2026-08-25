@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -198,12 +202,22 @@
       <a class="mark" href="/bn/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">মেনু</span></summary>
+      </details>
       <nav class="site-nav" aria-label="সাইট">
-        <a href="/bn/sparkle/">Sparkle</a>
+        <a href="/bn/sparkle/" translate="no">Sparkle</a>
         <a href="/bn/how-we-build/">যেভাবে বানাই</a>
         <a href="/bn/about/">কোম্পানি</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — বাংলা"><span lang="bn">বাংলা</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/privacy/" hreflang="en" lang="en">English</a></li>
@@ -270,7 +284,7 @@
         <p>এই সাইটটি শিশুদের উদ্দেশ্যে নয় এবং কারও কাছে কোনো ব্যক্তিগত তথ্য চায় না। উপরে বর্ণিত কারিগরি লগ এন্ট্রিই একমাত্র রেকর্ড হওয়া তথ্য, আর শিশু হোক বা প্রাপ্তবয়স্ক, কাউকে শনাক্ত করতে সেগুলো ব্যবহার করা হয় না।</p>
 
         <h2>যা এখানে নেই</h2>
-        <p>কোনো কুকি নেই। কোনো লোকাল বা সেশন স্টোরেজ নেই। কোনো ধরনের অ্যানালিটিক্স বা পরিমাপ নেই। কোনো বিজ্ঞাপন বা ট্র্যাকিং পিক্সেল নেই। বসানো কোনো ভিডিও, মানচিত্র বা সোশ্যাল উইজেট নেই। কোনো যোগাযোগ ফরম নেই। কোনো নিউজলেটার নেই। ফন্টটি কোনো ফন্ট প্রোভাইডারের কাছ থেকে নয়, এই একই ডোমেইন থেকেই আসে, তাই আপনাকে নিয়ে কোনো অনুরোধ এই সাইটের বাইরে যায় না। স্ক্রিপ্ট আছে একটিই, সেটিও এই ডোমেইন থেকেই আসে: পাতার উপরের কিনারায় ব্রাউজারের নিজের ঝাঁকুনির বদলে এটি কাজ করে। এটি কোনো কুকি বসায় না, কোনো স্টোরেজ পড়েও না লেখেও না, কোনো নেটওয়ার্ক অনুরোধ পাঠায় না, আর কিছুই রেকর্ড করে না।</p>
+        <p>কোনো কুকি নেই। কোনো লোকাল বা সেশন স্টোরেজ নেই। কোনো ধরনের অ্যানালিটিক্স বা পরিমাপ নেই। কোনো বিজ্ঞাপন বা ট্র্যাকিং পিক্সেল নেই। বসানো কোনো ভিডিও, মানচিত্র বা সোশ্যাল উইজেট নেই। কোনো যোগাযোগ ফরম নেই। কোনো নিউজলেটার নেই। ফন্টটি কোনো ফন্ট প্রোভাইডারের কাছ থেকে নয়, এই একই ডোমেইন থেকেই আসে, তাই আপনাকে নিয়ে কোনো অনুরোধ এই সাইটের বাইরে যায় না। স্ক্রিপ্ট আছে দুটি, দুটিই এই ডোমেইন থেকেই আসে। একটি পড়ে ব্রাউজার কোন ভাষা চাইছে, আর সেই ভাষায় সাইটটি প্রকাশিত থাকলে ঠিকানাটি সেই সংস্করণে বদলে দেয়; এই সেটিংটি একবারই পড়া হয়, কোথাও রাখা হয় না, কোথাও পাঠানোও হয় না। অন্যটি পাতার উপরের কিনারায় ব্রাউজারের নিজের ঝাঁকুনির বদলে কাজ করে। দুটির কোনোটিই কুকি বসায় না, কোনো স্টোরেজ ব্যবহার করে না, আর কিছুই রেকর্ড করে না।</p>
         <p>
           এই বিজ্ঞপ্তিতে উল্লেখ করা ঠিকানাগুলো বাদ দিলে, এই পাতাগুলো থেকে বাইরের দুটি ঠিকানায় লিংক আছে: একটি LinkedIn কোম্পানি প্রোফাইল, আর
           <a href="https://sparkle.software">sparkle.software</a>, যেটি একই নিয়ন্ত্রকের পরিচালিত একটি আলাদা ওয়েবসাইট। আপনি নিজে ক্লিক না করলে কোনোটিতেই কিছু পাঠানো হয় না; ক্লিক করলে সেই সাইটের নিজস্ব গোপনীয়তা বিজ্ঞপ্তি প্রযোজ্য হয়। এই পাতাগুলোতে দেখানো Sparkle লোগোটি এখানকার অন্য সব ছবির মতোই এই ডোমেইন থেকে আসে, তাই সেটি দেখানোর জন্য কারও সঙ্গে যোগাযোগ করা হয় না।
@@ -334,7 +348,7 @@
           <h2>পাতা</h2>
           <nav class="footer-nav" aria-label="পাতা">
             <a href="/bn/">হোম</a>
-            <a href="/bn/sparkle/">Sparkle</a>
+            <a href="/bn/sparkle/" translate="no">Sparkle</a>
             <a href="/bn/how-we-build/">যেভাবে বানাই</a>
             <a href="/bn/about/">কোম্পানি</a>
             <a href="/bn/privacy/">গোপনীয়তা</a>

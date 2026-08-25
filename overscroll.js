@@ -23,16 +23,22 @@
    elsewhere, and all three stay true. What is no longer true is the sentence
    "the page runs no script", which is why that comment changed too.
 
-   FINE POINTERS ONLY. On a touch screen the native bounce is already right, and
-   the first touchmove of a gesture is not reliably cancelable — taking the edge
-   over there would trade a behaviour that always works for one that sometimes
-   does nothing at all. Phones keep exactly what they have. */
+   TWO GESTURES, ONE PULL. A wheel arrives as a stream of deltas with no end
+   event, a finger arrives as a position with a very clear one, so they are read
+   separately and meet at the same accumulator. What they must NOT share is the
+   idle timer: 90ms of silence ends a wheel gesture, and a finger that simply
+   holds still is not finished with anything.
+
+   The one thing this needs from the browser is overscroll-behavior: without it
+   the native bounce runs underneath and the page is dragged twice. Where it is
+   missing — iOS before 16 — the edge is left exactly as it was rather than
+   taken over badly. */
 (function () {
   'use strict';
 
   var mm = window.matchMedia;
-  if (!mm || !mm('(pointer: fine)').matches) return;
-  if (mm('(prefers-reduced-motion: reduce)').matches) return;
+  if (mm && mm('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.CSS || !CSS.supports || !CSS.supports('overscroll-behavior-y', 'none')) return;
 
   var doc = document.documentElement;
   var body = document.body;
@@ -128,7 +134,11 @@
     }
     body.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0)';
     var p = Math.min(1, y / MAX / FULL_AT);
+    /* The same progress said twice, because CSS cannot divide a time by a time.
+       --pull-t scrubs the laying of each thread; --pull-p moves the front that
+       decides WHERE the web has been spun so far. */
     doc.style.setProperty('--pull-t', (p * BUILD_MS).toFixed(1) + 'ms');
+    doc.style.setProperty('--pull-p', p.toFixed(3));
     if (release) frame = window.requestAnimationFrame(paint);
   }
 
@@ -186,6 +196,7 @@
     releaseFrom = 0;
     body.style.transform = '';
     doc.style.removeProperty('--pull-t');
+    doc.style.removeProperty('--pull-p');
     doc.classList.remove('is-pulling');
   }
 
@@ -216,10 +227,19 @@
        the gesture is also the one that resumes scrolling — no dead tick. */
     if (next !== 0 && e.cancelable) e.preventDefault();
 
+    open(next);
+    window.clearTimeout(idleTimer);
+    idleTimer = window.setTimeout(settle, IDLE);
+  }
+
+  /* Where both gestures meet. `next` is how far the reader is asking for,
+     before resistance; everything downstream of here is the same whether it
+     came from a wheel or a finger. */
+  function open(next) {
     /* Caught mid-flight: the spring is abandoned where it is, and the pull
        carries on from exactly that opening rather than from zero. */
     if (release) {
-      raw = -MAX * STIFF * Math.log(1 - Math.min(0.999, travel() / MAX)) + next;
+      raw = unresisted(travel()) + next;
       release = 0;
       releaseFrom = 0;
     } else {
@@ -227,12 +247,58 @@
     }
     if (raw) doc.classList.add('is-pulling');
     if (!frame) frame = window.requestAnimationFrame(paint);
+  }
 
-    window.clearTimeout(idleTimer);
-    idleTimer = window.setTimeout(settle, IDLE);
+  /* resisted() run backwards: what the accumulator would have to hold for the
+     page to sit where it currently sits. */
+  function unresisted(y) {
+    return -MAX * STIFF * Math.log(1 - Math.min(0.999, y / MAX));
   }
 
   window.addEventListener('wheel', onWheel, { passive: false });
+
+  /* THE FINGER.
+     A drag is a position, not a stream of deltas, so the pull is measured from
+     where the finger went down rather than accumulated — that way a finger that
+     comes back up closes the field on the way, in step with itself.
+
+     No idle timer on this path. A finger resting still is not a gesture that
+     ended; touchend says that, and says it exactly. */
+  var touchFrom = 0;
+  var touchOpen = false;
+
+  function onTouchStart(e) {
+    if (e.touches.length !== 1) return;
+    touchOpen = window.scrollY <= 0;
+    touchFrom = e.touches[0].clientY - unresisted(travel());
+  }
+
+  function onTouchMove(e) {
+    if (!touchOpen || e.touches.length !== 1) return;
+
+    var next = e.touches[0].clientY - touchFrom;
+    if (next < 0) {
+      /* Dragged back past the top of the pull: hand the page back to the
+         browser and re-anchor, so the same drag can go on to scroll down
+         without the field reopening under it. */
+      if (raw) open(0);
+      touchOpen = window.scrollY <= 0;
+      touchFrom = e.touches[0].clientY;
+      return;
+    }
+
+    /* cancelable is false once the browser has committed the gesture to
+       scrolling — which at the top, with overscroll-behavior none, it has not.
+       Checked rather than assumed: preventing a non-cancelable event throws
+       nothing but logs a warning on every frame. */
+    if (e.cancelable) e.preventDefault();
+    open(next);
+  }
+
+  window.addEventListener('touchstart', onTouchStart, { passive: true });
+  window.addEventListener('touchmove', onTouchMove, { passive: false });
+  window.addEventListener('touchend', settle);
+  window.addEventListener('touchcancel', settle);
 
 
   /* Leaving the window mid-pull would come back to a page still held open. */

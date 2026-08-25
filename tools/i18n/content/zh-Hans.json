@@ -2,6 +2,7 @@
   "_note": "English is the source. Every other file in this directory is a translation OF this one; when a sentence changes here it is stale everywhere else until it is changed there too. Product names, the legal name, the VAT and REA numbers, the email addresses and the technology names (GPU, ONNX, NVENC, H.264, EBU R128, GDPR, SOC 2, ISO/IEC 27001) are never translated.",
   "nav": {
     "label": "站点",
+    "menu": "菜单",
     "home": "首页",
     "sparkle": "Sparkle",
     "how": "如何构建",
@@ -243,7 +244,7 @@
       "h2_children": "儿童",
       "children_p1": "本站不面向儿童，也不向任何人索取个人数据。上文所述的技术日志记录是唯一被记录的数据，它们不被用于识别任何人，无论儿童还是成年人。",
       "h2_absent": "本站没有的东西",
-      "absent_p1": "没有Cookie。没有本地存储或会话存储。没有任何形式的分析或测量。没有广告或跟踪像素。没有嵌入的视频、地图或社交组件。没有联系表单。没有邮件订阅。字体由本域名自行提供，而不是来自字体服务商，因此不会有任何关于你的请求离开本站。脚本有且只有一个，同样由本域名提供：它替换浏览器在页面顶端的回弹。它不设置cookie，不读写任何存储，不发起任何网络请求，也不记录任何东西。",
+      "absent_p1": "没有Cookie。没有本地存储或会话存储。没有任何形式的分析或测量。没有广告或跟踪像素。没有嵌入的视频、地图或社交组件。没有联系表单。没有邮件订阅。字体由本域名自行提供，而不是来自字体服务商，因此不会有任何关于你的请求离开本站。脚本有两个，同样都由本域名提供。一个读取浏览器请求的语言，若本站有该语言的版本，就把地址换成那一版；这项设置只读取一次，不保存，也不发往任何地方。另一个替换浏览器在页面顶端的回弹。两者都不设置cookie，不使用任何存储，也不记录任何东西。",
       "absent_links_a": "除本声明中引用的链接外，本站页面向外链接到两处：一个LinkedIn公司主页，以及",
       "absent_links_b": "，它是由同一控制者运营的另一个网站。除非你主动点击，否则不会有任何数据发送到这两处；一旦点击，就适用该网站自己的隐私声明。这些页面上显示的Sparkle标志与这里其他所有图片一样由本域名提供，因此显示它不会联系任何人。",
       "h2_rights": "你的权利",

@@ -2,6 +2,7 @@
   "_note": "English is the source. Every other file in this directory is a translation OF this one; when a sentence changes here it is stale everywhere else until it is changed there too. Product names, the legal name, the VAT and REA numbers, the email addresses and the technology names (GPU, ONNX, NVENC, H.264, EBU R128, GDPR, SOC 2, ISO/IEC 27001) are never translated.",
   "nav": {
     "label": "Site",
+    "menu": "Menu",
     "home": "Accueil",
     "sparkle": "Sparkle",
     "how": "Notre méthode",
@@ -243,7 +244,7 @@
       "h2_children": "Enfants",
       "children_p1": "Ce site ne s'adresse pas aux enfants et ne demande de données à caractère personnel à personne. Les entrées techniques de journal décrites ci-dessus sont les seules données enregistrées, et elles ne servent à identifier personne, enfant ou adulte.",
       "h2_absent": "Ce qui n'est pas ici",
-      "absent_p1": "Aucun cookie. Aucun stockage local ou de session. Aucune analyse ni mesure d'audience d'aucune sorte. Aucun pixel publicitaire ou de suivi. Aucune vidéo, carte ou widget social intégré. Aucun formulaire de contact. Aucune lettre d'information. La police de caractères est servie depuis ce même domaine et non depuis un fournisseur de polices : aucune requête vous concernant ne quitte donc ce site. Il y a un seul script, servi depuis ce domaine : il remplace le rebond du navigateur en haut de la page. Il ne dépose aucun cookie, ne lit ni n'écrit aucun stockage, n'effectue aucune requête réseau et n'enregistre rien.",
+      "absent_p1": "Aucun cookie. Aucun stockage local ou de session. Aucune analyse ni mesure d'audience d'aucune sorte. Aucun pixel publicitaire ou de suivi. Aucune vidéo, carte ou widget social intégré. Aucun formulaire de contact. Aucune lettre d'information. La police de caractères est servie depuis ce même domaine et non depuis un fournisseur de polices : aucune requête vous concernant ne quitte donc ce site. Il y a deux scripts, tous deux servis depuis ce domaine. Le premier lit la langue demandée par le navigateur et, si le site est publié dans cette langue, remplace l'adresse par cette version ; le réglage est lu une fois, ni conservé ni envoyé nulle part. Le second remplace le rebond du navigateur en haut de la page. Aucun des deux ne dépose de cookie, n'utilise de stockage ni n'enregistre quoi que ce soit.",
       "absent_links_a": "En dehors des références citées dans la présente politique, les pages renvoient vers deux destinations : une page d'entreprise LinkedIn et",
       "absent_links_b": ", site distinct exploité par le même responsable du traitement. Rien n'est envoyé ni à l'un ni à l'autre à moins que vous ne choisissiez de cliquer, auquel cas la politique de confidentialité propre à ce site s'applique. Le logo Sparkle affiché sur ces pages est servi depuis ce domaine comme toutes les autres images, de sorte que son affichage ne contacte personne.",
       "h2_rights": "Vos droits",

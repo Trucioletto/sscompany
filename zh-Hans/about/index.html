@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -198,12 +202,22 @@
       <a class="mark" href="/zh-Hans/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">菜单</span></summary>
+      </details>
       <nav class="site-nav" aria-label="站点">
-        <a href="/zh-Hans/sparkle/">Sparkle</a>
+        <a href="/zh-Hans/sparkle/" translate="no">Sparkle</a>
         <a href="/zh-Hans/how-we-build/">如何构建</a>
         <a href="/zh-Hans/about/" aria-current="page">公司</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — 简体中文"><span lang="zh-Hans">简体中文</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/about/" hreflang="en" lang="en">English</a></li>
@@ -328,7 +342,7 @@
           <h2>页面</h2>
           <nav class="footer-nav" aria-label="页面">
             <a href="/zh-Hans/">首页</a>
-            <a href="/zh-Hans/sparkle/">Sparkle</a>
+            <a href="/zh-Hans/sparkle/" translate="no">Sparkle</a>
             <a href="/zh-Hans/how-we-build/">如何构建</a>
             <a href="/zh-Hans/about/">公司</a>
             <a href="/zh-Hans/privacy/">隐私</a>

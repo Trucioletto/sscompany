@@ -279,6 +279,7 @@ body {
    368px on the home page and 144px everywhere else, in a different position —
    the brand had no constant location. */
 .masthead {
+  position: relative;
   border-bottom: 1px solid #e6e8ef;
   border-bottom-color: var(--rule);
 }
@@ -354,13 +355,49 @@ body {
   transform: translateZ(0);
 }
 
+/* THE FRONT.
+   Each thread lays itself, and that reads well up close — but the threads were
+   ordered by LENGTH, longest first, and a length bucket is scattered over the
+   whole strip. So a quarter of a pull put a quarter of the threads EVERYWHERE:
+   loose white ticks across 1400px, confetti rather than a web forming.
+
+   The order that was missing is spatial, and rather than re-time four hundred
+   threads it is imposed here, on the layer: a mask whose edge crosses the strip
+   as the page opens. Behind the front the web is spun, ahead of it there is
+   blue, and the 16% ramp is the front itself — threads there are half faded,
+   which is what makes the edge read as spinning rather than as a wipe.
+
+   Each plane runs its own front, and they are deliberately out of step: the
+   near ones lead, the far ones trail, so the strip is never uncovered by one
+   flat line moving across it. 130% rather than 100% so the last plane still
+   finishes before the pull does; the front has to leave the strip, not stop
+   at the far edge. */
 .pull-layer {
   position: absolute;
   inset: auto 0 0;
   height: 6rem;
   transform-origin: 50% 100%;
   backface-visibility: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0,
+    #000 calc(var(--pull-p, 0) * var(--front) * 1%),
+    transparent calc(var(--pull-p, 0) * var(--front) * 1% + 16%),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    #000 0,
+    #000 calc(var(--pull-p, 0) * var(--front) * 1%),
+    transparent calc(var(--pull-p, 0) * var(--front) * 1% + 16%),
+    transparent 100%
+  );
 }
+
+.pull-l1 { --front: 118; }
+.pull-l2 { --front: 126; }
+.pull-l3 { --front: 134; }
+.pull-l4 { --front: 142; }
 
 .pull-net {
   position: absolute;
@@ -535,10 +572,115 @@ body {
    keyboard user reaches the nav before the language menu that sits above it.
    The DOM sequence stays the meaningful one — mark, navigation, language — so
    what a screen reader announces is unchanged. */
+/* Above the breakpoint the button does not exist, so the mark, the navigation
+   and the language menu are three flex children of the masthead exactly as they
+   were before this control was added — the desktop header is untouched. */
+.menu {
+  display: none;
+}
+
+/* Below it: one row of mark and button, and the two panels open in flow
+   underneath. In flow rather than floating over the page, so the button does
+   not move out from under the thumb that just pressed it, and so nothing has to
+   win a z-index argument with the language dropdown that lives inside. */
 @media (max-width: 33rem) {
-  .site-nav {
+  .menu {
+    display: block;
     order: 1;
+    margin-inline-start: auto;
+  }
+
+  .menu > summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-inline-end: calc(var(--s-2) * -1);
+    list-style: none;
+    cursor: pointer;
+    color: #5a6478;
+    color: var(--text-muted);
+  }
+
+  .menu > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Three rules drawn in CSS rather than the ☰ character: check.sh verifies
+     that every glyph a page renders exists in the subsets this site ships, and
+     U+2630 is in none of them. A 44px box holds a 16px drawing. */
+  .menu > summary::after {
+    content: "";
+    width: 1rem;
+    height: 0.625rem;
+    border-top: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat;
+  }
+
+  .menu[open] > summary,
+  .menu > summary:hover {
+    color: #0e1220;
+    color: var(--text);
+  }
+
+  .menu > summary:focus-visible {
+    outline: 2px solid #3d5bfa;
+    outline-offset: var(--s-0);
+  }
+
+  /* Closed is the default, so a reader who never opens it never pays for it. */
+  .menu ~ .site-nav,
+  .menu ~ .lang {
+    display: none;
+  }
+
+  .menu[open] ~ .site-nav {
+    display: flex;
     flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    order: 2;
+    margin-top: var(--s-2);
+    padding-top: var(--s-1);
+    border-top: 1px solid #e6e8ef;
+    border-top-color: var(--rule);
+  }
+
+  /* Centred, and the language menu with them: the panel is a short list on an
+     otherwise empty screen, not a column of text, so a centre line reads as
+     composition rather than as a margin somebody forgot to set. .site-nav a
+     already centres — it has to, so that a one-syllable label like 홈 fills a
+     24px target on the inline nav — so this only has to not undo it. */
+  .menu[open] ~ .site-nav a {
+    padding: var(--s-2) 0;
+    border-bottom: 0;
+  }
+
+  .menu[open] ~ .site-nav a[aria-current="page"] {
+    border-bottom: 0;
+    box-shadow: inset 2px 0 0 var(--brand);
+    padding-inline-start: var(--s-2);
+  }
+
+  .menu[open] ~ .lang {
+    display: block;
+    flex-basis: 100%;
+    order: 3;
+    margin-inline-start: 0;
+    text-align: center;
+  }
+
+  /* The dropdown hangs off the end of a full-width block, which would pin it to
+     one edge. Centred on the control it belongs to instead. */
+  .menu[open] ~ .lang ul {
+    inset-inline: 50% auto;
+    transform: translateX(-50%);
+  }
+
+  .is-rtl .menu[open] ~ .lang ul {
+    transform: translateX(50%);
   }
 }
 

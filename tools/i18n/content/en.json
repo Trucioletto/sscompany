@@ -2,6 +2,7 @@
   "_note": "English is the source. Every other file in this directory is a translation OF this one; when a sentence changes here it is stale everywhere else until it is changed there too. Product names, the legal name, the VAT and REA numbers, the email addresses and the technology names (GPU, ONNX, NVENC, H.264, EBU R128, GDPR, SOC 2, ISO/IEC 27001) are never translated.",
   "nav": {
     "label": "Site",
+    "menu": "Menu",
     "home": "Home",
     "sparkle": "Sparkle",
     "how": "How we build",
@@ -243,7 +244,7 @@
       "h2_children": "Children",
       "children_p1": "This site is not directed at children and asks nobody for personal data. The technical log entries described above are the only data recorded, and they are not used to identify anyone, child or adult.",
       "h2_absent": "What is not here",
-      "absent_p1": "No cookies. No local or session storage. No analytics or measurement of any kind. No advertising or tracking pixels. No embedded videos, maps or social widgets. No contact form. No newsletter. The typeface is served from this same domain rather than from a font provider, so no request about you leaves this site. There is one script, served from this domain: it replaces the browser's bounce at the top edge of the page. It sets no cookie, reads and writes no storage, makes no network request, and records nothing.",
+      "absent_p1": "No cookies. No local or session storage. No analytics or measurement of any kind. No advertising or tracking pixels. No embedded videos, maps or social widgets. No contact form. No newsletter. The typeface is served from this same domain rather than from a font provider, so no request about you leaves this site. There are two scripts, both served from this domain. One reads the language your browser asks for and, if this site is published in it, replaces the address with that version; the setting is read once, not stored and not sent anywhere. The other replaces the browser's bounce at the top edge of the page. Neither sets a cookie, uses any storage, or records anything.",
       "absent_links_a": "Apart from the references in this notice, the pages link out to two places: a LinkedIn company profile, and",
       "absent_links_b": ", which is a separate website operated by the same controller. Nothing is sent to either unless you choose to click, at which point that site's own privacy notice applies. The Sparkle logo shown on these pages is served from this domain like every other image here, so displaying it contacts nobody.",
       "h2_rights": "Your rights",

@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -198,12 +202,22 @@
       <a class="mark" href="/ja/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">メニュー</span></summary>
+      </details>
       <nav class="site-nav" aria-label="サイト">
-        <a href="/ja/sparkle/">Sparkle</a>
+        <a href="/ja/sparkle/" translate="no">Sparkle</a>
         <a href="/ja/how-we-build/">作り方</a>
         <a href="/ja/about/">会社概要</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — 日本語"><span lang="ja">日本語</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/privacy/" hreflang="en" lang="en">English</a></li>
@@ -270,7 +284,7 @@
         <p>本サイトは子どもを対象としておらず、誰に対しても個人データを求めません。記録されるのは上記の技術的なログだけで、子どもか大人かを問わず、個人の特定には使いません。</p>
 
         <h2>ここにないもの</h2>
-        <p>クッキーはありません。ローカルストレージもセッションストレージもありません。いかなる種類のアクセス解析も計測もありません。広告や追跡用のピクセルもありません。埋め込みの動画、地図、ソーシャルメディアのウィジェットもありません。問い合わせフォームもありません。メールマガジンもありません。書体はフォント事業者ではなく本サイトと同じドメインから配信されるため、訪問者に関するリクエストが本サイトの外へ出ることはありません。スクリプトは1本だけで、これも同じドメインから配信しています。ページ上端でのブラウザの跳ね返りを置き換えるものです。クッキーは設定せず、ストレージの読み書きもせず、ネットワーク要求も行わず、何も記録しません。</p>
+        <p>クッキーはありません。ローカルストレージもセッションストレージもありません。いかなる種類のアクセス解析も計測もありません。広告や追跡用のピクセルもありません。埋め込みの動画、地図、ソーシャルメディアのウィジェットもありません。問い合わせフォームもありません。メールマガジンもありません。書体はフォント事業者ではなく本サイトと同じドメインから配信されるため、訪問者に関するリクエストが本サイトの外へ出ることはありません。スクリプトは2本で、どちらも同じドメインから配信しています。1本はブラウザが求める言語を読み取り、その言語の版があればアドレスをそちらに置き換えます。設定を読むのは一度だけで、保存も送信もしません。もう1本はページ上端でのブラウザの跳ね返りを置き換えます。どちらもクッキーを設定せず、ストレージを使わず、何も記録しません。</p>
         <p>
           本通知の中で参照しているものを除けば、本サイトから外に出るリンクは2か所です。LinkedIn の会社ページと、
           <a href="https://sparkle.software">sparkle.software</a>。後者は、同じ管理者が運営する別のウェブサイトです。クリックしない限り、どちらにも何も送信されません。クリックした時点で、そのサイト自身のプライバシー通知が適用されます。これらのページに表示される Sparkle のロゴも、ほかの画像と同じく本ドメインから配信されるため、表示によってどこかへ通信が発生することはありません。
@@ -334,7 +348,7 @@
           <h2>ページ</h2>
           <nav class="footer-nav" aria-label="ページ">
             <a href="/ja/">ホーム</a>
-            <a href="/ja/sparkle/">Sparkle</a>
+            <a href="/ja/sparkle/" translate="no">Sparkle</a>
             <a href="/ja/how-we-build/">作り方</a>
             <a href="/ja/about/">会社概要</a>
             <a href="/ja/privacy/">プライバシー</a>

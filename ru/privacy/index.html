@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -198,12 +202,22 @@
       <a class="mark" href="/ru/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">Меню</span></summary>
+      </details>
       <nav class="site-nav" aria-label="Сайт">
-        <a href="/ru/sparkle/">Sparkle</a>
+        <a href="/ru/sparkle/" translate="no">Sparkle</a>
         <a href="/ru/how-we-build/">Как мы строим</a>
         <a href="/ru/about/">Компания</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — Русский"><span lang="ru">Русский</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/privacy/" hreflang="en" lang="en">English</a></li>
@@ -270,7 +284,7 @@
         <p>Этот сайт не адресован детям и ни у кого не запрашивает персональных данных. Описанные выше технические записи в журналах — единственные собираемые данные, и они не используются для установления личности, ни ребенка, ни взрослого.</p>
 
         <h2>Чего здесь нет</h2>
-        <p>Никаких cookie. Ни local storage, ни session storage. Никакой аналитики и никаких измерений. Никакой рекламы и пикселей отслеживания. Никаких встроенных видео, карт и социальных виджетов. Никакой формы обратной связи. Никакой рассылки. Шрифт раздается с этого же домена, а не от поставщика шрифтов, поэтому ни один запрос о посетителе не покидает этот сайт. Скрипт ровно один, и он отдается с этого же домена: он заменяет собственный отскок браузера у верхнего края страницы. Он не ставит куки, не читает и не пишет никакое хранилище, не делает сетевых запросов и ничего не записывает.</p>
+        <p>Никаких cookie. Ни local storage, ни session storage. Никакой аналитики и никаких измерений. Никакой рекламы и пикселей отслеживания. Никаких встроенных видео, карт и социальных виджетов. Никакой формы обратной связи. Никакой рассылки. Шрифт раздается с этого же домена, а не от поставщика шрифтов, поэтому ни один запрос о посетителе не покидает этот сайт. Скриптов два, оба отдаются с этого же домена. Первый читает язык, который запрашивает браузер, и, если сайт опубликован на нем, подменяет адрес этой версией; настройка читается один раз, нигде не сохраняется и никуда не отправляется. Второй заменяет собственный отскок браузера у верхнего края страницы. Ни один не ставит куки, не использует хранилище и ничего не записывает.</p>
         <p>
           Не считая ссылок, приведенных в этом уведомлении, со страниц ведут внешние ссылки в два места: профиль компании в LinkedIn и
           <a href="https://sparkle.software">sparkle.software</a> — отдельный сайт, которым управляет тот же контролер. Ни в одно из них ничего не отправляется, пока по ссылке не перейдут; после перехода действует уведомление о конфиденциальности того сайта. Логотип Sparkle на этих страницах раздается с этого домена, как и любое другое изображение здесь, поэтому его показ ни к кому не обращается.
@@ -334,7 +348,7 @@
           <h2>Страницы</h2>
           <nav class="footer-nav" aria-label="Страницы">
             <a href="/ru/">Главная</a>
-            <a href="/ru/sparkle/">Sparkle</a>
+            <a href="/ru/sparkle/" translate="no">Sparkle</a>
             <a href="/ru/how-we-build/">Как мы строим</a>
             <a href="/ru/about/">Компания</a>
             <a href="/ru/privacy/">Приватность</a>

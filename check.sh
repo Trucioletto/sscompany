@@ -164,7 +164,12 @@ for f in sorted(glob.glob('**/*.html', recursive=True)):
     # Arabic, Devanagari and Bengali, and they are rendered by the system font
     # on purpose. Checking them would fail every page in every language for the
     # one thing that is deliberately correct.
-    body = re.sub(r'<details class="lang">.*?</details>', ' ', body, flags=re.S)
+    # Match the open tag by its class, not by its exact text. Adding a second
+    # attribute to that element — translate="no", so a machine translator cannot
+    # rewrite the language names into the reader's current language — silently
+    # stopped this pattern matching, and every Korean and Chinese endonym in the
+    # switcher was suddenly reported as a missing glyph on the English page.
+    body = re.sub(r'<details[^>]*class="lang"[^>]*>.*?</details>', ' ', body, flags=re.S)
     body = re.sub(r'<[^>]+>', ' ', body)
     pages += 1
     for ch in sorted(set(html.unescape(body))):

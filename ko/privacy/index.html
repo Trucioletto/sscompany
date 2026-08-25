@@ -8,6 +8,10 @@
        storage, no network call, no third party. It replaces the browser's own
        bounce at the top edge, which cannot hold anything that moves — see the
        top of overscroll.js for the three measurements that established that. -->
+  <!-- In <head> and not deferred: deferred, the English page paints first and
+       the reader watches it swap. Smaller than the favicon, same connection. -->
+  <script src="/lang.js"></script>
+
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
@@ -198,12 +202,22 @@
       <a class="mark" href="/ko/" aria-label="Spinne Software">
         <img src="/logo.svg" alt="Spinne Software" width="216" height="90">
       </a>
+      <!-- The disclosure holds only the button. The navigation and the language
+           menu stay siblings of the mark, which is the whole reason this works:
+           above the breakpoint the button is display:none and the three of them
+           lay out exactly as they always have, with no wrapper in between and
+           nothing for the desktop header to notice. Below it, [open] reveals
+           them in flow underneath. No script: the browser already owns the
+           state of a <details>. -->
+      <details class="menu">
+        <summary><span class="visually-hidden">메뉴</span></summary>
+      </details>
       <nav class="site-nav" aria-label="사이트">
-        <a href="/ko/sparkle/">Sparkle</a>
+        <a href="/ko/sparkle/" translate="no">Sparkle</a>
         <a href="/ko/how-we-build/">개발 방식</a>
         <a href="/ko/about/">회사</a>
       </nav>
-      <details class="lang">
+      <details class="lang" translate="no">
         <summary aria-label="Language — 한국어"><span lang="ko">한국어</span></summary>
         <ul>
         <li><a href="https://spinnesoftware.com/privacy/" hreflang="en" lang="en">English</a></li>
@@ -270,7 +284,7 @@
         <p>이 사이트는 아동을 대상으로 하지 않으며 누구에게도 개인정보를 요구하지 않습니다. 위에 설명한 기술적 로그 기록이 기록되는 유일한 데이터이고, 아동이든 성인이든 누군가를 식별하는 데 사용되지 않습니다.</p>
 
         <h2>여기에 없는 것</h2>
-        <p>쿠키가 없습니다. 로컬 저장소나 세션 저장소가 없습니다. 어떤 종류의 분석이나 측정도 없습니다. 광고나 추적 픽셀이 없습니다. 삽입된 영상, 지도, 소셜 위젯이 없습니다. 문의 양식이 없습니다. 뉴스레터가 없습니다. 서체는 폰트 제공자가 아니라 바로 이 도메인에서 제공되므로, 이용자에 관한 요청은 이 사이트를 벗어나지 않습니다. 스크립트는 하나뿐이고 그것도 이 도메인에서 제공됩니다. 페이지 위쪽 끝에서 브라우저가 튕기는 동작을 대신하는 스크립트입니다. 쿠키를 설정하지 않고, 어떤 저장소도 읽거나 쓰지 않으며, 네트워크 요청을 하지 않고, 아무것도 기록하지 않습니다.</p>
+        <p>쿠키가 없습니다. 로컬 저장소나 세션 저장소가 없습니다. 어떤 종류의 분석이나 측정도 없습니다. 광고나 추적 픽셀이 없습니다. 삽입된 영상, 지도, 소셜 위젯이 없습니다. 문의 양식이 없습니다. 뉴스레터가 없습니다. 서체는 폰트 제공자가 아니라 바로 이 도메인에서 제공되므로, 이용자에 관한 요청은 이 사이트를 벗어나지 않습니다. 스크립트는 두 개이고 둘 다 이 도메인에서 제공됩니다. 하나는 브라우저가 요청하는 언어를 읽어, 그 언어로 된 판이 있으면 주소를 그쪽으로 바꿉니다. 설정은 한 번만 읽고 저장하지도 보내지도 않습니다. 다른 하나는 페이지 위쪽 끝에서 브라우저가 튕기는 동작을 대신합니다. 둘 다 쿠키를 설정하지 않고, 어떤 저장소도 쓰지 않으며, 아무것도 기록하지 않습니다.</p>
         <p>
           이 고지에서 인용한 문서를 빼면, 이 페이지들이 바깥으로 연결하는 곳은 두 군데입니다. LinkedIn 회사 프로필, 그리고 같은 개인정보처리자가 운영하는 별도의 웹사이트인
           <a href="https://sparkle.software">sparkle.software</a>입니다. 이용자가 직접 클릭하지 않는 한 어느 쪽으로도 아무것도 전송되지 않으며, 클릭한 시점부터는 해당 사이트의 개인정보 고지가 적용됩니다. 이 페이지들에 표시되는 Sparkle 로고는 여기 있는 다른 모든 이미지와 마찬가지로 이 도메인에서 제공되므로, 로고를 표시해도 어디와도 통신하지 않습니다.
@@ -334,7 +348,7 @@
           <h2>페이지</h2>
           <nav class="footer-nav" aria-label="페이지">
             <a href="/ko/">홈</a>
-            <a href="/ko/sparkle/">Sparkle</a>
+            <a href="/ko/sparkle/" translate="no">Sparkle</a>
             <a href="/ko/how-we-build/">개발 방식</a>
             <a href="/ko/about/">회사</a>
             <a href="/ko/privacy/">개인정보</a>
