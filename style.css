@@ -517,6 +517,31 @@ body {
   padding-bottom: var(--s-2);
 }
 
+/* Below this width the three items cannot share one row, and they wrapped in DOM
+   order: mark, then nav, then the language menu alone on a third row. That row
+   cost 54px — a 46px control plus its gap — while 176px sat empty beside the
+   mark. At 320px the masthead was 179px in Latin languages and 232px in Russian
+   and Indonesian, where the nav itself wraps to two rows: 41% of an iPhone SE
+   spent before the first word of the page.
+
+   Sending the nav last puts the language menu back beside the mark, which is
+   where a phone header puts it anyway. Two rows instead of three, at every
+   width below the breakpoint, in every language.
+
+   33rem and not 34: at 540px English still fits all three on one row, and a
+   breakpoint above that would have forced a second row to buy nothing.
+
+   The trade is that focus order stops matching visual order for these two: a
+   keyboard user reaches the nav before the language menu that sits above it.
+   The DOM sequence stays the meaningful one — mark, navigation, language — so
+   what a screen reader announces is unchanged. */
+@media (max-width: 33rem) {
+  .site-nav {
+    order: 1;
+    flex-basis: 100%;
+  }
+}
+
 /* A 44px target around a 40px image, and the flex box is what centres it. */
 .mark {
   display: inline-flex;
