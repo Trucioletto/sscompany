@@ -404,10 +404,7 @@ body {
   );
 }
 
-.pull-l1 { --front: 118; }
-.pull-l2 { --front: 126; }
-.pull-l3 { --front: 134; }
-.pull-l4 { --front: 142; }
+.pull-l1 { --front: 106; }
 
 .pull-net {
   position: absolute;
@@ -428,38 +425,29 @@ body {
   shape-rendering: geometricPrecision;
 }
 
-/* THE FOUR DEPTHS.
-   scale() cancels the perspective divide, so a plane 430px further back still
-   reaches both edges of the strip. Once size is equalised, what carries the
-   depth is the rest: a weave that gets finer with distance, a thread that gets
-   lighter and dimmer, and each plane leaning back by its own angle about the
-   bottom edge. */
-.pull-l1 { transform: translateZ(-430px) rotateX(17deg) scale(1.58); }
-.pull-l2 { transform: translateZ(-230px) rotateX(11deg) scale(1.33); }
-.pull-l3 { transform: translateZ(-45px) rotateX(5deg) scale(1.1); }
-.pull-l4 { transform: translateZ(95px) rotateX(-7deg) scale(0.95); }
+/* ONE PLANE, AND IT IS FLAT.
+   There were four, at four depths, and the perspective scene existed to hold
+   them apart: each leaned back by its own angle and got finer and dimmer with
+   distance. Four webs overlapping at four scales did not read as depth, it read
+   as noise — the threads of one plane crossed the cells of the next and the
+   structure of all four cancelled out. With one web there is nothing to hold
+   apart, so the plane sits flat on the field where a web actually sits, and the
+   weight it was given for being furthest back is given back to it.
+   The perspective on the parent is harmless and stays: it is what makes the
+   field itself read as a surface rather than a band of colour. */
+.pull-l1 { transform: none; }
 
-.pull-l1 path { stroke-width: 0.55; stroke-opacity: 0.16; }
-.pull-l2 path { stroke-width: 0.7; stroke-opacity: 0.23; }
-.pull-l3 path { stroke-width: 0.9; stroke-opacity: 0.32; }
-.pull-l4 path { stroke-width: 1.15; stroke-opacity: 0.46; }
+.pull-l1 path { stroke-width: 1; stroke-opacity: 0.42; }
 
 /* At rest every thread is retracted into nothing. The length is per GROUP, not
    per thread: threads are bucketed by length, so one number covers a whole
    bucket and a shorter thread simply finishes early. pathLength would have been
    the obvious way to say this and is silently not honoured for
    stroke-dasharray here. */
-.pull-g3, .pull-g7 { stroke-dasharray: 40; stroke-dashoffset: 40; }
-.pull-g2, .pull-g11, .pull-g15 { stroke-dasharray: 60; stroke-dashoffset: 60; }
-.pull-g6 { stroke-dasharray: 80; stroke-dashoffset: 80; }
-.pull-g10 { stroke-dasharray: 100; stroke-dashoffset: 100; }
-.pull-g14 { stroke-dasharray: 120; stroke-dashoffset: 120; }
+.pull-g3 { stroke-dasharray: 40; stroke-dashoffset: 40; }
+.pull-g2 { stroke-dasharray: 60; stroke-dashoffset: 60; }
 .pull-g1 { stroke-dasharray: 220; stroke-dashoffset: 220; }
-.pull-g9 { stroke-dasharray: 300; stroke-dashoffset: 300; }
-.pull-g5, .pull-g13 { stroke-dasharray: 340; stroke-dashoffset: 340; }
 .pull-g0 { stroke-dasharray: 360; stroke-dashoffset: 360; }
-.pull-g4, .pull-g8 { stroke-dasharray: 440; stroke-dashoffset: 440; }
-.pull-g12 { stroke-dasharray: 540; stroke-dashoffset: 540; }
 
 @keyframes pull-lay {
   to {
@@ -475,23 +463,8 @@ body {
    first third of the build. */
 
 @keyframes pull-s1 {
-  from { transform: translateX(-14px) translateZ(-316px) rotateX(26deg) scale(1.58); }
-  to { transform: translateX(0) translateZ(-430px) rotateX(17deg) scale(1.58); }
-}
-
-@keyframes pull-s2 {
-  from { transform: translateX(-8px) translateZ(-101px) rotateX(20deg) scale(1.33); }
-  to { transform: translateX(0) translateZ(-230px) rotateX(11deg) scale(1.33); }
-}
-
-@keyframes pull-s3 {
-  from { transform: translateX(10px) translateZ(99px) rotateX(14deg) scale(1.1); }
-  to { transform: translateX(0) translateZ(-45px) rotateX(5deg) scale(1.1); }
-}
-
-@keyframes pull-s4 {
-  from { transform: translateX(20px) translateZ(284px) rotateX(2deg) scale(0.95); }
-  to { transform: translateX(0) translateZ(95px) rotateX(-7deg) scale(0.95); }
+  from { transform: translateX(22px); }
+  to { transform: translateX(0); }
 }
 
 /* THE BUILD, AND IT IS SCRUBBED BY THE GESTURE, NOT BY A CLOCK.
@@ -515,27 +488,12 @@ body {
    nothing. The global prefers-reduced-motion block near the end of this file
    collapses all of it. */
 .is-pulling .pull-l1 { animation: pull-s1 470ms cubic-bezier(0.18, 0.88, 0.28, 1) calc(0ms - var(--pull-t, 0ms)) both; }
-.is-pulling .pull-l2 { animation: pull-s2 485ms cubic-bezier(0.18, 0.88, 0.28, 1) calc(70ms - var(--pull-t, 0ms)) both; }
-.is-pulling .pull-l3 { animation: pull-s3 490ms cubic-bezier(0.18, 0.88, 0.28, 1) calc(140ms - var(--pull-t, 0ms)) both; }
-.is-pulling .pull-l4 { animation: pull-s4 495ms cubic-bezier(0.18, 0.88, 0.28, 1) calc(205ms - var(--pull-t, 0ms)) both; }
 .is-pulling .pull-a { animation: pull-lay 260ms linear both; }
 .is-pulling .pull-n { animation: pull-lay 300ms linear both; }
 .is-pulling .pull-g0 { animation-delay: calc(0ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g1 { animation-delay: calc(55ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g4 { animation-delay: calc(70ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g2 { animation-delay: calc(105ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g5 { animation-delay: calc(125ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g8 { animation-delay: calc(140ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g3 { animation-delay: calc(150ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g6 { animation-delay: calc(175ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g9 { animation-delay: calc(195ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g12 { animation-delay: calc(205ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g7 { animation-delay: calc(220ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g10 { animation-delay: calc(245ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g13 { animation-delay: calc(260ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g11 { animation-delay: calc(290ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g14 { animation-delay: calc(310ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g15 { animation-delay: calc(355ms - var(--pull-t, 0ms)); }
 
 /* LAST, and it has to be last: the animation shorthand above resets
    play-state along with everything else, so a paused declaration written
