@@ -439,15 +439,21 @@ body {
 
 .pull-l1 path { stroke-width: 1; stroke-opacity: 0.42; }
 
-/* At rest every thread is retracted into nothing. The length is per GROUP, not
-   per thread: threads are bucketed by length, so one number covers a whole
-   bucket and a shorter thread simply finishes early. pathLength would have been
+/* At rest every line is retracted into nothing, and the mosaic draws itself as
+   the field opens: the courses go across first, then the uprights, then the
+   diagonals that turn the cells from quadrilaterals into a mosaic.
+
+   The length is per GROUP, not per line: lines are bucketed by length, so one
+   number covers a whole bucket and a shorter line simply finishes early. The
+   four numbers are MEASURED off the geometry rather than guessed — the longest
+   course runs 1580 units, and a dasharray shorter than its own path leaves a
+   line that can never fully retract. pathLength would have been
    the obvious way to say this and is silently not honoured for
    stroke-dasharray here. */
-.pull-g3 { stroke-dasharray: 40; stroke-dashoffset: 40; }
-.pull-g2 { stroke-dasharray: 60; stroke-dashoffset: 60; }
-.pull-g1 { stroke-dasharray: 220; stroke-dashoffset: 220; }
-.pull-g0 { stroke-dasharray: 360; stroke-dashoffset: 360; }
+.pull-g3 { stroke-dasharray: 138; stroke-dashoffset: 138; }
+.pull-g2 { stroke-dasharray: 202; stroke-dashoffset: 202; }
+.pull-g1 { stroke-dasharray: 202; stroke-dashoffset: 202; }
+.pull-g0 { stroke-dasharray: 1780; stroke-dashoffset: 1780; }
 
 @keyframes pull-lay {
   to {
