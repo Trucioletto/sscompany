@@ -26,3 +26,20 @@ Copia di spinne software logo (1).svg
 # they are how the pages are generated and belong in the history.
 __pycache__/
 *.pyc
+
+# Agent skills installed with `npx skills add` (Leonxlnx/taste-skill).
+#
+# They are tooling for whoever is editing the site, not part of the site. The
+# same rule as __pycache__ above applies and is the reason this matters here
+# more than in a normal repository: everything in this tree is served from
+# spinnesoftware.com, so a committed .agents/ would publish thirteen skill
+# documents — instructions written by a third party — at a public URL under
+# the company's own domain.
+#
+# .claude/ holds symlinks INTO .agents/, so it is the same content by another
+# path; skills-lock.json is the manifest that reproduces both. All three are
+# recreated by re-running the install, and none of them is a decision worth
+# keeping in the history.
+.agents/
+.claude/
+skills-lock.json

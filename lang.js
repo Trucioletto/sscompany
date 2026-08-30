@@ -30,7 +30,16 @@
       redirected off an English page and the root stays indexable. It is worth
       saying plainly that Google advises against automatic language redirects
       at all: the hreflang cluster is what actually makes the other fourteen
-      findable, and this only changes where a human lands. */
+      findable, and this only changes where a human lands.
+
+   4. The page that exists in one language. Not every page is published in all
+      fifteen — see the `locales` column in build.py PAGES. Sending an Italian
+      browser from /answers/x/ to /it/answers/x/ lands it on a 404, which is
+      strictly worse than the English page it was already looking at. This was
+      not a hypothetical: it shipped, and every non-English browser hitting the
+      first answer page got the error document.
+      The first segment of such a page is listed below, and check.sh asserts
+      the list still matches what build.py publishes. */
 (function () {
   'use strict';
 
@@ -40,8 +49,19 @@
                'ur', 'id', 'de', 'ja', 'ko', 'it'];
   var DEFAULT = 'en';
 
+  /* First path segments whose pages exist in English only. Kept as segments
+     rather than full paths because everything under one of these lives in the
+     same section, and a list of individual URLs would go stale one page at a
+     time instead of loudly. */
+  var ENGLISH_ONLY = ['answers'];
+
   var path = location.pathname;
   var first = path.split('/')[1];
+
+  /* Published in English only: there is nothing to send the reader to. */
+  for (var e = 0; e < ENGLISH_ONLY.length; e++) {
+    if (first === ENGLISH_ONLY[e]) return;
+  }
 
   /* Already under a language prefix — including the 404 case above. */
   for (var i = 0; i < CODES.length; i++) {

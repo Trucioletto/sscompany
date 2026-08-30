@@ -239,7 +239,7 @@
              small print — it is the next heading, at the same size. -->
         <h2 id="short">The short answer</h2>
 
-        <div class="summary">
+        <div class="answer">
           <ul>
             <li>Name a Whisper model — tiny, base, small, medium or large-v3-turbo — and the audio never leaves your machine. Not “is encrypted in transit”. Does not leave.</li>
             <li>Leave the engine on Auto and the answer changes, which is the next section.</li>
@@ -253,7 +253,7 @@
         <!-- The one section this page exists to make impossible to miss: the
              default is not the private option. Stated before the reasoning,
              for the same reason as above. -->
-        <div class="summary">
+        <div class="answer">
           <ul>
             <li>Auto is not local-first. In Auto, audio longer than eight minutes goes to a cloud engine — Deepgram Nova-2 — when one is configured. Shorter audio, and any length with no cloud engine configured, stays local.</li>
             <li>This is a threshold in the code, not a heuristic: 480 seconds, measured with ffprobe before anything is sent.</li>

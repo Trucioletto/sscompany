@@ -258,6 +258,32 @@ else
 fi
 
 say ''
+say "lang.js knows which pages exist in one language only"
+# lang.js redirects a reader to their own language. For a page published in
+# English only there is nothing to redirect to, so it must skip those paths —
+# and it can only skip the ones it has been told about. Drift here is silent
+# and expensive: the reader gets a 404 instead of the page they asked for, and
+# only in the fourteen languages nobody tests in.
+langjs_list=$(sed -n 's/.*var ENGLISH_ONLY = \[\(.*\)\];.*/\1/p' lang.js | tr -d "' " | tr ',' '\n' | sort -u)
+build_list=$(python3 - <<'PYEOF'
+import sys
+sys.path.insert(0, "tools/i18n")
+from build import PAGES, langs_for, DEFAULT
+segs = set()
+for _key, path, _tmpl, locales in PAGES:
+    codes = langs_for(locales)
+    if codes == [DEFAULT] and path:
+        segs.add(path.split("/")[0])
+print("\n".join(sorted(segs)))
+PYEOF
+)
+if [ "$langjs_list" = "$build_list" ]; then
+  ok "lang.js skips: ${langjs_list:-(none)}"
+else
+  bad "lang.js ENGLISH_ONLY is [$(echo $langjs_list)] but build.py publishes [$(echo $build_list)] in English only"
+fi
+
+say ''
 if [ "$fail" = "0" ]; then
   say 'All checks passed.'
 else
