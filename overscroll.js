@@ -367,37 +367,69 @@
     return bare(from) !== bare(location.pathname);
   }
 
+  /* The greeting owns nothing permanently. Everything it writes, it writes
+     through here, and cleanup is idempotent and guaranteed by three separate
+     paths: the end of the run, a gesture taking over, and a deadline.
+
+     The first version had one exit — `if (raw || release) return` — which left
+     the transform, both custom properties and the class exactly where they
+     were. Any stray wheel tick during the 1.7 seconds killed the loop and the
+     page stayed pushed down with the field half open, permanently, until a
+     reload. It shipped, and it is the reason this is now three paths instead
+     of one clever check. */
+  var greeting = 0;
+  var greetDeadline = 0;
+
+  function greetEnd() {
+    if (!greeting) return;
+    greeting = 0;
+    window.clearTimeout(greetDeadline);
+    greetDeadline = 0;
+    /* Only ever removes what the greeting itself set. If a real gesture has
+       taken over, its own paint() writes these again on the very next frame,
+       so the worst case is one frame of rest — not a page left ajar. */
+    body.style.transform = '';
+    doc.style.removeProperty('--pull-t');
+    doc.style.removeProperty('--pull-p');
+    doc.classList.remove('is-pulling');
+  }
+
   function greet() {
     /* Not at the top — a restored scroll position, or a link to an anchor. The
        field is not on screen and there is nothing to introduce. */
     if (window.scrollY > 0) return;
     if (arrivedFromInsideTheSite()) return;
+    /* A gesture is already live: the reader found the edge on their own and is
+       doing the thing this exists to demonstrate. */
+    if (raw || release) return;
 
     var t0 = 0;
     var span = GREET_IN + GREET_HOLD + GREET_OUT;
+    greeting = 1;
 
-    doc.classList.add('is-pulling');
+    /* Third path. requestAnimationFrame does not run in a background tab, and a
+       frame callback that never fires cannot clean up after itself — the same
+       reason settle() carries a rescue timer. */
+    greetDeadline = window.setTimeout(greetEnd, span + 600);
 
     window.requestAnimationFrame(function step(now) {
-      /* The reader is pulling, or the release spring is running: the gesture
-         owns --pull-t and the body transform from here. Leave it alone. */
-      if (raw || release) return;
+      if (!greeting) return;
+      /* The reader is pulling: hand over, and take our own writes with us. */
+      if (raw || release) { greetEnd(); return; }
 
       if (!t0) t0 = now;
       var e = now - t0, p;
 
       if (e < GREET_IN) {
-        /* Thrown, and decelerating into place. */
         var x = e / GREET_IN;
         p = 1 - Math.pow(1 - x, 3);
       } else if (e < GREET_IN + GREET_HOLD) {
         p = 1;
       } else if (e < span) {
-        /* Back the same way, accelerating, so it leaves rather than fades. */
         var y = (e - GREET_IN - GREET_HOLD) / GREET_OUT;
         p = 1 - y * y * y;
       } else {
-        done();
+        greetEnd();
         return;
       }
 
@@ -405,6 +437,7 @@
       var t = p * GREET_TO;
       doc.style.setProperty('--pull-t', (t * BUILD_MS).toFixed(1) + 'ms');
       doc.style.setProperty('--pull-p', t.toFixed(3));
+      doc.classList.add('is-pulling');
       window.requestAnimationFrame(step);
     });
   }
