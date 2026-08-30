@@ -308,6 +308,67 @@
       "report_before": "If a link somewhere sent you here, ",
       "report_link": "tell us where it was",
       "report_after": " and we will fix it."
+    },
+    "answers_transcribe": {
+      "title": "Transcribing video without uploading it — Spinne Software",
+      "description": "Whisper runs on your machine. Which Sparkle settings keep the audio there, which one sends it to a cloud engine, and the eight-minute threshold that decides.",
+      "og_title": "Transcribing video without uploading it",
+      "og_description": "Naming a local Whisper model keeps the audio on your machine. Auto does not, past eight minutes. The difference, and where it lives in the code.",
+      "tw_title": "Transcribing video without uploading it",
+      "tw_description": "Which Sparkle settings keep audio on your machine, and the one that does not.",
+      "h1": "Transcribing video without uploading it",
+      "lede": "Whisper runs on your own machine. Getting from that to a subtitle file on a timeline is the part nobody writes down — and the part where footage quietly leaves the building.",
+      "h2_short": "The short answer",
+      "short_a": "Name a Whisper model — tiny, base, small, medium or large-v3-turbo — and the audio never leaves your machine. Not “is encrypted in transit”. Does not leave.",
+      "short_b": "Leave the engine on Auto and the answer changes, which is the next section.",
+      "short_p": "Sparkle ships two local speech engines: whisper.cpp by preference, faster-whisper when it is not available. Both run in-process on your hardware. On Apple Silicon the bulk of the work is already on the Metal GPU.",
+      "h2_auto": "When Auto does upload, and why",
+      "auto_warn_a": "Auto is not local-first. In Auto, audio longer than eight minutes goes to a cloud engine — Deepgram Nova-2 — when one is configured. Shorter audio, and any length with no cloud engine configured, stays local.",
+      "auto_warn_b": "This is a threshold in the code, not a heuristic: 480 seconds, measured with ffprobe before anything is sent.",
+      "auto_p1": "The reason is duration, not quality. A long recording through a local model on a laptop is a long wait, and the older Google engine caps out at roughly eight minutes of audio, so it was never a candidate for the long files in the first place.",
+      "auto_p2": "The fallback runs one way only, and it is worth being precise about it, because it is the whole promise:",
+      "auto_rules": [
+        "A named local model never becomes a cloud call. The branch that talks to a cloud engine is entered only when the requested engine is a cloud engine, or is Auto. A request for small cannot reach it.",
+        "A cloud engine falls back to local. If Deepgram is unconfigured, unhealthy, or fails mid-job, the work lands on local Whisper rather than failing."
+      ],
+      "auto_p3": "So the setting is the whole control surface. If footage is under embargo or covered by an NDA, name the model. Do not leave it on Auto and hope.",
+      "h2_model": "Which model to name",
+      "model_p1": "On Auto, when it does stay local, the priority is the largest model that will run: large-v3-turbo, then medium, small, base, tiny. Naming one explicitly overrides that.",
+      "model_p2": "There is no VRAM floor to clear. Sparkle does not refuse to run on a machine; it takes what the machine has and degrades. The practical limit is patience, not hardware.",
+      "model_p3": "One detail that costs people a hot laptop elsewhere: transcription threads are capped to the performance cores, roughly half the logical count and never more than eight. Saturating the efficiency cores too bought almost nothing — the heavy lifting on Apple Silicon is already on the GPU — and cooked the machine for it.",
+      "h2_local": "What else runs locally, and what it weighs",
+      "local_p1": "Transcription is not the only model on your disk. Sparkle ships these and runs them in-process:",
+      "local_models": [
+        "Segment Anything ViT-B — subject segmentation — 358 MB",
+        "Robust Video Matting, ResNet-50 — background removal, quality — 103 MB",
+        "MiDaS small — depth estimation — 64 MB",
+        "MobileSAM encoder — segmentation, fast path — 27 MB",
+        "SAM ViT-H decoder — segmentation, decode — 16 MB",
+        "Robust Video Matting, MobileNetV3 — background removal, fast — 14 MB"
+      ],
+      "local_total": "812 MB of models, shipped with the application.",
+      "h2_accel": "The neural accelerator is not always the fast path",
+      "accel_p1": "This is the part that surprises people, and it is measured rather than assumed. On Apple Silicon, Sparkle deliberately runs background removal on the CPU and demotes CoreML below it:",
+      "accel_rows": [
+        "RVM ResNet-50 — CPU ~76 ms/frame against CoreML ~150 ms/frame, twice as slow.",
+        "RVM MobileNetV3 — CPU ~43 ms/frame against CoreML ~104 ms/frame, 2.4 times as slow."
+      ],
+      "accel_p2": "The cause is specific. The matting model carries recurrent state across frames and takes a float downsample_ratio input. The CoreML execution provider cannot run those, so it partitions the graph and hands the unsupported nodes back to the CPU one at a time, paying a copy between providers at every transition. The copies cost more than the acceleration saves.",
+      "accel_p3": "CUDA and DirectML are real accelerators for this model and stay at the top of the order. CoreML sits below plain CPU as a last resort, for the case where the CPU provider is somehow absent. Measured on an M-series machine with ONNX Runtime 1.26.",
+      "h2_not": "What this will not do",
+      "not_items": [
+        "Auto will not keep long audio local. Past eight minutes it reaches for the cloud engine if one is configured. Name a model if that matters.",
+        "Mask tracking through SAM is not offered on Auto. Measured at 27 to 40 seconds per frame on an M2, it is too slow to hand to somebody without warning, so it is excluded from automatic selection rather than quietly chosen.",
+        "Generative work is cloud, and metered where you can see it. Credits are reserved before an operation and settled at what it actually cost."
+      ],
+      "h2_limits": "Practical limits",
+      "limits": [
+        "Audio accepted for transcription — 8 GB",
+        "Imported subtitle file — 64 MB",
+        "Auto cloud threshold — 480 seconds",
+        "Platforms — macOS on Apple Silicon and Intel; Windows 64-bit, in beta",
+        "Download — 186 MB with presets, 142 MB without"
+      ]
     }
   },
   "punct": {

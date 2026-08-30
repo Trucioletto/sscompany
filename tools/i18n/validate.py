@@ -27,6 +27,19 @@ HERE = pathlib.Path(__file__).resolve().parent
 CONTENT = HERE / "content"
 SOURCE = "en"
 
+# A page can be published in fewer languages than the site has (build.py PAGES,
+# `locales` column). The content for such a page exists only in the languages it
+# is built in, and its absence from the other files is the plan rather than a
+# translation somebody forgot. Imported rather than restated: a second list here
+# would be correct until the day the first one changed.
+from build import PAGES, langs_for  # noqa: E402
+
+
+def absent_by_design(lang: str) -> set:
+    """`pages.<key>` prefixes this language legitimately does not carry."""
+    return {f"pages.{key}" for key, _path, _tmpl, locales in PAGES
+            if lang not in langs_for(locales)}
+
 # Must appear, unchanged, in the translation wherever it appears in the English.
 # Not a style preference: these are identifiers, addresses and product names, and
 # a "translated" one is a broken link or a wrong company.
@@ -115,11 +128,15 @@ def main(argv) -> int:
             continue
 
         problems = []
+        skip = absent_by_design(lang)
+
+        def unpublished(key: str) -> bool:
+            return any(key == s or key.startswith(s + ".") for s in skip)
 
         # 1. Same shape, including array lengths.
         got_shape = dict(shape(data))
         for k, kind in src_shape.items():
-            if k == "_note":
+            if k == "_note" or unpublished(k):
                 continue
             if k not in got_shape:
                 problems.append(f"missing key   {k}")

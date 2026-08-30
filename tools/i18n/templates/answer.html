@@ -1,0 +1,101 @@
+    <div class="page">
+      <article class="doc">
+        <h1>{{page.h1}}</h1>
+
+        <p class="lede">{{page.lede}}</p>
+
+        <!-- The answer sits above the reasoning, not after it. Somebody who
+             arrived from a search typed a question; making them read four
+             sections before it is answered is how a documentation page becomes
+             a page nobody finishes. The qualification that follows is not
+             small print — it is the next heading, at the same size. -->
+        <h2 id="short">{{page.h2_short}}</h2>
+
+        <div class="summary">
+          <ul>
+            <li>{{page.short_a}}</li>
+            <li>{{page.short_b}}</li>
+          </ul>
+        </div>
+
+        <p>{{page.short_p}}</p>
+
+        <h2 id="auto">{{page.h2_auto}}</h2>
+
+        <!-- The one section this page exists to make impossible to miss: the
+             default is not the private option. Stated before the reasoning,
+             for the same reason as above. -->
+        <div class="summary">
+          <ul>
+            <li>{{page.auto_warn_a}}</li>
+            <li>{{page.auto_warn_b}}</li>
+          </ul>
+        </div>
+
+        <p>{{page.auto_p1}}</p>
+
+        <p>{{page.auto_p2}}</p>
+
+        <ul>
+          <li>{{page.auto_rules.0}}</li>
+          <li>{{page.auto_rules.1}}</li>
+        </ul>
+
+        <p>{{page.auto_p3}}</p>
+
+        <h2 id="model">{{page.h2_model}}</h2>
+
+        <p>{{page.model_p1}}</p>
+
+        <p>{{page.model_p2}}</p>
+
+        <p>{{page.model_p3}}</p>
+
+        <h2 id="local">{{page.h2_local}}</h2>
+
+        <p>{{page.local_p1}}</p>
+
+        <ul>
+          <li>{{page.local_models.0}}</li>
+          <li>{{page.local_models.1}}</li>
+          <li>{{page.local_models.2}}</li>
+          <li>{{page.local_models.3}}</li>
+          <li>{{page.local_models.4}}</li>
+          <li>{{page.local_models.5}}</li>
+        </ul>
+
+        <p class="pull">{{page.local_total}}</p>
+
+        <h2 id="accelerator">{{page.h2_accel}}</h2>
+
+        <p>{{page.accel_p1}}</p>
+
+        <ul>
+          <li>{{page.accel_rows.0}}</li>
+          <li>{{page.accel_rows.1}}</li>
+        </ul>
+
+        <p>{{page.accel_p2}}</p>
+
+        <p>{{page.accel_p3}}</p>
+
+        <h2 id="limits">{{page.h2_not}}</h2>
+
+        <ul>
+          <li>{{page.not_items.0}}</li>
+          <li>{{page.not_items.1}}</li>
+          <li>{{page.not_items.2}}</li>
+        </ul>
+
+        <h2 id="numbers">{{page.h2_limits}}</h2>
+
+        <ul>
+          <li>{{page.limits.0}}</li>
+          <li>{{page.limits.1}}</li>
+          <li>{{page.limits.2}}</li>
+          <li>{{page.limits.3}}</li>
+          <li>{{page.limits.4}}</li>
+        </ul>
+
+      </article>
+    </div>

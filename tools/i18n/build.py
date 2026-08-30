@@ -106,6 +106,11 @@ PAGES = [
     ("how_we_build", "how-we-build/", "how-we-build.html", None),
     ("about",        "about/",        "about.html",        None),
     ("privacy",      "privacy/",      "privacy.html",      None),
+    # The first page whose subject is a question rather than the company. English
+    # only: it is worth publishing now, and it is worth translating only once it
+    # has earned the attention that would justify fourteen more copies.
+    ("answers_transcribe", "answers/transcribe-video-without-uploading/",
+                                      "answer.html",       ("en",)),
 ]
 # 404 is special: not indexed, not in the sitemap, English only (GitHub Pages
 # serves one 404 document for the whole domain and cannot pick a language).
@@ -320,6 +325,19 @@ def jsonld(lang: str, page_key: str, page_path: str, data: dict) -> str:
              "item": f"{SITE}{prefix}/"},
             {"@type": "ListItem", "position": 2, "name": page["og_title"],
              "item": canonical}]})
+    if page_key.startswith("answers_"):
+        # TechArticle, not Article: the distinction is what the page is FOR, and
+        # a consumer that filters for technical documentation should find this
+        # and not a company announcement. No author node — the page is the
+        # company's, and inventing a byline to satisfy a schema validator is
+        # exactly the kind of decoration this graph has stayed clear of.
+        graph.append({"@type": "TechArticle", "@id": f"{canonical}#article",
+                      "headline": page["og_title"], "description": page["description"],
+                      "inLanguage": lang, "isPartOf": {"@id": SITE_ID},
+                      "mainEntityOfPage": {"@id": f"{canonical}#webpage"},
+                      "publisher": {"@id": ORG},
+                      "about": {"@id": f"{SITE}/sparkle/#software"},
+                      "proficiencyLevel": "Expert"})
     if page_key == "sparkle":
         graph.append({"@type": "SoftwareApplication", "@id": f"{canonical}#software",
                       "name": "Sparkle", "applicationCategory": "MultimediaApplication",
