@@ -78,18 +78,47 @@ LANGS = [
 BY_CODE = {l["code"]: l for l in LANGS}
 DEFAULT = "en"
 
-# page key -> (path under a language root, template file)
+# page key -> (path under a language root, template file, locales)
 # English lives at the root; every other language under /<code>/.
+#
+# `locales` is None when the page exists in every language, which is true of
+# everything the site launched with. A tuple names the only languages it is
+# built in.
+#
+# It exists for the pages that answer a question rather than describe the
+# company: one is worth publishing in English long before there is time to
+# translate it fifteen times. Nothing here needs it yet — the first such page
+# is unwritten, and an /answers/ hub with no answers on it is an empty room
+# with a sign on the door — but the column is what that page was waiting on.
+#
+# Its first real use is 404.html, and that is not a placeholder. The page offers
+# fifteen languages and fourteen of those links lead to another 404, because
+# /it/404.html was never written. Declaring the truth in this column is what
+# removes the control, rather than another special case in the template.
+#
+# So a page built in one language declares no hreflang alternates, renders no
+# language switcher, and lists no siblings in the sitemap. Not as a special
+# case bolted on, but because all three are generated from this column, and a
+# set of one has nothing to declare.
 PAGES = [
-    ("home",         "",              "home.html"),
-    ("sparkle",      "sparkle/",      "sparkle.html"),
-    ("how_we_build", "how-we-build/", "how-we-build.html"),
-    ("about",        "about/",        "about.html"),
-    ("privacy",      "privacy/",      "privacy.html"),
+    ("home",         "",              "home.html",         None),
+    ("sparkle",      "sparkle/",      "sparkle.html",      None),
+    ("how_we_build", "how-we-build/", "how-we-build.html", None),
+    ("about",        "about/",        "about.html",        None),
+    ("privacy",      "privacy/",      "privacy.html",      None),
 ]
 # 404 is special: not indexed, not in the sitemap, English only (GitHub Pages
 # serves one 404 document for the whole domain and cannot pick a language).
-ERROR_PAGE = ("notfound", "404.html", "404.html")
+# Declaring that here rather than in prose is what finally removes the dead
+# language switcher: the same column that governs every other page governs it.
+ERROR_PAGE = ("notfound", "404.html", "404.html", ("en",))
+
+
+def langs_for(locales) -> list[str]:
+    """The codes a page is built in, in LANGS order. None means all of them."""
+    if locales is None:
+        return [l["code"] for l in LANGS]
+    return [l["code"] for l in LANGS if l["code"] in locales]
 
 
 def url_for(lang: str, path: str) -> str:
@@ -117,6 +146,12 @@ def read_template(name: str) -> str:
 
 
 _PLACEHOLDER = re.compile(r"\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}")
+
+# A placeholder that is alone on its line — {{switcher}}, {{hreflang}},
+# {{preload}} — and resolves to nothing takes its line with it. Substituting in
+# place would leave a blank line in the served HTML, which is how you can tell
+# from the outside that something was meant to be there and wasn't.
+_LINE_PLACEHOLDER = re.compile(r"^[ \t]*\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}[ \t]*\n", re.M)
 
 
 def resolve(dotted: str, data: dict):
@@ -149,36 +184,60 @@ def render(template: str, data: dict, where: str) -> str:
             return "".join(value)
         return str(value)
 
-    out = _PLACEHOLDER.sub(sub, template)
+    def drop_if_empty(m):
+        """Only collapses a line that resolves to the empty string. A missing
+        key is left alone so the report below still names it."""
+        try:
+            value = resolve(m.group(1), data)
+        except KeyError:
+            return m.group(0)
+        if isinstance(value, list):
+            value = "".join(value)
+        return "" if str(value) == "" else m.group(0)
+
+    out = _LINE_PLACEHOLDER.sub(drop_if_empty, template)
+    out = _PLACEHOLDER.sub(sub, out)
     if missing:
         raise SystemExit(f"  MISSING in {where}: {', '.join(sorted(set(missing)))}")
     return out
 
 
-def hreflang_block(page_path: str) -> str:
-    """Every language points at every other, and at itself. Google drops a whole
-    hreflang cluster if the links are not reciprocal, so this is generated for
-    all of them from one list rather than written per page."""
+def hreflang_block(page_path: str, codes: list[str]) -> str:
+    """Every language the page exists in points at every other, and at itself.
+    Google drops a whole hreflang cluster if the links are not reciprocal, so
+    this is generated from one list rather than written per page.
+
+    A page that exists in one language emits nothing. hreflang describes a set
+    of alternates and a set of one has no alternates to describe; emitting the
+    full list instead would advertise fourteen URLs nobody wrote."""
+    if len(codes) < 2:
+        return ""
     lines = []
-    for l in LANGS:
+    for code in codes:
         lines.append(
-            f'  <link rel="alternate" hreflang="{l["code"]}" href="{url_for(l["code"], page_path)}">'
+            f'  <link rel="alternate" hreflang="{code}" href="{url_for(code, page_path)}">'
         )
+    fallback = DEFAULT if DEFAULT in codes else codes[0]
     lines.append(
-        f'  <link rel="alternate" hreflang="x-default" href="{url_for(DEFAULT, page_path)}">'
+        f'  <link rel="alternate" hreflang="x-default" href="{url_for(fallback, page_path)}">'
     )
     return "\n".join(lines)
 
 
-def switcher(current: str, page_path: str) -> str:
+def switcher(current: str, page_path: str, codes: list[str]) -> str:
     """A <details> element, because the site runs no JavaScript and this is the
     only disclosure widget HTML gives you without any. Every entry links to the
     SAME page in another language, not to that language's home page — landing on
     a homepage after asking to read the page you were already on is the standard
     way this control is got wrong."""
+    # One language, no control. A switcher is a way out of the language you are
+    # stuck in; one that lists fourteen pages that do not exist is a way into
+    # fourteen 404s, which is precisely what 404.html has been doing.
+    if len(codes) < 2:
+        return ""
     cur = BY_CODE[current]
     items = []
-    for l in LANGS:
+    for l in (BY_CODE[c] for c in codes):
         aria = ' aria-current="true"' if l["code"] == current else ""
         items.append(
             f'        <li><a href="{url_for(l["code"], page_path)}" hreflang="{l["code"]}"'
@@ -271,7 +330,8 @@ def jsonld(lang: str, page_key: str, page_path: str, data: dict) -> str:
 
 
 def build_page(lang: str, page_key: str, page_path: str, template_name: str,
-               data: dict, indexable: bool = True) -> tuple[pathlib.Path, str]:
+               data: dict, indexable: bool = True,
+               locales=None) -> tuple[pathlib.Path, str]:
     l = BY_CODE[lang]
     page = dict(data["pages"][page_key])
 
@@ -297,6 +357,8 @@ def build_page(lang: str, page_key: str, page_path: str, template_name: str,
         "privacy_href": f"{prefix}/privacy/",
     })
 
+    codes = langs_for(locales)
+
     ctx = {
         **data,
         "nav": nav,
@@ -305,8 +367,8 @@ def build_page(lang: str, page_key: str, page_path: str, template_name: str,
         "script": l["script"],
         "locale": l["locale"],
         "canonical": url_for(lang, page_path),
-        "hreflang": hreflang_block(page_path) if indexable else "",
-        "switcher": switcher(lang, page_path),
+        "hreflang": hreflang_block(page_path, codes) if indexable else "",
+        "switcher": switcher(lang, page_path, codes),
         "page": page,
         "rtl_class": " is-rtl" if l["dir"] == "rtl" else "",
         "preload": preload_for(l["script"]),
@@ -345,7 +407,9 @@ def llms_txt() -> str:
         "## Pages",
         "",
     ]
-    for key, path, _ in PAGES:
+    for key, path, _tmpl, locales in PAGES:
+        if DEFAULT not in langs_for(locales):
+            continue
         lines.append(f"- [{pages[key]['og_title']}]({url_for(DEFAULT, path)}): "
                      f"{pages[key]['description']}")
     lines += [
@@ -371,19 +435,30 @@ def llms_txt() -> str:
 
 
 def sitemap() -> str:
+    """Only the languages each page was actually built in. A sitemap alternate
+    is the same promise as an hreflang link, so a page published in one language
+    lists itself and stops — the alternates block is omitted rather than filled
+    with URLs that would 404."""
     rows = []
-    for _key, path, _tmpl in PAGES:
-        for l in LANGS:
+    for _key, path, _tmpl, locales in PAGES:
+        codes = langs_for(locales)
+        if len(codes) > 1:
             alts = "\n".join(
-                f'      <xhtml:link rel="alternate" hreflang="{a["code"]}" href="{url_for(a["code"], path)}"/>'
-                for a in LANGS
+                f'      <xhtml:link rel="alternate" hreflang="{c}" href="{url_for(c, path)}"/>'
+                for c in codes
             )
+            fallback = DEFAULT if DEFAULT in codes else codes[0]
+            alts += (f'\n      <xhtml:link rel="alternate" hreflang="x-default"'
+                     f' href="{url_for(fallback, path)}"/>')
+            alts += "\n"
+        else:
+            alts = ""
+        for code in codes:
             rows.append(
                 "  <url>\n"
-                f"    <loc>{url_for(l['code'], path)}</loc>\n"
+                f"    <loc>{url_for(code, path)}</loc>\n"
                 f"    <lastmod>{LASTMOD}</lastmod>\n"
-                f"{alts}\n"
-                f'      <xhtml:link rel="alternate" hreflang="x-default" href="{url_for(DEFAULT, path)}"/>\n'
+                f"{alts}"
                 "  </url>"
             )
     return (
@@ -417,8 +492,10 @@ def main() -> int:
 
     for lang in [l["code"] for l in LANGS]:
         data = load(lang)
-        for key, path, tmpl in PAGES:
-            dest, html = build_page(lang, key, path, tmpl, data)
+        for key, path, tmpl, locales in PAGES:
+            if lang not in langs_for(locales):
+                continue
+            dest, html = build_page(lang, key, path, tmpl, data, locales=locales)
             if check_only:
                 current = dest.read_text(encoding="utf-8") if dest.exists() else None
                 if current != html:
@@ -430,8 +507,9 @@ def main() -> int:
 
     # 404, English only.
     data = load(DEFAULT)
-    key, path, tmpl = ERROR_PAGE
-    dest, html = build_page(DEFAULT, key, path, tmpl, data, indexable=False)
+    key, path, tmpl, locales = ERROR_PAGE
+    dest, html = build_page(DEFAULT, key, path, tmpl, data, indexable=False,
+                            locales=locales)
     if check_only:
         current = dest.read_text(encoding="utf-8") if dest.exists() else None
         if current != html:
