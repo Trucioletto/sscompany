@@ -229,6 +229,35 @@ for f in $pages; do
 done
 
 say ''
+say 'security.txt is present and has not expired'
+# RFC 9116: a parser MUST ignore this file once Expires has passed. A stale date
+# does not weaken the file, it removes it — while the file stays on disk looking
+# fine. Sixty days of warning is enough to move the date without hurrying.
+sec='.well-known/security.txt'
+if [ ! -f "$sec" ]; then
+  bad "$sec is missing"
+else
+  exp=$(grep -i '^Expires:' "$sec" | head -1 | sed 's/^[Ee]xpires:[[:space:]]*//')
+  if [ -z "$exp" ]; then
+    bad "$sec has no Expires field — RFC 9116 requires one"
+  else
+    grep -qi '^Contact:' "$sec" || bad "$sec has no Contact field — RFC 9116 requires one"
+    # Compare as YYYYMMDD integers: no date(1) portability problem between
+    # BSD and GNU, and no dependency on how the timestamp is punctuated.
+    expday=$(printf '%s' "$exp" | tr -d -c '0-9' | cut -c1-8)
+    today=$(date -u +%Y%m%d)
+    soon=$(python3 -c "import datetime;print((datetime.date.today()+datetime.timedelta(days=60)).strftime('%Y%m%d'))")
+    if [ "$expday" -le "$today" ]; then
+      bad "$sec expired on $exp — every parser is now ignoring it"
+    elif [ "$expday" -le "$soon" ]; then
+      bad "$sec expires on $exp, within 60 days — move the date"
+    else
+      ok "expires $exp"
+    fi
+  fi
+fi
+
+say ''
 if [ "$fail" = "0" ]; then
   say 'All checks passed.'
 else

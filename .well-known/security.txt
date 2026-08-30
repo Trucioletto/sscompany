@@ -1,0 +1,21 @@
+# spinnesoftware.com — RFC 9116
+#
+# Where to write if you find something wrong with the security of this site or
+# of Sparkle. There is one mailbox and it is the same one on every page: a
+# security@ alias that forwards nowhere would be worse than no file at all,
+# because this file is a promise that somebody reads what arrives.
+#
+# Expires is not decoration. RFC 9116 says a parser MUST ignore this file once
+# the date has passed, so a stale date does not degrade the file — it deletes
+# it, silently, while the file still sits there looking published. check.sh
+# fails when the date is within sixty days, which is the only reason anybody
+# will remember to move it.
+#
+# No PGP key is listed. Publishing one commits to holding the private half for
+# as long as the key is advertised, and an encrypted report nobody can open is
+# a report that was never received.
+
+Contact: mailto:hello@spinnesoftware.com
+Expires: 2027-08-30T00:00:00.000Z
+Preferred-Languages: en, it
+Canonical: https://spinnesoftware.com/.well-known/security.txt
