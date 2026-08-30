@@ -365,46 +365,31 @@ body {
   transform: translateZ(0);
 }
 
-/* THE FRONT.
-   Each thread lays itself, and that reads well up close — but the threads were
-   ordered by LENGTH, longest first, and a length bucket is scattered over the
-   whole strip. So a quarter of a pull put a quarter of the threads EVERYWHERE:
-   loose white ticks across 1400px, confetti rather than a web forming.
+/* THE LINES DRAW THEMSELVES, AND THEY UNDRAW THE SAME WAY.
 
-   The order that was missing is spatial, and rather than re-time four hundred
-   threads it is imposed here, on the layer: a mask whose edge crosses the strip
-   as the page opens. Behind the front the web is spun, ahead of it there is
-   blue, and the 16% ramp is the front itself — threads there are half faded,
-   which is what makes the edge read as spinning rather than as a wipe.
+   There was a mask here — a soft-edged front that crossed the strip as the page
+   opened, blue ahead of it and web behind. It solved a real problem: with four
+   planes and four hundred threads bucketed by LENGTH, a quarter of a pull drew
+   a quarter of the threads everywhere at once, which was confetti rather than a
+   web forming. The mask imposed a spatial order the timing did not have.
 
-   Each plane runs its own front, and they are deliberately out of step: the
-   near ones lead, the far ones trail, so the strip is never uncovered by one
-   flat line moving across it. 130% rather than 100% so the last plane still
-   finishes before the pull does; the front has to leave the strip, not stop
-   at the far edge. */
+   That problem left with the planes. One layer and sixty-odd chains do not
+   scatter, and the mask had become the only thing anyone could see: the front
+   swept, the strip filled in behind it, and the fact that every wall is drawing
+   itself from one end — which is what stroke-dashoffset had been doing the whole
+   time — was hidden under a curtain.
+
+   So it is gone, and what is left is the drawing. Each chain grows from its own
+   start as --pull-t advances, in four groups longest to shortest, and runs back
+   through the same frames as the page comes home: drawn on the way out, erased
+   on the way back, never faded. */
 .pull-layer {
   position: absolute;
   inset: auto 0 0;
   height: 6rem;
   transform-origin: 50% 100%;
   backface-visibility: hidden;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    #000 0,
-    #000 calc(var(--pull-p, 0) * var(--front) * 1%),
-    transparent calc(var(--pull-p, 0) * var(--front) * 1% + 16%),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    #000 0,
-    #000 calc(var(--pull-p, 0) * var(--front) * 1%),
-    transparent calc(var(--pull-p, 0) * var(--front) * 1% + 16%),
-    transparent 100%
-  );
 }
-
-.pull-l1 { --front: 106; }
 
 .pull-net {
   position: absolute;
@@ -474,8 +459,11 @@ body {
 }
 
 /* THE BUILD, AND IT IS SCRUBBED BY THE GESTURE, NOT BY A CLOCK.
-   The anchor lines go across first, then the weave fills in behind them,
-   longest threads first — nothing can hang off a thread that is not there yet.
+   The longest chains go down first and the shortest last. The stagger and the
+   durations are set so the LAST group finishes at 690ms against the 700ms the
+   pull is worth: before, everything was drawn by 460 and the final third of the
+   gesture drew nothing, so the web arrived early and then just sat there while
+   the reader was still pulling.
    That ORDER is what these rules describe. WHEN each thread is laid is not up
    to them: every animation here is paused, and overscroll.js writes --pull-t,
    a position on this timeline, from how far the page is actually open. A
@@ -494,12 +482,12 @@ body {
    nothing. The global prefers-reduced-motion block near the end of this file
    collapses all of it. */
 .is-pulling .pull-l1 { animation: pull-s1 470ms cubic-bezier(0.18, 0.88, 0.28, 1) calc(0ms - var(--pull-t, 0ms)) both; }
-.is-pulling .pull-a { animation: pull-lay 260ms linear both; }
-.is-pulling .pull-n { animation: pull-lay 300ms linear both; }
+.is-pulling .pull-a { animation: pull-lay 300ms linear both; }
+.is-pulling .pull-n { animation: pull-lay 400ms linear both; }
 .is-pulling .pull-g0 { animation-delay: calc(0ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g1 { animation-delay: calc(55ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g2 { animation-delay: calc(105ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-g3 { animation-delay: calc(150ms - var(--pull-t, 0ms)); }
+.is-pulling .pull-g1 { animation-delay: calc(95ms - var(--pull-t, 0ms)); }
+.is-pulling .pull-g2 { animation-delay: calc(185ms - var(--pull-t, 0ms)); }
+.is-pulling .pull-g3 { animation-delay: calc(290ms - var(--pull-t, 0ms)); }
 
 /* LAST, and it has to be last: the animation shorthand above resets
    play-state along with everything else, so a paused declaration written
