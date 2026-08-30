@@ -303,4 +303,114 @@
 
   /* Leaving the window mid-pull would come back to a page still held open. */
   window.addEventListener('blur', settle);
+
+
+  /* THE WEB SPINS ITSELF ONCE, ON ARRIVAL.
+
+     The edge gesture was the only thing that ever drew the web, so almost
+     nobody learned it was there: nothing on the page suggests the top edge
+     gives. This spins it once, so the affordance has been shown rather than
+     hidden, and then puts it away.
+
+     It reuses the gesture's own path rather than adding a second one. Every
+     animation in the stylesheet is paused and reads --pull-t; writing that from
+     a clock produces exactly the frames a pull produces, in the same order,
+     with no new keyframes and no second definition of what a half-spun web
+     looks like.
+
+     IT HAS TO OPEN THE PAGE, AND THAT WAS THE FIRST VERSION'S MISTAKE.
+     This was written once without the translate, on the reasoning that an
+     arrival which shoves the first paragraph down and pulls it back is a jolt
+     dressed as an intention. Then it was rendered: the field is at top:-96px,
+     entirely above the viewport, so with the body left alone there is nothing
+     on screen to see. The web is only ever visible in the space the pull opens.
+     So it opens it — 26px against the gesture's 64, which is enough to show the
+     weave's lower band and little enough to read as a breath. It is a transform
+     on the body, on the compositor, so nothing reflows and no layout shifts.
+
+     TO is 0.72, not 1: the whole picture stays something the reader gets by
+     pulling. An introduction that gives away all of what it introduces leaves
+     nothing behind it.
+
+     ONCE PER VISIT, NOT ONCE PER PAGE. A flourish on every internal click stops
+     being a greeting and becomes a tic. The test is the referrer — the same one
+     lang.js uses — with one correction that cost a render to find: lang.js
+     redirects with location.replace(), so a reader who lands on /about/ and is
+     sent to /it/about/ arrives with a SAME-ORIGIN referrer and looked, to the
+     first version of this test, exactly like somebody clicking a link. Compared
+     with the language prefix stripped from both, that redirect reads as what it
+     is: still an arrival. Nothing is stored to decide this — the privacy notice
+     says no storage and it stays true.
+
+     A real gesture during it wins immediately: the frame loop checks whether the
+     pull path has taken ownership and gets out of its way. */
+  var GREET_IN = 820, GREET_HOLD = 260, GREET_OUT = 620;
+  var GREET_TO = 0.72, GREET_PX = 26;
+
+  /* The path with a leading /xx/ language segment removed, so the same page in
+     two languages compares equal. */
+  function bare(pathname) {
+    /* Matched by shape rather than against the list of fifteen codes: that list
+       lives in build.py and lang.js, and a third copy here would be the one
+       that goes stale. No real path segment on this site is two letters, so the
+       shape is unambiguous in practice. */
+    var seg = pathname.split('/')[1] || '';
+    return /^[a-z]{2}(-[A-Za-z]+)?$/.test(seg) ? pathname.slice(seg.length + 1) : pathname;
+  }
+
+  function arrivedFromInsideTheSite() {
+    var r = document.referrer;
+    if (!r || r.indexOf(location.origin + '/') !== 0) return false;
+    var from;
+    try { from = new URL(r).pathname; } catch (e) { return false; }
+    /* Same page, different language prefix: that is lang.js, not a reader. */
+    return bare(from) !== bare(location.pathname);
+  }
+
+  function greet() {
+    /* Not at the top — a restored scroll position, or a link to an anchor. The
+       field is not on screen and there is nothing to introduce. */
+    if (window.scrollY > 0) return;
+    if (arrivedFromInsideTheSite()) return;
+
+    var t0 = 0;
+    var span = GREET_IN + GREET_HOLD + GREET_OUT;
+
+    doc.classList.add('is-pulling');
+
+    window.requestAnimationFrame(function step(now) {
+      /* The reader is pulling, or the release spring is running: the gesture
+         owns --pull-t and the body transform from here. Leave it alone. */
+      if (raw || release) return;
+
+      if (!t0) t0 = now;
+      var e = now - t0, p;
+
+      if (e < GREET_IN) {
+        /* Thrown, and decelerating into place. */
+        var x = e / GREET_IN;
+        p = 1 - Math.pow(1 - x, 3);
+      } else if (e < GREET_IN + GREET_HOLD) {
+        p = 1;
+      } else if (e < span) {
+        /* Back the same way, accelerating, so it leaves rather than fades. */
+        var y = (e - GREET_IN - GREET_HOLD) / GREET_OUT;
+        p = 1 - y * y * y;
+      } else {
+        done();
+        return;
+      }
+
+      body.style.transform = 'translate3d(0,' + (p * GREET_PX).toFixed(2) + 'px,0)';
+      var t = p * GREET_TO;
+      doc.style.setProperty('--pull-t', (t * BUILD_MS).toFixed(1) + 'ms');
+      doc.style.setProperty('--pull-p', t.toFixed(3));
+      window.requestAnimationFrame(step);
+    });
+  }
+
+  /* After the first paint and after the fonts have had their moment: the web
+     arriving in the same frame as the wordmark makes both look like a loader. */
+  if (document.readyState === 'complete') window.setTimeout(greet, 260);
+  else window.addEventListener('load', function () { window.setTimeout(greet, 260); });
 })();
