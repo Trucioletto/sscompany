@@ -431,14 +431,14 @@ body {
    The length is per GROUP, not per line: lines are bucketed by length, so one
    number covers a whole bucket and a shorter line simply finishes early. The
    four numbers are MEASURED off the geometry rather than guessed — the longest
-   chain runs 534 units — because a dasharray shorter than its own path leaves a
+   chain runs 427 units — because a dasharray shorter than its own path leaves a
    line that can never fully retract, and would sit there at rest as a scratch. pathLength would have been
    the obvious way to say this and is silently not honoured for
    stroke-dasharray here. */
-.pull-g3 { stroke-dasharray: 82; stroke-dashoffset: 82; }
-.pull-g2 { stroke-dasharray: 183; stroke-dashoffset: 183; }
-.pull-g1 { stroke-dasharray: 340; stroke-dashoffset: 340; }
-.pull-g0 { stroke-dasharray: 542; stroke-dashoffset: 542; }
+.pull-g3 { stroke-dasharray: 121; stroke-dashoffset: 121; }
+.pull-g2 { stroke-dasharray: 304; stroke-dashoffset: 304; }
+.pull-g1 { stroke-dasharray: 396; stroke-dashoffset: 396; }
+.pull-g0 { stroke-dasharray: 512; stroke-dashoffset: 512; }
 
 @keyframes pull-lay {
   to {

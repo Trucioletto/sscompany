@@ -344,8 +344,23 @@
 
      A real gesture during it wins immediately: the frame loop checks whether the
      pull path has taken ownership and gets out of its way. */
-  var GREET_IN = 820, GREET_HOLD = 260, GREET_OUT = 620;
-  var GREET_TO = 0.72, GREET_PX = 26;
+  var GREET_IN = 1100, GREET_HOLD = 320, GREET_OUT = 780;
+  var GREET_TO = 1, GREET_PX = 42;
+
+  /* Smoothstep, not a cubic ease-out.
+
+     The ease-out put 58% of the build into the first quarter of the opening —
+     205ms of the 820 — so the mesh did not draw, it flashed, and then the
+     remaining three quarters crawled through what was left. Smoothstep is
+     nearly linear through the middle with soft ends, which is what a line being
+     drawn wants: a start you can see begin and a finish you can see land.
+
+     And TO is 1 rather than 0.72. At 0.72 the scrub stopped at 504ms of the
+     stylesheet's 700ms timeline, so the last two groups never finished — the
+     greeting always showed a half-built mesh and then took it away again. The
+     whole picture stays worth pulling for because the pull opens 96px against
+     this 42; the drawing is not the part to hold back. */
+  function smooth(x) { return x * x * (3 - 2 * x); }
 
   /* The path with a leading /xx/ language segment removed, so the same page in
      two languages compares equal. */
@@ -421,13 +436,13 @@
       var e = now - t0, p;
 
       if (e < GREET_IN) {
-        var x = e / GREET_IN;
-        p = 1 - Math.pow(1 - x, 3);
+        p = smooth(e / GREET_IN);
       } else if (e < GREET_IN + GREET_HOLD) {
         p = 1;
       } else if (e < span) {
-        var y = (e - GREET_IN - GREET_HOLD) / GREET_OUT;
-        p = 1 - y * y * y;
+        /* Back through the same frames at the same pace: the mesh unbuilds
+           rather than being taken away. */
+        p = 1 - smooth((e - GREET_IN - GREET_HOLD) / GREET_OUT);
       } else {
         greetEnd();
         return;
