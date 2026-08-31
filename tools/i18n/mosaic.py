@@ -22,8 +22,8 @@ import pathlib
 
 W, H = 1440.0, 96.0          # the viewBox the shells declare
 BLEED_X, BLEED_TOP, BLEED_BOT = 70.0, 26.0, 26.0
-ROW_GAP = 50.0               # ~2 rows inside 96, so whole cells fit in view
-GAP_MID, GAP_EDGE = 68.0, 155.0  # column spacing at the centre and at the sides
+ROW_GAP = 46.0               # ~2 rows inside 96, so whole cells fit in view
+GAP_MID, GAP_EDGE = 58.0, 138.0  # column spacing at the centre and at the sides
 JITTER = 0.34                # of the local spacing
 SEED = 20260831
 GROUPS = 4                   # length buckets, matching .pull-g0..g3 in the CSS
