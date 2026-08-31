@@ -420,18 +420,11 @@ main:focus {
   transform-origin: 50% 100%;
   backface-visibility: hidden;
 
-  /* A FADE UPWARD, AND IT IS NOT THE CURTAIN COMING BACK.
-     The one that was removed moved with --pull-p and was the whole event; this
-     one never moves. It exists because the field's top edge is the top of the
-     window, so the mesh was being cut off by the screen — a hard white line
-     across the full width, which is the one edge in the composition nobody drew.
-
-     The ramp starts at 14% rather than half way, because the greeting opens 42px
-     of the 96 and a fade confined to the upper half would do nothing at all in
-     the only view most readers ever get. Solid where the field meets the
-     masthead, gone before the top. */
-  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 14%, transparent 88%);
-  mask-image: linear-gradient(to top, #000 0%, #000 14%, transparent 88%);
+  /* NO MASK. There was a fade up the strip here, and it was a misreading: the
+     note was that the threads should not be pure white, and what got built was
+     a gradient that deleted them toward the top. It took away the thing the
+     effect is — a mesh that draws itself whole — to solve a problem that is
+     better solved in the colour, which is where it is solved now. */
 }
 
 .pull-net {
@@ -449,7 +442,11 @@ main:focus {
    and getScreenCTM alike, and visible only in a screenshot. */
 .pull-net path {
   fill: none;
-  stroke: #ffffff;
+  /* Not #ffffff. Pure white on the brand blue is a harder edge than anything
+     else in the composition, and it made the mesh read as wire laid over the
+     field instead of as the field catching light. This is the same hue lifted
+     to a tint, so the threads stay part of the surface they sit on. */
+  stroke: #a9bcff;
   shape-rendering: geometricPrecision;
 }
 
@@ -465,7 +462,7 @@ main:focus {
    field itself read as a surface rather than a band of colour. */
 .pull-l1 { transform: none; }
 
-.pull-l1 path { stroke-width: 1; stroke-opacity: 0.3; }
+.pull-l1 path { stroke-width: 1; stroke-opacity: 0.42; }
 
 /* At rest every line is retracted into nothing, and the mosaic draws itself as
    the field opens: the longest chains of cell wall go down first and the
