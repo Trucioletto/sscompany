@@ -471,14 +471,20 @@ main:focus {
    The length is per GROUP, not per line: lines are bucketed by length, so one
    number covers a whole bucket and a shorter line simply finishes early. The
    four numbers are MEASURED off the geometry rather than guessed — the longest
-   chain runs 427 units — because a dasharray shorter than its own path leaves a
-   line that can never fully retract, and would sit there at rest as a scratch. pathLength would have been
-   the obvious way to say this and is silently not honoured for
-   stroke-dasharray here. */
-.pull-g3 { stroke-dasharray: 121; stroke-dashoffset: 121; }
-.pull-g2 { stroke-dasharray: 304; stroke-dashoffset: 304; }
-.pull-g1 { stroke-dasharray: 396; stroke-dashoffset: 396; }
-.pull-g0 { stroke-dasharray: 512; stroke-dashoffset: 512; }
+   chain in each bucket runs 217, 116, 89 and 53 units — because a dasharray
+   shorter than its own path leaves a line that can never fully retract, and
+   would sit there at rest as a scratch.
+
+   Per CHAIN, not per path element: the dash pattern restarts at every moveto,
+   so the seven chains inside one path each get the pattern from their own
+   start. Verified rather than assumed — a path of two 100-unit subpaths with
+   dasharray 100 draws both in full, exactly as two separate elements do.
+   pathLength would have been the obvious way to say this and is silently not
+   honoured for stroke-dasharray here. */
+.pull-g3 { stroke-dasharray: 55; stroke-dashoffset: 55; }
+.pull-g2 { stroke-dasharray: 91; stroke-dashoffset: 91; }
+.pull-g1 { stroke-dasharray: 119; stroke-dashoffset: 119; }
+.pull-g0 { stroke-dasharray: 219; stroke-dashoffset: 219; }
 
 @keyframes pull-lay {
   to {
