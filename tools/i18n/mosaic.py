@@ -22,9 +22,8 @@ import pathlib
 
 W, H = 1440.0, 96.0          # the viewBox the shells declare
 BLEED_X, BLEED_TOP, BLEED_BOT = 70.0, 26.0, 26.0
-ROW_GAP = 46.0               # ~2 rows inside 96, so whole cells fit in view
-GAP_MID, GAP_EDGE = 58.0, 138.0  # column spacing at the centre and at the sides
-JITTER = 0.34                # of the local spacing
+R_MID, R_EDGE = 44.0, 68.0   # cell size at the centre and at the left/right edges
+DARTS = 9000                 # candidate points; sampling stops when they run out
 SEED = 20260831
 GROUPS = 4                   # length buckets, matching .pull-g0..g3 in the CSS
 
@@ -33,26 +32,46 @@ SHELLS = ("tools/i18n/templates/_shell.html",
           "tools/i18n/templates/_shell-noindex.html")
 
 
-def spacing_at(x: float) -> float:
-    """Wide at the edges, tight in the middle, easing between the two."""
+def radius_at(x: float) -> float:
+    """Cell size as a function of where across the strip you are.
+
+    ISOTROPIC, which is the whole point. The first version widened the columns
+    toward the edges and left the rows alone, so a cell at the side came out
+    138 wide by 46 tall — a stretched box with a long straight lid, which read
+    as ruled lines rather than as a tessellation. Cells are grown here in both
+    directions at once, so the sides get bigger cells of the same shape as the
+    middle rather than the same cells pulled sideways.
+    """
     t = min(1.0, abs(x - W / 2) / (W / 2))
-    return GAP_MID + (GAP_EDGE - GAP_MID) * (t * t * (3 - 2 * t))
+    return R_MID + (R_EDGE - R_MID) * (t * t * (3 - 2 * t))
 
 
 def seeds(rng: random.Random):
-    pts, y = [], -BLEED_TOP
-    row = 0
-    while y <= H + BLEED_BOT:
-        x = -BLEED_X
-        # offset alternate rows so columns never line up into a grid
-        x += (ROW_GAP * 0.5) if row % 2 else 0.0
-        while x <= W + BLEED_X:
-            g = spacing_at(x)
-            pts.append((x + rng.uniform(-JITTER, JITTER) * g,
-                        y + rng.uniform(-JITTER, JITTER) * ROW_GAP))
-            x += g
-        y += ROW_GAP
-        row += 1
+    """Dart-throwing with a radius that varies across the strip.
+
+    A lattice with jitter was the other option and it is what produced the
+    boxes: jitter perturbs a grid, it does not stop it being a grid. Rejecting
+    candidates that land too close to an existing point gives blue noise —
+    irregular at every scale, with no direction preferred — and lets the cell
+    size vary smoothly across the width without any row structure to fight.
+    """
+    x0, x1 = -BLEED_X, W + BLEED_X
+    y0, y1 = -BLEED_TOP, H + BLEED_BOT
+    pts = []
+    for _ in range(DARTS):
+        x = rng.uniform(x0, x1)
+        y = rng.uniform(y0, y1)
+        r = radius_at(x)
+        ok = True
+        for px, py in pts:
+            # the gate is the mean of the two radii, so the size gradient stays
+            # smooth instead of stepping where two neighbourhoods meet
+            need = (r + radius_at(px)) / 2
+            if (px - x) ** 2 + (py - y) ** 2 < need * need:
+                ok = False
+                break
+        if ok:
+            pts.append((x, y))
     return pts
 
 
