@@ -157,6 +157,11 @@
 </head>
 <body class="script-arab is-rtl">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -221,7 +226,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>شركة تقنية تُطلق منتجات.</h1>
@@ -232,7 +237,7 @@
 
         <p>العمل بالعقود يموّل خارطة طريق شخص آخر. أما امتلاك المنتج فيعني أن الهندسة تتراكم بدل أن تُسلَّم — وكل نظام احتاجه Sparkle يرثه ما يأتي بعده.</p>
 
-        <p>ويعني أيضاً أن القرار يبقى هنا. ما يُبنى تالياً تحدده حاجة العمل نفسه، لا أكبر عميل في الربع، والأجزاء التي يعتمد عليها المنتج مملوكة لنا لا مستأجرة من جهة قد تغيّر أولوياتها دون إشعار.</p>
+        <p>ويعني أيضاً أن القرار يبقى هنا. ما يُبنى تالياً تحدده حاجة العمل نفسه، لا أكبر عميل في الربع، والأجزاء التي تحدد ما يمكن أن يصير إليه المنتج مملوكة لنا لا مستأجرة؛ أما ما نستأجره فمذكور بالاسم في موضع لاحق من هذه الصفحة.</p>
 
         <p class="pull">الاستقلال ليس تفضيلاً. هو الفرق بين أن تختار وأن يُملى عليك.</p>
 
@@ -253,7 +258,7 @@
         <h2 id="built">ما هو موجود</h2>
 
         <p>
-          <strong>Sparkle</strong> — محرّر فيديو لسطح المكتب بعرض على GPU، وذكاء اصطناعي محلي لفصل الخلفية والتجزئة والعمق، وترميز عتادي عبر أربع منظومات من المصنّعين، إضافة إلى ما لا يصدر منتج بهذا الحجم بدونه: حسابات فرق، واشتراكات لكل مقعد، وأرصدة مقيسة، وفوترة إلكترونية إيطالية. في معاينة خاصة على
+          <strong>Sparkle</strong> — محرّر فيديو لسطح المكتب بعرض على GPU، وذكاء اصطناعي محلي لفصل الخلفية والتجزئة والعمق، وترميز عتادي عبر أربع منظومات من المصنّعين، إضافة إلى ما لا يصدر منتج بهذا الحجم بدونه: حسابات فرق، واشتراكات لكل عضو، وأرصدة مقيسة، وفوترة إلكترونية إيطالية. في معاينة خاصة على
           <a href="https://sparkle.software">sparkle.software</a>.
           <a href="/ar/sparkle/">ما الذي يفعله</a> &middot; <a href="/ar/how-we-build/">كيف بُني</a>.
         </p>

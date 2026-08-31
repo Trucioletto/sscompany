@@ -361,6 +361,19 @@ def build_page(lang: str, page_key: str, page_path: str, template_name: str,
     page["nav_how_current"] = ' aria-current="page"' if page_key == "how_we_build" else ""
     page["nav_about_current"] = ' aria-current="page"' if page_key == "about" else ""
 
+    # The answer page exists in English only, so the link to it is emitted only on the
+    # English /sparkle/. Sending fourteen languages to a page none of them can read would
+    # be a worse defect than the one it fixes — the page being unreachable from anywhere.
+    # Computed here rather than carried as a string in fifteen content files, because
+    # fourteen of them would hold a label for a link that is never rendered.
+    page["answer_link"] = ""
+    if page_key == "sparkle" and lang == DEFAULT:
+        ans = data["pages"].get("answers_transcribe", {})
+        if ans.get("link_from_sparkle"):
+            page["answer_link"] = (
+                '<p class="more"><a href="/answers/transcribe-video-without-uploading/">'
+                + ans["link_from_sparkle"] + "</a></p>")
+
     # Navigation URLs are COMPUTED, never taken from the content file. A
     # translator's job is words; a mistyped href in one of fifteen files is a
     # dead link nobody would find, and "/it/sparkle/" is not a translation of

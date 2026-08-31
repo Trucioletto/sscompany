@@ -43,3 +43,7 @@ __pycache__/
 .agents/
 .claude/
 skills-lock.json
+
+# Content audit notes. Same rule as GEO-STRATEGY.md: the repo root is served
+# from the public domain, so internal notes must never be published.
+CONTENT-AUDIT.md

@@ -140,6 +140,11 @@
 </head>
 <body class="script-arab is-rtl">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">مواد پر جائیں</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -204,7 +209,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>مشکل ٹیکنالوجی، سادہ سافٹ ویئر۔</h1>
@@ -219,7 +224,7 @@
           <li><strong>سادگی</strong> مشکل ہمارا کام ہے۔ جو حصہ استعمال کرنے والے تک پہنچے، وہ دیکھتے ہی سمجھ آنا چاہیے۔</li>
           <li><strong>بلند نظری</strong> اپنی قسم کے بہترین سافٹ ویئر کے ساتھ کھڑا ہو سکے، ورنہ بنایا ہی نہ جائے۔</li>
           <li><strong>شفافیت</strong> ہم جو کہتے ہیں کہ سافٹ ویئر کرتا ہے، وہی کرتا ہے، بشمول ان مواقع کے جہاں جواب نہیں ہے۔</li>
-          <li><strong>خودمختاری</strong> جس پر ہمارا انحصار ہے وہ ہماری ملکیت ہے، تاکہ کوئی اور یہ طے نہ کرے کہ یہ پروڈکٹ کیا بن سکتا ہے۔</li>
+          <li><strong>خودمختاری</strong> جو حصے طے کرتے ہیں کہ یہ پروڈکٹ کیا بن سکتا ہے وہ ہمارے اپنے ہیں، اور جو کرائے پر لیے ہیں ان کا نام ہم بتا دیتے ہیں۔</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -242,7 +247,7 @@
 
         <p>ان لوگوں کے لیے ایک ڈیسک ٹاپ ویڈیو ایڈیٹر جو ایڈیٹنگ سے روزی کماتے ہیں، اور پہلی جگہ جہاں ان قدروں کو ایک اصل پروڈکٹ کے سامنے ٹھہرنا پڑا۔ اسے غیر معمولی ماڈل نہیں بناتے — بلکہ یہ بات بناتی ہے کہ وہ ایڈیٹر کے پہلو میں نہیں، اس کے اندر بیٹھے ہیں۔ اسسٹنٹ جو ایڈٹ کرتا ہے، وہ ایسا ایڈٹ ہے جو آپ ہاتھ سے بھی کر سکتے تھے، اور ایک undo اسے واپس لے لیتا ہے۔</p>
 
-        <p>بھاری ماڈل یہ اسی مشین پر چلاتا ہے جس پر فوٹیج پہلے سے موجود ہے، اور پیش نظارہ اسی کوڈ سے بناتا ہے جو ایکسپورٹ رینڈر کرتا ہے۔ نجی پیش نمائش میں۔</p>
+        <p>اس کا زیادہ تر AI اسی مشین پر چلتا ہے جس پر فوٹیج پہلے سے موجود ہے، اور جس جنریٹو کام کو کلاؤڈ درکار ہے وہ وہیں ناپا جاتا ہے جہاں آپ اسے دیکھ سکیں۔ نجی پیش نمائش میں۔</p>
 
         <p class="more">
           <a href="/ur/sparkle/">دیکھیں Sparkle کیا کرتا ہے</a>

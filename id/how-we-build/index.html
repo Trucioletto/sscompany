@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Lompat ke konten</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Tempat editor berakhir dan model dimulai.</h1>
@@ -282,11 +287,11 @@
 
         <p>Itu adalah pilihan desain tentang latensi, dan sekaligus menutup pertanyaan yang biasanya dibiarkan terbuka oleh sambungan itu: rekaman yang diembargo tetap diembargo, sebab rekaman itu tidak pernah pergi ke mana-mana. Ketika sebuah pekerjaan memang membutuhkan cloud, pekerjaan itu melewati satu gateway yang menghitung pemakaiannya ke akun yang memintanya.</p>
 
-        <h2 id="parity">Pratinjau yang memang hasil ekspornya</h2>
+        <h2 id="parity">Pratinjau yang cukup dekat untuk disetujui</h2>
 
-        <p>Shader yang sama menggambar penyusuran dan render akhirnya, sehingga apa yang Anda setujui adalah apa yang Anda kirimkan. Tanpa itu, setiap suntingan AI bersifat sementara: Anda akan menyetujui sebuah gambar lalu memeriksa ulang berkasnya kemudian — dan itulah sambungan yang muncul kembali di ujung lain pipeline-nya.</p>
+        <p>Penyusuran dan render akhirnya berasal dari timeline yang sama, dan perhitungan warna ekspornya adalah porting yang disengaja dari perhitungan warna pratinjaunya, sehingga apa yang Anda setujui adalah apa yang Anda kirimkan, di mana pun kecuali transisi. Pengecualian itu nyata, dan kami lebih memilih menyebutnya di sini daripada membiarkan Anda menemukannya di dalam sebuah pengiriman: ekspornya tidak menjalankan satu pun shader transisi milik pratinjaunya. Ia menyerahkan transisi itu kepada kumpulan milik encoder-nya sendiri, dan di sana sekitar sepuluh transisi kami memiliki padanan berdasarkan nama sedangkan sisanya berupa pendekatan — dan sebuah transisi turun menjadi cross-dissolve biasa setiap kali klip di kedua sisinya tidak dapat diserahkan dalam keadaan utuh, yang mencakup rekaman yang dibalik, kecepatan variabel, fade per klip, drop shadow, blend mode, geometri yang diberi keyframe, dan transisi kedua dari dua transisi yang dipasang berturut-turut. Apa pun yang bukan transisi dirender dari deskripsi yang sama di keduanya. Tanpa itu, setiap suntingan AI akan bersifat sementara: Anda akan menyetujui sebuah gambar lalu memeriksa ulang berkasnya kemudian — dan itulah sambungan yang muncul kembali di ujung lain pipeline-nya.</p>
 
-        <p>Bila semuanya disatukan — satu dokumen, satu kumpulan operasi, satu undo, satu head, satu eksekusi, satu jalur render — pertanyaan yang menarik bukan lagi seberapa bagus modelnya. Pertanyaannya menjadi seberapa murah Anda dapat tidak menyetujuinya. Bagian itulah yang kami bangun.</p>
+        <p>Bila semuanya disatukan — satu dokumen, satu kumpulan operasi, satu undo, satu head, satu eksekusi, satu pipeline warna — pertanyaan yang menarik bukan lagi seberapa bagus modelnya. Pertanyaannya menjadi seberapa murah Anda dapat tidak menyetujuinya. Bagian itulah yang kami bangun.</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

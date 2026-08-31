@@ -142,6 +142,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -206,7 +211,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>Tecnologia difficile, software semplice.</h1>
@@ -221,7 +226,7 @@
           <li><strong>Semplicità</strong> La difficoltà è affare nostro. Quello che arriva a chi usa il prodotto deve essere ovvio.</li>
           <li><strong>Ambizione</strong> Fatto per stare accanto al miglior software della sua categoria, o non fatto.</li>
           <li><strong>Trasparenza</strong> Quello che diciamo che il software fa è quello che fa, comprese le volte in cui la risposta è no.</li>
-          <li><strong>Indipendenza</strong> Possediamo ciò da cui dipendiamo, così nessun altro decide che cosa può diventare il prodotto.</li>
+          <li><strong>Indipendenza</strong> Possediamo le parti che decidono che cosa può diventare il prodotto, e diciamo quali affittiamo.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -244,7 +249,7 @@
 
         <p>Un editor video desktop per chi monta di mestiere, e il primo posto in cui quei valori hanno dovuto reggere l'urto di un prodotto vero. Quello che lo rende insolito non sono i modelli: è che stanno dentro l'editor, non accanto. Una modifica dell'assistente è una modifica che si poteva fare a mano, e basta un undo per tornare indietro.</p>
 
-        <p>I modelli pesanti girano sulla macchina dove il girato si trova già, e l'anteprima è disegnata dallo stesso codice che disegna l'esportazione. In anteprima privata.</p>
+        <p>Gran parte della sua AI gira sulla macchina dove il girato si trova già, e il lavoro generativo che ha bisogno del cloud è misurato dove si vede. In anteprima privata.</p>
 
         <p class="more">
           <a href="/it/sparkle/">Che cosa fa Sparkle</a>

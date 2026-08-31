@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Onde o editor termina e o modelo começa.</h1>
@@ -282,11 +287,11 @@
 
         <p>Essa é uma decisão de projeto sobre latência, e ela resolve uma questão que a emenda costuma deixar em aberto: material sob embargo continua sob embargo, porque nunca saiu dali. Onde o trabalho realmente precisa da nuvem, ele passa por um único gateway que o mede contra a conta que o pediu.</p>
 
-        <h2 id="parity">Uma prévia que é a exportação</h2>
+        <h2 id="parity">Uma prévia fiel o bastante para aprovar</h2>
 
-        <p>Os mesmos shaders desenham a navegação e a renderização final, então o que você aprova é o que você entrega. Sem isso, toda edição feita por IA é provisória: você estaria aceitando uma imagem e reconferindo o arquivo depois, que é a emenda reaparecendo na outra ponta do pipeline.</p>
+        <p>A navegação e a renderização final saem da mesma linha do tempo, e a matemática de cor da exportação é uma reimplementação deliberada da matemática da prévia, então o que você aprova é o que você entrega em tudo, menos nas transições. Essa exceção é real, e preferimos dizer isso aqui a deixar você descobrir numa entrega: a exportação não roda nenhum dos shaders de transição da prévia. Ela os entrega ao conjunto do próprio codificador, no qual cerca de dez das nossas têm correspondência pelo nome e as demais são aproximadas — e uma transição cai para um simples cross-dissolve sempre que os clipes dos dois lados dela não podem ser repassados intactos, o que inclui material invertido, velocidade variável, fades por clipe, sombras projetadas, modos de mesclagem, geometria com keyframes e a segunda de duas transições coladas uma na outra. Tudo o que não é transição é renderizado a partir da mesma descrição na prévia e na exportação. Sem isso, toda edição feita por IA seria provisória: você estaria aceitando uma imagem e reconferindo o arquivo depois, que é a emenda reaparecendo na outra ponta do pipeline.</p>
 
-        <p>Tudo junto — um documento, um conjunto de operações, um desfazer, um head, uma execução, um caminho de renderização —, a pergunta interessante deixa de ser o quanto o modelo é bom. Passa a ser o quão barato é discordar dele. É essa a parte que construímos.</p>
+        <p>Tudo junto — um documento, um conjunto de operações, um desfazer, um head, uma execução, um pipeline de cor —, a pergunta interessante deixa de ser o quanto o modelo é bom. Passa a ser o quão barato é discordar dele. É essa a parte que construímos.</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

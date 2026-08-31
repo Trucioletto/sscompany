@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Where the editor ends and the model begins.</h1>
@@ -282,11 +287,11 @@
 
         <p>That is a design choice about latency, and it settles a question the seam usually leaves open: footage under embargo stays under embargo, because it never left. Where work genuinely needs the cloud it goes through one gateway that meters it against the account that asked for it.</p>
 
-        <h2 id="parity">A preview that is the export</h2>
+        <h2 id="parity">A preview close enough to approve</h2>
 
-        <p>The same shaders draw the scrub and the final render, so what you approve is what you ship. Without that, every AI edit is provisional: you would be accepting a picture and re-checking the file later, which is the seam reappearing at the other end of the pipeline.</p>
+        <p>The scrub and the final render come off the same timeline, and the colour maths of the export is a deliberate port of the preview's, so what you approve is what you ship everywhere except transitions. That exception is real and we would rather name it here than let you find it in a delivery: the export runs none of the preview's transition shaders. It hands them to the encoder's own set, where about ten of ours have a match by name and the rest are approximated — and a transition drops to a plain cross-dissolve whenever the clips either side cannot be handed over intact, which includes reversed footage, variable speed, per-clip fades, drop shadows, blend modes, keyframed geometry, and the second of two transitions placed back to back. Everything that is not a transition renders from the same description in both. Without that, every AI edit would be provisional: you would be accepting a picture and re-checking the file later, which is the seam reappearing at the other end of the pipeline.</p>
 
-        <p>Taken together — one document, one set of operations, one undo, one head, one execution, one render path — the interesting question stops being how good the model is. It becomes how cheaply you can disagree with it. That is the part we build.</p>
+        <p>Taken together — one document, one set of operations, one undo, one head, one execution, one colour pipeline — the interesting question stops being how good the model is. It becomes how cheaply you can disagree with it. That is the part we build.</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

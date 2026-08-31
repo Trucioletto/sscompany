@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Un'impresa tecnologica che rilascia prodotti.</h1>
@@ -234,7 +239,7 @@
 
         <p>Il lavoro su commessa paga i piani di qualcun altro. Avere il prodotto vuol dire che l'ingegneria si accumula invece di essere ceduta — ogni sistema che è servito a Sparkle lo eredita quello dopo.</p>
 
-        <p>Vuol dire anche che le decisioni restano qui. Che cosa si costruisce dopo lo decide quello che serve al lavoro, non il cliente più grosso del trimestre, e le parti da cui il prodotto dipende sono nostre invece che affittate da qualcuno le cui priorità possono cambiare senza preavviso.</p>
+        <p>Vuol dire anche che le decisioni restano qui. Che cosa si costruisce dopo lo decide quello che serve al lavoro, non il cliente più grosso del trimestre, e le parti che decidono che cosa può diventare il prodotto sono nostre invece che affittate; quelle che affittiamo sono elencate più avanti in questa pagina.</p>
 
         <p class="pull">L'indipendenza non è una preferenza. È la differenza fra scegliere e sentirselo dire.</p>
 
@@ -255,7 +260,7 @@
         <h2 id="built">Che cosa esiste</h2>
 
         <p>
-          <strong>Sparkle</strong> — un editor video desktop con rendering sulla GPU, AI locale per matting, segmentazione e profondità, codifica hardware su quattro piattaforme di produttori diversi, e gli account per team, gli abbonamenti a postazione, i crediti a consumo e la fatturazione elettronica italiana senza cui un prodotto di quella taglia non si spedisce. In anteprima privata su
+          <strong>Sparkle</strong> — un editor video desktop con rendering sulla GPU, AI locale per matting, segmentazione e profondità, codifica hardware su quattro piattaforme di produttori diversi, e gli account per team, gli abbonamenti per membro, i crediti a consumo e la fatturazione elettronica italiana senza cui un prodotto di quella taglia non si spedisce. In anteprima privata su
           <a href="https://sparkle.software">sparkle.software</a>.
           <a href="/it/sparkle/">Che cosa fa</a> &middot; <a href="/it/how-we-build/">com'è costruito</a>.
         </p>

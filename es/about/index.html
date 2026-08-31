@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Una empresa de tecnología que lanza productos.</h1>
@@ -234,7 +239,7 @@
 
         <p>El trabajo por encargo paga la hoja de ruta de otro. Ser dueños del producto significa que la ingeniería se acumula en lugar de cederse: cada sistema que Sparkle necesitó lo hereda lo siguiente.</p>
 
-        <p>También significa que las decisiones se quedan aquí. Lo que se construye a continuación lo decide lo que el trabajo necesita, no el cliente más grande del trimestre, y las piezas de las que depende el producto son propias en vez de alquiladas a alguien cuyas prioridades pueden cambiar sin avisar.</p>
+        <p>También significa que las decisiones se quedan aquí. Lo que se construye a continuación lo decide lo que el trabajo necesita, no el cliente más grande del trimestre, y las piezas que deciden en qué puede convertirse el producto son propias en vez de alquiladas; las que sí alquilamos se nombran más abajo en esta página.</p>
 
         <p class="pull">La independencia no es una preferencia. Es la diferencia entre elegir y que te lo digan.</p>
 
@@ -255,7 +260,7 @@
         <h2 id="built">Qué existe</h2>
 
         <p>
-          <strong>Sparkle</strong> — un editor de vídeo de escritorio con renderizado por GPU, IA local para recorte de fondo, segmentación y profundidad, codificación por hardware en cuatro plataformas de fabricante, y las cuentas de equipo, las suscripciones por puesto, los créditos medidos al consumo y la facturación electrónica italiana sin los que un producto de ese tamaño no se publica. En versión preliminar privada en
+          <strong>Sparkle</strong> — un editor de vídeo de escritorio con renderizado por GPU, IA local para recorte de fondo, segmentación y profundidad, codificación por hardware en cuatro plataformas de fabricante, y las cuentas de equipo, las suscripciones por miembro, los créditos medidos al consumo y la facturación electrónica italiana sin los que un producto de ese tamaño no se publica. En versión preliminar privada en
           <a href="https://sparkle.software">sparkle.software</a>.
           <a href="/es/sparkle/">Qué hace</a> &middot; <a href="/es/how-we-build/">cómo está construido</a>.
         </p>

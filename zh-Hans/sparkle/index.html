@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle——一款下面装着引擎的视频剪辑软件</title>
-  <meta name="description" content="Sparkle是一款桌面视频剪辑软件：预览与导出共用同一套GPU渲染，AI模型跑在你自己的机器上，硬件编码覆盖四家厂商的技术栈。目前为不公开预览。">
+  <meta name="description" content="Sparkle是一款桌面视频剪辑软件：GPU渲染，大部分AI跑在素材本来就在的那台机器上，硬件编码随你的芯片而变。目前为不公开预览。">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="一款下面装着引擎的视频剪辑软件">
-  <meta property="og:description" content="预览与导出共用的GPU渲染、跑在你自己机器上的AI、随你的芯片而变的硬件编码。">
+  <meta property="og:description" content="GPU渲染、跑在你自己机器上的大部分AI、随你的芯片而变的硬件编码。">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -125,7 +125,7 @@
       "@id": "https://spinnesoftware.com/zh-Hans/sparkle/#webpage",
       "url": "https://spinnesoftware.com/zh-Hans/sparkle/",
       "name": "一款下面装着引擎的视频剪辑软件",
-      "description": "Sparkle是一款桌面视频剪辑软件：预览与导出共用同一套GPU渲染，AI模型跑在你自己的机器上，硬件编码覆盖四家厂商的技术栈。目前为不公开预览。",
+      "description": "Sparkle是一款桌面视频剪辑软件：GPU渲染，大部分AI跑在素材本来就在的那台机器上，硬件编码随你的芯片而变。目前为不公开预览。",
       "inLanguage": "zh-Hans",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -156,7 +156,7 @@
       "@id": "https://spinnesoftware.com/zh-Hans/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle是一款桌面视频剪辑软件：预览与导出共用同一套GPU渲染，AI模型跑在你自己的机器上，硬件编码覆盖四家厂商的技术栈。目前为不公开预览。",
+      "description": "Sparkle是一款桌面视频剪辑软件：GPU渲染，大部分AI跑在素材本来就在的那台机器上，硬件编码随你的芯片而变。目前为不公开预览。",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -167,6 +167,11 @@
   </script>
 </head>
 <body class="script-hans">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">跳到主要内容</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -232,7 +237,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>一款下面装着引擎的视频剪辑软件。</h1>
@@ -251,15 +256,16 @@
 
         <h2 id="preview">成千上万帧，一个预览</h2>
 
-        <p>转场就是着色器。你拖动播放头时它们跑在GPU上，最终文件也由同一批着色器渲染——所以预览不是导出的一种客气近似，它就是另一种分辨率下的导出。</p>
+        <p>大部分转场是着色器，你拖动播放头时它们跑在GPU上——一次普通的淡入淡出，以及任何挨着静止图片的转场，走的都是更简单的一条路。导出不跑这些着色器。它用的是编码器自带的那套转场：我们的转场里大约有十个能按名字对得上，其余的都被近似成它手上最接近的那个效果。预览是对最终文件的一份贴近的参照，而不是对它的承诺；而两者分岔的地方，就在转场。</p>
 
         <p>重素材有代理文件，还有一条为长时间线设计的拖动路径。一个能让你边想边剪的剪辑软件，和一个让你干等的剪辑软件，差别就在这里。</p>
 
         <h2 id="ai" class="key">大部分AI跑在你自己的机器上</h2>
 
-        <p>背景移除、主体分割和深度估计，都以本地模型的形式跑在你自己的硬件上。一下午的样片不必上传就能派上用场，处于保密期的素材也仍然留在保密期内。</p>
+        <p>背景移除、主体分割和深度估计，都以本地模型的形式跑在你自己的硬件上。一下午的样片不必上传就能派上用场；就这部分工作而言，处于保密期的素材仍然留在保密期内。</p>
 
-        <p>语音转文字同样可以在本地跑，用的是剪辑软件下载一次、此后无需联网即可使用的Whisper模型。云端引擎也有，默认会先去找云端，因此你的音频去了哪里是一项设置，而不是一个假设。</p>
+        <p>语音转文字同样可以在本地跑，用的是剪辑软件下载一次、此后无需联网即可使用的Whisper模型。指定这个模型，音频就留在你自己的机器上。把引擎留在Auto，只要配置了云端引擎，不论音频多长多短，它都会交给云端——所以你的音频去了哪里是一项设置，而且是值得你去设一次的设置。</p>
+
 
         <p>遮罩靠光流在帧与帧之间跟踪，不必一个镜头一个镜头重画。字幕带有逐词时间码，因此可以设置样式、重新剪切，并导出为行业其余环节所预期的格式。</p>
 
@@ -273,7 +279,7 @@
 
         <p>编码会使用它找到的任何加速器——NVIDIA NVENC、Intel Quick Sync、AMD、Apple VideoToolbox——在没有对象可对话时，退回到软件的x264、x265或SVT-AV1。剪辑机房要的H.264、HEVC、AV1和DNxHR都在，HDR是被处理的，而不是被压平的。</p>
 
-        <p>色彩走的是3D LUT管线，因此在别处调好的风格能够原样抵达。音频在导出时按EBU R128做响度标准化，因为一次不符合响度规范的交付，等于要交付两次。</p>
+        <p>色彩走的是3D LUT管线，因此在别处调好的风格能够原样抵达。音频在导出时可以做响度标准化——一遍测量，得到一份-14 LUFS的母版——因为一次不符合响度规范的交付，等于要交付两次。它是一个复选框，不是默认打开的，所以值得你把它找出来一次。</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -283,22 +289,22 @@
         <h2 id="hood">引擎盖之下</h2>
 
         <dl class="identity">
-          <div><dt>渲染</dt><dd>GPU着色器，预览与导出共用</dd></div>
+          <div><dt>渲染</dt><dd>预览用GPU着色器；导出用编码器转场</dd></div>
           <div><dt>本地AI</dt><dd>ONNX Runtime——抠像、分割、深度</dd></div>
           <div><dt>语音</dt><dd>本地或云端，逐词时间码</dd></div>
           <div><dt>编码</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>格式</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>色彩</dt><dd>3D LUT管线</dd></div>
-          <div><dt>音频</dt><dd>EBU R128响度</dd></div>
+          <div><dt>音频</dt><dd>可选的响度标准化，-14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">它是给谁用的</h2>
 
-        <p>剪辑师和小型后期团队——那些活在时间线里、软件还回来的每一个小时都察觉得到的人。桌面剪辑软件免费。云端AI按席位售卖，因此三位剪辑师买三个席位，而不是买某人凭空想出来的授权档位。上面说的点数余额，就是一个席位里云端用量的计量方式。</p>
+        <p>剪辑师和小型后期团队——那些活在时间线里、软件还回来的每一个小时都察觉得到的人。桌面剪辑软件免费。云端AI按你所在组织的成员计费，因此三位剪辑师就付三个成员的钱，而不是买某人凭空想出来的授权档位。不另设闲置费率：一个从不打开剪辑软件的成员，和一个天天剪的成员，付的钱一样。上面说的点数余额，就是一个账户名下云端用量的计量方式。</p>
 
         <h2 id="status">目前的状态</h2>
 
-        <p>Sparkle处于<strong>不公开预览</strong>阶段。剪辑软件、云服务、账户和计费都已建成并在运行；开放是逐步进行的，因为一款同时经手别人素材和别人钱的软件，值得慢慢放出来。</p>
+        <p>Sparkle处于<strong>不公开预览</strong>阶段。剪辑软件、云服务、账户和计费都已建成并在运行；开放是逐步进行的，因为一款同时经手别人素材和别人钱的软件，值得慢慢放出来。如果你靠剪辑吃饭，也想进来，写信来说说你剪的是什么。</p>
       </article>
 
       <section class="close">

@@ -157,6 +157,11 @@
 </head>
 <body class="script-hans">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -221,7 +226,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>剪辑软件到哪里为止，模型从哪里开始。</h1>
@@ -280,11 +285,11 @@
 
         <p>这是一个关于延迟的设计选择，同时它了结了接缝通常留着不答的一个问题：处于保密期的素材仍然留在保密期内，因为它从未离开过。确实需要云端的那部分工作，走的是同一个网关，由它按提出请求的那个账户计量。</p>
 
-        <h2 id="parity">预览就是导出</h2>
+        <h2 id="parity">预览足够接近，可以据此认可</h2>
 
-        <p>拖动预览和最终渲染由同一批着色器绘制，所以你通过的就是你交付的。没有这一点，每一次AI修改都只是暂定：你认可的是一幅画面，文件还要留到之后再核一遍——这就是那道接缝在管线的另一端重新出现。</p>
+        <p>拖动预览和最终渲染出自同一条时间线，而导出的色彩运算是照着预览的那一套有意移植过来的，所以除转场之外，你通过的就是你交付的。这个例外是真的，我们宁可自己在这里说出来，也不愿你在一次交付里发现它：导出不跑预览里的任何一个转场着色器。它把转场交给编码器自带的那一套：我们的转场里大约有十个能按名字对得上，其余的都是近似出来的——而只要转场两侧的素材没法原样交过去，这个转场就退回成一次普通的交叉叠化，这里面包括倒放的素材、变速、单段素材上的淡入淡出、投影、混合模式、打了关键帧的几何变换，以及两个转场紧挨着排在一起时的后一个。凡不是转场的东西，预览和导出都从同一份描述渲染出来。若没有这一点，每一次AI修改都只会是暂定的：你认可的是一幅画面，文件还要留到之后再核一遍，而这就是那道接缝在管线的另一端重新出现。</p>
 
-        <p>合起来看——一份文档、一组操作、一次撤销、一个头操作、一次执行、一条渲染路径——有意思的问题就不再是模型有多好，而是不同意它的代价有多低。我们做的正是这一部分。</p>
+        <p>合起来看——一份文档、一组操作、一次撤销、一个头操作、一次执行、一条色彩管线——有意思的问题就不再是模型有多好，而是不同意它的代价有多低。我们做的正是这一部分。</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

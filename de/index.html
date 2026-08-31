@@ -142,6 +142,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -206,7 +211,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>Schwere Technik, einfache Software.</h1>
@@ -221,7 +226,7 @@
           <li><strong>Einfachheit</strong> Die Schwierigkeit ist unsere Sache. Was bei den Nutzenden ankommt, soll offensichtlich sein.</li>
           <li><strong>Ambition</strong> Gebaut, um neben der besten Software seiner Kategorie zu bestehen, oder gar nicht gebaut.</li>
           <li><strong>Transparenz</strong> Was wir sagen, dass die Software tut, tut sie — auch dort, wo die Antwort nein lautet.</li>
-          <li><strong>Unabhängigkeit</strong> Uns gehört, worauf wir angewiesen sind, damit niemand sonst entscheidet, was aus dem Produkt wird.</li>
+          <li><strong>Unabhängigkeit</strong> Uns gehören die Teile, die entscheiden, was aus dem Produkt wird, und wir sagen, welche wir mieten.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -244,7 +249,7 @@
 
         <p>Ein Desktop-Videoeditor für Menschen, die vom Schneiden leben, und die erste Stelle, an der sich diese Werte an einem echten Produkt bewähren mussten. Ungewöhnlich sind nicht die Modelle — ungewöhnlich ist, dass sie im Editor sitzen und nicht daneben. Eine Änderung des Assistenten ist eine Änderung, die Sie auch von Hand hätten machen können, und ein einziges Undo nimmt sie zurück.</p>
 
-        <p>Die schweren Modelle laufen auf der Maschine, auf der das Material ohnehin schon liegt, und die Vorschau wird mit demselben Code gezeichnet, der den Export rendert. In geschlossener Vorschau.</p>
+        <p>Der größte Teil seiner KI läuft auf der Maschine, auf der das Material ohnehin schon liegt, und die generative Arbeit, die die Cloud braucht, wird sichtbar abgerechnet. In geschlossener Vorschau.</p>
 
         <p class="more">
           <a href="/de/sparkle/">Was Sparkle kann</a>

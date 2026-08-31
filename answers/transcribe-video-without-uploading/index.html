@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Transcribing video without uploading it — Spinne Software</title>
-  <meta name="description" content="Whisper runs on your machine. Which Sparkle settings keep the audio there, which one sends it to a cloud engine, and the eight-minute threshold that decides.">
+  <meta name="description" content="Whisper runs on your machine. Which Sparkle setting keeps the audio there, why Auto does not, and what the eight-minute threshold actually decides.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Transcribing video without uploading it">
-  <meta property="og:description" content="Naming a local Whisper model keeps the audio on your machine. Auto does not, past eight minutes. The difference, and where it lives in the code.">
+  <meta property="og:description" content="Naming a local Whisper model keeps the audio on your machine. Auto sends it to a cloud engine at any length. The difference, and where it lives in the code.">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -111,7 +111,7 @@
       "@id": "https://spinnesoftware.com/answers/transcribe-video-without-uploading/#webpage",
       "url": "https://spinnesoftware.com/answers/transcribe-video-without-uploading/",
       "name": "Transcribing video without uploading it",
-      "description": "Whisper runs on your machine. Which Sparkle settings keep the audio there, which one sends it to a cloud engine, and the eight-minute threshold that decides.",
+      "description": "Whisper runs on your machine. Which Sparkle setting keeps the audio there, why Auto does not, and what the eight-minute threshold actually decides.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -141,7 +141,7 @@
       "@type": "TechArticle",
       "@id": "https://spinnesoftware.com/answers/transcribe-video-without-uploading/#article",
       "headline": "Transcribing video without uploading it",
-      "description": "Whisper runs on your machine. Which Sparkle settings keep the audio there, which one sends it to a cloud engine, and the eight-minute threshold that decides.",
+      "description": "Whisper runs on your machine. Which Sparkle setting keeps the audio there, why Auto does not, and what the eight-minute threshold actually decides.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -162,6 +162,11 @@
   </script>
 </head>
 <body class="script-latin">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -207,7 +212,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Transcribing video without uploading it</h1>
@@ -228,7 +233,7 @@
           </ul>
         </div>
 
-        <p>Sparkle ships two local speech engines: whisper.cpp by preference, faster-whisper when it is not available. Both run in-process on your hardware. On Apple Silicon the bulk of the work is already on the Metal GPU.</p>
+        <p>Sparkle ships two local speech engines: whisper.cpp by preference, faster-whisper when it is not available. Both run locally, in the application's own backend. On Apple Silicon the bulk of the work is already on the Metal GPU.</p>
 
         <h2 id="auto">When Auto does upload, and why</h2>
 
@@ -237,12 +242,12 @@
              for the same reason as above. -->
         <div class="answer">
           <ul>
-            <li>Auto is not local-first. In Auto, audio longer than eight minutes goes to a cloud engine — Deepgram Nova-2 — when one is configured. Shorter audio, and any length with no cloud engine configured, stays local.</li>
-            <li>This is a threshold in the code, not a heuristic: 480 seconds, measured with ffprobe before anything is sent.</li>
+            <li>Auto is not local-first at any length. With a cloud engine configured, Auto sends the audio to it — Deepgram first, Google Cloud second — however short the file. Local Whisper is what Auto falls back to when no cloud engine is configured, or when every one of them fails.</li>
+            <li>The eight-minute threshold is not the local-versus-cloud gate. Past 480 seconds, measured with ffprobe before anything is sent, the request is pinned to Deepgram and Google drops out of the chain.</li>
           </ul>
         </div>
 
-        <p>The reason is duration, not quality. A long recording through a local model on a laptop is a long wait, and the older Google engine caps out at roughly eight minutes of audio, so it was never a candidate for the long files in the first place.</p>
+        <p>The reason for that threshold is the older Google engine, which caps out at roughly eight minutes of audio and was never a candidate for long files. It decides which cloud engine, not whether the cloud is used at all.</p>
 
         <p>The fallback runs one way only, and it is worth being precise about it, because it is the whole promise:</p>
 
@@ -263,18 +268,20 @@
 
         <h2 id="local">What else runs locally, and what it weighs</h2>
 
-        <p>Transcription is not the only model on your disk. Sparkle ships these and runs them in-process:</p>
+        <p>Transcription is not the only model Sparkle runs locally. The largest of them, by file size:</p>
 
         <ul>
           <li>Segment Anything ViT-B — subject segmentation — 358 MB</li>
+          <li>Segment Anything 2.1, Hiera-small — mask tracking — 176 MB</li>
           <li>Robust Video Matting, ResNet-50 — background removal, quality — 103 MB</li>
           <li>MiDaS small — depth estimation — 64 MB</li>
+          <li>MobileSAM checkpoint — segmentation, fast path — 39 MB</li>
           <li>MobileSAM encoder — segmentation, fast path — 27 MB</li>
           <li>SAM ViT-H decoder — segmentation, decode — 16 MB</li>
           <li>Robust Video Matting, MobileNetV3 — background removal, fast — 14 MB</li>
         </ul>
 
-        <p class="pull">812 MB of models, shipped with the application.</p>
+        <p class="pull">None of these weights are inside the download. The application keeps its models in its own data folder, separately from the installer, which is why the sizes above are not what you fetch when you install it.</p>
 
         <h2 id="accelerator">The neural accelerator is not always the fast path</h2>
 
@@ -289,25 +296,39 @@
 
         <p>CUDA and DirectML are real accelerators for this model and stay at the top of the order. CoreML sits below plain CPU as a last resort, for the case where the CPU provider is somehow absent. Measured on an M-series machine with ONNX Runtime 1.26.</p>
 
-        <h2 id="limits">What this will not do</h2>
+        <h2 id="not">What this will not do</h2>
 
         <ul>
-          <li>Auto will not keep long audio local. Past eight minutes it reaches for the cloud engine if one is configured. Name a model if that matters.</li>
-          <li>Mask tracking through SAM is not offered on Auto. Measured at 27 to 40 seconds per frame on an M2, it is too slow to hand to somebody without warning, so it is excluded from automatic selection rather than quietly chosen.</li>
+          <li>Auto will not keep audio local, at any length. If a cloud engine is configured, Auto uses it. Name a model if that matters.</li>
+          <li>Mask tracking through SAM is not offered on Auto. Measured at 27 to 40 seconds per frame on an M2, it is too slow to hand to somebody without warning, so it is excluded from automatic selection rather than quietly chosen. The optical-flow tracking that ships in the editor is a different path and is not affected.</li>
           <li>Generative work is cloud, and metered where you can see it. Credits are reserved before an operation and settled at what it actually cost.</li>
         </ul>
 
-        <h2 id="numbers">Practical limits</h2>
+        <h2 id="limits">Practical limits</h2>
 
         <ul>
           <li>Audio accepted for transcription — 8 GB</li>
           <li>Imported subtitle file — 64 MB</li>
-          <li>Auto cloud threshold — 480 seconds</li>
+          <li>Threshold that pins Auto to Deepgram — 480 seconds</li>
           <li>Platforms — macOS on Apple Silicon and Intel; Windows 64-bit, in beta</li>
-          <li>Download — 186 MB with presets, 142 MB without</li>
+          <li>Download — macOS 186 MB with presets, 142 MB without; Windows 192 MB and 148 MB</li>
         </ul>
 
       </article>
+
+      <!-- Until /sparkle/ linked here this page was an orphan and a dead end was
+           survivable. It is now the page a reader lands on from the product page,
+           so it ends the way the other five do: a way forward, and the section
+           they came from to go back to. -->
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          Open sparkle.software
+        </a>
+        <p class="cta-note">
+          <a href="/sparkle/#ai">Back to what Sparkle runs on your machine</a>
+        </p>
+      </section>
     </div>
 
   </main>

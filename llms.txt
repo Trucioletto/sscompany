@@ -7,11 +7,11 @@ Spinne Software makes its own software instead of taking contracts. It is one en
 ## Pages
 
 - [Spinne Software](https://spinnesoftware.com/): An Italian company that builds its own technology and makes it simple to use. What Spinne Software values, how it decides, and the first product: Sparkle.
-- [A video editor with an engine under it](https://spinnesoftware.com/sparkle/): Sparkle is a desktop video editor: GPU rendering shared by preview and export, AI on your own machine, hardware encoding. In private preview.
+- [A video editor with an engine under it](https://spinnesoftware.com/sparkle/): Sparkle is a desktop video editor: GPU rendering, most of the AI on the machine the footage is already on, hardware encoding that adapts to your silicon. In private preview.
 - [Where the editor ends and the model begins](https://spinnesoftware.com/how-we-build/): How Sparkle is built: one document, one set of operations on it, and an assistant that is another caller rather than another program.
 - [A technology company that ships](https://spinnesoftware.com/about/): Why Spinne Software builds its own products rather than taking contracts, how the work is decided, and the diligence answers — including the ones that are no.
 - [Privacy — Spinne Software](https://spinnesoftware.com/privacy/): How spinnesoftware.com handles personal data. No cookies, no analytics, no third-party services, nothing sold or shared.
-- [Transcribing video without uploading it](https://spinnesoftware.com/answers/transcribe-video-without-uploading/): Whisper runs on your machine. Which Sparkle settings keep the audio there, which one sends it to a cloud engine, and the eight-minute threshold that decides.
+- [Transcribing video without uploading it](https://spinnesoftware.com/answers/transcribe-video-without-uploading/): Whisper runs on your machine. Which Sparkle setting keeps the audio there, why Auto does not, and what the eight-minute threshold actually decides.
 
 ## Company
 

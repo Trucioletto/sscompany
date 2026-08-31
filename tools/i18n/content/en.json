@@ -7,7 +7,8 @@
     "sparkle": "Sparkle",
     "how": "How we build",
     "about": "Company",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "skip": "Skip to content"
   },
   "footer": {
     "blurb": "An Italian company building its own software — desktop applications, local AI, and the cloud systems underneath them.",
@@ -74,12 +75,12 @@
         },
         {
           "name": "Independence",
-          "body": "We own what we depend on, so nobody else decides what the product can become."
+          "body": "We own the parts that decide what the product can become, and name the ones we rent."
         }
       ],
       "h2_sparkle": "Sparkle",
       "sparkle_p1": "A desktop video editor for people who cut for a living, and the first place those values had to survive contact with a real product. What makes it unusual is not the models — it is that they sit inside the editor rather than beside it. An edit the assistant makes is an edit you could have made by hand, and one undo takes it back.",
-      "sparkle_p2": "It runs the heavy models on the machine the footage is already on, and it draws the preview with the same code that renders the export. In private preview.",
+      "sparkle_p2": "Most of its AI runs on the machine the footage is already on, and the generative work that needs the cloud is metered where you can see it. In private preview.",
       "more_internal": "See what Sparkle does",
       "h2_next": "And then the next one",
       "next_p1": "A product of this kind leaves a great deal behind it that is not the product: accounts and permissions, the services that run the models, the systems that keep the money honest. None of it is interesting, and all of it is what the next product no longer has to build.",
@@ -93,9 +94,9 @@
     },
     "sparkle": {
       "title": "Sparkle — a video editor with an engine under it",
-      "description": "Sparkle is a desktop video editor: GPU rendering shared by preview and export, AI on your own machine, hardware encoding. In private preview.",
+      "description": "Sparkle is a desktop video editor: GPU rendering, most of the AI on the machine the footage is already on, hardware encoding that adapts to your silicon. In private preview.",
       "og_title": "A video editor with an engine under it",
-      "og_description": "GPU rendering shared by preview and export, AI on your own machine, hardware encoding that adapts to your silicon.",
+      "og_description": "GPU rendering, most of the AI on your own machine, and hardware encoding that adapts to your silicon.",
       "tw_title": "Sparkle — Spinne Software",
       "tw_description": "The machine takes the labour. You keep the cut.",
       "h1": "A video editor with an engine under it.",
@@ -106,24 +107,24 @@
       "problem_p3": "Tools that promise to fix this usually fix it by taking the decisions: hand over the footage, receive an edit, hope you agree. Sparkle goes the other way.",
       "pull": "The machine takes the labour. You keep the cut.",
       "h2_preview": "Thousands of frames, one preview",
-      "preview_p1": "Transitions are shaders. They run on the GPU while you scrub, and the same shaders render the final file — so the preview is not a polite approximation of the export, it is the export at a different resolution.",
+      "preview_p1": "Most transitions are shaders that run on the GPU while you scrub — a plain fade, and anything sitting next to a still, take a simpler path. The export runs none of those shaders. It uses the encoder's own transition set, where about ten of ours have a match by name and the rest are approximated to the nearest look it has. The preview is a close guide to the file rather than a promise of it, and transitions are where the two come apart.",
       "preview_p2": "Heavy footage gets proxies and a scrub path built for long timelines, which is the difference between an editor you can think in and one you wait for.",
       "h2_ai": "Most of the AI runs on your machine",
-      "ai_p1": "Background removal, subject segmentation and depth estimation run as local models on your own hardware. An afternoon of rushes does not have to be uploaded to become useful, and footage under embargo stays under embargo.",
-      "ai_p2": "Speech to text can run locally too, on a Whisper model the editor fetches once and then runs without a network. There are cloud engines as well and the default reaches for one first, so where your audio goes is a setting rather than an assumption.",
+      "ai_p1": "Background removal, subject segmentation and depth estimation run as local models on your own hardware. An afternoon of rushes does not have to be uploaded to become useful, and for this work footage under embargo stays under embargo.",
+      "ai_p2": "Speech to text can run locally too, on a Whisper model the editor fetches once and then runs without a network. Name that model and the audio stays on the machine. Leave the engine on Auto and it goes to a cloud engine whenever one is configured, at any length — so where your audio goes is a setting, and it is one worth setting.",
       "ai_p3": "Masks track across frames using optical flow rather than being redrawn shot by shot. Captions arrive with word-level timing, so they can be styled, re-cut and exported to the formats the rest of the industry expects.",
       "ai_p4": "The heavier generative work needs the cloud, and that part is metered where you can see it. Every account holds a balance of credits; an operation reserves what it might cost before it starts and settles for what it actually cost. Nobody discovers a bill at the end of the month.",
       "h2_export": "Export that talks to your hardware",
       "export_p1": "Encoding uses whatever accelerator it finds — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — and drops to x264, x265 or SVT-AV1 in software when there is nothing to talk to. H.264, HEVC, AV1 and DNxHR for the edit suite, with HDR handled rather than flattened.",
-      "export_p2": "Colour goes through a 3D LUT pipeline, so a look built elsewhere arrives intact. Audio is normalised to EBU R128 on the way out, because a delivery that fails loudness spec is a delivery you make twice.",
+      "export_p2": "Colour goes through a 3D LUT pipeline, so a look built elsewhere arrives intact. Audio can be loudness-normalised on the way out — a measurement pass to a -14 LUFS master — because a delivery that fails loudness spec is a delivery you make twice. It is a checkbox rather than a default, so it is worth finding once.",
       "h2_who": "Who it is for",
-      "who_p1": "Editors and small post-production teams — people who live in a timeline and notice every hour the software gives back. The desktop editor is free. Cloud AI is sold per seat, so three editors pay for three seats rather than a licence tier somebody invented. The credit balance above is how the cloud work inside a seat is metered.",
+      "who_p1": "Editors and small post-production teams — people who live in a timeline and notice every hour the software gives back. The desktop editor is free. Cloud AI is billed per member of your organisation, so three editors pay for three rather than a licence tier somebody invented. There is no idle rate: a member who never opens the editor costs the same as one who edits daily. The credit balance above is how the cloud work on an account is metered.",
       "h2_status": "Where it is today",
-      "status_p1": "Sparkle is in <strong>private preview</strong>. Editor, cloud services, accounts and billing are built and running; access opens gradually, because software that handles other people's footage and other people's money deserves to be let out slowly.",
+      "status_p1": "Sparkle is in <strong>private preview</strong>. Editor, cloud services, accounts and billing are built and running; access opens gradually, because software that handles other people's footage and other people's money deserves to be let out slowly. If you cut for a living and want in, write and say what you cut.",
       "rail_hood": "Under the hood",
       "spec": {
         "rendering": "Rendering",
-        "rendering_v": "GPU shaders, shared by preview and export",
+        "rendering_v": "GPU shaders in preview; encoder transitions on export",
         "local_ai": "Local AI",
         "local_ai_v": "ONNX Runtime — matting, segmentation, depth",
         "speech": "Speech",
@@ -133,7 +134,7 @@
         "colour": "Colour",
         "colour_v": "3D LUT pipeline",
         "audio": "Audio",
-        "audio_v": "EBU R128 loudness"
+        "audio_v": "Optional loudness normalisation, -14 LUFS"
       },
       "rail_short": "What it will not do",
       "rail_short_body": "It does not take the edit off you. The assistant does not touch a cut it was not asked to touch, and it cannot do anything the editor itself cannot do — which is the reason a single undo takes any of it back."
@@ -166,9 +167,9 @@
       "h2_models": "The models sit beside the timeline, not behind an upload",
       "models_p1": "Matting, segmentation and depth run in the same process as the editor, on the frames it already has in hand. There is no export, no upload, no waiting, no re-import, and nothing to line back up afterwards.",
       "models_p2": "That is a design choice about latency, and it settles a question the seam usually leaves open: footage under embargo stays under embargo, because it never left. Where work genuinely needs the cloud it goes through one gateway that meters it against the account that asked for it.",
-      "h2_parity": "A preview that is the export",
-      "parity_p1": "The same shaders draw the scrub and the final render, so what you approve is what you ship. Without that, every AI edit is provisional: you would be accepting a picture and re-checking the file later, which is the seam reappearing at the other end of the pipeline.",
-      "parity_p2": "Taken together — one document, one set of operations, one undo, one head, one execution, one render path — the interesting question stops being how good the model is. It becomes how cheaply you can disagree with it. That is the part we build.",
+      "h2_parity": "A preview close enough to approve",
+      "parity_p1": "The scrub and the final render come off the same timeline, and the colour maths of the export is a deliberate port of the preview's, so what you approve is what you ship everywhere except transitions. That exception is real and we would rather name it here than let you find it in a delivery: the export runs none of the preview's transition shaders. It hands them to the encoder's own set, where about ten of ours have a match by name and the rest are approximated — and a transition drops to a plain cross-dissolve whenever the clips either side cannot be handed over intact, which includes reversed footage, variable speed, per-clip fades, drop shadows, blend modes, keyframed geometry, and the second of two transitions placed back to back. Everything that is not a transition renders from the same description in both. Without that, every AI edit would be provisional: you would be accepting a picture and re-checking the file later, which is the seam reappearing at the other end of the pipeline.",
+      "parity_p2": "Taken together — one document, one set of operations, one undo, one head, one execution, one colour pipeline — the interesting question stops being how good the model is. It becomes how cheaply you can disagree with it. That is the part we build.",
       "rail_shape": "The shape of it",
       "shape": {
         "doc": "Document",
@@ -200,7 +201,7 @@
       "lede": "Spinne Software makes its own software instead of taking contracts. It is one engineer in Rome, and the order of the work is deliberate: build the machinery once, then build the products that stand on it. The ambition is stated plainly — products that hold their own against the best in their category, built by a company small enough to finish them.",
       "h2_why": "Why products rather than clients",
       "why_p1": "Contract work pays for someone else's roadmap. Owning the product means the engineering compounds instead of being handed over — every system Sparkle needed, the next thing inherits.",
-      "why_p2": "It also means the decisions stay here. What gets built next is settled by what the work needs rather than by whichever customer is largest this quarter, and the parts the product depends on are owned rather than rented from somebody whose priorities can change without notice.",
+      "why_p2": "It also means the decisions stay here. What gets built next is settled by what the work needs rather than by whichever customer is largest this quarter, and the parts that decide what the product can become are owned rather than rented; the ones we rent are named further down this page.",
       "pull": "Independence is not a preference. It is the difference between choosing and being told.",
       "h2_one": "One engineer, and what that buys",
       "one_p1": "Nothing is lost in translation between the person who decided something and the person who built it, and every part of the system still has an author who can explain why it is the way it is. What it costs is parallelism: one thing at a time, finished.",
@@ -208,7 +209,7 @@
       "decided_p1": "A feature starts from something a person cannot do today, not from a model that was released last week. The technology is chosen after the problem, which is why some of it runs on the machine in front of you, some of it runs in a data centre, and some of it was left out because the honest version did not work yet.",
       "decided_p2": "What is wrong gets fixed rather than documented. A defect is not a known limitation, and a design that only holds if the user is careful is a design that does not hold.",
       "h2_built": "What exists",
-      "built_p1": " — a desktop video editor with GPU rendering, local AI for matting, segmentation and depth, hardware encoding across four vendor stacks, and the team accounts, per-seat subscriptions, metered credits and Italian electronic invoicing that a product of that size cannot ship without. In private preview at",
+      "built_p1": " — a desktop video editor with GPU rendering, local AI for matting, segmentation and depth, hardware encoding across four vendor stacks, and the team accounts, per-member subscriptions, metered credits and Italian electronic invoicing that a product of that size cannot ship without. In private preview at",
       "built_link_what": "What it does",
       "built_link_how": "how it is built",
       "h2_compliance": "The exact position",
@@ -311,9 +312,9 @@
     },
     "answers_transcribe": {
       "title": "Transcribing video without uploading it — Spinne Software",
-      "description": "Whisper runs on your machine. Which Sparkle settings keep the audio there, which one sends it to a cloud engine, and the eight-minute threshold that decides.",
+      "description": "Whisper runs on your machine. Which Sparkle setting keeps the audio there, why Auto does not, and what the eight-minute threshold actually decides.",
       "og_title": "Transcribing video without uploading it",
-      "og_description": "Naming a local Whisper model keeps the audio on your machine. Auto does not, past eight minutes. The difference, and where it lives in the code.",
+      "og_description": "Naming a local Whisper model keeps the audio on your machine. Auto sends it to a cloud engine at any length. The difference, and where it lives in the code.",
       "tw_title": "Transcribing video without uploading it",
       "tw_description": "Which Sparkle settings keep audio on your machine, and the one that does not.",
       "h1": "Transcribing video without uploading it",
@@ -321,11 +322,11 @@
       "h2_short": "The short answer",
       "short_a": "Name a Whisper model — tiny, base, small, medium or large-v3-turbo — and the audio never leaves your machine. Not “is encrypted in transit”. Does not leave.",
       "short_b": "Leave the engine on Auto and the answer changes, which is the next section.",
-      "short_p": "Sparkle ships two local speech engines: whisper.cpp by preference, faster-whisper when it is not available. Both run in-process on your hardware. On Apple Silicon the bulk of the work is already on the Metal GPU.",
+      "short_p": "Sparkle ships two local speech engines: whisper.cpp by preference, faster-whisper when it is not available. Both run locally, in the application's own backend. On Apple Silicon the bulk of the work is already on the Metal GPU.",
       "h2_auto": "When Auto does upload, and why",
-      "auto_warn_a": "Auto is not local-first. In Auto, audio longer than eight minutes goes to a cloud engine — Deepgram Nova-2 — when one is configured. Shorter audio, and any length with no cloud engine configured, stays local.",
-      "auto_warn_b": "This is a threshold in the code, not a heuristic: 480 seconds, measured with ffprobe before anything is sent.",
-      "auto_p1": "The reason is duration, not quality. A long recording through a local model on a laptop is a long wait, and the older Google engine caps out at roughly eight minutes of audio, so it was never a candidate for the long files in the first place.",
+      "auto_warn_a": "Auto is not local-first at any length. With a cloud engine configured, Auto sends the audio to it — Deepgram first, Google Cloud second — however short the file. Local Whisper is what Auto falls back to when no cloud engine is configured, or when every one of them fails.",
+      "auto_warn_b": "The eight-minute threshold is not the local-versus-cloud gate. Past 480 seconds, measured with ffprobe before anything is sent, the request is pinned to Deepgram and Google drops out of the chain.",
+      "auto_p1": "The reason for that threshold is the older Google engine, which caps out at roughly eight minutes of audio and was never a candidate for long files. It decides which cloud engine, not whether the cloud is used at all.",
       "auto_p2": "The fallback runs one way only, and it is worth being precise about it, because it is the whole promise:",
       "auto_rules": [
         "A named local model never becomes a cloud call. The branch that talks to a cloud engine is entered only when the requested engine is a cloud engine, or is Auto. A request for small cannot reach it.",
@@ -337,16 +338,18 @@
       "model_p2": "There is no VRAM floor to clear. Sparkle does not refuse to run on a machine; it takes what the machine has and degrades. The practical limit is patience, not hardware.",
       "model_p3": "One detail that costs people a hot laptop elsewhere: transcription threads are capped to the performance cores, roughly half the logical count and never more than eight. Saturating the efficiency cores too bought almost nothing — the heavy lifting on Apple Silicon is already on the GPU — and cooked the machine for it.",
       "h2_local": "What else runs locally, and what it weighs",
-      "local_p1": "Transcription is not the only model on your disk. Sparkle ships these and runs them in-process:",
+      "local_p1": "Transcription is not the only model Sparkle runs locally. The largest of them, by file size:",
       "local_models": [
         "Segment Anything ViT-B — subject segmentation — 358 MB",
+        "Segment Anything 2.1, Hiera-small — mask tracking — 176 MB",
         "Robust Video Matting, ResNet-50 — background removal, quality — 103 MB",
         "MiDaS small — depth estimation — 64 MB",
+        "MobileSAM checkpoint — segmentation, fast path — 39 MB",
         "MobileSAM encoder — segmentation, fast path — 27 MB",
         "SAM ViT-H decoder — segmentation, decode — 16 MB",
         "Robust Video Matting, MobileNetV3 — background removal, fast — 14 MB"
       ],
-      "local_total": "812 MB of models, shipped with the application.",
+      "local_total": "None of these weights are inside the download. The application keeps its models in its own data folder, separately from the installer, which is why the sizes above are not what you fetch when you install it.",
       "h2_accel": "The neural accelerator is not always the fast path",
       "accel_p1": "This is the part that surprises people, and it is measured rather than assumed. On Apple Silicon, Sparkle deliberately runs background removal on the CPU and demotes CoreML below it:",
       "accel_rows": [
@@ -357,18 +360,20 @@
       "accel_p3": "CUDA and DirectML are real accelerators for this model and stay at the top of the order. CoreML sits below plain CPU as a last resort, for the case where the CPU provider is somehow absent. Measured on an M-series machine with ONNX Runtime 1.26.",
       "h2_not": "What this will not do",
       "not_items": [
-        "Auto will not keep long audio local. Past eight minutes it reaches for the cloud engine if one is configured. Name a model if that matters.",
-        "Mask tracking through SAM is not offered on Auto. Measured at 27 to 40 seconds per frame on an M2, it is too slow to hand to somebody without warning, so it is excluded from automatic selection rather than quietly chosen.",
+        "Auto will not keep audio local, at any length. If a cloud engine is configured, Auto uses it. Name a model if that matters.",
+        "Mask tracking through SAM is not offered on Auto. Measured at 27 to 40 seconds per frame on an M2, it is too slow to hand to somebody without warning, so it is excluded from automatic selection rather than quietly chosen. The optical-flow tracking that ships in the editor is a different path and is not affected.",
         "Generative work is cloud, and metered where you can see it. Credits are reserved before an operation and settled at what it actually cost."
       ],
       "h2_limits": "Practical limits",
       "limits": [
         "Audio accepted for transcription — 8 GB",
         "Imported subtitle file — 64 MB",
-        "Auto cloud threshold — 480 seconds",
+        "Threshold that pins Auto to Deepgram — 480 seconds",
         "Platforms — macOS on Apple Silicon and Intel; Windows 64-bit, in beta",
-        "Download — 186 MB with presets, 142 MB without"
-      ]
+        "Download — macOS 186 MB with presets, 142 MB without; Windows 192 MB and 148 MB"
+      ],
+      "link_from_sparkle": "Which settings keep audio on your machine",
+      "back_to_sparkle": "Back to what Sparkle runs on your machine"
     }
   },
   "punct": {

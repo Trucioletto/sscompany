@@ -140,6 +140,11 @@
 </head>
 <body class="script-deva">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">सामग्री पर जाएँ</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -204,7 +209,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>कठिन तकनीक, सरल सॉफ़्टवेयर।</h1>
@@ -219,7 +224,7 @@
           <li><strong>सरलता</strong> कठिनाई हमारी ज़िम्मेदारी है। जो हिस्सा इस्तेमाल करने वाले तक पहुँचे, वह देखते ही समझ आना चाहिए।</li>
           <li><strong>महत्वाकांक्षा</strong> अपनी श्रेणी के सबसे अच्छे सॉफ़्टवेयर के बगल में खड़ा हो सके, वरना बनाया ही न जाए।</li>
           <li><strong>पारदर्शिता</strong> हम कहते हैं कि सॉफ़्टवेयर क्या करता है, वही वह करता है — उन मौकों समेत जहाँ जवाब नहीं है।</li>
-          <li><strong>स्वतंत्रता</strong> जिस पर हम निर्भर हैं वह हमारा अपना है, ताकि यह कोई और तय न करे कि उत्पाद क्या बन सकता है।</li>
+          <li><strong>स्वतंत्रता</strong> जो हिस्से तय करते हैं कि उत्पाद क्या बन सकता है, वे हमारे अपने हैं; और जो किराए पर लिए हैं, उनके नाम हम बताते हैं।</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -242,7 +247,7 @@
 
         <p>एक डेस्कटॉप वीडियो एडिटर, उन लोगों के लिए जो एडिटिंग से रोज़ी कमाते हैं, और पहली जगह जहाँ इन मूल्यों को एक असली उत्पाद के सामने टिकना पड़ा। इसे असामान्य मॉडल नहीं बनाते — बनाती है यह बात कि वे एडिटर के बगल में नहीं, उसके भीतर बैठते हैं। असिस्टेंट जो एडिट करता है, वह ऐसी एडिट है जो आप हाथ से भी कर सकते थे, और एक undo उसे वापस ले लेता है।</p>
 
-        <p>भारी मॉडल वह उसी मशीन पर चलाता है जिस पर फ़ुटेज पहले से है, और प्रीव्यू उसी कोड से बनाता है जो एक्सपोर्ट रेंडर करता है। प्राइवेट प्रीव्यू में।</p>
+        <p>इसका ज़्यादातर AI उसी मशीन पर चलता है जिस पर फ़ुटेज पहले से है, और जिस जेनरेटिव काम को क्लाउड चाहिए, वह वहीं मीटर होता है जहाँ आप उसे देख सकें। प्राइवेट प्रीव्यू में।</p>
 
         <p class="more">
           <a href="/hi/sparkle/">देखें Sparkle क्या करता है</a>

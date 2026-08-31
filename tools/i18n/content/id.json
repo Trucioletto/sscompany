@@ -7,7 +7,8 @@
     "sparkle": "Sparkle",
     "how": "Cara membangun",
     "about": "Perusahaan",
-    "privacy": "Privasi"
+    "privacy": "Privasi",
+    "skip": "Lompat ke konten"
   },
   "footer": {
     "blurb": "Perusahaan Italia yang membangun perangkat lunaknya sendiri — aplikasi desktop, AI lokal, dan sistem cloud di bawahnya.",
@@ -74,12 +75,12 @@
         },
         {
           "name": "Kemandirian",
-          "body": "Kami memiliki apa yang kami andalkan, sehingga tidak ada pihak lain yang menentukan produk ini bisa menjadi apa."
+          "body": "Bagian yang menentukan produk ini bisa menjadi apa adalah milik kami sendiri, dan yang kami sewa kami sebutkan."
         }
       ],
       "h2_sparkle": "Sparkle",
       "sparkle_p1": "Editor video desktop untuk orang yang menyunting video sebagai mata pencaharian, dan tempat pertama nilai-nilai itu harus bertahan ketika diuji produk sungguhan. Yang membuatnya tidak biasa bukanlah modelnya — melainkan bahwa model itu berada di dalam editornya, bukan di sebelahnya. Suntingan yang dibuat asisten adalah suntingan yang dapat Anda buat sendiri dengan tangan, dan satu undo mengembalikannya.",
-      "sparkle_p2": "Model-model beratnya dijalankan di mesin tempat rekamannya sudah berada, dan pratinjaunya digambar dengan kode yang sama yang merender hasil ekspornya. Dalam pratinjau privat.",
+      "sparkle_p2": "Sebagian besar AI-nya berjalan di mesin tempat rekamannya sudah berada, dan pekerjaan generatif yang membutuhkan cloud dihitung di tempat yang dapat Anda lihat. Dalam pratinjau privat.",
       "more_internal": "Lihat apa yang dilakukan Sparkle",
       "h2_next": "Lalu produk berikutnya",
       "next_p1": "Produk seperti ini meninggalkan banyak hal yang bukan produk itu sendiri: akun dan izin akses, layanan yang menjalankan modelnya, sistem yang menjaga perhitungan uangnya tetap jujur. Tidak ada yang menarik dari semua itu, dan justru itulah yang tidak perlu dibangun lagi oleh produk berikutnya.",
@@ -93,9 +94,9 @@
     },
     "sparkle": {
       "title": "Sparkle — editor video dengan mesin di bawahnya",
-      "description": "Sparkle adalah editor video desktop: rendering GPU yang dipakai bersama pratinjau dan ekspor, AI di mesin Anda, encoding perangkat keras.",
+      "description": "Sparkle adalah editor video desktop: rendering GPU, sebagian besar AI di mesin tempat rekamannya berada, encoding perangkat keras. Dalam pratinjau privat.",
       "og_title": "Editor video dengan mesin di bawahnya",
-      "og_description": "Rendering GPU yang dipakai bersama oleh pratinjau dan ekspor, AI di mesin Anda sendiri, encoding perangkat keras yang menyesuaikan diri dengan chip Anda.",
+      "og_description": "Rendering GPU, sebagian besar AI di mesin Anda sendiri, dan encoding perangkat keras yang menyesuaikan diri dengan chip Anda.",
       "tw_title": "Sparkle — Spinne Software",
       "tw_description": "Mesin mengambil alih kerja kasarnya. Hasil suntingan tetap milik Anda.",
       "h1": "Editor video dengan mesin di bawahnya.",
@@ -106,24 +107,24 @@
       "problem_p3": "Alat yang menjanjikan perbaikan biasanya memperbaikinya dengan mengambil alih keputusan: serahkan rekamannya, terima hasil suntingan, lalu berharap Anda setuju. Sparkle menempuh arah sebaliknya.",
       "pull": "Mesin mengambil alih kerja kasarnya. Hasil suntingan tetap milik Anda.",
       "h2_preview": "Ribuan frame, satu pratinjau",
-      "preview_p1": "Transisi adalah shader. Semuanya berjalan di GPU saat Anda menyusuri rekaman, dan shader yang sama merender berkas akhirnya — sehingga pratinjau bukan perkiraan yang sopan atas hasil ekspor, melainkan hasil ekspor itu sendiri pada resolusi yang berbeda.",
+      "preview_p1": "Sebagian besar transisi adalah shader yang berjalan di GPU saat Anda menyusuri rekaman — sebuah fade biasa, dan apa pun yang berada di sebelah gambar diam, menempuh jalur yang lebih sederhana. Ekspornya tidak menjalankan satu pun shader itu. Ia memakai kumpulan transisi milik encoder-nya sendiri, dan di sana sekitar sepuluh transisi kami memiliki padanan berdasarkan nama, sedangkan sisanya didekatkan ke look terdekat yang dimilikinya. Pratinjaunya adalah panduan yang dekat terhadap berkas akhirnya, bukan janji atasnya, dan transisi adalah tempat keduanya berpisah.",
       "preview_p2": "Rekaman berat mendapat proxy dan jalur penyusuran yang dibangun untuk timeline panjang, dan itulah perbedaan antara editor tempat Anda bisa berpikir dan editor yang harus Anda tunggu.",
       "h2_ai": "Sebagian besar AI berjalan di mesin Anda",
-      "ai_p1": "Penghapusan latar, segmentasi subjek, dan estimasi kedalaman berjalan sebagai model lokal di perangkat keras Anda sendiri. Rekaman mentah satu sore penuh tidak perlu diunggah agar berguna, dan rekaman yang diembargo tetap diembargo.",
-      "ai_p2": "Pengubahan ucapan menjadi teks juga dapat berjalan secara lokal, pada model Whisper yang diunduh editornya sekali lalu dipakai tanpa jaringan. Tersedia pula mesin cloud, dan pengaturan bawaan memilih salah satunya lebih dulu, sehingga ke mana audio Anda pergi adalah sebuah pengaturan, bukan sebuah asumsi.",
+      "ai_p1": "Penghapusan latar, segmentasi subjek, dan estimasi kedalaman berjalan sebagai model lokal di perangkat keras Anda sendiri. Rekaman mentah satu sore penuh tidak perlu diunggah agar berguna, dan untuk pekerjaan ini rekaman yang diembargo tetap diembargo.",
+      "ai_p2": "Pengubahan ucapan menjadi teks juga dapat berjalan secara lokal, pada model Whisper yang diunduh editornya sekali lalu dipakai tanpa jaringan. Pilih model itu, dan audionya tetap di mesin Anda. Biarkan pengaturan mesinnya pada Auto, dan pekerjaannya dikirim ke mesin cloud kapan pun ada yang dikonfigurasi, berapa pun panjang audionya — sehingga ke mana audio Anda pergi adalah sebuah pengaturan, dan pengaturan itu layak Anda tentukan sendiri.",
       "ai_p3": "Mask mengikuti objek antar-frame menggunakan optical flow, bukan digambar ulang shot demi shot. Caption hadir dengan penanda waktu per kata, sehingga dapat diberi gaya, dipotong ulang, dan diekspor ke format yang diharapkan seluruh industri.",
       "ai_p4": "Pekerjaan generatif yang lebih berat membutuhkan cloud, dan bagian itu dihitung di tempat yang dapat Anda lihat. Setiap akun memiliki saldo kredit; sebuah operasi mencadangkan perkiraan biayanya sebelum mulai dan menyelesaikannya sesuai biaya yang benar-benar terjadi. Tidak ada yang baru menemukan tagihannya di akhir bulan.",
       "h2_export": "Ekspor yang berbicara dengan perangkat keras Anda",
       "export_p1": "Encoding memakai akselerator apa pun yang ditemukannya — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — dan turun ke x264, x265, atau SVT-AV1 di perangkat lunak bila tidak ada yang dapat diajak bicara. H.264, HEVC, AV1, dan DNxHR untuk ruang penyuntingan, dengan HDR ditangani, bukan diratakan.",
-      "export_p2": "Warna melewati pipeline 3D LUT, sehingga look yang dibangun di tempat lain tiba dalam keadaan utuh. Audio dinormalkan ke EBU R128 saat keluar, sebab pengiriman yang gagal memenuhi spesifikasi loudness adalah pengiriman yang harus dilakukan dua kali.",
+      "export_p2": "Warna melewati pipeline 3D LUT, sehingga look yang dibangun di tempat lain tiba dalam keadaan utuh. Loudness audionya dapat dinormalkan saat keluar — satu tahap pengukuran menuju master -14 LUFS — sebab pengiriman yang gagal memenuhi spesifikasi loudness adalah pengiriman yang harus dilakukan dua kali. Ini sebuah kotak centang, bukan pengaturan bawaan, jadi ada baiknya Anda menemukannya sekali.",
       "h2_who": "Untuk siapa",
-      "who_p1": "Editor dan tim pascaproduksi kecil — orang yang hidup di dalam timeline dan menghitung setiap jam yang dikembalikan perangkat lunaknya. Editor desktop-nya gratis. AI cloud dijual per kursi, sehingga tiga editor membayar tiga kursi, bukan tingkat lisensi yang dikarang seseorang. Saldo kredit yang disebut di atas adalah cara mengukur pekerjaan cloud di dalam satu kursi.",
+      "who_p1": "Editor dan tim pascaproduksi kecil — orang yang hidup di dalam timeline dan menghitung setiap jam yang dikembalikan perangkat lunaknya. Editor desktop-nya gratis. AI cloud ditagih per anggota organisasi Anda, sehingga tiga editor membayar untuk tiga anggota, bukan tingkat lisensi yang dikarang seseorang. Tidak ada tarif tersendiri untuk yang menganggur: anggota yang tidak pernah membuka editornya berbiaya sama dengan anggota yang menyunting setiap hari. Saldo kredit yang disebut di atas adalah cara mengukur pekerjaan cloud pada sebuah akun.",
       "h2_status": "Posisinya hari ini",
-      "status_p1": "Sparkle berada dalam <strong>pratinjau privat</strong>. Editor, layanan cloud, akun, dan penagihan sudah dibangun dan berjalan; akses dibuka bertahap, sebab perangkat lunak yang menangani rekaman orang lain dan uang orang lain layak dilepas perlahan.",
+      "status_p1": "Sparkle berada dalam <strong>pratinjau privat</strong>. Editor, layanan cloud, akun, dan penagihan sudah dibangun dan berjalan; akses dibuka bertahap, sebab perangkat lunak yang menangani rekaman orang lain dan uang orang lain layak dilepas perlahan. Jika Anda menyunting video sebagai mata pencaharian dan ingin ikut, tulislah kepada kami dan ceritakan apa yang Anda sunting.",
       "rail_hood": "Di balik kap mesin",
       "spec": {
         "rendering": "Rendering",
-        "rendering_v": "Shader GPU, dipakai bersama pratinjau dan ekspor",
+        "rendering_v": "Shader GPU di pratinjau; transisi encoder saat ekspor",
         "local_ai": "AI lokal",
         "local_ai_v": "ONNX Runtime — matting, segmentasi, kedalaman",
         "speech": "Ucapan",
@@ -133,7 +134,7 @@
         "colour": "Warna",
         "colour_v": "Pipeline 3D LUT",
         "audio": "Audio",
-        "audio_v": "Loudness EBU R128"
+        "audio_v": "Normalisasi loudness opsional, -14 LUFS"
       },
       "rail_short": "Yang tidak akan dilakukannya",
       "rail_short_body": "Ia tidak mengambil alih hasil suntingan dari tangan Anda. Asistennya tidak menyentuh potongan yang tidak diminta untuk disentuhnya, dan tidak dapat melakukan apa pun yang tidak dapat dilakukan editornya sendiri — dan itulah sebabnya satu undo dapat mengembalikan bagian mana pun darinya."
@@ -166,9 +167,9 @@
       "h2_models": "Model-modelnya berada di samping timeline, bukan di balik unggahan",
       "models_p1": "Matting, segmentasi, dan kedalaman berjalan dalam proses yang sama dengan editornya, pada frame yang sudah ada di tangannya. Tidak ada ekspor, tidak ada unggahan, tidak ada penantian, tidak ada impor ulang, dan tidak ada yang harus dipaskan kembali sesudahnya.",
       "models_p2": "Itu adalah pilihan desain tentang latensi, dan sekaligus menutup pertanyaan yang biasanya dibiarkan terbuka oleh sambungan itu: rekaman yang diembargo tetap diembargo, sebab rekaman itu tidak pernah pergi ke mana-mana. Ketika sebuah pekerjaan memang membutuhkan cloud, pekerjaan itu melewati satu gateway yang menghitung pemakaiannya ke akun yang memintanya.",
-      "h2_parity": "Pratinjau yang memang hasil ekspornya",
-      "parity_p1": "Shader yang sama menggambar penyusuran dan render akhirnya, sehingga apa yang Anda setujui adalah apa yang Anda kirimkan. Tanpa itu, setiap suntingan AI bersifat sementara: Anda akan menyetujui sebuah gambar lalu memeriksa ulang berkasnya kemudian — dan itulah sambungan yang muncul kembali di ujung lain pipeline-nya.",
-      "parity_p2": "Bila semuanya disatukan — satu dokumen, satu kumpulan operasi, satu undo, satu head, satu eksekusi, satu jalur render — pertanyaan yang menarik bukan lagi seberapa bagus modelnya. Pertanyaannya menjadi seberapa murah Anda dapat tidak menyetujuinya. Bagian itulah yang kami bangun.",
+      "h2_parity": "Pratinjau yang cukup dekat untuk disetujui",
+      "parity_p1": "Penyusuran dan render akhirnya berasal dari timeline yang sama, dan perhitungan warna ekspornya adalah porting yang disengaja dari perhitungan warna pratinjaunya, sehingga apa yang Anda setujui adalah apa yang Anda kirimkan, di mana pun kecuali transisi. Pengecualian itu nyata, dan kami lebih memilih menyebutnya di sini daripada membiarkan Anda menemukannya di dalam sebuah pengiriman: ekspornya tidak menjalankan satu pun shader transisi milik pratinjaunya. Ia menyerahkan transisi itu kepada kumpulan milik encoder-nya sendiri, dan di sana sekitar sepuluh transisi kami memiliki padanan berdasarkan nama sedangkan sisanya berupa pendekatan — dan sebuah transisi turun menjadi cross-dissolve biasa setiap kali klip di kedua sisinya tidak dapat diserahkan dalam keadaan utuh, yang mencakup rekaman yang dibalik, kecepatan variabel, fade per klip, drop shadow, blend mode, geometri yang diberi keyframe, dan transisi kedua dari dua transisi yang dipasang berturut-turut. Apa pun yang bukan transisi dirender dari deskripsi yang sama di keduanya. Tanpa itu, setiap suntingan AI akan bersifat sementara: Anda akan menyetujui sebuah gambar lalu memeriksa ulang berkasnya kemudian — dan itulah sambungan yang muncul kembali di ujung lain pipeline-nya.",
+      "parity_p2": "Bila semuanya disatukan — satu dokumen, satu kumpulan operasi, satu undo, satu head, satu eksekusi, satu pipeline warna — pertanyaan yang menarik bukan lagi seberapa bagus modelnya. Pertanyaannya menjadi seberapa murah Anda dapat tidak menyetujuinya. Bagian itulah yang kami bangun.",
       "rail_shape": "Bentuknya",
       "shape": {
         "doc": "Dokumen",
@@ -200,7 +201,7 @@
       "lede": "Spinne Software membuat perangkat lunaknya sendiri alih-alih menerima pekerjaan kontrak. Perusahaan ini terdiri atas satu pengembang di Roma, dan urutan kerjanya disengaja: bangun mesinnya sekali, lalu bangun produk yang berdiri di atasnya. Ambisinya dinyatakan terus terang — produk yang sanggup berdiri sejajar dengan yang terbaik di kelasnya, dibuat oleh perusahaan yang cukup kecil untuk menyelesaikannya.",
       "h2_why": "Mengapa produk, bukan klien",
       "why_p1": "Pekerjaan kontrak membiayai peta jalan orang lain. Memiliki produk sendiri berarti hasil rekayasanya terakumulasi alih-alih diserahkan — setiap sistem yang dibutuhkan Sparkle diwarisi oleh hal berikutnya.",
-      "why_p2": "Artinya juga keputusannya tetap di sini. Apa yang dibangun berikutnya ditentukan oleh kebutuhan pekerjaannya, bukan oleh pelanggan terbesar kuartal ini, dan bagian-bagian yang menjadi sandaran produk ini milik kami sendiri, bukan sewaan dari pihak yang prioritasnya bisa berubah tanpa pemberitahuan.",
+      "why_p2": "Artinya juga keputusannya tetap di sini. Apa yang dibangun berikutnya ditentukan oleh kebutuhan pekerjaannya, bukan oleh pelanggan terbesar kuartal ini, dan bagian-bagian yang menentukan produk ini bisa menjadi apa adalah milik kami sendiri, bukan sewaan; yang kami sewa disebutkan lebih jauh di bawah pada halaman ini.",
       "pull": "Kemandirian bukan soal selera. Itu bedanya antara memilih dan diberi tahu.",
       "h2_one": "Satu pengembang, dan apa yang didapat darinya",
       "one_p1": "Tidak ada yang tercecer antara orang yang memutuskan sesuatu dan orang yang membangunnya, dan setiap bagian sistem masih memiliki penulis yang dapat menjelaskan mengapa bagian itu seperti itu. Harganya adalah paralelisme: satu hal pada satu waktu, sampai selesai.",
@@ -208,7 +209,7 @@
       "decided_p1": "Sebuah fitur berawal dari sesuatu yang hari ini tidak bisa dilakukan seseorang, bukan dari model yang dirilis pekan lalu. Teknologinya dipilih setelah masalahnya: karena itu sebagian berjalan di mesin di depan Anda, sebagian berjalan di pusat data, dan sebagian ditinggalkan karena versi jujurnya belum bekerja.",
       "decided_p2": "Yang salah diperbaiki, bukan didokumentasikan. Cacat bukanlah keterbatasan yang sudah diketahui, dan rancangan yang hanya bertahan kalau pemakainya berhati-hati adalah rancangan yang tidak bertahan.",
       "h2_built": "Apa yang sudah ada",
-      "built_p1": " — editor video desktop dengan rendering GPU, AI lokal untuk matting, segmentasi, dan kedalaman, encoding perangkat keras di empat rangkaian vendor, serta akun tim, langganan per kursi, kredit terukur, dan faktur elektronik Italia yang tanpa semuanya itu produk sebesar ini tidak bisa dirilis. Dalam pratinjau privat di",
+      "built_p1": " — editor video desktop dengan rendering GPU, AI lokal untuk matting, segmentasi, dan kedalaman, encoding perangkat keras di empat rangkaian vendor, serta akun tim, langganan per anggota, kredit terukur, dan faktur elektronik Italia yang tanpa semuanya itu produk sebesar ini tidak bisa dirilis. Dalam pratinjau privat di",
       "built_link_what": "Apa yang dilakukannya",
       "built_link_how": "bagaimana ia dibangun",
       "h2_compliance": "Posisi yang sebenarnya",

@@ -140,6 +140,11 @@
 </head>
 <body class="script-kore">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -204,7 +209,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>어려운 기술, 단순한 소프트웨어.</h1>
@@ -219,7 +224,7 @@
           <li><strong>단순함</strong> 어려움은 우리 몫입니다. 쓰는 사람에게 닿는 부분은 보면 알 수 있어야 합니다.</li>
           <li><strong>야심</strong> 같은 분야에서 가장 좋은 소프트웨어 옆에 설 수 있게 만들거나, 아예 만들지 않습니다.</li>
           <li><strong>투명함</strong> 소프트웨어가 한다고 말한 것은 실제로 합니다. 하지 못하는 것도 그대로 말합니다.</li>
-          <li><strong>독립</strong> 의존하는 것은 우리가 가집니다. 그래서 이 제품이 무엇이 될지 다른 누구도 정하지 않습니다.</li>
+          <li><strong>독립</strong> 이 제품이 무엇이 될지 정하는 부분은 우리가 가집니다. 빌려 쓰는 부분은 어디인지 밝힙니다.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -242,7 +247,7 @@
 
         <p>편집으로 먹고사는 사람들을 위한 데스크톱 영상 편집기이자, 이 가치들이 실제 제품과 부딪혀 버텨야 했던 첫 자리입니다. 특이한 점은 모델이 아닙니다. 그 모델이 편집기 옆이 아니라 안에 놓여 있다는 점입니다. 어시스턴트가 한 편집은 당신이 손으로도 할 수 있었던 편집이고, 되돌리기 한 번이면 그대로 되돌아갑니다.</p>
 
-        <p>무거운 모델은 촬영본이 이미 놓여 있는 기기에서 돌리고, 미리보기는 내보내기를 렌더링하는 것과 같은 코드로 그립니다. 비공개 프리뷰 단계입니다.</p>
+        <p>AI의 대부분은 촬영본이 이미 놓여 있는 기기에서 돌아가고, 클라우드가 필요한 생성 작업은 눈에 보이는 곳에서 계량됩니다. 비공개 프리뷰 단계입니다.</p>
 
         <p class="more">
           <a href="/ko/sparkle/">Sparkle이 하는 일 보기</a>

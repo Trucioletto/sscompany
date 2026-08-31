@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle — um editor de vídeo com um motor por baixo</title>
-  <meta name="description" content="Sparkle é um editor de vídeo para desktop: renderização em GPU compartilhada por prévia e exportação, IA na sua máquina, codificação por hardware.">
+  <meta name="description" content="Sparkle é um editor de vídeo para desktop: renderização em GPU, a maior parte da IA na máquina onde o material já está, codificação por hardware. Em prévia privada.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Um editor de vídeo com um motor por baixo">
-  <meta property="og:description" content="Renderização em GPU compartilhada por prévia e exportação, IA na sua própria máquina, codificação por hardware que se adapta ao seu silício.">
+  <meta property="og:description" content="Renderização em GPU, a maior parte da IA na sua própria máquina e codificação por hardware que se adapta ao seu silício.">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -127,7 +127,7 @@
       "@id": "https://spinnesoftware.com/pt-BR/sparkle/#webpage",
       "url": "https://spinnesoftware.com/pt-BR/sparkle/",
       "name": "Um editor de vídeo com um motor por baixo",
-      "description": "Sparkle é um editor de vídeo para desktop: renderização em GPU compartilhada por prévia e exportação, IA na sua máquina, codificação por hardware.",
+      "description": "Sparkle é um editor de vídeo para desktop: renderização em GPU, a maior parte da IA na máquina onde o material já está, codificação por hardware. Em prévia privada.",
       "inLanguage": "pt-BR",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -158,7 +158,7 @@
       "@id": "https://spinnesoftware.com/pt-BR/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle é um editor de vídeo para desktop: renderização em GPU compartilhada por prévia e exportação, IA na sua máquina, codificação por hardware.",
+      "description": "Sparkle é um editor de vídeo para desktop: renderização em GPU, a maior parte da IA na máquina onde o material já está, codificação por hardware. Em prévia privada.",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -169,6 +169,11 @@
   </script>
 </head>
 <body class="script-latin">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -234,7 +239,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Um editor de vídeo com um motor por baixo.</h1>
@@ -253,15 +258,16 @@
 
         <h2 id="preview">Milhares de quadros, uma prévia</h2>
 
-        <p>As transições são shaders. Rodam na GPU enquanto você percorre a linha do tempo, e os mesmos shaders renderizam o arquivo final — de modo que a prévia não é uma aproximação educada da exportação: é a exportação em outra resolução.</p>
+        <p>A maioria das transições são shaders que rodam na GPU enquanto você percorre a linha do tempo — um fade simples, e qualquer transição encostada em uma imagem estática, seguem um caminho mais simples. A exportação não roda nenhum desses shaders. Ela usa o conjunto de transições do próprio codificador, no qual cerca de dez das nossas têm correspondência pelo nome e as demais são aproximadas para o look mais próximo que ele tiver. A prévia é um guia fiel do arquivo, e não uma promessa dele, e é nas transições que os dois divergem.</p>
 
         <p>Material pesado ganha proxies e um caminho de navegação feito para linhas do tempo longas, o que é a diferença entre um editor em que se pensa e um editor pelo qual se espera.</p>
 
         <h2 id="ai" class="key">A maior parte da IA roda na sua máquina</h2>
 
-        <p>Remoção de fundo, segmentação de sujeito e estimativa de profundidade rodam como modelos locais no seu próprio hardware. Uma tarde de brutos não precisa ser enviada para se tornar útil, e material sob embargo continua sob embargo.</p>
+        <p>Remoção de fundo, segmentação de sujeito e estimativa de profundidade rodam como modelos locais no seu próprio hardware. Uma tarde de brutos não precisa ser enviada para se tornar útil, e, para esse trabalho, material sob embargo continua sob embargo.</p>
 
-        <p>A transcrição de fala também pode rodar localmente, em um modelo Whisper que o editor baixa uma vez e depois usa sem rede. Há motores em nuvem também, e o padrão recorre primeiro a um deles, de modo que o destino do seu áudio é uma configuração, e não um pressuposto.</p>
+        <p>A transcrição de fala também pode rodar localmente, em um modelo Whisper que o editor baixa uma vez e depois usa sem rede. Escolha esse modelo e o áudio fica na máquina. Deixe o motor em Automático e ele vai para um motor em nuvem sempre que houver um configurado, seja qual for a duração — de modo que o destino do seu áudio é uma configuração, e é uma que vale a pena definir.</p>
+
 
         <p>As máscaras acompanham os quadros por fluxo óptico, em vez de serem redesenhadas plano a plano. As legendas chegam com marcação de tempo por palavra, então podem ser estilizadas, recortadas e exportadas nos formatos que o resto do setor espera.</p>
 
@@ -275,7 +281,7 @@
 
         <p>A codificação usa o acelerador que encontrar — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — e cai para x264, x265 ou SVT-AV1 em software quando não há com o que conversar. H.264, HEVC, AV1 e DNxHR para a sala de montagem, com HDR tratado em vez de achatado.</p>
 
-        <p>A cor passa por um pipeline de 3D LUT, de modo que um look criado em outro lugar chega intacto. O áudio é normalizado em EBU R128 na saída, porque uma entrega que não passa na especificação de loudness é uma entrega feita duas vezes.</p>
+        <p>A cor passa por um pipeline de 3D LUT, de modo que um look criado em outro lugar chega intacto. O áudio pode ser normalizado em loudness na saída — uma passagem de medição até um master a -14 LUFS —, porque uma entrega que não passa na especificação de loudness é uma entrega feita duas vezes. É uma caixa de seleção, e não o padrão, então vale a pena encontrá-la uma vez.</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -285,22 +291,22 @@
         <h2 id="hood">Por baixo do capô</h2>
 
         <dl class="identity">
-          <div><dt>Renderização</dt><dd>Shaders de GPU, compartilhados por prévia e exportação</dd></div>
+          <div><dt>Renderização</dt><dd>Shaders de GPU na prévia; transições do codificador na exportação</dd></div>
           <div><dt>IA local</dt><dd>ONNX Runtime — matting, segmentação, profundidade</dd></div>
           <div><dt>Fala</dt><dd>No dispositivo ou na nuvem, tempo por palavra</dd></div>
           <div><dt>Codificação</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>Formatos</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>Cor</dt><dd>Pipeline de 3D LUT</dd></div>
-          <div><dt>Áudio</dt><dd>Loudness EBU R128</dd></div>
+          <div><dt>Áudio</dt><dd>Normalização de loudness opcional, -14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">Para quem é</h2>
 
-        <p>Montadores e pequenas equipes de pós-produção — gente que vive dentro de uma linha do tempo e percebe cada hora que o software devolve. O editor de desktop é gratuito. A IA em nuvem é vendida por assento, então três montadores pagam por três assentos, e não por um nível de licença que alguém inventou. O saldo de créditos descrito acima é como se mede o trabalho em nuvem dentro de um assento.</p>
+        <p>Montadores e pequenas equipes de pós-produção — gente que vive dentro de uma linha do tempo e percebe cada hora que o software devolve. O editor de desktop é gratuito. A IA em nuvem é cobrada por membro da sua organização, então três montadores pagam por três, e não por um nível de licença que alguém inventou. Não existe tarifa de inatividade: um membro que nunca abre o editor custa o mesmo que um que edita todos os dias. O saldo de créditos descrito acima é como se mede o trabalho em nuvem em uma conta.</p>
 
         <h2 id="status">Onde está hoje</h2>
 
-        <p>O Sparkle está em <strong>prévia privada</strong>. Editor, serviços de nuvem, contas e cobrança estão construídos e em operação; o acesso é liberado aos poucos, porque um software que lida com o material dos outros e com o dinheiro dos outros merece ser solto devagar.</p>
+        <p>O Sparkle está em <strong>prévia privada</strong>. Editor, serviços de nuvem, contas e cobrança estão construídos e em operação; o acesso é liberado aos poucos, porque um software que lida com o material dos outros e com o dinheiro dos outros merece ser solto devagar. Se você edita para viver e quer entrar, escreva e conte o que você edita.</p>
       </article>
 
       <section class="close">

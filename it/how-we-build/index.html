@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Dove finisce l'editor e comincia il modello.</h1>
@@ -282,11 +287,11 @@
 
         <p>È una scelta di progetto sulla latenza, e chiude una domanda che la giuntura di solito lascia aperta: il girato sotto embargo resta sotto embargo, perché non è mai uscito. Dove il lavoro ha davvero bisogno del cloud, passa da un unico gateway che lo misura sull'account che l'ha chiesto.</p>
 
-        <h2 id="parity">Un'anteprima che è l'esportazione</h2>
+        <h2 id="parity">Un'anteprima abbastanza fedele da approvare</h2>
 
-        <p>Sono gli stessi shader a disegnare lo scorrimento e il rendering finale, quindi quello che si approva è quello che si consegna. Senza questo, ogni modifica dell'AI è provvisoria: si approverebbe un'immagine per poi ricontrollare il file dopo, che è la giuntura che ricompare all'altro capo della pipeline.</p>
+        <p>Lo scorrimento e il rendering finale escono dalla stessa timeline, e la matematica del colore dell'esportazione è un port voluto di quella dell'anteprima, quindi quello che si approva è quello che si consegna dappertutto tranne che nelle transizioni. È un'eccezione vera, e preferiamo dirla qui piuttosto che farla scoprire dentro una consegna: l'esportazione non esegue nessuno degli shader di transizione dell'anteprima. Le affida al set dell'encoder, dove circa dieci delle nostre trovano una corrispondenza per nome e le altre vengono approssimate — e una transizione ripiega su una semplice dissolvenza incrociata ogni volta che le clip ai due lati non possono essere consegnate intatte, fra cui il girato riprodotto al contrario, la velocità variabile, le dissolvenze sulla singola clip, le ombre portate, i metodi di fusione, le geometrie animate a keyframe e la seconda di due transizioni attaccate una all'altra. Tutto quello che non è una transizione viene renderizzato a partire dalla stessa descrizione sia nell'anteprima sia nell'esportazione. Senza questo ogni modifica dell'AI sarebbe provvisoria: si approverebbe un'immagine per poi ricontrollare il file dopo, che è la giuntura che ricompare all'altro capo della pipeline.</p>
 
-        <p>Messe insieme — un solo documento, un solo insieme di operazioni, un solo undo, una sola operazione di testa, una sola esecuzione, un solo percorso di rendering — la domanda interessante smette di essere quanto è bravo il modello. Diventa quanto poco costa non essere d'accordo con lui. È quella la parte che costruiamo.</p>
+        <p>Messe insieme — un solo documento, un solo insieme di operazioni, un solo undo, una sola operazione di testa, una sola esecuzione, una sola pipeline di colore — la domanda interessante smette di essere quanto è bravo il modello. Diventa quanto poco costa non essere d'accordo con lui. È quella la parte che costruiamo.</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

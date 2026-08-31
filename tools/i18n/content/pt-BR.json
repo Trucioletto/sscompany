@@ -7,7 +7,8 @@
     "sparkle": "Sparkle",
     "how": "Como fazemos",
     "about": "Empresa",
-    "privacy": "Privacidade"
+    "privacy": "Privacidade",
+    "skip": "Pular para o conteúdo"
   },
   "footer": {
     "blurb": "Uma empresa italiana que desenvolve o próprio software — aplicativos de desktop, IA local e os sistemas de nuvem que os sustentam.",
@@ -74,12 +75,12 @@
         },
         {
           "name": "Independência",
-          "body": "Somos donos daquilo de que dependemos, para que mais ninguém decida no que o produto pode se tornar."
+          "body": "Somos donos das peças que decidem no que o produto pode se tornar, e dizemos quais alugamos."
         }
       ],
       "h2_sparkle": "Sparkle",
       "sparkle_p1": "Um editor de vídeo para desktop para quem edita para viver, e o primeiro lugar em que esses valores tiveram de resistir ao contato com um produto real. O que ele tem de incomum não são os modelos — é que eles ficam dentro do editor, e não ao lado dele. Uma edição feita pelo assistente é uma edição que você poderia ter feito à mão, e um único desfazer a reverte.",
-      "sparkle_p2": "Ele roda os modelos pesados na mesma máquina em que o material já está, e desenha a prévia com o mesmo código que renderiza a exportação. Em prévia privada.",
+      "sparkle_p2": "A maior parte da sua IA roda na mesma máquina em que o material já está, e o trabalho generativo que precisa da nuvem é medido onde você pode ver. Em prévia privada.",
       "more_internal": "Veja o que o Sparkle faz",
       "h2_next": "E depois o próximo",
       "next_p1": "Um produto assim deixa para trás muita coisa que não é o produto: contas e permissões, os serviços que executam os modelos, os sistemas que mantêm as contas honestas. Nada disso é interessante, e é tudo o que o próximo produto já não precisa construir.",
@@ -93,9 +94,9 @@
     },
     "sparkle": {
       "title": "Sparkle — um editor de vídeo com um motor por baixo",
-      "description": "Sparkle é um editor de vídeo para desktop: renderização em GPU compartilhada por prévia e exportação, IA na sua máquina, codificação por hardware.",
+      "description": "Sparkle é um editor de vídeo para desktop: renderização em GPU, a maior parte da IA na máquina onde o material já está, codificação por hardware. Em prévia privada.",
       "og_title": "Um editor de vídeo com um motor por baixo",
-      "og_description": "Renderização em GPU compartilhada por prévia e exportação, IA na sua própria máquina, codificação por hardware que se adapta ao seu silício.",
+      "og_description": "Renderização em GPU, a maior parte da IA na sua própria máquina e codificação por hardware que se adapta ao seu silício.",
       "tw_title": "Sparkle — Spinne Software",
       "tw_description": "A máquina fica com o trabalho braçal. Você fica com o corte.",
       "h1": "Um editor de vídeo com um motor por baixo.",
@@ -106,24 +107,24 @@
       "problem_p3": "As ferramentas que prometem resolver isso normalmente resolvem tomando as decisões: entregue o material, receba uma edição, torça para concordar. O Sparkle vai no sentido oposto.",
       "pull": "A máquina fica com o trabalho braçal. Você fica com o corte.",
       "h2_preview": "Milhares de quadros, uma prévia",
-      "preview_p1": "As transições são shaders. Rodam na GPU enquanto você percorre a linha do tempo, e os mesmos shaders renderizam o arquivo final — de modo que a prévia não é uma aproximação educada da exportação: é a exportação em outra resolução.",
+      "preview_p1": "A maioria das transições são shaders que rodam na GPU enquanto você percorre a linha do tempo — um fade simples, e qualquer transição encostada em uma imagem estática, seguem um caminho mais simples. A exportação não roda nenhum desses shaders. Ela usa o conjunto de transições do próprio codificador, no qual cerca de dez das nossas têm correspondência pelo nome e as demais são aproximadas para o look mais próximo que ele tiver. A prévia é um guia fiel do arquivo, e não uma promessa dele, e é nas transições que os dois divergem.",
       "preview_p2": "Material pesado ganha proxies e um caminho de navegação feito para linhas do tempo longas, o que é a diferença entre um editor em que se pensa e um editor pelo qual se espera.",
       "h2_ai": "A maior parte da IA roda na sua máquina",
-      "ai_p1": "Remoção de fundo, segmentação de sujeito e estimativa de profundidade rodam como modelos locais no seu próprio hardware. Uma tarde de brutos não precisa ser enviada para se tornar útil, e material sob embargo continua sob embargo.",
-      "ai_p2": "A transcrição de fala também pode rodar localmente, em um modelo Whisper que o editor baixa uma vez e depois usa sem rede. Há motores em nuvem também, e o padrão recorre primeiro a um deles, de modo que o destino do seu áudio é uma configuração, e não um pressuposto.",
+      "ai_p1": "Remoção de fundo, segmentação de sujeito e estimativa de profundidade rodam como modelos locais no seu próprio hardware. Uma tarde de brutos não precisa ser enviada para se tornar útil, e, para esse trabalho, material sob embargo continua sob embargo.",
+      "ai_p2": "A transcrição de fala também pode rodar localmente, em um modelo Whisper que o editor baixa uma vez e depois usa sem rede. Escolha esse modelo e o áudio fica na máquina. Deixe o motor em Automático e ele vai para um motor em nuvem sempre que houver um configurado, seja qual for a duração — de modo que o destino do seu áudio é uma configuração, e é uma que vale a pena definir.",
       "ai_p3": "As máscaras acompanham os quadros por fluxo óptico, em vez de serem redesenhadas plano a plano. As legendas chegam com marcação de tempo por palavra, então podem ser estilizadas, recortadas e exportadas nos formatos que o resto do setor espera.",
       "ai_p4": "O trabalho generativo mais pesado precisa da nuvem, e essa parte é medida onde você pode ver. Cada conta mantém um saldo de créditos; uma operação reserva o que pode custar antes de começar e acerta pelo que custou de fato. Ninguém descobre uma fatura no fim do mês.",
       "h2_export": "Exportação que conversa com o seu hardware",
       "export_p1": "A codificação usa o acelerador que encontrar — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — e cai para x264, x265 ou SVT-AV1 em software quando não há com o que conversar. H.264, HEVC, AV1 e DNxHR para a sala de montagem, com HDR tratado em vez de achatado.",
-      "export_p2": "A cor passa por um pipeline de 3D LUT, de modo que um look criado em outro lugar chega intacto. O áudio é normalizado em EBU R128 na saída, porque uma entrega que não passa na especificação de loudness é uma entrega feita duas vezes.",
+      "export_p2": "A cor passa por um pipeline de 3D LUT, de modo que um look criado em outro lugar chega intacto. O áudio pode ser normalizado em loudness na saída — uma passagem de medição até um master a -14 LUFS —, porque uma entrega que não passa na especificação de loudness é uma entrega feita duas vezes. É uma caixa de seleção, e não o padrão, então vale a pena encontrá-la uma vez.",
       "h2_who": "Para quem é",
-      "who_p1": "Montadores e pequenas equipes de pós-produção — gente que vive dentro de uma linha do tempo e percebe cada hora que o software devolve. O editor de desktop é gratuito. A IA em nuvem é vendida por assento, então três montadores pagam por três assentos, e não por um nível de licença que alguém inventou. O saldo de créditos descrito acima é como se mede o trabalho em nuvem dentro de um assento.",
+      "who_p1": "Montadores e pequenas equipes de pós-produção — gente que vive dentro de uma linha do tempo e percebe cada hora que o software devolve. O editor de desktop é gratuito. A IA em nuvem é cobrada por membro da sua organização, então três montadores pagam por três, e não por um nível de licença que alguém inventou. Não existe tarifa de inatividade: um membro que nunca abre o editor custa o mesmo que um que edita todos os dias. O saldo de créditos descrito acima é como se mede o trabalho em nuvem em uma conta.",
       "h2_status": "Onde está hoje",
-      "status_p1": "O Sparkle está em <strong>prévia privada</strong>. Editor, serviços de nuvem, contas e cobrança estão construídos e em operação; o acesso é liberado aos poucos, porque um software que lida com o material dos outros e com o dinheiro dos outros merece ser solto devagar.",
+      "status_p1": "O Sparkle está em <strong>prévia privada</strong>. Editor, serviços de nuvem, contas e cobrança estão construídos e em operação; o acesso é liberado aos poucos, porque um software que lida com o material dos outros e com o dinheiro dos outros merece ser solto devagar. Se você edita para viver e quer entrar, escreva e conte o que você edita.",
       "rail_hood": "Por baixo do capô",
       "spec": {
         "rendering": "Renderização",
-        "rendering_v": "Shaders de GPU, compartilhados por prévia e exportação",
+        "rendering_v": "Shaders de GPU na prévia; transições do codificador na exportação",
         "local_ai": "IA local",
         "local_ai_v": "ONNX Runtime — matting, segmentação, profundidade",
         "speech": "Fala",
@@ -133,7 +134,7 @@
         "colour": "Cor",
         "colour_v": "Pipeline de 3D LUT",
         "audio": "Áudio",
-        "audio_v": "Loudness EBU R128"
+        "audio_v": "Normalização de loudness opcional, -14 LUFS"
       },
       "rail_short": "O que ele não faz",
       "rail_short_body": "Ele não tira a edição das suas mãos. O assistente não mexe em um corte sem que alguém tenha pedido, e não consegue fazer nada que o próprio editor não consiga fazer — que é a razão pela qual um único desfazer reverte qualquer coisa que ele tenha feito."
@@ -166,9 +167,9 @@
       "h2_models": "Os modelos ficam ao lado da linha do tempo, não atrás de um upload",
       "models_p1": "Matting, segmentação e profundidade rodam no mesmo processo do editor, sobre os quadros que ele já tem em mãos. Não há exportação, nem upload, nem espera, nem reimportação, e nada para realinhar depois.",
       "models_p2": "Essa é uma decisão de projeto sobre latência, e ela resolve uma questão que a emenda costuma deixar em aberto: material sob embargo continua sob embargo, porque nunca saiu dali. Onde o trabalho realmente precisa da nuvem, ele passa por um único gateway que o mede contra a conta que o pediu.",
-      "h2_parity": "Uma prévia que é a exportação",
-      "parity_p1": "Os mesmos shaders desenham a navegação e a renderização final, então o que você aprova é o que você entrega. Sem isso, toda edição feita por IA é provisória: você estaria aceitando uma imagem e reconferindo o arquivo depois, que é a emenda reaparecendo na outra ponta do pipeline.",
-      "parity_p2": "Tudo junto — um documento, um conjunto de operações, um desfazer, um head, uma execução, um caminho de renderização —, a pergunta interessante deixa de ser o quanto o modelo é bom. Passa a ser o quão barato é discordar dele. É essa a parte que construímos.",
+      "h2_parity": "Uma prévia fiel o bastante para aprovar",
+      "parity_p1": "A navegação e a renderização final saem da mesma linha do tempo, e a matemática de cor da exportação é uma reimplementação deliberada da matemática da prévia, então o que você aprova é o que você entrega em tudo, menos nas transições. Essa exceção é real, e preferimos dizer isso aqui a deixar você descobrir numa entrega: a exportação não roda nenhum dos shaders de transição da prévia. Ela os entrega ao conjunto do próprio codificador, no qual cerca de dez das nossas têm correspondência pelo nome e as demais são aproximadas — e uma transição cai para um simples cross-dissolve sempre que os clipes dos dois lados dela não podem ser repassados intactos, o que inclui material invertido, velocidade variável, fades por clipe, sombras projetadas, modos de mesclagem, geometria com keyframes e a segunda de duas transições coladas uma na outra. Tudo o que não é transição é renderizado a partir da mesma descrição na prévia e na exportação. Sem isso, toda edição feita por IA seria provisória: você estaria aceitando uma imagem e reconferindo o arquivo depois, que é a emenda reaparecendo na outra ponta do pipeline.",
+      "parity_p2": "Tudo junto — um documento, um conjunto de operações, um desfazer, um head, uma execução, um pipeline de cor —, a pergunta interessante deixa de ser o quanto o modelo é bom. Passa a ser o quão barato é discordar dele. É essa a parte que construímos.",
       "rail_shape": "A estrutura",
       "shape": {
         "doc": "Documento",
@@ -200,7 +201,7 @@
       "lede": "A Spinne Software faz o próprio software em vez de pegar contratos. É um desenvolvedor em Roma, e a ordem do trabalho é deliberada: construir o maquinário uma vez, depois construir os produtos que se apoiam nele. A ambição é dita sem rodeios — produtos que se sustentem ao lado dos melhores da sua categoria, feitos por uma empresa pequena o bastante para terminá-los.",
       "h2_why": "Por que produtos e não clientes",
       "why_p1": "Trabalho por contrato paga o plano de outra pessoa. Ser dono do produto significa que a engenharia acumula em vez de ser cedida — cada sistema de que o Sparkle precisou, a próxima coisa herda.",
-      "why_p2": "Significa também que as decisões ficam aqui. O que se constrói em seguida é decidido pelo que o trabalho exige, e não pelo maior cliente do trimestre, e as peças de que o produto depende são nossas, em vez de alugadas de alguém cujas prioridades podem mudar sem aviso.",
+      "why_p2": "Significa também que as decisões ficam aqui. O que se constrói em seguida é decidido pelo que o trabalho exige, e não pelo maior cliente do trimestre, e as peças que decidem no que o produto pode se tornar são nossas, em vez de alugadas; as que alugamos estão nomeadas mais abaixo nesta página.",
       "pull": "Independência não é preferência. É a diferença entre escolher e receber a ordem.",
       "h2_one": "Um desenvolvedor, e o que isso compra",
       "one_p1": "Nada se perde na tradução entre quem decidiu algo e quem construiu, e cada parte do sistema ainda tem um autor capaz de explicar por que ela é como é. O que isso custa é paralelismo: uma coisa de cada vez, terminada.",
@@ -208,7 +209,7 @@
       "decided_p1": "Um recurso nasce de algo que uma pessoa não consegue fazer hoje, não de um modelo lançado na semana passada. A tecnologia é escolhida depois do problema: por isso parte dela roda na máquina à sua frente, parte roda num data center, e parte ficou de fora porque a versão honesta ainda não funcionava.",
       "decided_p2": "O que está errado é corrigido em vez de documentado. Um defeito não é uma limitação conhecida, e um design que só se sustenta se quem usa tomar cuidado é um design que não se sustenta.",
       "h2_built": "O que existe",
-      "built_p1": " — um editor de vídeo para desktop com renderização em GPU, IA local para matting, segmentação e profundidade, codificação por hardware em quatro plataformas de fabricantes, e as contas de equipe, assinaturas por assento, créditos medidos e o faturamento eletrônico italiano sem os quais um produto desse tamanho não sai. Em prévia privada em",
+      "built_p1": " — um editor de vídeo para desktop com renderização em GPU, IA local para matting, segmentação e profundidade, codificação por hardware em quatro plataformas de fabricantes, e as contas de equipe, assinaturas por membro, créditos medidos e o faturamento eletrônico italiano sem os quais um produto desse tamanho não sai. Em prévia privada em",
       "built_link_what": "O que ele faz",
       "built_link_how": "como é construído",
       "h2_compliance": "A posição exata",

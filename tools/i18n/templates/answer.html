@@ -62,6 +62,8 @@
           <li>{{page.local_models.3}}</li>
           <li>{{page.local_models.4}}</li>
           <li>{{page.local_models.5}}</li>
+          <li>{{page.local_models.6}}</li>
+          <li>{{page.local_models.7}}</li>
         </ul>
 
         <p class="pull">{{page.local_total}}</p>
@@ -79,7 +81,7 @@
 
         <p>{{page.accel_p3}}</p>
 
-        <h2 id="limits">{{page.h2_not}}</h2>
+        <h2 id="not">{{page.h2_not}}</h2>
 
         <ul>
           <li>{{page.not_items.0}}</li>
@@ -87,7 +89,7 @@
           <li>{{page.not_items.2}}</li>
         </ul>
 
-        <h2 id="numbers">{{page.h2_limits}}</h2>
+        <h2 id="limits">{{page.h2_limits}}</h2>
 
         <ul>
           <li>{{page.limits.0}}</li>
@@ -98,4 +100,18 @@
         </ul>
 
       </article>
+
+      <!-- Until /sparkle/ linked here this page was an orphan and a dead end was
+           survivable. It is now the page a reader lands on from the product page,
+           so it ends the way the other five do: a way forward, and the section
+           they came from to go back to. -->
+      <section class="close">
+        <a class="cta" href="https://sparkle.software">
+          <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
+          {{cta.open_sparkle}}
+        </a>
+        <p class="cta-note">
+          <a href="/sparkle/#ai">{{page.back_to_sparkle}}</a>
+        </p>
+      </section>
     </div>

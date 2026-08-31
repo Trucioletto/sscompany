@@ -157,6 +157,11 @@
 </head>
 <body class="script-kore">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -221,7 +226,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>제품을 내놓는 기술 회사.</h1>
@@ -232,7 +237,7 @@
 
         <p>수주 작업은 남의 로드맵에 값을 치릅니다. 제품을 직접 보유한다는 것은 엔지니어링이 넘겨지는 대신 쌓인다는 뜻입니다. Sparkle에 필요했던 모든 시스템을 그다음 것이 물려받습니다.</p>
 
-        <p>그것은 또한 결정이 이곳에 남는다는 뜻입니다. 다음에 무엇을 만들지는 그 분기에 가장 큰 고객이 아니라 일 자체의 필요가 정하고, 제품이 기대는 부분은 예고 없이 우선순위를 바꿀 수 있는 곳에서 빌리는 대신 우리가 가집니다.</p>
+        <p>그것은 또한 결정이 이곳에 남는다는 뜻입니다. 다음에 무엇을 만들지는 그 분기에 가장 큰 고객이 아니라 일 자체의 필요가 정하고, 이 제품이 무엇이 될지 정하는 부분은 빌리는 대신 우리가 가집니다. 빌려 쓰는 부분이 어디인지는 이 페이지 아래쪽에 적어 두었습니다.</p>
 
         <p class="pull">독립은 취향이 아닙니다. 스스로 고르느냐, 지시를 받느냐의 차이입니다.</p>
 
@@ -253,7 +258,7 @@
         <h2 id="built">무엇이 존재하는가</h2>
 
         <p>
-          <strong>Sparkle</strong>은 GPU 렌더링, 매팅과 세그멘테이션과 깊이 추정을 위한 로컬 AI, 네 개 벤더 스택에 걸친 하드웨어 인코딩에 더해, 이 규모의 제품이라면 없이는 출시할 수 없는 팀 계정, 좌석당 구독, 계량형 크레딧, 이탈리아 전자세금계산서를 갖춘 데스크톱 영상 편집기입니다. 다음 주소에서 비공개 프리뷰로 제공되고 있습니다:
+          <strong>Sparkle</strong>은 GPU 렌더링, 매팅과 세그멘테이션과 깊이 추정을 위한 로컬 AI, 네 개 벤더 스택에 걸친 하드웨어 인코딩에 더해, 이 규모의 제품이라면 없이는 출시할 수 없는 팀 계정, 구성원당 구독, 계량형 크레딧, 이탈리아 전자세금계산서를 갖춘 데스크톱 영상 편집기입니다. 다음 주소에서 비공개 프리뷰로 제공되고 있습니다:
           <a href="https://sparkle.software">sparkle.software</a>.
           <a href="/ko/sparkle/">무엇을 하는가</a> &middot; <a href="/ko/how-we-build/">어떻게 만들었는가</a>.
         </p>

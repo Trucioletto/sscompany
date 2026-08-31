@@ -142,6 +142,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -206,7 +211,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>Hard technology, simple software.</h1>
@@ -221,7 +226,7 @@
           <li><strong>Simplicity</strong> The difficulty is ours to absorb. What reaches the person using it should be obvious.</li>
           <li><strong>Ambition</strong> Built to stand beside the best software in its category, or not built at all.</li>
           <li><strong>Transparency</strong> What we say the software does is what it does, including where the answer is no.</li>
-          <li><strong>Independence</strong> We own what we depend on, so nobody else decides what the product can become.</li>
+          <li><strong>Independence</strong> We own the parts that decide what the product can become, and name the ones we rent.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -244,7 +249,7 @@
 
         <p>A desktop video editor for people who cut for a living, and the first place those values had to survive contact with a real product. What makes it unusual is not the models — it is that they sit inside the editor rather than beside it. An edit the assistant makes is an edit you could have made by hand, and one undo takes it back.</p>
 
-        <p>It runs the heavy models on the machine the footage is already on, and it draws the preview with the same code that renders the export. In private preview.</p>
+        <p>Most of its AI runs on the machine the footage is already on, and the generative work that needs the cloud is metered where you can see it. In private preview.</p>
 
         <p class="more">
           <a href="/sparkle/">See what Sparkle does</a>

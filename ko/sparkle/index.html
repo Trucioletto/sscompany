@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle — 엔진이 밑에 깔린 영상 편집기</title>
-  <meta name="description" content="Sparkle은 데스크톱 영상 편집기입니다. 미리보기와 내보내기가 같은 GPU 렌더링을 공유하고, AI는 사용자 기기에서 돌아갑니다.">
+  <meta name="description" content="Sparkle은 데스크톱 영상 편집기입니다. GPU 렌더링, AI의 대부분은 촬영본이 놓인 기기에서, 하드웨어 인코딩은 실리콘에 맞춰. 비공개 프리뷰 단계.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="ko_KR">
   <meta property="og:title" content="엔진이 밑에 깔린 영상 편집기">
-  <meta property="og:description" content="미리보기와 내보내기가 공유하는 GPU 렌더링, 사용자 자신의 기기에서 돌아가는 AI, 실리콘에 맞춰 가는 하드웨어 인코딩.">
+  <meta property="og:description" content="GPU 렌더링, 사용자 자신의 기기에서 돌아가는 AI의 대부분, 실리콘에 맞춰 가는 하드웨어 인코딩.">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -125,7 +125,7 @@
       "@id": "https://spinnesoftware.com/ko/sparkle/#webpage",
       "url": "https://spinnesoftware.com/ko/sparkle/",
       "name": "엔진이 밑에 깔린 영상 편집기",
-      "description": "Sparkle은 데스크톱 영상 편집기입니다. 미리보기와 내보내기가 같은 GPU 렌더링을 공유하고, AI는 사용자 기기에서 돌아갑니다.",
+      "description": "Sparkle은 데스크톱 영상 편집기입니다. GPU 렌더링, AI의 대부분은 촬영본이 놓인 기기에서, 하드웨어 인코딩은 실리콘에 맞춰. 비공개 프리뷰 단계.",
       "inLanguage": "ko",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -156,7 +156,7 @@
       "@id": "https://spinnesoftware.com/ko/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle은 데스크톱 영상 편집기입니다. 미리보기와 내보내기가 같은 GPU 렌더링을 공유하고, AI는 사용자 기기에서 돌아갑니다.",
+      "description": "Sparkle은 데스크톱 영상 편집기입니다. GPU 렌더링, AI의 대부분은 촬영본이 놓인 기기에서, 하드웨어 인코딩은 실리콘에 맞춰. 비공개 프리뷰 단계.",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -167,6 +167,11 @@
   </script>
 </head>
 <body class="script-kore">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">본문 바로가기</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -232,7 +237,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>엔진이 밑에 깔린 영상 편집기.</h1>
@@ -251,15 +256,16 @@
 
         <h2 id="preview">수천 프레임, 하나의 미리보기</h2>
 
-        <p>트랜지션은 셰이더입니다. 스크럽하는 동안 GPU에서 돌아가고, 최종 파일도 같은 셰이더가 렌더링합니다. 그래서 미리보기는 내보내기를 예의 바르게 흉내 낸 근사치가 아니라, 해상도만 다른 내보내기 그 자체입니다.</p>
+        <p>트랜지션은 대부분 스크럽하는 동안 GPU에서 돌아가는 셰이더입니다. 평범한 페이드, 그리고 스틸 이미지 옆에 놓인 트랜지션은 더 단순한 경로를 탑니다. 내보내기는 그 셰이더를 하나도 돌리지 않습니다. 인코더 자신의 트랜지션 세트를 쓰는데, 우리 것 중 이름이 그대로 맞아떨어지는 것은 열 개 남짓이고 나머지는 인코더가 가진 것 중 가장 가까운 룩으로 근사됩니다. 미리보기는 최종 파일을 약속하는 것이 아니라 가깝게 안내하는 것이고, 둘이 갈라지는 자리가 트랜지션입니다.</p>
 
         <p>무거운 촬영본에는 프록시와 긴 타임라인을 염두에 두고 만든 스크럽 경로가 붙습니다. 생각하면서 쓸 수 있는 편집기와 기다려야 하는 편집기의 차이가 거기서 갈립니다.</p>
 
         <h2 id="ai" class="key">AI의 대부분은 사용자 기기에서 돌아갑니다</h2>
 
-        <p>배경 제거, 피사체 세그멘테이션, 깊이 추정은 사용자 자신의 하드웨어에서 로컬 모델로 돌아갑니다. 오후 내내 찍은 촬영본을 쓸모 있게 만들자고 업로드할 필요가 없고, 엠바고가 걸린 촬영본은 엠바고 안에 그대로 남습니다.</p>
+        <p>배경 제거, 피사체 세그멘테이션, 깊이 추정은 사용자 자신의 하드웨어에서 로컬 모델로 돌아갑니다. 오후 내내 찍은 촬영본을 쓸모 있게 만들자고 업로드할 필요가 없고, 이 작업에 관한 한 엠바고가 걸린 촬영본은 엠바고 안에 그대로 남습니다.</p>
 
-        <p>음성 인식도 로컬에서 돌릴 수 있습니다. 편집기가 한 번 내려받아 그다음부터는 네트워크 없이 쓰는 Whisper 모델을 씁니다. 클라우드 엔진도 있고 기본값은 클라우드를 먼저 찾으므로, 오디오가 어디로 가는지는 가정이 아니라 설정입니다.</p>
+        <p>음성 인식도 로컬에서 돌릴 수 있습니다. 편집기가 한 번 내려받아 그다음부터는 네트워크 없이 쓰는 Whisper 모델을 씁니다. 그 모델을 직접 지정하면 오디오는 그 기기를 벗어나지 않습니다. 엔진을 자동에 두면, 클라우드 엔진이 하나라도 설정되어 있는 한 길이와 관계없이 오디오는 그쪽으로 갑니다. 오디오가 어디로 가는지는 설정이고, 한 번은 직접 정해 둘 만한 설정입니다.</p>
+
 
         <p>마스크는 샷마다 다시 그리는 대신 옵티컬 플로로 프레임을 가로질러 추적합니다. 자막은 단어 단위 타이밍과 함께 나오므로, 스타일을 입히고 다시 자르고 업계의 나머지가 기대하는 형식으로 내보낼 수 있습니다.</p>
 
@@ -273,7 +279,7 @@
 
         <p>인코딩은 찾아낸 가속기가 무엇이든 그것을 씁니다. NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox를 쓰고, 대화할 상대가 없으면 소프트웨어의 x264, x265, SVT-AV1로 내려갑니다. 편집실을 위한 H.264, HEVC, AV1, DNxHR을 지원하며, HDR은 평탄화하지 않고 그대로 처리합니다.</p>
 
-        <p>색은 3D LUT 파이프라인을 거치므로 다른 곳에서 만든 룩이 그대로 도착합니다. 오디오는 나가는 길에 EBU R128로 정규화됩니다. 라우드니스 규격을 통과하지 못한 납품은 두 번 하게 되는 납품이기 때문입니다.</p>
+        <p>색은 3D LUT 파이프라인을 거치므로 다른 곳에서 만든 룩이 그대로 도착합니다. 오디오는 나가는 길에 라우드니스를 정규화할 수 있습니다. -14 LUFS 마스터를 기준으로 측정을 한 번 거치는 방식입니다. 라우드니스 규격을 통과하지 못한 납품은 두 번 하게 되는 납품이기 때문입니다. 기본값이 아니라 체크박스이므로, 한 번은 찾아 둘 만합니다.</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -283,22 +289,22 @@
         <h2 id="hood">내부 구조</h2>
 
         <dl class="identity">
-          <div><dt>렌더링</dt><dd>GPU 셰이더, 미리보기와 내보내기 공유</dd></div>
+          <div><dt>렌더링</dt><dd>미리보기는 GPU 셰이더, 내보내기는 인코더 트랜지션</dd></div>
           <div><dt>로컬 AI</dt><dd>ONNX Runtime — 매팅, 세그멘테이션, 깊이</dd></div>
           <div><dt>음성</dt><dd>기기 내 또는 클라우드, 단어 단위 타이밍</dd></div>
           <div><dt>인코딩</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>포맷</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>색상</dt><dd>3D LUT 파이프라인</dd></div>
-          <div><dt>오디오</dt><dd>EBU R128 라우드니스</dd></div>
+          <div><dt>오디오</dt><dd>선택형 라우드니스 정규화, -14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">누구를 위한 도구인가</h2>
 
-        <p>편집자와 소규모 포스트프로덕션 팀입니다. 타임라인 안에서 살고, 소프트웨어가 돌려주는 한 시간 한 시간을 알아채는 사람들입니다. 데스크톱 편집기는 무료입니다. 클라우드 AI는 좌석 단위로 판매하므로, 편집자가 세 명이면 누군가 지어낸 라이선스 등급이 아니라 좌석 세 개 값을 냅니다. 위에서 말한 크레딧 잔액은 좌석 하나 안에서 클라우드 작업량을 재는 방식입니다.</p>
+        <p>편집자와 소규모 포스트프로덕션 팀입니다. 타임라인 안에서 살고, 소프트웨어가 돌려주는 한 시간 한 시간을 알아채는 사람들입니다. 데스크톱 편집기는 무료입니다. 클라우드 AI는 조직 구성원 단위로 청구하므로, 편집자가 세 명이면 누군가 지어낸 라이선스 등급이 아니라 세 명 값을 냅니다. 쉬고 있는 구성원에게 매기는 별도 요금은 없습니다. 편집기를 한 번도 열지 않는 구성원도 매일 편집하는 구성원과 값이 같습니다. 위에서 말한 크레딧 잔액은 계정 단위로 클라우드 작업량을 재는 방식입니다.</p>
 
         <h2 id="status">지금 상태</h2>
 
-        <p>Sparkle은 <strong>비공개 프리뷰</strong> 단계입니다. 편집기, 클라우드 서비스, 계정, 결제는 모두 만들어져 돌아가고 있습니다. 접근 권한은 천천히 열립니다. 남의 촬영본과 남의 돈을 다루는 소프트웨어는 천천히 내보낼 자격이 있기 때문입니다.</p>
+        <p>Sparkle은 <strong>비공개 프리뷰</strong> 단계입니다. 편집기, 클라우드 서비스, 계정, 결제는 모두 만들어져 돌아가고 있습니다. 접근 권한은 천천히 열립니다. 남의 촬영본과 남의 돈을 다루는 소프트웨어는 천천히 내보낼 자격이 있기 때문입니다. 편집으로 먹고사는 분이고 들어와 보고 싶다면, 무엇을 편집하는지 적어 보내 주십시오.</p>
       </article>
 
       <section class="close">

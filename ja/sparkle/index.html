@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle｜エンジンを備えた動画編集ソフト</title>
-  <meta name="description" content="Sparkle はデスクトップ動画編集ソフト。プレビューと書き出しが同じ GPU レンダリングを共有し、AI は手元の機械で動きます。">
+  <meta name="description" content="Sparkle はデスクトップ動画編集ソフト。GPU レンダリング、大半が手元の機械で動く AI、チップに合わせるハードウェアエンコード。プライベートプレビュー中。">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="エンジンを備えた動画編集ソフト">
-  <meta property="og:description" content="プレビューと書き出しで共有する GPU レンダリング、手元の機械で動く AI、載っているチップに合わせるハードウェアエンコード。">
+  <meta property="og:description" content="GPU レンダリング、大半が手元の機械で動く AI、載っているチップに合わせるハードウェアエンコード。">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -125,7 +125,7 @@
       "@id": "https://spinnesoftware.com/ja/sparkle/#webpage",
       "url": "https://spinnesoftware.com/ja/sparkle/",
       "name": "エンジンを備えた動画編集ソフト",
-      "description": "Sparkle はデスクトップ動画編集ソフト。プレビューと書き出しが同じ GPU レンダリングを共有し、AI は手元の機械で動きます。",
+      "description": "Sparkle はデスクトップ動画編集ソフト。GPU レンダリング、大半が手元の機械で動く AI、チップに合わせるハードウェアエンコード。プライベートプレビュー中。",
       "inLanguage": "ja",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -156,7 +156,7 @@
       "@id": "https://spinnesoftware.com/ja/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle はデスクトップ動画編集ソフト。プレビューと書き出しが同じ GPU レンダリングを共有し、AI は手元の機械で動きます。",
+      "description": "Sparkle はデスクトップ動画編集ソフト。GPU レンダリング、大半が手元の機械で動く AI、チップに合わせるハードウェアエンコード。プライベートプレビュー中。",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -167,6 +167,11 @@
   </script>
 </head>
 <body class="script-jpan">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">本文へスキップ</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -232,7 +237,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>エンジンを積んだ動画編集ソフト。</h1>
@@ -251,15 +256,16 @@
 
         <h2 id="preview">何千フレームでも、プレビューはひとつ</h2>
 
-        <p>トランジションはシェーダーです。再生ヘッドを動かしている間は GPU 上で動き、最終ファイルも同じシェーダーが描きます。だからプレビューは、書き出しの体裁だけの近似ではなく、解像度の違う書き出しそのものです。</p>
+        <p>トランジションの大半はシェーダーで、再生ヘッドを動かしているあいだは GPU 上で動きます。単純なフェードと、静止画の隣に置かれたものは、もっと簡単な経路を通ります。書き出しは、そのシェーダーをひとつも動かしません。エンコーダー自身が持つトランジションの一式を使い、同じ名前のまま渡るのはこちらの10ほどで、残りはエンコーダーが持つ中で最も近いルックに寄せられます。プレビューは、書き出されるファイルの約束ではなく、かなり近い目安です。そして、両者が食い違うのはトランジションです。</p>
 
         <p>重い素材にはプロキシを作り、長いタイムライン向けの再生経路を用意します。その差が、考えながら使える編集ソフトと、待たされる編集ソフトの差です。</p>
 
         <h2 id="ai" class="key">AI の大半は、手元の機械で動く</h2>
 
-        <p>背景除去、被写体のセグメンテーション、深度推定は、手元のハードウェアでローカルのモデルとして動きます。半日分の素材を使えるようにするためにアップロードする必要はなく、解禁前の素材は解禁前のままです。</p>
+        <p>背景除去、被写体のセグメンテーション、深度推定は、手元のハードウェアでローカルのモデルとして動きます。半日分の素材を使えるようにするためにアップロードする必要はなく、この処理については、解禁前の素材は解禁前のままです。</p>
 
-        <p>音声の文字起こしも、編集ソフトが一度だけダウンロードし、その後はネットワークなしで使う Whisper モデルで手元で動かせます。クラウドのエンジンもあり、初期設定ではまずそちらを使うので、音声がどこへ行くかは思い込みではなく設定の問題です。</p>
+        <p>音声の文字起こしも、編集ソフトが一度だけダウンロードし、その後はネットワークなしで使う Whisper モデルで手元で動かせます。そのモデルを指定すれば、音声は手元の機械から出ません。エンジンを自動のままにしておくと、クラウドのエンジンが設定されている限り、音声の長さにかかわらずそちらへ送られます。だから、音声がどこへ行くかは設定の問題であり、その設定は自分で決めておく価値があります。</p>
+
 
         <p>マスクはショットごとに描き直すのではなく、オプティカルフローでフレームをまたいで追従します。字幕は単語単位のタイミング付きで生成されるので、体裁を整え、切り直し、業界で使われている形式に書き出せます。</p>
 
@@ -273,7 +279,7 @@
 
         <p>エンコードは、見つけたアクセラレータをそのまま使います。NVIDIA NVENC、Intel Quick Sync、AMD、Apple VideoToolbox。相手がいなければ、x264、x265、SVT-AV1 のソフトウェア処理に落とします。編集室向けに H.264、HEVC、AV1、DNxHR に対応し、HDR は潰さずに扱います。</p>
 
-        <p>色は 3D LUT のパイプラインを通るので、別の場所で作ったルックもそのまま届きます。音声は書き出し時に EBU R128 へ正規化します。ラウドネス規定を外れた納品は、二度作ることになるからです。</p>
+        <p>色は 3D LUT のパイプラインを通るので、別の場所で作ったルックもそのまま届きます。音声は書き出し時にラウドネスを正規化できます——測定を一度通して、-14 LUFS のマスターに合わせます——ラウドネス規定を外れた納品は、二度作ることになるからです。既定ではなくチェックボックスなので、一度は場所を確かめておく価値があります。</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -283,22 +289,22 @@
         <h2 id="hood">内部構成</h2>
 
         <dl class="identity">
-          <div><dt>レンダリング</dt><dd>GPU シェーダー、プレビューと書き出しで共通</dd></div>
+          <div><dt>レンダリング</dt><dd>プレビューは GPU シェーダー、書き出しはエンコーダーのトランジション</dd></div>
           <div><dt>ローカル AI</dt><dd>ONNX Runtime、マット処理・セグメンテーション・深度</dd></div>
           <div><dt>音声認識</dt><dd>端末内またはクラウド、単語単位のタイミング</dd></div>
           <div><dt>エンコード</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>対応形式</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>色</dt><dd>3D LUT パイプライン</dd></div>
-          <div><dt>音声</dt><dd>EBU R128 ラウドネス</dd></div>
+          <div><dt>音声</dt><dd>ラウドネス正規化は任意、-14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">誰のためのものか</h2>
 
-        <p>編集者と小規模なポストプロダクションのチーム、つまりタイムラインの中で暮らし、ソフトが返してくれる1時間を必ず感じ取る人たちです。デスクトップの編集ソフトは無料です。クラウド AI は利用者1人単位で販売するので、編集者が3人なら3人分の支払いになります。誰かが考えたライセンス階層に合わせる必要はありません。上に書いたクレジット残高は、1人分の枠の中でクラウドの作業量を計るためのものです。</p>
+        <p>編集者と小規模なポストプロダクションのチーム、つまりタイムラインの中で暮らし、ソフトが返してくれる1時間を必ず感じ取る人たちです。デスクトップの編集ソフトは無料です。クラウド AI は組織のメンバー1人単位で課金するので、編集者が3人なら3人分の支払いになります。誰かが考えたライセンス階層に合わせる必要はありません。使っていないメンバーの分が安くなることはありません。編集ソフトを一度も開かないメンバーも、毎日編集するメンバーと同じ金額です。上に書いたクレジット残高は、アカウント単位でクラウドの作業量を計るためのものです。</p>
 
         <h2 id="status">現在の状況</h2>
 
-        <p>Sparkle は<strong>プライベートプレビュー</strong>の段階です。編集ソフト、クラウドサービス、アカウント、課金はすでに作られて動いています。利用は少しずつ開放します。他人の素材と他人のお金を扱うソフトウェアは、ゆっくり世に出すのが筋だからです。</p>
+        <p>Sparkle は<strong>プライベートプレビュー</strong>の段階です。編集ソフト、クラウドサービス、アカウント、課金はすでに作られて動いています。利用は少しずつ開放します。他人の素材と他人のお金を扱うソフトウェアは、ゆっくり世に出すのが筋だからです。編集を仕事にしていて使ってみたい方は、何を編集しているかを書いてご連絡ください。</p>
       </article>
 
       <section class="close">

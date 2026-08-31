@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle — editor video dengan mesin di bawahnya</title>
-  <meta name="description" content="Sparkle adalah editor video desktop: rendering GPU yang dipakai bersama pratinjau dan ekspor, AI di mesin Anda, encoding perangkat keras.">
+  <meta name="description" content="Sparkle adalah editor video desktop: rendering GPU, sebagian besar AI di mesin tempat rekamannya berada, encoding perangkat keras. Dalam pratinjau privat.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="id_ID">
   <meta property="og:title" content="Editor video dengan mesin di bawahnya">
-  <meta property="og:description" content="Rendering GPU yang dipakai bersama oleh pratinjau dan ekspor, AI di mesin Anda sendiri, encoding perangkat keras yang menyesuaikan diri dengan chip Anda.">
+  <meta property="og:description" content="Rendering GPU, sebagian besar AI di mesin Anda sendiri, dan encoding perangkat keras yang menyesuaikan diri dengan chip Anda.">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -127,7 +127,7 @@
       "@id": "https://spinnesoftware.com/id/sparkle/#webpage",
       "url": "https://spinnesoftware.com/id/sparkle/",
       "name": "Editor video dengan mesin di bawahnya",
-      "description": "Sparkle adalah editor video desktop: rendering GPU yang dipakai bersama pratinjau dan ekspor, AI di mesin Anda, encoding perangkat keras.",
+      "description": "Sparkle adalah editor video desktop: rendering GPU, sebagian besar AI di mesin tempat rekamannya berada, encoding perangkat keras. Dalam pratinjau privat.",
       "inLanguage": "id",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -158,7 +158,7 @@
       "@id": "https://spinnesoftware.com/id/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle adalah editor video desktop: rendering GPU yang dipakai bersama pratinjau dan ekspor, AI di mesin Anda, encoding perangkat keras.",
+      "description": "Sparkle adalah editor video desktop: rendering GPU, sebagian besar AI di mesin tempat rekamannya berada, encoding perangkat keras. Dalam pratinjau privat.",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -169,6 +169,11 @@
   </script>
 </head>
 <body class="script-latin">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Lompat ke konten</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -234,7 +239,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Editor video dengan mesin di bawahnya.</h1>
@@ -253,15 +258,16 @@
 
         <h2 id="preview">Ribuan frame, satu pratinjau</h2>
 
-        <p>Transisi adalah shader. Semuanya berjalan di GPU saat Anda menyusuri rekaman, dan shader yang sama merender berkas akhirnya — sehingga pratinjau bukan perkiraan yang sopan atas hasil ekspor, melainkan hasil ekspor itu sendiri pada resolusi yang berbeda.</p>
+        <p>Sebagian besar transisi adalah shader yang berjalan di GPU saat Anda menyusuri rekaman — sebuah fade biasa, dan apa pun yang berada di sebelah gambar diam, menempuh jalur yang lebih sederhana. Ekspornya tidak menjalankan satu pun shader itu. Ia memakai kumpulan transisi milik encoder-nya sendiri, dan di sana sekitar sepuluh transisi kami memiliki padanan berdasarkan nama, sedangkan sisanya didekatkan ke look terdekat yang dimilikinya. Pratinjaunya adalah panduan yang dekat terhadap berkas akhirnya, bukan janji atasnya, dan transisi adalah tempat keduanya berpisah.</p>
 
         <p>Rekaman berat mendapat proxy dan jalur penyusuran yang dibangun untuk timeline panjang, dan itulah perbedaan antara editor tempat Anda bisa berpikir dan editor yang harus Anda tunggu.</p>
 
         <h2 id="ai" class="key">Sebagian besar AI berjalan di mesin Anda</h2>
 
-        <p>Penghapusan latar, segmentasi subjek, dan estimasi kedalaman berjalan sebagai model lokal di perangkat keras Anda sendiri. Rekaman mentah satu sore penuh tidak perlu diunggah agar berguna, dan rekaman yang diembargo tetap diembargo.</p>
+        <p>Penghapusan latar, segmentasi subjek, dan estimasi kedalaman berjalan sebagai model lokal di perangkat keras Anda sendiri. Rekaman mentah satu sore penuh tidak perlu diunggah agar berguna, dan untuk pekerjaan ini rekaman yang diembargo tetap diembargo.</p>
 
-        <p>Pengubahan ucapan menjadi teks juga dapat berjalan secara lokal, pada model Whisper yang diunduh editornya sekali lalu dipakai tanpa jaringan. Tersedia pula mesin cloud, dan pengaturan bawaan memilih salah satunya lebih dulu, sehingga ke mana audio Anda pergi adalah sebuah pengaturan, bukan sebuah asumsi.</p>
+        <p>Pengubahan ucapan menjadi teks juga dapat berjalan secara lokal, pada model Whisper yang diunduh editornya sekali lalu dipakai tanpa jaringan. Pilih model itu, dan audionya tetap di mesin Anda. Biarkan pengaturan mesinnya pada Auto, dan pekerjaannya dikirim ke mesin cloud kapan pun ada yang dikonfigurasi, berapa pun panjang audionya — sehingga ke mana audio Anda pergi adalah sebuah pengaturan, dan pengaturan itu layak Anda tentukan sendiri.</p>
+
 
         <p>Mask mengikuti objek antar-frame menggunakan optical flow, bukan digambar ulang shot demi shot. Caption hadir dengan penanda waktu per kata, sehingga dapat diberi gaya, dipotong ulang, dan diekspor ke format yang diharapkan seluruh industri.</p>
 
@@ -275,7 +281,7 @@
 
         <p>Encoding memakai akselerator apa pun yang ditemukannya — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — dan turun ke x264, x265, atau SVT-AV1 di perangkat lunak bila tidak ada yang dapat diajak bicara. H.264, HEVC, AV1, dan DNxHR untuk ruang penyuntingan, dengan HDR ditangani, bukan diratakan.</p>
 
-        <p>Warna melewati pipeline 3D LUT, sehingga look yang dibangun di tempat lain tiba dalam keadaan utuh. Audio dinormalkan ke EBU R128 saat keluar, sebab pengiriman yang gagal memenuhi spesifikasi loudness adalah pengiriman yang harus dilakukan dua kali.</p>
+        <p>Warna melewati pipeline 3D LUT, sehingga look yang dibangun di tempat lain tiba dalam keadaan utuh. Loudness audionya dapat dinormalkan saat keluar — satu tahap pengukuran menuju master -14 LUFS — sebab pengiriman yang gagal memenuhi spesifikasi loudness adalah pengiriman yang harus dilakukan dua kali. Ini sebuah kotak centang, bukan pengaturan bawaan, jadi ada baiknya Anda menemukannya sekali.</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -285,22 +291,22 @@
         <h2 id="hood">Di balik kap mesin</h2>
 
         <dl class="identity">
-          <div><dt>Rendering</dt><dd>Shader GPU, dipakai bersama pratinjau dan ekspor</dd></div>
+          <div><dt>Rendering</dt><dd>Shader GPU di pratinjau; transisi encoder saat ekspor</dd></div>
           <div><dt>AI lokal</dt><dd>ONNX Runtime — matting, segmentasi, kedalaman</dd></div>
           <div><dt>Ucapan</dt><dd>Di perangkat atau cloud, penanda waktu per kata</dd></div>
           <div><dt>Encoding</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>Format</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>Warna</dt><dd>Pipeline 3D LUT</dd></div>
-          <div><dt>Audio</dt><dd>Loudness EBU R128</dd></div>
+          <div><dt>Audio</dt><dd>Normalisasi loudness opsional, -14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">Untuk siapa</h2>
 
-        <p>Editor dan tim pascaproduksi kecil — orang yang hidup di dalam timeline dan menghitung setiap jam yang dikembalikan perangkat lunaknya. Editor desktop-nya gratis. AI cloud dijual per kursi, sehingga tiga editor membayar tiga kursi, bukan tingkat lisensi yang dikarang seseorang. Saldo kredit yang disebut di atas adalah cara mengukur pekerjaan cloud di dalam satu kursi.</p>
+        <p>Editor dan tim pascaproduksi kecil — orang yang hidup di dalam timeline dan menghitung setiap jam yang dikembalikan perangkat lunaknya. Editor desktop-nya gratis. AI cloud ditagih per anggota organisasi Anda, sehingga tiga editor membayar untuk tiga anggota, bukan tingkat lisensi yang dikarang seseorang. Tidak ada tarif tersendiri untuk yang menganggur: anggota yang tidak pernah membuka editornya berbiaya sama dengan anggota yang menyunting setiap hari. Saldo kredit yang disebut di atas adalah cara mengukur pekerjaan cloud pada sebuah akun.</p>
 
         <h2 id="status">Posisinya hari ini</h2>
 
-        <p>Sparkle berada dalam <strong>pratinjau privat</strong>. Editor, layanan cloud, akun, dan penagihan sudah dibangun dan berjalan; akses dibuka bertahap, sebab perangkat lunak yang menangani rekaman orang lain dan uang orang lain layak dilepas perlahan.</p>
+        <p>Sparkle berada dalam <strong>pratinjau privat</strong>. Editor, layanan cloud, akun, dan penagihan sudah dibangun dan berjalan; akses dibuka bertahap, sebab perangkat lunak yang menangani rekaman orang lain dan uang orang lain layak dilepas perlahan. Jika Anda menyunting video sebagai mata pencaharian dan ingin ikut, tulislah kepada kami dan ceritakan apa yang Anda sunting.</p>
       </article>
 
       <section class="close">

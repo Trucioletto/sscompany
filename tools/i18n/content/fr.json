@@ -7,7 +7,8 @@
     "sparkle": "Sparkle",
     "how": "Notre méthode",
     "about": "Société",
-    "privacy": "Vie privée"
+    "privacy": "Vie privée",
+    "skip": "Aller au contenu"
   },
   "footer": {
     "blurb": "Une entreprise italienne qui développe ses propres logiciels — applications de bureau, IA locale et les systèmes cloud qui les portent.",
@@ -74,12 +75,12 @@
         },
         {
           "name": "Indépendance",
-          "body": "Nous possédons ce dont nous dépendons, ainsi personne d'autre ne décide de ce que le produit peut devenir."
+          "body": "Nous possédons les pièces qui décident de ce que le produit peut devenir, et nous nommons celles que nous louons."
         }
       ],
       "h2_sparkle": "Sparkle",
       "sparkle_p1": "Un logiciel de montage vidéo de bureau pour ceux qui montent pour vivre, et le premier endroit où ces valeurs ont dû résister au contact d'un vrai produit. Ce qui le rend inhabituel, ce ne sont pas les modèles — c'est qu'ils se trouvent à l'intérieur du logiciel plutôt qu'à côté. Une modification faite par l'assistant est une modification que vous auriez pu faire à la main, et une seule annulation la défait.",
-      "sparkle_p2": "Il exécute les modèles lourds sur la machine où se trouvent déjà les images, et il dessine l'aperçu avec le même code que celui qui calcule l'export. En préversion privée.",
+      "sparkle_p2": "L'essentiel de son IA tourne sur la machine où se trouvent déjà les images, et le travail génératif qui a besoin du cloud est décompté là où on peut le voir. En préversion privée.",
       "more_internal": "Voir ce que fait Sparkle",
       "h2_next": "Et ensuite le suivant",
       "next_p1": "Un produit de cette nature laisse derrière lui beaucoup de choses qui ne sont pas le produit : comptes et permissions, les services qui font tourner les modèles, les systèmes qui gardent les comptes honnêtes. Rien de tout cela n'est intéressant, et c'est tout ce que le produit suivant n'a plus à construire.",
@@ -93,9 +94,9 @@
     },
     "sparkle": {
       "title": "Sparkle — un logiciel de montage avec un moteur",
-      "description": "Sparkle est un logiciel de montage vidéo : rendu GPU partagé par l'aperçu et l'export, IA locale, encodage matériel. En préversion privée.",
+      "description": "Sparkle est un logiciel de montage vidéo : rendu GPU, l'essentiel de l'IA sur la machine où sont déjà les images, encodage matériel. En préversion privée.",
       "og_title": "Un logiciel de montage vidéo avec un moteur dessous",
-      "og_description": "Rendu GPU partagé par l'aperçu et l'export, IA sur votre propre machine, encodage matériel qui s'adapte à votre silicium.",
+      "og_description": "Rendu GPU, l'essentiel de l'IA sur votre propre machine, et encodage matériel qui s'adapte à votre silicium.",
       "tw_title": "Sparkle — Spinne Software",
       "tw_description": "La machine prend le labeur. Le montage reste le vôtre.",
       "h1": "Un logiciel de montage vidéo avec un moteur dessous.",
@@ -106,24 +107,24 @@
       "problem_p3": "Les outils qui promettent de régler le problème le règlent en général en prenant les décisions à votre place : on livre les images, on reçoit un montage, on espère être d'accord. Sparkle fait l'inverse.",
       "pull": "La machine prend le labeur. Le montage reste le vôtre.",
       "h2_preview": "Des milliers d'images, un seul aperçu",
-      "preview_p1": "Les transitions sont des shaders. Elles s'exécutent sur le GPU pendant le défilement, et ce sont les mêmes shaders qui calculent le fichier final — l'aperçu n'est donc pas une approximation polie de l'export, c'est l'export à une autre résolution.",
+      "preview_p1": "La plupart des transitions sont des shaders qui s'exécutent sur le GPU pendant le défilement — un simple fondu, et tout ce qui est placé à côté d'une image fixe, passent par un chemin plus simple. L'export n'exécute aucun de ces shaders. Il utilise le jeu de transitions propre à l'encodeur, où une dizaine des nôtres trouvent une correspondance par le nom et les autres sont approximées par l'aspect le plus proche dont il dispose. L'aperçu est un guide fidèle du fichier plutôt qu'une promesse, et c'est sur les transitions que les deux se séparent.",
       "preview_p2": "Les images lourdes reçoivent des proxys et un chemin de défilement conçu pour les longues timelines, ce qui fait la différence entre un logiciel dans lequel on pense et un logiciel que l'on attend.",
       "h2_ai": "L'essentiel de l'IA tourne sur votre machine",
-      "ai_p1": "La suppression de l'arrière-plan, la segmentation du sujet et l'estimation de profondeur sont des modèles locaux qui tournent sur votre propre matériel. Un après-midi de rushes n'a pas besoin d'être téléversé pour devenir exploitable, et des images sous embargo restent sous embargo.",
-      "ai_p2": "La transcription de la parole peut elle aussi tourner en local, sur un modèle Whisper que le logiciel télécharge une fois puis utilise sans réseau. Il existe également des moteurs cloud, et la configuration par défaut s'adresse d'abord à l'un d'eux : la destination de votre audio est donc un réglage, pas une supposition.",
+      "ai_p1": "La suppression de l'arrière-plan, la segmentation du sujet et l'estimation de profondeur sont des modèles locaux qui tournent sur votre propre matériel. Un après-midi de rushes n'a pas besoin d'être téléversé pour devenir exploitable, et, pour ce travail-là, des images sous embargo restent sous embargo.",
+      "ai_p2": "La transcription de la parole peut elle aussi tourner en local, sur un modèle Whisper que le logiciel télécharge une fois puis utilise sans réseau. Désignez ce modèle et l'audio reste sur la machine. Laissez le moteur sur Auto et il part vers un moteur cloud dès qu'il y en a un de configuré, quelle que soit la durée — la destination de votre audio est donc un réglage, et c'est un réglage qui mérite d'être fait.",
       "ai_p3": "Les masques suivent le mouvement d'image en image par flux optique, au lieu d'être redessinés plan par plan. Les sous-titres arrivent avec un calage au mot, ce qui permet de les styliser, de les recouper et de les exporter dans les formats attendus par le reste de la profession.",
       "ai_p4": "Les travaux génératifs les plus lourds passent par le cloud, et cette partie est décomptée là où on peut la voir. Chaque compte détient un solde de crédits ; une opération réserve ce qu'elle pourrait coûter avant de démarrer, puis se règle sur ce qu'elle a réellement coûté. Personne ne découvre une facture à la fin du mois.",
       "h2_export": "Un export qui parle à votre matériel",
       "export_p1": "L'encodage utilise l'accélérateur qu'il trouve — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — et redescend vers x264, x265 ou SVT-AV1 en logiciel quand il n'a rien à qui parler. H.264, HEVC, AV1 et DNxHR pour la salle de montage, avec le HDR traité plutôt qu'aplati.",
-      "export_p2": "La couleur passe par une chaîne 3D LUT : un étalonnage construit ailleurs arrive intact. L'audio est normalisé en EBU R128 à la sortie, parce qu'une livraison recalée sur la norme de sonie est une livraison que l'on fait deux fois.",
+      "export_p2": "La couleur passe par une chaîne 3D LUT : un étalonnage construit ailleurs arrive intact. L'audio peut être normalisé en sonie à la sortie — une passe de mesure vers un master à -14 LUFS — parce qu'une livraison recalée sur la norme de sonie est une livraison que l'on fait deux fois. C'est une case à cocher plutôt qu'un comportement par défaut, et elle vaut la peine d'être trouvée une fois pour toutes.",
       "h2_who": "À qui il s'adresse",
-      "who_p1": "Monteurs et petites équipes de post-production — des gens qui vivent dans une timeline et qui remarquent chaque heure que le logiciel leur rend. Le logiciel de bureau est gratuit. L'IA cloud se vend au poste : trois monteurs paient trois postes, pas un palier de licence inventé par quelqu'un. Le solde de crédits évoqué plus haut est la façon dont le travail cloud est mesuré à l'intérieur d'un poste.",
+      "who_p1": "Monteurs et petites équipes de post-production — des gens qui vivent dans une timeline et qui remarquent chaque heure que le logiciel leur rend. Le logiciel de bureau est gratuit. L'IA cloud est facturée par membre de votre organisation : trois monteurs paient pour trois, pas un palier de licence inventé par quelqu'un. Il n'y a pas de tarif d'inactivité : un membre qui n'ouvre jamais le logiciel coûte autant qu'un membre qui monte tous les jours. Le solde de crédits évoqué plus haut est la façon dont le travail cloud est mesuré sur un compte.",
       "h2_status": "Où en est le produit",
-      "status_p1": "Sparkle est en <strong>préversion privée</strong>. Le logiciel, les services cloud, les comptes et la facturation sont construits et en service ; l'accès s'ouvre progressivement, parce qu'un logiciel qui manipule les images et l'argent des autres mérite d'être lâché lentement.",
+      "status_p1": "Sparkle est en <strong>préversion privée</strong>. Le logiciel, les services cloud, les comptes et la facturation sont construits et en service ; l'accès s'ouvre progressivement, parce qu'un logiciel qui manipule les images et l'argent des autres mérite d'être lâché lentement. Si vous montez pour vivre et que vous voulez en être, écrivez-nous et dites-nous ce que vous montez.",
       "rail_hood": "Sous le capot",
       "spec": {
         "rendering": "Rendu",
-        "rendering_v": "Shaders GPU, partagés par l'aperçu et l'export",
+        "rendering_v": "Shaders GPU à l'aperçu ; transitions de l'encodeur à l'export",
         "local_ai": "IA locale",
         "local_ai_v": "ONNX Runtime — détourage, segmentation, profondeur",
         "speech": "Parole",
@@ -133,7 +134,7 @@
         "colour": "Couleur",
         "colour_v": "Chaîne 3D LUT",
         "audio": "Audio",
-        "audio_v": "Sonie EBU R128"
+        "audio_v": "Normalisation de sonie optionnelle, -14 LUFS"
       },
       "rail_short": "Ce qu'il ne fera pas",
       "rail_short_body": "Il ne vous prend pas le montage. L'assistant ne touche pas à une coupe qu'on ne lui a pas demandé de toucher, et il ne peut rien faire que le logiciel lui-même ne sache faire — c'est la raison pour laquelle une seule annulation suffit à revenir en arrière."
@@ -166,9 +167,9 @@
       "h2_models": "Les modèles sont à côté de la timeline, pas derrière un téléversement",
       "models_p1": "Le détourage, la segmentation et la profondeur s'exécutent dans le même processus que le logiciel de montage, sur les images qu'il a déjà sous la main. Pas d'export, pas de téléversement, pas d'attente, pas de réimport, et rien à réaligner ensuite.",
       "models_p2": "C'est un choix de conception dicté par la latence, et il tranche une question que la couture laisse d'ordinaire ouverte : des images sous embargo restent sous embargo, parce qu'elles ne sont jamais parties. Là où un travail a réellement besoin du cloud, il passe par une passerelle unique qui le décompte sur le compte qui l'a demandé.",
-      "h2_parity": "Un aperçu qui est l'export",
-      "parity_p1": "Les mêmes shaders dessinent le défilement et le rendu final : ce que vous validez est ce que vous livrez. Sans cela, chaque modification de l'IA est provisoire — vous accepteriez une image pour revérifier le fichier plus tard, c'est-à-dire la couture qui réapparaît à l'autre bout de la chaîne.",
-      "parity_p2": "Mis bout à bout — un seul document, un seul jeu d'opérations, une seule annulation, une seule opération de tête, une seule exécution, un seul chemin de rendu — la question intéressante n'est plus de savoir si le modèle est bon. Elle devient : combien il en coûte de ne pas être d'accord avec lui. C'est cette partie-là que nous construisons.",
+      "h2_parity": "Un aperçu assez fidèle pour être validé",
+      "parity_p1": "Le défilement et le rendu final sortent de la même timeline, et les calculs de couleur de l'export sont un portage délibéré de ceux de l'aperçu : ce que vous validez est ce que vous livrez, partout sauf sur les transitions. Cette exception est réelle, et nous préférons la nommer ici plutôt que de vous laisser la découvrir dans une livraison : l'export n'exécute aucun des shaders de transition de l'aperçu. Il les confie au jeu propre à l'encodeur, où une dizaine des nôtres trouvent une correspondance par le nom et les autres sont approximées — et une transition retombe sur un simple fondu enchaîné dès que les plans de part et d'autre ne peuvent pas être transmis intacts, ce qui comprend les images lues à l'envers, la vitesse variable, les fondus appliqués clip par clip, les ombres portées, les modes de fusion, la géométrie animée par images clés et la seconde de deux transitions placées bout à bout. Tout ce qui n'est pas une transition est rendu à partir de la même description dans les deux cas. Sans cela, chaque modification de l'IA serait provisoire : vous accepteriez une image pour revérifier le fichier plus tard, c'est-à-dire la couture qui réapparaît à l'autre bout de la chaîne.",
+      "parity_p2": "Mis bout à bout — un seul document, un seul jeu d'opérations, une seule annulation, une seule opération de tête, une seule exécution, une seule chaîne de couleur — la question intéressante n'est plus de savoir si le modèle est bon. Elle devient : combien il en coûte de ne pas être d'accord avec lui. C'est cette partie-là que nous construisons.",
       "rail_shape": "La forme générale",
       "shape": {
         "doc": "Document",
@@ -200,7 +201,7 @@
       "lede": "Spinne Software fabrique ses propres logiciels au lieu d'accepter des prestations. C'est un développeur à Rome, et l'ordre du travail est délibéré : construire la machinerie une fois, puis construire les produits qui tiennent dessus. L'ambition est dite sans détour — des produits qui tiennent la comparaison avec les meilleurs de leur catégorie, faits par une entreprise assez petite pour les finir.",
       "h2_why": "Pourquoi des produits plutôt que des clients",
       "why_p1": "La prestation finance la feuille de route de quelqu'un d'autre. Posséder le produit, c'est faire en sorte que l'ingénierie se capitalise au lieu d'être cédée — chaque système dont Sparkle a eu besoin, la suite en hérite.",
-      "why_p2": "Cela veut dire aussi que les décisions restent ici. Ce qui sera construit ensuite est tranché par ce dont le travail a besoin, pas par le client le plus gros du trimestre, et les pièces dont le produit dépend nous appartiennent au lieu d'être louées à quelqu'un dont les priorités peuvent changer sans préavis.",
+      "why_p2": "Cela veut dire aussi que les décisions restent ici. Ce qui sera construit ensuite est tranché par ce dont le travail a besoin, pas par le client le plus gros du trimestre, et les pièces qui décident de ce que le produit peut devenir nous appartiennent au lieu d'être louées ; celles que nous louons sont nommées plus bas sur cette page.",
       "pull": "L'indépendance n'est pas une préférence. C'est la différence entre choisir et se le faire dicter.",
       "h2_one": "Un seul développeur, et ce que cela apporte",
       "one_p1": "Rien ne se perd entre celui qui a décidé quelque chose et celui qui l'a construit, et chaque partie du système a encore un auteur capable d'expliquer pourquoi elle est ainsi. Ce que cela coûte, c'est le parallélisme : une chose à la fois, terminée.",
@@ -208,7 +209,7 @@
       "decided_p1": "Une fonction naît de quelque chose qu'une personne ne peut pas faire aujourd'hui, pas d'un modèle sorti la semaine dernière. La technologie est choisie après le problème : c'est pourquoi une partie tourne sur la machine que vous avez devant vous, une autre dans un centre de données, et une autre a été laissée de côté parce que la version honnête ne fonctionnait pas encore.",
       "decided_p2": "Ce qui est défectueux est corrigé plutôt que documenté. Un défaut n'est pas une limitation connue, et une conception qui ne tient que si l'utilisateur fait attention est une conception qui ne tient pas.",
       "h2_built": "Ce qui existe",
-      "built_p1": " — un logiciel de montage vidéo de bureau avec rendu GPU, IA locale pour le détourage, la segmentation et la profondeur, encodage matériel sur quatre plateformes constructeurs, ainsi que les comptes d'équipe, les abonnements au poste, les crédits mesurés à l'usage et la facturation électronique italienne sans lesquels un produit de cette taille ne sort pas. En préversion privée sur",
+      "built_p1": " — un logiciel de montage vidéo de bureau avec rendu GPU, IA locale pour le détourage, la segmentation et la profondeur, encodage matériel sur quatre plateformes constructeurs, ainsi que les comptes d'équipe, les abonnements par membre, les crédits mesurés à l'usage et la facturation électronique italienne sans lesquels un produit de cette taille ne sort pas. En préversion privée sur",
       "built_link_what": "Ce qu'il fait",
       "built_link_how": "comment il est construit",
       "h2_compliance": "La position exacte",

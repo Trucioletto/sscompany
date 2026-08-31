@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Où finit le logiciel de montage et où commence le modèle.</h1>
@@ -282,11 +287,11 @@
 
         <p>C'est un choix de conception dicté par la latence, et il tranche une question que la couture laisse d'ordinaire ouverte : des images sous embargo restent sous embargo, parce qu'elles ne sont jamais parties. Là où un travail a réellement besoin du cloud, il passe par une passerelle unique qui le décompte sur le compte qui l'a demandé.</p>
 
-        <h2 id="parity">Un aperçu qui est l'export</h2>
+        <h2 id="parity">Un aperçu assez fidèle pour être validé</h2>
 
-        <p>Les mêmes shaders dessinent le défilement et le rendu final : ce que vous validez est ce que vous livrez. Sans cela, chaque modification de l'IA est provisoire — vous accepteriez une image pour revérifier le fichier plus tard, c'est-à-dire la couture qui réapparaît à l'autre bout de la chaîne.</p>
+        <p>Le défilement et le rendu final sortent de la même timeline, et les calculs de couleur de l'export sont un portage délibéré de ceux de l'aperçu : ce que vous validez est ce que vous livrez, partout sauf sur les transitions. Cette exception est réelle, et nous préférons la nommer ici plutôt que de vous laisser la découvrir dans une livraison : l'export n'exécute aucun des shaders de transition de l'aperçu. Il les confie au jeu propre à l'encodeur, où une dizaine des nôtres trouvent une correspondance par le nom et les autres sont approximées — et une transition retombe sur un simple fondu enchaîné dès que les plans de part et d'autre ne peuvent pas être transmis intacts, ce qui comprend les images lues à l'envers, la vitesse variable, les fondus appliqués clip par clip, les ombres portées, les modes de fusion, la géométrie animée par images clés et la seconde de deux transitions placées bout à bout. Tout ce qui n'est pas une transition est rendu à partir de la même description dans les deux cas. Sans cela, chaque modification de l'IA serait provisoire : vous accepteriez une image pour revérifier le fichier plus tard, c'est-à-dire la couture qui réapparaît à l'autre bout de la chaîne.</p>
 
-        <p>Mis bout à bout — un seul document, un seul jeu d'opérations, une seule annulation, une seule opération de tête, une seule exécution, un seul chemin de rendu — la question intéressante n'est plus de savoir si le modèle est bon. Elle devient : combien il en coûte de ne pas être d'accord avec lui. C'est cette partie-là que nous construisons.</p>
+        <p>Mis bout à bout — un seul document, un seul jeu d'opérations, une seule annulation, une seule opération de tête, une seule exécution, une seule chaîne de couleur — la question intéressante n'est plus de savoir si le modèle est bon. Elle devient : combien il en coûte de ne pas être d'accord avec lui. C'est cette partie-là que nous construisons.</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

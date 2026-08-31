@@ -7,7 +7,8 @@
     "sparkle": "Sparkle",
     "how": "Wie wir bauen",
     "about": "Firma",
-    "privacy": "Datenschutz"
+    "privacy": "Datenschutz",
+    "skip": "Zum Inhalt springen"
   },
   "footer": {
     "blurb": "Ein italienisches Unternehmen, das seine eigene Software baut — Desktop-Anwendungen, lokale KI und die Cloud-Systeme darunter.",
@@ -74,12 +75,12 @@
         },
         {
           "name": "Unabhängigkeit",
-          "body": "Uns gehört, worauf wir angewiesen sind, damit niemand sonst entscheidet, was aus dem Produkt wird."
+          "body": "Uns gehören die Teile, die entscheiden, was aus dem Produkt wird, und wir sagen, welche wir mieten."
         }
       ],
       "h2_sparkle": "Sparkle",
       "sparkle_p1": "Ein Desktop-Videoeditor für Menschen, die vom Schneiden leben, und die erste Stelle, an der sich diese Werte an einem echten Produkt bewähren mussten. Ungewöhnlich sind nicht die Modelle — ungewöhnlich ist, dass sie im Editor sitzen und nicht daneben. Eine Änderung des Assistenten ist eine Änderung, die Sie auch von Hand hätten machen können, und ein einziges Undo nimmt sie zurück.",
-      "sparkle_p2": "Die schweren Modelle laufen auf der Maschine, auf der das Material ohnehin schon liegt, und die Vorschau wird mit demselben Code gezeichnet, der den Export rendert. In geschlossener Vorschau.",
+      "sparkle_p2": "Der größte Teil seiner KI läuft auf der Maschine, auf der das Material ohnehin schon liegt, und die generative Arbeit, die die Cloud braucht, wird sichtbar abgerechnet. In geschlossener Vorschau.",
       "more_internal": "Was Sparkle kann",
       "h2_next": "Und dann das nächste",
       "next_p1": "Ein solches Produkt lässt sehr viel zurück, das nicht das Produkt ist: Konten und Berechtigungen, die Dienste, die die Modelle ausführen, die Systeme, die das Geld ehrlich halten. Nichts davon ist interessant, und genau das muss das nächste Produkt nicht mehr bauen.",
@@ -93,9 +94,9 @@
     },
     "sparkle": {
       "title": "Sparkle — ein Videoeditor mit einer Engine darunter",
-      "description": "Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, das Vorschau und Export teilen, KI auf der eigenen Maschine, Hardware-Kodierung.",
+      "description": "Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, der größte Teil der KI auf der eigenen Maschine, Hardware-Kodierung. In geschlossener Vorschau.",
       "og_title": "Ein Videoeditor mit einer Engine darunter",
-      "og_description": "GPU-Rendering, das Vorschau und Export teilen, KI auf der eigenen Maschine, Hardware-Kodierung, die sich an das vorhandene Silizium anpasst.",
+      "og_description": "GPU-Rendering, der größte Teil der KI auf der eigenen Maschine, Hardware-Kodierung, die sich an das vorhandene Silizium anpasst.",
       "tw_title": "Sparkle — Spinne Software",
       "tw_description": "Die Maschine übernimmt die Arbeit. Der Schnitt bleibt Ihrer.",
       "h1": "Ein Videoeditor mit einer Engine darunter.",
@@ -106,24 +107,24 @@
       "problem_p3": "Werkzeuge, die das zu beheben versprechen, beheben es meist, indem sie die Entscheidungen übernehmen: Material abgeben, einen Schnitt zurückbekommen, hoffen, dass er passt. Sparkle geht den anderen Weg.",
       "pull": "Die Maschine übernimmt die Arbeit. Der Schnitt bleibt Ihrer.",
       "h2_preview": "Tausende Bilder, eine Vorschau",
-      "preview_p1": "Übergänge sind Shader. Sie laufen auf der GPU, während Sie durch das Material fahren, und dieselben Shader rendern die endgültige Datei — die Vorschau ist also keine höfliche Annäherung an den Export, sie ist der Export in einer anderen Auflösung.",
+      "preview_p1": "Die meisten Übergänge sind Shader, die auf der GPU laufen, während Sie durch das Material fahren — eine schlichte Blende und alles, was neben einem Standbild sitzt, nehmen einen einfacheren Weg. Beim Export läuft keiner dieser Shader. Er nutzt den eigenen Übergangssatz des Encoders: Etwa zehn unserer Übergänge haben dort eine namentliche Entsprechung, der Rest wird an den nächstliegenden Look angenähert, den der Encoder hat. Die Vorschau ist damit ein genauer Anhaltspunkt für die Datei und kein Versprechen, und bei den Übergängen gehen Vorschau und Datei auseinander.",
       "preview_p2": "Schweres Material bekommt Proxys und einen Scrub-Pfad, der für lange Timelines gebaut ist. Das ist der Unterschied zwischen einem Editor, in dem man denken kann, und einem, auf den man wartet.",
       "h2_ai": "Der größte Teil der KI läuft auf der eigenen Maschine",
-      "ai_p1": "Freistellung des Hintergrunds, Segmentierung des Motivs und Tiefenschätzung laufen als lokale Modelle auf der eigenen Hardware. Ein Nachmittag Rohmaterial muss nicht hochgeladen werden, um brauchbar zu sein, und Material unter Sperrfrist bleibt unter Sperrfrist.",
-      "ai_p2": "Auch die Spracherkennung kann lokal laufen, auf einem Whisper-Modell, das der Editor einmal herunterlädt und danach ohne Netz benutzt. Es gibt ebenso Cloud-Engines, und die Voreinstellung greift zuerst nach einer davon; wohin Ihr Ton geht, ist damit eine Einstellung und keine Annahme.",
+      "ai_p1": "Freistellung des Hintergrunds, Segmentierung des Motivs und Tiefenschätzung laufen als lokale Modelle auf der eigenen Hardware. Ein Nachmittag Rohmaterial muss nicht hochgeladen werden, um brauchbar zu sein, und für diese Arbeit bleibt Material unter Sperrfrist unter Sperrfrist.",
+      "ai_p2": "Auch die Spracherkennung kann lokal laufen, auf einem Whisper-Modell, das der Editor einmal herunterlädt und danach ohne Netz benutzt. Geben Sie dieses Modell an, bleibt der Ton auf der Maschine. Bleibt die Engine auf Auto, geht er an eine Cloud-Engine, sobald eine eingerichtet ist, unabhängig von der Länge der Datei — wohin Ihr Ton geht, ist damit eine Einstellung, und eine, die man vornehmen sollte.",
       "ai_p3": "Masken werden mit optischem Fluss von Bild zu Bild verfolgt, statt Einstellung für Einstellung neu gezeichnet zu werden. Untertitel kommen mit wortgenauem Timing, lassen sich also gestalten, neu schneiden und in die Formate exportieren, die der Rest der Branche erwartet.",
       "ai_p4": "Die schwerere generative Arbeit braucht die Cloud, und dieser Teil wird sichtbar abgerechnet. Jedes Konto führt ein Guthaben an Credits; ein Vorgang reserviert vor dem Start, was er kosten könnte, und rechnet ab, was er tatsächlich gekostet hat. Niemand entdeckt am Monatsende eine Rechnung.",
       "h2_export": "Ein Export, der mit der Hardware spricht",
       "export_p1": "Die Kodierung nutzt jeden Beschleuniger, den sie findet — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — und fällt auf x264, x265 oder SVT-AV1 in Software zurück, wenn es nichts gibt, mit dem sie sprechen kann. H.264, HEVC, AV1 und DNxHR für den Schnittplatz, wobei HDR behandelt und nicht eingeebnet wird.",
-      "export_p2": "Farbe läuft durch eine Pipeline mit 3D LUT, ein anderswo gebauter Look kommt also unversehrt an. Der Ton wird beim Ausspielen auf EBU R128 normalisiert, denn eine Lieferung, die an der Lautheitsnorm scheitert, ist eine Lieferung, die man zweimal macht.",
+      "export_p2": "Farbe läuft durch eine Pipeline mit 3D LUT, ein anderswo gebauter Look kommt also unversehrt an. Der Ton kann beim Ausspielen in der Lautheit normalisiert werden — ein Messdurchlauf auf einen Master mit -14 LUFS —, denn eine Lieferung, die an der Lautheitsnorm scheitert, ist eine Lieferung, die man zweimal macht. Es ist ein Häkchen und keine Voreinstellung, es lohnt sich also, es einmal zu suchen.",
       "h2_who": "Für wen es gedacht ist",
-      "who_p1": "Cutter und kleine Teams in der Postproduktion — Menschen, die in einer Timeline leben und jede Stunde bemerken, die die Software zurückgibt. Der Desktop-Editor ist kostenlos. Cloud-KI wird pro Arbeitsplatz verkauft; drei Cutter zahlen also für drei Plätze und nicht für eine Lizenzstufe, die sich jemand ausgedacht hat. Das oben beschriebene Credit-Guthaben misst die Cloud-Arbeit innerhalb eines Platzes.",
+      "who_p1": "Cutter und kleine Teams in der Postproduktion — Menschen, die in einer Timeline leben und jede Stunde bemerken, die die Software zurückgibt. Der Desktop-Editor ist kostenlos. Cloud-KI wird pro Mitglied Ihrer Organisation abgerechnet; drei Cutter zahlen also für drei Mitglieder und nicht für eine Lizenzstufe, die sich jemand ausgedacht hat. Einen Tarif für Untätigkeit gibt es nicht: Ein Mitglied, das den Editor nie öffnet, kostet dasselbe wie eines, das täglich schneidet. Das oben beschriebene Credit-Guthaben misst die Cloud-Arbeit auf einem Konto.",
       "h2_status": "Wo es heute steht",
-      "status_p1": "Sparkle befindet sich in <strong>geschlossener Vorschau</strong>. Editor, Cloud-Dienste, Konten und Abrechnung sind gebaut und laufen; der Zugang öffnet sich schrittweise, denn Software, die fremdes Material und fremdes Geld anfasst, verdient es, langsam herausgelassen zu werden.",
+      "status_p1": "Sparkle befindet sich in <strong>geschlossener Vorschau</strong>. Editor, Cloud-Dienste, Konten und Abrechnung sind gebaut und laufen; der Zugang öffnet sich schrittweise, denn Software, die fremdes Material und fremdes Geld anfasst, verdient es, langsam herausgelassen zu werden. Wenn Sie vom Schneiden leben und dabei sein wollen, schreiben Sie uns und sagen Sie, was Sie schneiden.",
       "rail_hood": "Unter der Haube",
       "spec": {
         "rendering": "Rendering",
-        "rendering_v": "GPU-Shader, geteilt von Vorschau und Export",
+        "rendering_v": "GPU-Shader in der Vorschau; Encoder-Übergänge beim Export",
         "local_ai": "Lokale KI",
         "local_ai_v": "ONNX Runtime — Matting, Segmentierung, Tiefe",
         "speech": "Sprache",
@@ -133,7 +134,7 @@
         "colour": "Farbe",
         "colour_v": "Pipeline mit 3D LUT",
         "audio": "Audio",
-        "audio_v": "Lautheit nach EBU R128"
+        "audio_v": "Lautheit optional normalisiert, -14 LUFS"
       },
       "rail_short": "Was es nicht tut",
       "rail_short_body": "Es nimmt Ihnen den Schnitt nicht ab. Der Assistent fasst nichts am Schnitt ungefragt an, und er kann nichts tun, was der Editor selbst nicht tun kann — und genau deshalb nimmt ein einziges Undo alles davon wieder zurück."
@@ -166,9 +167,9 @@
       "h2_models": "Die Modelle sitzen neben der Timeline, nicht hinter einem Upload",
       "models_p1": "Matting, Segmentierung und Tiefe laufen im selben Prozess wie der Editor, auf den Bildern, die er ohnehin schon vorliegen hat. Es gibt keinen Export, keinen Upload, kein Warten, keinen Re-Import und nichts, was hinterher wieder zusammenpassen muss.",
       "models_p2": "Das ist eine Entwurfsentscheidung über Latenz, und sie klärt eine Frage, die die Naht sonst offenlässt: Material unter Sperrfrist bleibt unter Sperrfrist, weil es nie weg war. Wo Arbeit die Cloud wirklich braucht, geht sie durch ein einziges Gateway, das sie dem Konto zurechnet, das sie angefordert hat.",
-      "h2_parity": "Eine Vorschau, die der Export ist",
-      "parity_p1": "Dieselben Shader zeichnen das Scrubbing und das endgültige Rendering; was Sie abnehmen, ist das, was Sie ausliefern. Ohne das wäre jede KI-Änderung vorläufig: Sie würden ein Bild abnehmen und die Datei später noch einmal prüfen — die Naht, die am anderen Ende der Pipeline wieder auftaucht.",
-      "parity_p2": "Zusammengenommen — ein Dokument, ein Satz von Operationen, ein Undo, ein Head, eine Ausführung, ein Render-Pfad — ist die interessante Frage nicht mehr, wie gut das Modell ist. Sie lautet, wie billig man ihm widersprechen kann. Das ist der Teil, den wir bauen.",
+      "h2_parity": "Eine Vorschau, nah genug zur Abnahme",
+      "parity_p1": "Das Scrubbing und das endgültige Rendering kommen von derselben Timeline, und die Farbmathematik des Exports ist bewusst aus der Vorschau portiert; was Sie abnehmen, ist damit das, was Sie ausliefern — überall außer bei den Übergängen. Diese Ausnahme ist real, und wir benennen sie lieber hier, als dass Sie sie in einer Lieferung entdecken: Beim Export läuft keiner der Übergangs-Shader der Vorschau. Er übergibt sie an den eigenen Satz des Encoders, wo etwa zehn unserer Übergänge eine namentliche Entsprechung haben und der Rest angenähert wird — und ein Übergang fällt auf eine schlichte Kreuzblende zurück, sobald die Clips zu beiden Seiten nicht unversehrt übergeben werden können, wozu rückwärts laufendes Material, variables Tempo, Blenden am einzelnen Clip, Schlagschatten, Blend-Modi, per Keyframe animierte Geometrie und der zweite von zwei direkt aufeinanderfolgenden Übergängen gehören. Alles, was kein Übergang ist, wird in Vorschau und Export aus derselben Beschreibung gerendert. Ohne das wäre jede KI-Änderung vorläufig: Sie würden ein Bild abnehmen und die Datei später noch einmal prüfen — die Naht, die am anderen Ende der Pipeline wieder auftaucht.",
+      "parity_p2": "Zusammengenommen — ein Dokument, ein Satz von Operationen, ein Undo, ein Head, eine Ausführung, eine Farb-Pipeline — ist die interessante Frage nicht mehr, wie gut das Modell ist. Sie lautet, wie billig man ihm widersprechen kann. Das ist der Teil, den wir bauen.",
       "rail_shape": "Der Aufbau",
       "shape": {
         "doc": "Dokument",
@@ -200,7 +201,7 @@
       "lede": "Spinne Software macht seine eigene Software, statt Aufträge anzunehmen. Es ist ein Entwickler in Rom, und die Reihenfolge der Arbeit ist Absicht: erst die Maschinerie einmal bauen, dann die Produkte, die darauf stehen. Der Anspruch wird offen gesagt — Produkte, die neben den besten ihrer Kategorie bestehen, gebaut von einem Unternehmen, das klein genug ist, sie fertigzustellen.",
       "h2_why": "Warum Produkte statt Kunden",
       "why_p1": "Auftragsarbeit bezahlt die Roadmap eines anderen. Das Produkt zu besitzen heißt, dass sich die Technik verzinst, statt übergeben zu werden — das Nächste erbt jedes System, das Sparkle gebraucht hat.",
-      "why_p2": "Es heißt auch, dass die Entscheidungen hier bleiben. Was als Nächstes gebaut wird, entscheidet die Arbeit und nicht der größte Kunde des Quartals, und die Teile, auf die das Produkt angewiesen ist, gehören uns, statt bei jemandem gemietet zu sein, dessen Prioritäten sich ohne Ankündigung ändern können.",
+      "why_p2": "Es heißt auch, dass die Entscheidungen hier bleiben. Was als Nächstes gebaut wird, entscheidet die Arbeit und nicht der größte Kunde des Quartals, und die Teile, die entscheiden, was aus dem Produkt wird, gehören uns, statt gemietet zu sein; welche wir mieten, steht weiter unten auf dieser Seite.",
       "pull": "Unabhängigkeit ist keine Vorliebe. Sie ist der Unterschied zwischen entscheiden und gesagt bekommen.",
       "h2_one": "Ein Entwickler, und was das einbringt",
       "one_p1": "Zwischen der Person, die etwas entschieden hat, und der Person, die es gebaut hat, geht nichts verloren, und jeder Teil des Systems hat noch einen Autor, der erklären kann, warum er so ist, wie er ist. Was es kostet, ist Parallelität: eine Sache nach der anderen, fertig.",
@@ -208,7 +209,7 @@
       "decided_p1": "Eine Funktion entsteht aus etwas, das ein Mensch heute nicht tun kann, nicht aus einem Modell, das vorige Woche erschienen ist. Die Technik wird nach dem Problem gewählt: Deshalb läuft ein Teil davon auf der Maschine vor Ihnen, ein Teil im Rechenzentrum, und ein Teil blieb draußen, weil die ehrliche Fassung noch nicht funktionierte.",
       "decided_p2": "Was falsch ist, wird repariert statt dokumentiert. Ein Fehler ist keine bekannte Einschränkung, und ein Entwurf, der nur hält, wenn die Nutzenden aufpassen, ist ein Entwurf, der nicht hält.",
       "h2_built": "Was existiert",
-      "built_p1": " — ein Desktop-Videoeditor mit GPU-Rendering, lokaler KI für Matting, Segmentierung und Tiefe, Hardware-Kodierung über vier Hersteller-Stacks sowie den Team-Konten, Abonnements pro Arbeitsplatz, Credits nach Verbrauch und der italienischen elektronischen Rechnungsstellung, ohne die ein Produkt dieser Größe nicht ausgeliefert wird. In geschlossener Vorschau unter",
+      "built_p1": " — ein Desktop-Videoeditor mit GPU-Rendering, lokaler KI für Matting, Segmentierung und Tiefe, Hardware-Kodierung über vier Hersteller-Stacks sowie den Team-Konten, Abonnements pro Mitglied, Credits nach Verbrauch und der italienischen elektronischen Rechnungsstellung, ohne die ein Produkt dieser Größe nicht ausgeliefert wird. In geschlossener Vorschau unter",
       "built_link_what": "Was es kann",
       "built_link_how": "wie es gebaut ist",
       "h2_compliance": "Die genaue Position",

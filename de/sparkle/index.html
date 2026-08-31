@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle — ein Videoeditor mit einer Engine darunter</title>
-  <meta name="description" content="Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, das Vorschau und Export teilen, KI auf der eigenen Maschine, Hardware-Kodierung.">
+  <meta name="description" content="Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, der größte Teil der KI auf der eigenen Maschine, Hardware-Kodierung. In geschlossener Vorschau.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="de_DE">
   <meta property="og:title" content="Ein Videoeditor mit einer Engine darunter">
-  <meta property="og:description" content="GPU-Rendering, das Vorschau und Export teilen, KI auf der eigenen Maschine, Hardware-Kodierung, die sich an das vorhandene Silizium anpasst.">
+  <meta property="og:description" content="GPU-Rendering, der größte Teil der KI auf der eigenen Maschine, Hardware-Kodierung, die sich an das vorhandene Silizium anpasst.">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -127,7 +127,7 @@
       "@id": "https://spinnesoftware.com/de/sparkle/#webpage",
       "url": "https://spinnesoftware.com/de/sparkle/",
       "name": "Ein Videoeditor mit einer Engine darunter",
-      "description": "Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, das Vorschau und Export teilen, KI auf der eigenen Maschine, Hardware-Kodierung.",
+      "description": "Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, der größte Teil der KI auf der eigenen Maschine, Hardware-Kodierung. In geschlossener Vorschau.",
       "inLanguage": "de",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -158,7 +158,7 @@
       "@id": "https://spinnesoftware.com/de/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, das Vorschau und Export teilen, KI auf der eigenen Maschine, Hardware-Kodierung.",
+      "description": "Sparkle ist ein Desktop-Videoeditor: GPU-Rendering, der größte Teil der KI auf der eigenen Maschine, Hardware-Kodierung. In geschlossener Vorschau.",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -169,6 +169,11 @@
   </script>
 </head>
 <body class="script-latin">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -234,7 +239,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Ein Videoeditor mit einer Engine darunter.</h1>
@@ -253,15 +258,16 @@
 
         <h2 id="preview">Tausende Bilder, eine Vorschau</h2>
 
-        <p>Übergänge sind Shader. Sie laufen auf der GPU, während Sie durch das Material fahren, und dieselben Shader rendern die endgültige Datei — die Vorschau ist also keine höfliche Annäherung an den Export, sie ist der Export in einer anderen Auflösung.</p>
+        <p>Die meisten Übergänge sind Shader, die auf der GPU laufen, während Sie durch das Material fahren — eine schlichte Blende und alles, was neben einem Standbild sitzt, nehmen einen einfacheren Weg. Beim Export läuft keiner dieser Shader. Er nutzt den eigenen Übergangssatz des Encoders: Etwa zehn unserer Übergänge haben dort eine namentliche Entsprechung, der Rest wird an den nächstliegenden Look angenähert, den der Encoder hat. Die Vorschau ist damit ein genauer Anhaltspunkt für die Datei und kein Versprechen, und bei den Übergängen gehen Vorschau und Datei auseinander.</p>
 
         <p>Schweres Material bekommt Proxys und einen Scrub-Pfad, der für lange Timelines gebaut ist. Das ist der Unterschied zwischen einem Editor, in dem man denken kann, und einem, auf den man wartet.</p>
 
         <h2 id="ai" class="key">Der größte Teil der KI läuft auf der eigenen Maschine</h2>
 
-        <p>Freistellung des Hintergrunds, Segmentierung des Motivs und Tiefenschätzung laufen als lokale Modelle auf der eigenen Hardware. Ein Nachmittag Rohmaterial muss nicht hochgeladen werden, um brauchbar zu sein, und Material unter Sperrfrist bleibt unter Sperrfrist.</p>
+        <p>Freistellung des Hintergrunds, Segmentierung des Motivs und Tiefenschätzung laufen als lokale Modelle auf der eigenen Hardware. Ein Nachmittag Rohmaterial muss nicht hochgeladen werden, um brauchbar zu sein, und für diese Arbeit bleibt Material unter Sperrfrist unter Sperrfrist.</p>
 
-        <p>Auch die Spracherkennung kann lokal laufen, auf einem Whisper-Modell, das der Editor einmal herunterlädt und danach ohne Netz benutzt. Es gibt ebenso Cloud-Engines, und die Voreinstellung greift zuerst nach einer davon; wohin Ihr Ton geht, ist damit eine Einstellung und keine Annahme.</p>
+        <p>Auch die Spracherkennung kann lokal laufen, auf einem Whisper-Modell, das der Editor einmal herunterlädt und danach ohne Netz benutzt. Geben Sie dieses Modell an, bleibt der Ton auf der Maschine. Bleibt die Engine auf Auto, geht er an eine Cloud-Engine, sobald eine eingerichtet ist, unabhängig von der Länge der Datei — wohin Ihr Ton geht, ist damit eine Einstellung, und eine, die man vornehmen sollte.</p>
+
 
         <p>Masken werden mit optischem Fluss von Bild zu Bild verfolgt, statt Einstellung für Einstellung neu gezeichnet zu werden. Untertitel kommen mit wortgenauem Timing, lassen sich also gestalten, neu schneiden und in die Formate exportieren, die der Rest der Branche erwartet.</p>
 
@@ -275,7 +281,7 @@
 
         <p>Die Kodierung nutzt jeden Beschleuniger, den sie findet — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — und fällt auf x264, x265 oder SVT-AV1 in Software zurück, wenn es nichts gibt, mit dem sie sprechen kann. H.264, HEVC, AV1 und DNxHR für den Schnittplatz, wobei HDR behandelt und nicht eingeebnet wird.</p>
 
-        <p>Farbe läuft durch eine Pipeline mit 3D LUT, ein anderswo gebauter Look kommt also unversehrt an. Der Ton wird beim Ausspielen auf EBU R128 normalisiert, denn eine Lieferung, die an der Lautheitsnorm scheitert, ist eine Lieferung, die man zweimal macht.</p>
+        <p>Farbe läuft durch eine Pipeline mit 3D LUT, ein anderswo gebauter Look kommt also unversehrt an. Der Ton kann beim Ausspielen in der Lautheit normalisiert werden — ein Messdurchlauf auf einen Master mit -14 LUFS —, denn eine Lieferung, die an der Lautheitsnorm scheitert, ist eine Lieferung, die man zweimal macht. Es ist ein Häkchen und keine Voreinstellung, es lohnt sich also, es einmal zu suchen.</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -285,22 +291,22 @@
         <h2 id="hood">Unter der Haube</h2>
 
         <dl class="identity">
-          <div><dt>Rendering</dt><dd>GPU-Shader, geteilt von Vorschau und Export</dd></div>
+          <div><dt>Rendering</dt><dd>GPU-Shader in der Vorschau; Encoder-Übergänge beim Export</dd></div>
           <div><dt>Lokale KI</dt><dd>ONNX Runtime — Matting, Segmentierung, Tiefe</dd></div>
           <div><dt>Sprache</dt><dd>Lokal oder Cloud, wortgenaues Timing</dd></div>
           <div><dt>Kodierung</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>Formate</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>Farbe</dt><dd>Pipeline mit 3D LUT</dd></div>
-          <div><dt>Audio</dt><dd>Lautheit nach EBU R128</dd></div>
+          <div><dt>Audio</dt><dd>Lautheit optional normalisiert, -14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">Für wen es gedacht ist</h2>
 
-        <p>Cutter und kleine Teams in der Postproduktion — Menschen, die in einer Timeline leben und jede Stunde bemerken, die die Software zurückgibt. Der Desktop-Editor ist kostenlos. Cloud-KI wird pro Arbeitsplatz verkauft; drei Cutter zahlen also für drei Plätze und nicht für eine Lizenzstufe, die sich jemand ausgedacht hat. Das oben beschriebene Credit-Guthaben misst die Cloud-Arbeit innerhalb eines Platzes.</p>
+        <p>Cutter und kleine Teams in der Postproduktion — Menschen, die in einer Timeline leben und jede Stunde bemerken, die die Software zurückgibt. Der Desktop-Editor ist kostenlos. Cloud-KI wird pro Mitglied Ihrer Organisation abgerechnet; drei Cutter zahlen also für drei Mitglieder und nicht für eine Lizenzstufe, die sich jemand ausgedacht hat. Einen Tarif für Untätigkeit gibt es nicht: Ein Mitglied, das den Editor nie öffnet, kostet dasselbe wie eines, das täglich schneidet. Das oben beschriebene Credit-Guthaben misst die Cloud-Arbeit auf einem Konto.</p>
 
         <h2 id="status">Wo es heute steht</h2>
 
-        <p>Sparkle befindet sich in <strong>geschlossener Vorschau</strong>. Editor, Cloud-Dienste, Konten und Abrechnung sind gebaut und laufen; der Zugang öffnet sich schrittweise, denn Software, die fremdes Material und fremdes Geld anfasst, verdient es, langsam herausgelassen zu werden.</p>
+        <p>Sparkle befindet sich in <strong>geschlossener Vorschau</strong>. Editor, Cloud-Dienste, Konten und Abrechnung sind gebaut und laufen; der Zugang öffnet sich schrittweise, denn Software, die fremdes Material und fremdes Geld anfasst, verdient es, langsam herausgelassen zu werden. Wenn Sie vom Schneiden leben und dabei sein wollen, schreiben Sie uns und sagen Sie, was Sie schneiden.</p>
       </article>
 
       <section class="close">

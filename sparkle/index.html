@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle — a video editor with an engine under it</title>
-  <meta name="description" content="Sparkle is a desktop video editor: GPU rendering shared by preview and export, AI on your own machine, hardware encoding. In private preview.">
+  <meta name="description" content="Sparkle is a desktop video editor: GPU rendering, most of the AI on the machine the footage is already on, hardware encoding that adapts to your silicon. In private preview.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="A video editor with an engine under it">
-  <meta property="og:description" content="GPU rendering shared by preview and export, AI on your own machine, hardware encoding that adapts to your silicon.">
+  <meta property="og:description" content="GPU rendering, most of the AI on your own machine, and hardware encoding that adapts to your silicon.">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -127,7 +127,7 @@
       "@id": "https://spinnesoftware.com/sparkle/#webpage",
       "url": "https://spinnesoftware.com/sparkle/",
       "name": "A video editor with an engine under it",
-      "description": "Sparkle is a desktop video editor: GPU rendering shared by preview and export, AI on your own machine, hardware encoding. In private preview.",
+      "description": "Sparkle is a desktop video editor: GPU rendering, most of the AI on the machine the footage is already on, hardware encoding that adapts to your silicon. In private preview.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -158,7 +158,7 @@
       "@id": "https://spinnesoftware.com/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle is a desktop video editor: GPU rendering shared by preview and export, AI on your own machine, hardware encoding. In private preview.",
+      "description": "Sparkle is a desktop video editor: GPU rendering, most of the AI on the machine the footage is already on, hardware encoding that adapts to your silicon. In private preview.",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -169,6 +169,11 @@
   </script>
 </head>
 <body class="script-latin">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -234,7 +239,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>A video editor with an engine under it.</h1>
@@ -253,15 +258,17 @@
 
         <h2 id="preview">Thousands of frames, one preview</h2>
 
-        <p>Transitions are shaders. They run on the GPU while you scrub, and the same shaders render the final file — so the preview is not a polite approximation of the export, it is the export at a different resolution.</p>
+        <p>Most transitions are shaders that run on the GPU while you scrub — a plain fade, and anything sitting next to a still, take a simpler path. The export runs none of those shaders. It uses the encoder's own transition set, where about ten of ours have a match by name and the rest are approximated to the nearest look it has. The preview is a close guide to the file rather than a promise of it, and transitions are where the two come apart.</p>
 
         <p>Heavy footage gets proxies and a scrub path built for long timelines, which is the difference between an editor you can think in and one you wait for.</p>
 
         <h2 id="ai" class="key">Most of the AI runs on your machine</h2>
 
-        <p>Background removal, subject segmentation and depth estimation run as local models on your own hardware. An afternoon of rushes does not have to be uploaded to become useful, and footage under embargo stays under embargo.</p>
+        <p>Background removal, subject segmentation and depth estimation run as local models on your own hardware. An afternoon of rushes does not have to be uploaded to become useful, and for this work footage under embargo stays under embargo.</p>
 
-        <p>Speech to text can run locally too, on a Whisper model the editor fetches once and then runs without a network. There are cloud engines as well and the default reaches for one first, so where your audio goes is a setting rather than an assumption.</p>
+        <p>Speech to text can run locally too, on a Whisper model the editor fetches once and then runs without a network. Name that model and the audio stays on the machine. Leave the engine on Auto and it goes to a cloud engine whenever one is configured, at any length — so where your audio goes is a setting, and it is one worth setting.</p>
+
+<p class="more"><a href="/answers/transcribe-video-without-uploading/">Which settings keep audio on your machine</a></p>
 
         <p>Masks track across frames using optical flow rather than being redrawn shot by shot. Captions arrive with word-level timing, so they can be styled, re-cut and exported to the formats the rest of the industry expects.</p>
 
@@ -275,7 +282,7 @@
 
         <p>Encoding uses whatever accelerator it finds — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — and drops to x264, x265 or SVT-AV1 in software when there is nothing to talk to. H.264, HEVC, AV1 and DNxHR for the edit suite, with HDR handled rather than flattened.</p>
 
-        <p>Colour goes through a 3D LUT pipeline, so a look built elsewhere arrives intact. Audio is normalised to EBU R128 on the way out, because a delivery that fails loudness spec is a delivery you make twice.</p>
+        <p>Colour goes through a 3D LUT pipeline, so a look built elsewhere arrives intact. Audio can be loudness-normalised on the way out — a measurement pass to a -14 LUFS master — because a delivery that fails loudness spec is a delivery you make twice. It is a checkbox rather than a default, so it is worth finding once.</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -285,22 +292,22 @@
         <h2 id="hood">Under the hood</h2>
 
         <dl class="identity">
-          <div><dt>Rendering</dt><dd>GPU shaders, shared by preview and export</dd></div>
+          <div><dt>Rendering</dt><dd>GPU shaders in preview; encoder transitions on export</dd></div>
           <div><dt>Local AI</dt><dd>ONNX Runtime — matting, segmentation, depth</dd></div>
           <div><dt>Speech</dt><dd>On-device or cloud, word-level timing</dd></div>
           <div><dt>Encoding</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>Formats</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>Colour</dt><dd>3D LUT pipeline</dd></div>
-          <div><dt>Audio</dt><dd>EBU R128 loudness</dd></div>
+          <div><dt>Audio</dt><dd>Optional loudness normalisation, -14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">Who it is for</h2>
 
-        <p>Editors and small post-production teams — people who live in a timeline and notice every hour the software gives back. The desktop editor is free. Cloud AI is sold per seat, so three editors pay for three seats rather than a licence tier somebody invented. The credit balance above is how the cloud work inside a seat is metered.</p>
+        <p>Editors and small post-production teams — people who live in a timeline and notice every hour the software gives back. The desktop editor is free. Cloud AI is billed per member of your organisation, so three editors pay for three rather than a licence tier somebody invented. There is no idle rate: a member who never opens the editor costs the same as one who edits daily. The credit balance above is how the cloud work on an account is metered.</p>
 
         <h2 id="status">Where it is today</h2>
 
-        <p>Sparkle is in <strong>private preview</strong>. Editor, cloud services, accounts and billing are built and running; access opens gradually, because software that handles other people's footage and other people's money deserves to be let out slowly.</p>
+        <p>Sparkle is in <strong>private preview</strong>. Editor, cloud services, accounts and billing are built and running; access opens gradually, because software that handles other people's footage and other people's money deserves to be let out slowly. If you cut for a living and want in, write and say what you cut.</p>
       </article>
 
       <section class="close">

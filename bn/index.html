@@ -140,6 +140,11 @@
 </head>
 <body class="script-beng">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">মূল বিষয়বস্তুতে যান</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -204,7 +209,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>কঠিন প্রযুক্তি, সহজ সফটওয়্যার।</h1>
@@ -219,7 +224,7 @@
           <li><strong>সরলতা</strong> কঠিন দিকটা আমাদের দায়। যা ব্যবহারকারীর কাছে পৌঁছায়, তা দেখেই বোঝা যাওয়া উচিত।</li>
           <li><strong>উচ্চাকাঙ্ক্ষা</strong> নিজের শ্রেণির সেরা সফটওয়্যারের পাশে দাঁড়াতে পারবে, নয়তো বানানোই হবে না।</li>
           <li><strong>স্বচ্ছতা</strong> সফটওয়্যার যা করে বলে আমরা বলি, সে তা-ই করে — যেখানে উত্তর না, সেখানেও তা বলি।</li>
-          <li><strong>স্বাধীনতা</strong> যার উপর আমরা নির্ভর করি তার মালিক আমরাই, যাতে পণ্যটি কী হয়ে উঠবে তা অন্য কেউ ঠিক না করে।</li>
+          <li><strong>স্বাধীনতা</strong> পণ্যটি কী হয়ে উঠবে তা যেসব অংশ ঠিক করে সেগুলোর মালিক আমরাই, আর যেগুলো ভাড়া নেওয়া সেগুলোর নাম আমরা বলে দিই।</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -242,7 +247,7 @@
 
         <p>পেশা হিসেবে যাঁরা এডিট করেন তাঁদের জন্য একটি ডেস্কটপ ভিডিও এডিটর, আর প্রথম জায়গা যেখানে এই মূল্যবোধগুলোকে সত্যিকারের একটি পণ্যের সামনে টিকে থাকতে হয়েছে। একে অস্বাভাবিক করে তুলেছে মডেলগুলো নয় — বরং এই যে, সেগুলো এডিটরের পাশে নয়, এডিটরের ভেতরেই বসানো। অ্যাসিস্ট্যান্ট যে এডিটটি করে, সেটি আপনি নিজের হাতেও করতে পারতেন; আর একটিমাত্র undo সেটি ফিরিয়ে নেয়।</p>
 
-        <p>ফুটেজ যে মেশিনে আছে, ভারী মডেলগুলো সেই মেশিনেই চালায়; আর যে কোড এক্সপোর্ট রেন্ডার করে, প্রিভিউও আঁকে সেই একই কোড দিয়ে। এখন প্রাইভেট প্রিভিউতে।</p>
+        <p>এর AI-এর বেশির ভাগটাই চলে সেই মেশিনে, ফুটেজ যেখানে এমনিতেই আছে; আর জেনারেটিভ যে কাজের জন্য ক্লাউড লাগে, তার হিসাব আপনার চোখের সামনেই মিটার করা হয়। এখন প্রাইভেট প্রিভিউতে।</p>
 
         <p class="more">
           <a href="/bn/sparkle/">Sparkle কী করে দেখুন</a>

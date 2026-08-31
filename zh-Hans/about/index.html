@@ -157,6 +157,11 @@
 </head>
 <body class="script-hans">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -221,7 +226,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>一家能把产品发出来的技术公司。</h1>
@@ -232,7 +237,7 @@
 
         <p>承接项目，是在为别人的路线图出力。拥有产品意味着工程会不断累积，而不是被交出去——Sparkle需要过的每一套系统，下一件事都会继承。</p>
 
-        <p>这也意味着决定留在自己手里。接下来做什么，由工作本身需要什么来定，而不是由本季度最大的那个客户来定；产品所依赖的部分归我们所有，而不是租自某个随时可能改变优先级的人。</p>
+        <p>这也意味着决定留在自己手里。接下来做什么，由工作本身需要什么来定，而不是由本季度最大的那个客户来定；决定产品能长成什么样的那些部分也归我们所有，而不是租来的，租来的那些，本页再往下列了名字。</p>
 
         <p class="pull">独立不是偏好。它是自己选择与被人告知之间的差别。</p>
 
@@ -253,7 +258,7 @@
         <h2 id="built">已经存在的东西</h2>
 
         <p>
-          <strong>Sparkle</strong>——一款桌面视频剪辑软件，具备GPU渲染、用于抠像、分割和深度的本地AI、覆盖四家厂商技术栈的硬件编码，以及团队账户、按席位订阅、计量点数和意大利电子发票——这个体量的产品少了这些就发不出去。目前为不公开预览，见
+          <strong>Sparkle</strong>——一款桌面视频剪辑软件，具备GPU渲染、用于抠像、分割和深度的本地AI、覆盖四家厂商技术栈的硬件编码，以及团队账户、按成员订阅、计量点数和意大利电子发票——这个体量的产品少了这些就发不出去。目前为不公开预览，见
           <a href="https://sparkle.software">sparkle.software</a>。
           <a href="/zh-Hans/sparkle/">它能做什么</a> &middot; <a href="/zh-Hans/how-we-build/">它是如何构建的</a>。
         </p>

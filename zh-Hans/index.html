@@ -140,6 +140,11 @@
 </head>
 <body class="script-hans">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -204,7 +209,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>难的技术，简单的软件。</h1>
@@ -219,7 +224,7 @@
           <li><strong>简单</strong> 难的部分归我们扛。落到使用者手里的部分，应该一看就懂。</li>
           <li><strong>野心</strong> 要做到能与同类中最好的软件并肩，否则不做。</li>
           <li><strong>坦白</strong> 我们说软件能做什么，它就做什么，包括答案是不能的时候。</li>
-          <li><strong>独立</strong> 我们所依赖的东西由自己掌握，别人无法决定这个产品能长成什么样。</li>
+          <li><strong>独立</strong> 决定产品能长成什么样的那些部分归我们所有；租来的那些，我们把名字列出来。</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -242,7 +247,7 @@
 
         <p>一款写给靠剪辑吃饭的人的桌面视频剪辑软件，也是这些价值观第一次要在真实产品上经受检验的地方。它不寻常的地方不是模型，而是模型装在剪辑软件里面，不在它旁边。助手做的每一次修改，都是你自己动手也能做的修改，一次撤销就能收回。</p>
 
-        <p>重模型跑在素材本来就在的那台机器上，预览与导出由同一份代码绘制。目前为不公开预览。</p>
+        <p>它的大部分AI跑在素材本来就在的那台机器上，需要云端的那部分生成式任务，计量放在你看得见的地方。目前为不公开预览。</p>
 
         <p class="more">
           <a href="/zh-Hans/sparkle/">看看Sparkle能做什么</a>

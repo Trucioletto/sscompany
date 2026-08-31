@@ -142,6 +142,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -206,7 +211,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>Tecnología difícil, software sencillo.</h1>
@@ -221,7 +226,7 @@
           <li><strong>Sencillez</strong> La dificultad es cosa nuestra. Lo que llega a quien usa el producto debe ser obvio.</li>
           <li><strong>Ambición</strong> Hecho para estar junto al mejor software de su categoría, o no hecho.</li>
           <li><strong>Transparencia</strong> Lo que decimos que hace el software es lo que hace, incluidas las veces en que la respuesta es no.</li>
-          <li><strong>Independencia</strong> Somos dueños de aquello de lo que dependemos, así nadie más decide en qué puede convertirse el producto.</li>
+          <li><strong>Independencia</strong> Somos dueños de las partes que deciden en qué puede convertirse el producto, y decimos cuáles alquilamos.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -244,7 +249,7 @@
 
         <p>Un editor de vídeo de escritorio para quien monta para vivir, y el primer sitio donde esos valores tuvieron que aguantar el choque con un producto real. Lo que lo hace distinto no son los modelos, sino que están dentro del editor y no al lado. Una edición que hace el asistente es una edición que se podría haber hecho a mano, y un solo deshacer la revierte.</p>
 
-        <p>Los modelos pesados se ejecutan en la misma máquina en la que ya está el material, y la vista previa se dibuja con el mismo código que genera la exportación. En versión preliminar privada.</p>
+        <p>Casi toda su IA se ejecuta en la misma máquina en la que ya está el material, y el trabajo generativo que necesita la nube se mide a la vista. En versión preliminar privada.</p>
 
         <p class="more">
           <a href="/es/sparkle/">Ver qué hace Sparkle</a>

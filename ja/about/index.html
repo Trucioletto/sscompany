@@ -157,6 +157,11 @@
 </head>
 <body class="script-jpan">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -221,7 +226,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>作って世に出す技術会社。</h1>
@@ -232,7 +237,7 @@
 
         <p>受託の仕事が進めるのは、他人のロードマップです。製品を自分で持てば、技術は引き渡されるのではなく積み上がります。Sparkle に必要だった仕組みは、すべて次のものが引き継ぎます。</p>
 
-        <p>同時に、決定がこの場に残るということでもあります。次に何を作るかは、その四半期でいちばん大きな顧客ではなく、仕事そのものの必要が決めます。製品が依存する部分は、予告なく方針を変えうる相手から借りるのではなく、自分たちのものです。</p>
+        <p>同時に、決定がこの場に残るということでもあります。次に何を作るかは、その四半期でいちばん大きな顧客ではなく、仕事そのものの必要が決めます。そして、製品の行き先を決める部分は、借りるのではなく自分たちで持っています。借りているものは、このページの下のほうで名前を挙げています。</p>
 
         <p class="pull">独立は好みの問題ではありません。自分で選ぶか、言われて作るかの違いです。</p>
 
@@ -253,7 +258,7 @@
         <h2 id="built">実際にあるもの</h2>
 
         <p>
-          <strong>Sparkle</strong> は、GPU レンダリング、マット処理・セグメンテーション・深度推定のローカル AI、4系統のハードウェアエンコードに加えて、この規模の製品には欠かせない部分——チームアカウント、1人単位のサブスクリプション、従量制クレジット、イタリアの電子インボイス——を備えたデスクトップ動画編集ソフトです。現在はプライベートプレビュー中で、公開先は
+          <strong>Sparkle</strong> は、GPU レンダリング、マット処理・セグメンテーション・深度推定のローカル AI、4系統のハードウェアエンコードに加えて、この規模の製品には欠かせない部分——チームアカウント、メンバー1人単位のサブスクリプション、従量制クレジット、イタリアの電子インボイス——を備えたデスクトップ動画編集ソフトです。現在はプライベートプレビュー中で、公開先は
           <a href="https://sparkle.software">sparkle.software</a>。
           <a href="/ja/sparkle/">できること</a> &middot; <a href="/ja/how-we-build/">どう作っているか</a>。
         </p>

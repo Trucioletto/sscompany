@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Wo der Editor endet und das Modell beginnt.</h1>
@@ -282,11 +287,11 @@
 
         <p>Das ist eine Entwurfsentscheidung über Latenz, und sie klärt eine Frage, die die Naht sonst offenlässt: Material unter Sperrfrist bleibt unter Sperrfrist, weil es nie weg war. Wo Arbeit die Cloud wirklich braucht, geht sie durch ein einziges Gateway, das sie dem Konto zurechnet, das sie angefordert hat.</p>
 
-        <h2 id="parity">Eine Vorschau, die der Export ist</h2>
+        <h2 id="parity">Eine Vorschau, nah genug zur Abnahme</h2>
 
-        <p>Dieselben Shader zeichnen das Scrubbing und das endgültige Rendering; was Sie abnehmen, ist das, was Sie ausliefern. Ohne das wäre jede KI-Änderung vorläufig: Sie würden ein Bild abnehmen und die Datei später noch einmal prüfen — die Naht, die am anderen Ende der Pipeline wieder auftaucht.</p>
+        <p>Das Scrubbing und das endgültige Rendering kommen von derselben Timeline, und die Farbmathematik des Exports ist bewusst aus der Vorschau portiert; was Sie abnehmen, ist damit das, was Sie ausliefern — überall außer bei den Übergängen. Diese Ausnahme ist real, und wir benennen sie lieber hier, als dass Sie sie in einer Lieferung entdecken: Beim Export läuft keiner der Übergangs-Shader der Vorschau. Er übergibt sie an den eigenen Satz des Encoders, wo etwa zehn unserer Übergänge eine namentliche Entsprechung haben und der Rest angenähert wird — und ein Übergang fällt auf eine schlichte Kreuzblende zurück, sobald die Clips zu beiden Seiten nicht unversehrt übergeben werden können, wozu rückwärts laufendes Material, variables Tempo, Blenden am einzelnen Clip, Schlagschatten, Blend-Modi, per Keyframe animierte Geometrie und der zweite von zwei direkt aufeinanderfolgenden Übergängen gehören. Alles, was kein Übergang ist, wird in Vorschau und Export aus derselben Beschreibung gerendert. Ohne das wäre jede KI-Änderung vorläufig: Sie würden ein Bild abnehmen und die Datei später noch einmal prüfen — die Naht, die am anderen Ende der Pipeline wieder auftaucht.</p>
 
-        <p>Zusammengenommen — ein Dokument, ein Satz von Operationen, ein Undo, ein Head, eine Ausführung, ein Render-Pfad — ist die interessante Frage nicht mehr, wie gut das Modell ist. Sie lautet, wie billig man ihm widersprechen kann. Das ist der Teil, den wir bauen.</p>
+        <p>Zusammengenommen — ein Dokument, ein Satz von Operationen, ein Undo, ein Head, eine Ausführung, eine Farb-Pipeline — ist die interessante Frage nicht mehr, wie gut das Modell ist. Sie lautet, wie billig man ihm widersprechen kann. Das ist der Teil, den wir bauen.</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

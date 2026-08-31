@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Dónde acaba el editor y empieza el modelo.</h1>
@@ -282,11 +287,11 @@
 
         <p>Es una decisión de diseño sobre la latencia, y de paso zanja una pregunta que la costura suele dejar abierta: el material bajo embargo sigue bajo embargo, porque nunca salió. Cuando un trabajo necesita de verdad la nube, pasa por una única pasarela que lo mide contra la cuenta que lo pidió.</p>
 
-        <h2 id="parity">Una vista previa que es la exportación</h2>
+        <h2 id="parity">Una vista previa lo bastante fiel para aprobar</h2>
 
-        <p>Los mismos shaders dibujan el recorrido de la línea de tiempo y el render final, de modo que lo que se aprueba es lo que se entrega. Sin eso, toda edición hecha por la IA es provisional: se estaría aprobando una imagen para volver a revisar el archivo más tarde, que es la costura reapareciendo al otro extremo de la cadena.</p>
+        <p>Lo que se ve al recorrer y el render final salen de la misma línea de tiempo, y los cálculos de color de la exportación son un port deliberado de los de la vista previa, de modo que lo que se aprueba es lo que se entrega en todo salvo en las transiciones. Esa excepción es real y preferimos nombrarla aquí a que se descubra en una entrega: la exportación no ejecuta ninguno de los shaders de transición de la vista previa. Los entrega al juego propio del codificador, donde alrededor de diez de las nuestras tienen correspondencia por nombre y el resto se aproximan; y una transición se queda en un simple fundido encadenado siempre que los clips de uno y otro lado no se puedan entregar intactos, lo que incluye material invertido, velocidad variable, fundidos por clip, sombras proyectadas, modos de fusión, geometría con fotogramas clave y la segunda de dos transiciones colocadas seguidas. Todo lo que no es una transición se renderiza a partir de la misma descripción en ambas. Sin eso, toda edición hecha por la IA sería provisional: se estaría aceptando una imagen para volver a comprobar el archivo más tarde, que es la costura reapareciendo al otro extremo de la cadena.</p>
 
-        <p>En conjunto —un documento, un conjunto de operaciones, un deshacer, una operación head, una ejecución, una sola ruta de renderizado—, la pregunta interesante deja de ser lo bueno que es el modelo. Pasa a ser lo barato que resulta llevarle la contraria. Esa es la parte que construimos nosotros.</p>
+        <p>En conjunto —un documento, un conjunto de operaciones, un deshacer, una operación head, una ejecución, una sola cadena de color—, la pregunta interesante deja de ser lo bueno que es el modelo. Pasa a ser lo barato que resulta llevarle la contraria. Esa es la parte que construimos nosotros.</p>
 
         <!-- What it costs argues a position, so it is a section and not a note
              in a margin. -->

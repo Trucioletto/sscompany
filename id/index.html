@@ -142,6 +142,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Lompat ke konten</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -206,7 +211,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>Teknologi sulit, perangkat lunak sederhana.</h1>
@@ -221,7 +226,7 @@
           <li><strong>Kesederhanaan</strong> Kesulitannya urusan kami. Yang sampai ke pemakainya harus jelas dengan sendirinya.</li>
           <li><strong>Ambisi</strong> Dibuat untuk berdiri sejajar dengan perangkat lunak terbaik di kelasnya, atau tidak dibuat sama sekali.</li>
           <li><strong>Keterbukaan</strong> Apa yang kami katakan dikerjakan perangkat lunak ini memang yang dikerjakannya, termasuk ketika jawabannya tidak.</li>
-          <li><strong>Kemandirian</strong> Kami memiliki apa yang kami andalkan, sehingga tidak ada pihak lain yang menentukan produk ini bisa menjadi apa.</li>
+          <li><strong>Kemandirian</strong> Bagian yang menentukan produk ini bisa menjadi apa adalah milik kami sendiri, dan yang kami sewa kami sebutkan.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -244,7 +249,7 @@
 
         <p>Editor video desktop untuk orang yang menyunting video sebagai mata pencaharian, dan tempat pertama nilai-nilai itu harus bertahan ketika diuji produk sungguhan. Yang membuatnya tidak biasa bukanlah modelnya — melainkan bahwa model itu berada di dalam editornya, bukan di sebelahnya. Suntingan yang dibuat asisten adalah suntingan yang dapat Anda buat sendiri dengan tangan, dan satu undo mengembalikannya.</p>
 
-        <p>Model-model beratnya dijalankan di mesin tempat rekamannya sudah berada, dan pratinjaunya digambar dengan kode yang sama yang merender hasil ekspornya. Dalam pratinjau privat.</p>
+        <p>Sebagian besar AI-nya berjalan di mesin tempat rekamannya sudah berada, dan pekerjaan generatif yang membutuhkan cloud dihitung di tempat yang dapat Anda lihat. Dalam pratinjau privat.</p>
 
         <p class="more">
           <a href="/id/sparkle/">Lihat apa yang dilakukan Sparkle</a>

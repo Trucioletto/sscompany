@@ -159,6 +159,11 @@
 </head>
 <body class="script-latin">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -223,7 +228,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>A technology company that ships.</h1>
@@ -234,7 +239,7 @@
 
         <p>Contract work pays for someone else's roadmap. Owning the product means the engineering compounds instead of being handed over — every system Sparkle needed, the next thing inherits.</p>
 
-        <p>It also means the decisions stay here. What gets built next is settled by what the work needs rather than by whichever customer is largest this quarter, and the parts the product depends on are owned rather than rented from somebody whose priorities can change without notice.</p>
+        <p>It also means the decisions stay here. What gets built next is settled by what the work needs rather than by whichever customer is largest this quarter, and the parts that decide what the product can become are owned rather than rented; the ones we rent are named further down this page.</p>
 
         <p class="pull">Independence is not a preference. It is the difference between choosing and being told.</p>
 
@@ -255,7 +260,7 @@
         <h2 id="built">What exists</h2>
 
         <p>
-          <strong>Sparkle</strong> — a desktop video editor with GPU rendering, local AI for matting, segmentation and depth, hardware encoding across four vendor stacks, and the team accounts, per-seat subscriptions, metered credits and Italian electronic invoicing that a product of that size cannot ship without. In private preview at
+          <strong>Sparkle</strong> — a desktop video editor with GPU rendering, local AI for matting, segmentation and depth, hardware encoding across four vendor stacks, and the team accounts, per-member subscriptions, metered credits and Italian electronic invoicing that a product of that size cannot ship without. In private preview at
           <a href="https://sparkle.software">sparkle.software</a>.
           <a href="/sparkle/">What it does</a> &middot; <a href="/how-we-build/">how it is built</a>.
         </p>

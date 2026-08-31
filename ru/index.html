@@ -141,6 +141,11 @@
 </head>
 <body class="script-cyrl">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -205,7 +210,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>Сложная техника, простые программы.</h1>
@@ -220,7 +225,7 @@
           <li><strong>Простота</strong> Сложность — наша забота. То, что доходит до человека за экраном, должно быть очевидным.</li>
           <li><strong>Амбиция</strong> Сделано так, чтобы стоять рядом с лучшими программами своего класса, или не сделано вовсе.</li>
           <li><strong>Прозрачность</strong> Программа делает ровно то, что мы о ней говорим, включая те случаи, когда ответ — нет.</li>
-          <li><strong>Независимость</strong> Мы владеем тем, от чего зависим, поэтому никто другой не решает, чем может стать продукт.</li>
+          <li><strong>Независимость</strong> Мы владеем теми частями, которые решают, чем может стать продукт, а те, что арендуем, называем поименно.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -243,7 +248,7 @@
 
         <p>Настольный видеоредактор для тех, кто монтирует профессионально, и первое место, где этим ценностям пришлось выдержать столкновение с настоящим продуктом. Необычны в нем не модели, а то, что они сидят внутри редактора, а не рядом с ним. Правка, которую делает ассистент, — это правка, которую вы могли бы сделать руками, и одна отмена возвращает все назад.</p>
 
-        <p>Тяжелые модели он запускает на той машине, где уже лежит материал, а превью рисует тем же кодом, которым рендерит экспорт. Закрытое превью.</p>
+        <p>Большая часть его ИИ работает на той машине, где уже лежит материал, а генеративная работа, которой нужно облако, учитывается на виду. Закрытое превью.</p>
 
         <p class="more">
           <a href="/ru/sparkle/">Что умеет Sparkle</a>

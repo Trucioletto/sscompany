@@ -16,7 +16,7 @@
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
   <title>Sparkle — un logiciel de montage avec un moteur</title>
-  <meta name="description" content="Sparkle est un logiciel de montage vidéo : rendu GPU partagé par l'aperçu et l'export, IA locale, encodage matériel. En préversion privée.">
+  <meta name="description" content="Sparkle est un logiciel de montage vidéo : rendu GPU, l'essentiel de l'IA sur la machine où sont déjà les images, encodage matériel. En préversion privée.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Spinne Software">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:title" content="Un logiciel de montage vidéo avec un moteur dessous">
-  <meta property="og:description" content="Rendu GPU partagé par l'aperçu et l'export, IA sur votre propre machine, encodage matériel qui s'adapte à votre silicium.">
+  <meta property="og:description" content="Rendu GPU, l'essentiel de l'IA sur votre propre machine, et encodage matériel qui s'adapte à votre silicium.">
   <meta property="og:image" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:secure_url" content="https://spinnesoftware.com/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -127,7 +127,7 @@
       "@id": "https://spinnesoftware.com/fr/sparkle/#webpage",
       "url": "https://spinnesoftware.com/fr/sparkle/",
       "name": "Un logiciel de montage vidéo avec un moteur dessous",
-      "description": "Sparkle est un logiciel de montage vidéo : rendu GPU partagé par l'aperçu et l'export, IA locale, encodage matériel. En préversion privée.",
+      "description": "Sparkle est un logiciel de montage vidéo : rendu GPU, l'essentiel de l'IA sur la machine où sont déjà les images, encodage matériel. En préversion privée.",
       "inLanguage": "fr",
       "isPartOf": {
         "@id": "https://spinnesoftware.com/#website"
@@ -158,7 +158,7 @@
       "@id": "https://spinnesoftware.com/fr/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
-      "description": "Sparkle est un logiciel de montage vidéo : rendu GPU partagé par l'aperçu et l'export, IA locale, encodage matériel. En préversion privée.",
+      "description": "Sparkle est un logiciel de montage vidéo : rendu GPU, l'essentiel de l'IA sur la machine où sont déjà les images, encodage matériel. En préversion privée.",
       "url": "https://sparkle.software",
       "publisher": {
         "@id": "https://spinnesoftware.com/#organization"
@@ -169,6 +169,11 @@
   </script>
 </head>
 <body class="script-latin">
+
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">Aller au contenu</a>
 
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
@@ -234,7 +239,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc">
         <h1>Un logiciel de montage vidéo avec un moteur dessous.</h1>
@@ -253,15 +258,16 @@
 
         <h2 id="preview">Des milliers d'images, un seul aperçu</h2>
 
-        <p>Les transitions sont des shaders. Elles s'exécutent sur le GPU pendant le défilement, et ce sont les mêmes shaders qui calculent le fichier final — l'aperçu n'est donc pas une approximation polie de l'export, c'est l'export à une autre résolution.</p>
+        <p>La plupart des transitions sont des shaders qui s'exécutent sur le GPU pendant le défilement — un simple fondu, et tout ce qui est placé à côté d'une image fixe, passent par un chemin plus simple. L'export n'exécute aucun de ces shaders. Il utilise le jeu de transitions propre à l'encodeur, où une dizaine des nôtres trouvent une correspondance par le nom et les autres sont approximées par l'aspect le plus proche dont il dispose. L'aperçu est un guide fidèle du fichier plutôt qu'une promesse, et c'est sur les transitions que les deux se séparent.</p>
 
         <p>Les images lourdes reçoivent des proxys et un chemin de défilement conçu pour les longues timelines, ce qui fait la différence entre un logiciel dans lequel on pense et un logiciel que l'on attend.</p>
 
         <h2 id="ai" class="key">L'essentiel de l'IA tourne sur votre machine</h2>
 
-        <p>La suppression de l'arrière-plan, la segmentation du sujet et l'estimation de profondeur sont des modèles locaux qui tournent sur votre propre matériel. Un après-midi de rushes n'a pas besoin d'être téléversé pour devenir exploitable, et des images sous embargo restent sous embargo.</p>
+        <p>La suppression de l'arrière-plan, la segmentation du sujet et l'estimation de profondeur sont des modèles locaux qui tournent sur votre propre matériel. Un après-midi de rushes n'a pas besoin d'être téléversé pour devenir exploitable, et, pour ce travail-là, des images sous embargo restent sous embargo.</p>
 
-        <p>La transcription de la parole peut elle aussi tourner en local, sur un modèle Whisper que le logiciel télécharge une fois puis utilise sans réseau. Il existe également des moteurs cloud, et la configuration par défaut s'adresse d'abord à l'un d'eux : la destination de votre audio est donc un réglage, pas une supposition.</p>
+        <p>La transcription de la parole peut elle aussi tourner en local, sur un modèle Whisper que le logiciel télécharge une fois puis utilise sans réseau. Désignez ce modèle et l'audio reste sur la machine. Laissez le moteur sur Auto et il part vers un moteur cloud dès qu'il y en a un de configuré, quelle que soit la durée — la destination de votre audio est donc un réglage, et c'est un réglage qui mérite d'être fait.</p>
+
 
         <p>Les masques suivent le mouvement d'image en image par flux optique, au lieu d'être redessinés plan par plan. Les sous-titres arrivent avec un calage au mot, ce qui permet de les styliser, de les recouper et de les exporter dans les formats attendus par le reste de la profession.</p>
 
@@ -275,7 +281,7 @@
 
         <p>L'encodage utilise l'accélérateur qu'il trouve — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — et redescend vers x264, x265 ou SVT-AV1 en logiciel quand il n'a rien à qui parler. H.264, HEVC, AV1 et DNxHR pour la salle de montage, avec le HDR traité plutôt qu'aplati.</p>
 
-        <p>La couleur passe par une chaîne 3D LUT : un étalonnage construit ailleurs arrive intact. L'audio est normalisé en EBU R128 à la sortie, parce qu'une livraison recalée sur la norme de sonie est une livraison que l'on fait deux fois.</p>
+        <p>La couleur passe par une chaîne 3D LUT : un étalonnage construit ailleurs arrive intact. L'audio peut être normalisé en sonie à la sortie — une passe de mesure vers un master à -14 LUFS — parce qu'une livraison recalée sur la norme de sonie est une livraison que l'on fait deux fois. C'est une case à cocher plutôt qu'un comportement par défaut, et elle vaut la peine d'être trouvée une fois pour toutes.</p>
 
         <!-- The spec, in the flow and at full measure. It is the most checkable
              thing on the page and it used to be 14px grey in a 264px gutter.
@@ -285,22 +291,22 @@
         <h2 id="hood">Sous le capot</h2>
 
         <dl class="identity">
-          <div><dt>Rendu</dt><dd>Shaders GPU, partagés par l'aperçu et l'export</dd></div>
+          <div><dt>Rendu</dt><dd>Shaders GPU à l'aperçu ; transitions de l'encodeur à l'export</dd></div>
           <div><dt>IA locale</dt><dd>ONNX Runtime — détourage, segmentation, profondeur</dd></div>
           <div><dt>Parole</dt><dd>Sur la machine ou dans le cloud, calage au mot</dd></div>
           <div><dt>Encodage</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
           <div><dt>Formats</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
           <div><dt>Couleur</dt><dd>Chaîne 3D LUT</dd></div>
-          <div><dt>Audio</dt><dd>Sonie EBU R128</dd></div>
+          <div><dt>Audio</dt><dd>Normalisation de sonie optionnelle, -14 LUFS</dd></div>
         </dl>
 
         <h2 id="who">À qui il s'adresse</h2>
 
-        <p>Monteurs et petites équipes de post-production — des gens qui vivent dans une timeline et qui remarquent chaque heure que le logiciel leur rend. Le logiciel de bureau est gratuit. L'IA cloud se vend au poste : trois monteurs paient trois postes, pas un palier de licence inventé par quelqu'un. Le solde de crédits évoqué plus haut est la façon dont le travail cloud est mesuré à l'intérieur d'un poste.</p>
+        <p>Monteurs et petites équipes de post-production — des gens qui vivent dans une timeline et qui remarquent chaque heure que le logiciel leur rend. Le logiciel de bureau est gratuit. L'IA cloud est facturée par membre de votre organisation : trois monteurs paient pour trois, pas un palier de licence inventé par quelqu'un. Il n'y a pas de tarif d'inactivité : un membre qui n'ouvre jamais le logiciel coûte autant qu'un membre qui monte tous les jours. Le solde de crédits évoqué plus haut est la façon dont le travail cloud est mesuré sur un compte.</p>
 
         <h2 id="status">Où en est le produit</h2>
 
-        <p>Sparkle est en <strong>préversion privée</strong>. Le logiciel, les services cloud, les comptes et la facturation sont construits et en service ; l'accès s'ouvre progressivement, parce qu'un logiciel qui manipule les images et l'argent des autres mérite d'être lâché lentement.</p>
+        <p>Sparkle est en <strong>préversion privée</strong>. Le logiciel, les services cloud, les comptes et la facturation sont construits et en service ; l'accès s'ouvre progressivement, parce qu'un logiciel qui manipule les images et l'argent des autres mérite d'être lâché lentement. Si vous montez pour vivre et que vous voulez en être, écrivez-nous et dites-nous ce que vous montez.</p>
       </article>
 
       <section class="close">

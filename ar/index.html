@@ -140,6 +140,11 @@
 </head>
 <body class="script-arab is-rtl">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -204,7 +209,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>تقنية صعبة، وبرمجيات بسيطة.</h1>
@@ -219,7 +224,7 @@
           <li><strong>البساطة</strong> الصعوبة شأننا نحن. وما يصل إلى من يستعمل المنتج ينبغي أن يكون بيّنًا.</li>
           <li><strong>الطموح</strong> مبني ليقف إلى جانب أفضل البرمجيات في فئته، وإلا فلا يُبنى.</li>
           <li><strong>الشفافية</strong> ما نقول إن البرنامج يفعله هو ما يفعله، بما في ذلك حين يكون الجواب لا.</li>
-          <li><strong>الاستقلال</strong> نملك ما نعتمد عليه، فلا يقرر أحد غيرنا ما يمكن أن يصير إليه المنتج.</li>
+          <li><strong>الاستقلال</strong> نملك الأجزاء التي تقرر ما يمكن أن يصير إليه المنتج، ونذكر بالاسم ما نستأجره منها.</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -242,7 +247,7 @@
 
         <p>محرّر فيديو لسطح المكتب موجّه لمن يعملون في المونتاج مهنةً، وأول موضع كان على هذه القيم أن تصمد فيه أمام منتج حقيقي. وما يجعله غير مألوف ليس النماذج — بل أنها تقيم داخل المحرّر لا بجانبه. والتعديل الذي يجريه المساعد تعديل كان بوسعك أن تجريه بيدك، وتراجُع واحد يُلغيه.</p>
 
-        <p>يشغّل النماذج الثقيلة على الجهاز الذي تقيم عليه اللقطات أصلاً، ويرسم المعاينة بالشيفرة نفسها التي تُخرِج ملف التصدير. في معاينة خاصة.</p>
+        <p>معظم ذكائه الاصطناعي يعمل على الجهاز الذي تقيم عليه اللقطات أصلاً، والعمل التوليدي الذي يحتاج إلى السحابة تُقاس تكلفته على مرأى منك. في معاينة خاصة.</p>
 
         <p class="more">
           <a href="/ar/sparkle/">اطّلع على ما يفعله Sparkle</a>

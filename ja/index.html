@@ -140,6 +140,11 @@
 </head>
 <body class="script-jpan">
 
+  <!-- First focusable thing on the page. Off-screen until it takes focus,
+       because a keyboard user should not have to tab the whole masthead on
+       every one of these pages to reach what they came for. -->
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
   <header class="masthead">
     <!-- The field the top edge opens into, and the web spun across it.
          Decoration with nothing to say, so aria-hidden and out of the tab
@@ -204,7 +209,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="page">
       <article class="doc home">
         <h1>難しい技術、簡単なソフトウェア。</h1>
@@ -219,7 +224,7 @@
           <li><strong>簡潔さ</strong> 難しさは私たちが引き受けます。使う人に届く部分は、見ればわかるものであるべきです。</li>
           <li><strong>野心</strong> 同じ分野で最良のソフトウェアと並べるものをつくる。そうでなければつくりません。</li>
           <li><strong>透明さ</strong> このソフトウェアができると言ったことは、実際にできます。できないことも、そのまま言います。</li>
-          <li><strong>独立</strong> 依存するものは自分たちで持ちます。だから製品の行き先を他人が決めることはありません。</li>
+          <li><strong>独立</strong> 製品の行き先を決める部分は自分たちで持ちます。借りている部分は、その名前を挙げます。</li>
         </ul>
 
         <!-- The motto stays in English in every language, like the company name
@@ -242,7 +247,7 @@
 
         <p>編集を仕事にしている人のためのデスクトップ動画編集ソフトであり、これらの価値観が実際の製品に当たって耐えられるかを最初に試された場所です。変わっているのはモデルそのものではなく、そのモデルが編集ソフトの隣ではなく、中にあることです。アシスタントが行う編集は、あなたが手でもできた編集であり、一度の取り消しで元に戻せます。</p>
 
-        <p>重いモデルは、素材がすでに置かれている機械で動かします。プレビューは、書き出しをレンダリングするのと同じコードで描きます。現在はプライベートプレビュー中です。</p>
+        <p>AI の大半は、素材がすでに置かれている機械で動きます。クラウドが必要な生成処理は、目に見えるところで計測されます。現在はプライベートプレビュー中です。</p>
 
         <p class="more">
           <a href="/ja/sparkle/">Sparkle でできること</a>
