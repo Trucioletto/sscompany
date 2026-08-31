@@ -403,6 +403,9 @@ def build_page(lang: str, page_key: str, page_path: str, template_name: str,
         "page": page,
         "rtl_class": " is-rtl" if l["dir"] == "rtl" else "",
         "preload": preload_for(l["script"]),
+        "css": asset("/style.css"),
+        "lang_js": asset("/lang.js"),
+        "overscroll_js": asset("/overscroll.js"),
         "jsonld": jsonld(lang, page_key, page_path, data),
     }
 
@@ -410,6 +413,30 @@ def build_page(lang: str, page_key: str, page_path: str, template_name: str,
     ctx["body"] = body
     shell = read_template("_shell.html" if indexable else "_shell-noindex.html")
     return out_path(lang, page_path), render(shell, ctx, f"{lang}/shell")
+
+
+_ASSET_HASHES: dict = {}
+
+
+def asset(path: str) -> str:
+    """Return an asset URL carrying a short hash of its contents.
+
+    Without this the site has no way to say "the stylesheet changed". Both the
+    edge and the browser are told to keep /style.css for four hours, so a deploy
+    lands new HTML against the previous CSS and the pages render wrong until the
+    cache expires — which is exactly what happened when the skip link shipped:
+    the markup arrived, the rule that positions it did not, and every visitor got
+    a blue band across the top of the page for as long as the old file lived.
+
+    A hash in the query string gives each version its own cache key, so new HTML
+    can only ever ask for the CSS it was built against. Filenames stay stable, so
+    nothing else in the tree has to know about this.
+    """
+    if path not in _ASSET_HASHES:
+        import hashlib
+        blob = (ROOT / path.lstrip("/")).read_bytes()
+        _ASSET_HASHES[path] = hashlib.sha256(blob).hexdigest()[:8]
+    return f"{path}?v={_ASSET_HASHES[path]}"
 
 
 def llms_txt() -> str:

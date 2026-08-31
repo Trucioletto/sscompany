@@ -283,6 +283,31 @@ else
   bad "lang.js ENGLISH_ONLY is [$(echo $langjs_list)] but build.py publishes [$(echo $build_list)] in English only"
 fi
 
+say "asset URLs carry the hash of the asset they point at"
+# The pages ask for /style.css?v=<hash>. If somebody edits an asset and does not
+# rebuild, the pages keep asking for the old hash — and because that URL is
+# already in every cache, the change reaches nobody. This is not hypothetical:
+# before the hashes existed, a stylesheet change shipped against four-hour cached
+# CSS and put a blue band across the top of every page until the cache expired.
+asset_drift=0
+for f in style.css lang.js overscroll.js; do
+  want=$(shasum -a 256 "$f" | cut -c1-8)
+  got=$(grep -ho "$f?v=[a-f0-9]*" index.html | head -1 | cut -d= -f2)
+  if [ -z "$got" ]; then
+    bad "$f is not referenced with a version hash"
+    asset_drift=1
+  elif [ "$want" != "$got" ]; then
+    bad "$f has hash $want but the pages ask for $got — rebuild"
+    asset_drift=1
+  fi
+  n=$(grep -rho "$f?v=[a-f0-9]*" --include='*.html' . 2>/dev/null | sort -u | wc -l | tr -d ' ')
+  if [ "$n" != "1" ]; then
+    bad "$f is referenced with $n different hashes across the pages"
+    asset_drift=1
+  fi
+done
+[ "$asset_drift" = "0" ] && ok "style.css, lang.js and overscroll.js match the pages that ask for them"
+
 say ''
 if [ "$fail" = "0" ]; then
   say 'All checks passed.'

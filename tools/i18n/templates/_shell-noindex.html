@@ -10,7 +10,7 @@
        top of overscroll.js for the three measurements that established that. -->
   <!-- In <head> and not deferred: deferred, the English page paints first and
        the reader watches it swap. Smaller than the favicon, same connection. -->
-  <script src="/lang.js"></script>
+  <script src="{{lang_js}}"></script>
 
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 {{preload}}
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="{{css}}">
 </head>
 <body class="script-{{script}}{{rtl_class}}">
 
@@ -136,7 +136,7 @@
   <!-- Deferred and last: the page is complete and readable before this runs,
        and everything it does is a response to a gesture that has not happened
        yet. -->
-  <script src="/overscroll.js" defer></script>
+  <script src="{{overscroll_js}}" defer></script>
 
 </body>
 </html>
