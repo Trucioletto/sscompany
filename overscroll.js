@@ -90,8 +90,27 @@
     else doc.classList.remove('pull-active');
   }
 
+  /* THE SCROLL CUE'S TWO CONDITIONS, kept apart from pull-active on purpose.
+     pull-active means "the top edge may be pulled" and happens to be true at
+     scrollY 0; the cue needs "the reader is at the top AND there is something
+     below". Reusing one class for both would mean a later change to the pull
+     behaviour silently deciding whether a label appears on every page.
+
+     The length gate is what keeps the cue off a page with nothing under it: on
+     a document shorter than the window scrollY is always 0, so without it the
+     label would sit there forever pointing at nothing. 240px rather than zero
+     because a page that runs a little past the fold does not need telling. */
+  function syncCue() {
+    doc.classList.toggle('has-more',
+      doc.scrollHeight - window.innerHeight > 240);
+    doc.classList.toggle('at-top', window.scrollY < 24);
+  }
+
   syncEdge();
-  window.addEventListener('scroll', syncEdge, { passive: true });
+  syncCue();
+  window.addEventListener('scroll', function () { syncEdge(); syncCue(); },
+    { passive: true });
+  window.addEventListener('resize', syncCue, { passive: true });
 
   /* Asymptotic, so the page gives less the further it is pulled and can never
      pass MAX however hard the gesture is. exp() rather than a linear ratio
