@@ -1640,10 +1640,8 @@ h2 + [class] {
   align-items: center;
   gap: var(--s-0);
   pointer-events: none;
-  /* Light on a dark scrim rather than muted grey on white: the veil below is
-     now a shade, and text at --text-muted would sit inside it without being
-     read. */
-  color: #ffffff;
+  color: #5a6478;
+  color: var(--text-muted);
   opacity: 0;
   visibility: hidden;
   transition: opacity 320ms ease, visibility 0s linear 320ms;
@@ -1661,13 +1659,15 @@ h2 + [class] {
   inset-inline: 0;
   bottom: calc(var(--s-3) * -1);
   height: 9rem;
-  /* The page's own ink, carried down to nothing over seven rems. Asked for as
-     a darkened background, and taken from --text rather than from black so the
-     shade belongs to the palette instead of arriving from outside it. */
-  background: linear-gradient(to top, rgba(14, 18, 32, 0.94) 0%,
-                                      rgba(14, 18, 32, 0.74) 30%,
-                                      rgba(14, 18, 32, 0.34) 62%,
-                                      rgba(14, 18, 32, 0) 100%);
+  /* The page's own background, carried up to nothing. A dark scrim was tried
+     and it was wrong on a white page for a reason worth writing down: a shade
+     over dark text does not remove the text, it greys it, and the band read as
+     a piece of furniture laid across the bottom of a quiet page. Fading to the
+     paper is what a page continuing past its edge actually looks like — the
+     words thin out and stop, and nothing is added to the composition. Opaque
+     for the first third so the label has clean ground under it. */
+  background: linear-gradient(to top, #ffffff 0%, #ffffff 34%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to top, var(--bg) 0%, var(--bg) 34%, transparent 100%);
   z-index: -1;
 }
 
