@@ -72,7 +72,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="/style.css?v=3a80301a">
+  <link rel="stylesheet" href="/style.css?v=7804c002">
 
   <script type="application/ld+json">
 {
@@ -242,14 +242,15 @@
      <path class="pull-n pull-g3" d="M496.4 93Q496.4 99.5 495.8 106"/>
      <path class="pull-n pull-g3" d="M994.6 94.5Q993.5 100.2 992.8 106"/>
      <path class="pull-n pull-g3" d="M181.6 95.7Q180 100.8 178.5 106"/>
+     <!-- The motto, made of the same wire as the rest. It is a <text> and not
+          markup laid over the field: fill:none with the mesh's own stroke, so
+          it is one more chain in the weave that happens to spell something.
+          Placed AFTER the path block on purpose — mosaic.py rewrites exactly
+          the run of <path class="pull-*"> lines and stops, so a regenerated
+          mesh leaves this line where it is. -->
+     <text class="pull-word" x="720" y="76" text-anchor="middle" dx="0.04em">WEAVE THE WEB</text>
     </svg></div>
     </div>
-      <!-- The motto, and it is the same three words the home page sets as a
-           heading. Here it is decoration: the field is aria-hidden, so this is
-           not a second copy of the phrase for a screen reader to read out, and
-           translate="no" matches the heading's own attribute — the line is a
-           brand mark, identical in all fifteen languages. -->
-      <div class="pull-word" translate="no">Weave the web</div>
     </div>
 
     <div class="page masthead-inner">
@@ -474,7 +475,7 @@
   <!-- Deferred and last: the page is complete and readable before this runs,
        and everything it does is a response to a gesture that has not happened
        yet. -->
-  <script src="/overscroll.js?v=aa8f498f" defer></script>
+  <script src="/overscroll.js?v=8ed34db2" defer></script>
 
 </body>
 </html>

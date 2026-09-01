@@ -467,7 +467,8 @@ main:focus {
    DEVICE pixels while reporting layout sizes unscaled, so on a 2x display every
    thread is laid to exactly half its length — invisible to getBoundingClientRect
    and getScreenCTM alike, and visible only in a screenshot. */
-.pull-net path {
+.pull-net path,
+.pull-net text {
   fill: none;
   /* Not #ffffff. Pure white on the brand blue is a harder edge than anything
      else in the composition, and it made the mesh read as wire laid over the
@@ -519,80 +520,75 @@ main:focus {
   }
 }
 
-/* THE MOTTO, AND IT ARRIVES LAST.
+/* THE MOTTO, AND IT IS MADE OF THE SAME WIRE.
 
-   Three words, in the middle of the field, and they are the same three the home
-   page sets as `h2#name`. Set in Fraunces because that is what carries them
-   there — a Latin brand mark with translate="no" that is byte-identical in all
-   fifteen languages, so the display face is safe here in a way it is not for
-   anything that gets translated.
+   The first version of this was an HTML div laid over the field in the display
+   serif, near-white, at label size. It read as a sticker: the mesh is a faint
+   technical lattice at 42% of a tint, and a bright soft-serif caption sitting
+   on top of it belonged to a different picture. Nothing about it was part of
+   the weave — it did not share the material, the weight, the colour or the way
+   anything else in this field comes into being.
 
-   UPPERCASE AND TRACKED, WHICH IS THE ONLY NEW TREATMENT IN IT. 13px is the
-   label rank the scale already names, so this invents no size; but every other
-   label on the site is set in Inter, and the note under .footer-col h2 says why
-   — a serif label would sit at the rank of the section headings it stands in
-   front of. Nothing here stands in front of a heading. It is on a blue field
-   above the page, seen for as long as a wheel gesture, so it can be the one
-   place the display face is allowed to be a label, and the wide tracking is
-   what keeps three short words from reading as a caption at that size.
+   So it is not laid over the mesh, it is IN it: a <text> inside the same <svg>,
+   `fill: none`, stroked in the mesh's own colour at the mesh's own width. At a
+   glance it is another run of cell wall; a moment later it is three words. That
+   is the whole idea, and it only works if every value below is the thread's
+   values and not typographic ones — so the colour and the missing fill are
+   declared ONCE, on `.pull-net path, .pull-net text` above, and cannot drift
+   apart. They were not, at first: that rule named only `path`, so this element
+   had no stroke at all and the field came up with its mesh on it and no words.
+   A selector that says `path` does not reach a `text` however much a comment
+   beside it claims the material is shared. The width is restated below because
+   the layer's own rule is scoped to paths too, and a glyph is not one.
 
-   0.14em of tracking is laid to the RIGHT of every glyph, the last one
-   included, so a centred line sits half a step left of centre. text-indent puts
-   the same measure back at the start; with text-align: center it moves the line
-   by half of what it is given, which is exactly the half step owed.
+   BIG, because an outline has to be. At label size an unfilled letter is a
+   smudge: the counter closes up and the two sides of a stem merge into one
+   mark. The letters have to be large enough that the space inside them reads,
+   which also puts them at the scale of the cells they sit among — 34 units
+   against cells of 44 to 68 — so they sit in the tessellation rather than on
+   it. Uppercase for the same reason: fewer closed counters, and no descenders
+   to collide with the field's bottom edge.
 
-   direction: ltr unconditionally, and not a paired .is-rtl rule: the string is
-   pure Latin and the same in every language, and the colophon's note near the
-   end of this file records what the bidi algorithm does to a Latin run left in
-   an RTL block. Giving the line its own direction settles the tracking and the
-   indent in both directions at once, and centred text needs no side to be
-   picked for it. */
+   Inter, not Fraunces. A serif outlined at 1px is mostly bracket and stress —
+   the modelling that makes the face worth having is exactly what disappears
+   when you take the fill away, and what is left reads as a wobble. A grotesque
+   outlined is a clean geometric contour, which is the same drawing as the cell
+   walls beside it. */
 .pull-word {
-  position: absolute;
-  inset-inline: 0;
-  /* 60px, not the field's 96. Only the bottom 64 of the field is ever on
-     screen — that is overscroll.js's MAX, and the 32 above it exists so the
-     field's own top edge is never reached. Centring in 96 would put the line
-     16px above the middle of the only part anyone sees. Centring in 60 puts it
-     at 30px off the bottom edge: clear of the masthead, and fully out from
-     under it by the time the pull is 37px in, which is before the web finishes
-     at 54. */
-  bottom: 0;
-  height: 3.75rem;
-  line-height: 3.75rem;
-  text-align: center;
-  direction: ltr;
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  font-size: 0.8125rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 34px;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-indent: 0.14em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  /* Not #ffffff, for the reason .pull-net path gives: pure white on this blue
-     is the hardest edge in the composition. This is the same lift applied to a
-     tint rather than to the mesh's stroke, and it measures 4.2:1 against the
-     field where white would measure 4.6 — a floor that governs informative
-     text, which this is not: the field is aria-hidden and the phrase is set as
-     a real heading in the page's own prose a few hundred pixels below. */
-  color: #f0f4ff;
-  /* At rest, gone — the same at-rest state the mesh has, and for the same
-     reason: nothing in this field exists until the reader opens it. */
-  opacity: 0;
-}
+  letter-spacing: 0.08em;
+  fill: none;
+  stroke-width: 1;
+  /* Brighter than the threads, and only just: 0.62 against their 0.42. The
+     words have to come forward enough to be read as words rather than dismissed
+     as more mesh, and any further forward they stop being made of the field. */
+  stroke-opacity: 0.62;
 
-/* 330 + 360 = 690ms, which is where .pull-g3 finishes. The words land on the
-   frame the last thread does, so the web is not spun around a line that is
-   already sitting there — the line is what the spinning arrives at. */
-@keyframes pull-word {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* 220, MEASURED, and the measurement is the whole reason for the number.
+
+     A glyph outline is a closed subpath and the dash pattern restarts at every
+     moveto, exactly as it does for the seven chains inside one mesh path — so
+     each letter draws itself from its own start, and one value covers all
+     thirteen. The note under .pull-g0 states the hazard: a dasharray shorter
+     than its own contour leaves a line that can never retract, and it would sit
+     on the field at rest as a scratch nobody could explain.
+
+     So it was measured rather than guessed, by holding the offset at the
+     dasharray and looking for ink. Inter's W is the longest contour here and it
+     is just over 200 units at this size; 220 is clean, 200 is not. Checked
+     against the fallbacks too, because font-display is `optional` and a reader
+     whose Inter has not arrived gets a system face with different outlines:
+     -apple-system and Helvetica/Arial are both clean at 200, so Inter is the
+     binding case and 220 clears it.
+
+     And only just, deliberately. The completion point of a contour is L/D of
+     the way through, so a generous D finishes every letter early and leaves the
+     last part of the gesture drawing nothing — which is the failure the build
+     comment above records fixing for the mesh. At 220 the W lands at 95%. */
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
 }
 
 /* Each plane comes to rest out of its own depth on its own clock, and slides
@@ -637,7 +633,7 @@ main:focus {
 .is-pulling .pull-g1 { animation-delay: calc(95ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g2 { animation-delay: calc(185ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g3 { animation-delay: calc(290ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-word { animation: pull-word 360ms cubic-bezier(0.18, 0.88, 0.28, 1) calc(330ms - var(--pull-t, 0ms)) both; }
+.is-pulling .pull-word { animation: pull-lay 360ms linear calc(330ms - var(--pull-t, 0ms)) both; }
 
 /* LAST, and it has to be last: the animation shorthand above resets
    play-state along with everything else, so a paused declaration written
@@ -1671,7 +1667,7 @@ h2 + [class] {
   z-index: -1;
 }
 
-.has-more.at-top:not(.scrolling) .scroll-cue {
+.has-more:not(.scrolling) .scroll-cue {
   opacity: 1;
   visibility: visible;
   transition: opacity 420ms ease 600ms, visibility 0s;
@@ -1700,7 +1696,7 @@ h2 + [class] {
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue svg { animation: none; }
   .scroll-cue,
-  .has-more.at-top:not(.scrolling) .scroll-cue { transition: none; }
+  .has-more:not(.scrolling) .scroll-cue { transition: none; }
 }
 
 

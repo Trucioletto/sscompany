@@ -53,16 +53,21 @@
 
      And it is not there while the page is moving. A hint that rides along under
      moving text is furniture; the moment it has something to say is when the
-     reader has stopped. The class goes on at the first scroll event and comes
-     off 420ms after the last — long enough to sit out a flick and its momentum,
-     short enough that letting go brings it back without a wait. */
+     reader has stopped — anywhere, not only at the top. It goes at the first
+     scroll event and comes back 1200ms after the last. The wait is the point:
+     shorter and it flickers back between the small pauses inside one gesture,
+     which is worse than never coming back at all. */
   var cueDoc = document.documentElement;
   var cueIdle = 0;
 
   function syncCue() {
+    /* What is left BELOW where the reader is, not how long the page is. The
+       first version measured the document and only ever showed the cue at the
+       top, so it could not come back mid-page; measuring the remainder lets it
+       come back anywhere, and takes itself away at the end of the page, where a
+       label saying more follows would be pointing at nothing. */
     cueDoc.classList.toggle('has-more',
-      cueDoc.scrollHeight - window.innerHeight > 240);
-    cueDoc.classList.toggle('at-top', window.scrollY < 24);
+      cueDoc.scrollHeight - window.scrollY - window.innerHeight > 240);
   }
 
   function markScrolling() {
@@ -70,7 +75,7 @@
     window.clearTimeout(cueIdle);
     cueIdle = window.setTimeout(function () {
       cueDoc.classList.remove('scrolling');
-    }, 420);
+    }, 1200);
   }
 
   syncCue();
