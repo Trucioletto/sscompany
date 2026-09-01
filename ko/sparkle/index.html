@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle — 엔진이 밑에 깔린 영상 편집기</title>
   <meta name="description" content="Sparkle은 데스크톱 영상 편집기입니다. GPU 렌더링, AI의 대부분은 촬영본이 놓인 기기에서, 하드웨어 인코딩은 실리콘에 맞춰. 비공개 프리뷰 단계.">
 
@@ -106,6 +114,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -156,6 +165,8 @@
       "@id": "https://spinnesoftware.com/ko/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle은 데스크톱 영상 편집기입니다. GPU 렌더링, AI의 대부분은 촬영본이 놓인 기기에서, 하드웨어 인코딩은 실리콘에 맞춰. 비공개 프리뷰 단계.",
       "url": "https://sparkle.software",
       "publisher": {
@@ -342,6 +353,7 @@
         <h2 id="hood">내부 구조</h2>
 
         <dl class="identity">
+          <div><dt>플랫폼</dt><dd>macOS는 Apple Silicon과 Intel, Windows 64비트는 베타</dd></div>
           <div><dt>렌더링</dt><dd>미리보기는 GPU 셰이더, 내보내기는 인코더 트랜지션</dd></div>
           <div><dt>로컬 AI</dt><dd>ONNX Runtime — 매팅, 세그멘테이션, 깊이</dd></div>
           <div><dt>음성</dt><dd>기기 내 또는 클라우드, 단어 단위 타이밍</dd></div>

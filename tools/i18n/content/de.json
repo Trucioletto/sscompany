@@ -123,6 +123,8 @@
       "status_p1": "Sparkle befindet sich in <strong>geschlossener Vorschau</strong>. Editor, Cloud-Dienste, Konten und Abrechnung sind gebaut und laufen; der Zugang öffnet sich schrittweise, denn Software, die fremdes Material und fremdes Geld anfasst, verdient es, langsam herausgelassen zu werden. Wenn Sie vom Schneiden leben und dabei sein wollen, schreiben Sie uns und sagen Sie, was Sie schneiden.",
       "rail_hood": "Unter der Haube",
       "spec": {
+        "platforms": "Plattformen",
+        "platforms_v": "macOS auf Apple Silicon und Intel; Windows 64-Bit, als Beta",
         "rendering": "Rendering",
         "rendering_v": "GPU-Shader in der Vorschau; Encoder-Übergänge beim Export",
         "local_ai": "Lokale KI",

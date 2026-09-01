@@ -123,6 +123,8 @@
       "status_p1": "Sparkle处于<strong>不公开预览</strong>阶段。剪辑软件、云服务、账户和计费都已建成并在运行；开放是逐步进行的，因为一款同时经手别人素材和别人钱的软件，值得慢慢放出来。如果你靠剪辑吃饭，也想进来，写信来说说你剪的是什么。",
       "rail_hood": "引擎盖之下",
       "spec": {
+        "platforms": "平台",
+        "platforms_v": "macOS支持Apple Silicon与Intel；Windows 64位，测试版",
         "rendering": "渲染",
         "rendering_v": "预览用GPU着色器；导出用编码器转场",
         "local_ai": "本地AI",

@@ -123,6 +123,8 @@
       "status_p1": "Sparkle está en <strong>versión preliminar privada</strong>. El editor, los servicios en la nube, las cuentas y la facturación están construidos y en marcha; el acceso se abre de forma gradual, porque un software que maneja el material de otros y el dinero de otros merece salir despacio. Quien monte para vivir y quiera entrar, que escriba y cuente qué monta.",
       "rail_hood": "Bajo el capó",
       "spec": {
+        "platforms": "Plataformas",
+        "platforms_v": "macOS en Apple Silicon e Intel; Windows de 64 bits, en beta",
         "rendering": "Renderizado",
         "rendering_v": "Shaders de GPU en la vista previa; transiciones del codificador en la exportación",
         "local_ai": "IA local",

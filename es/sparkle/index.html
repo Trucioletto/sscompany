@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle — un editor de vídeo con un motor debajo</title>
   <meta name="description" content="Sparkle es un editor de vídeo de escritorio: renderizado por GPU, casi toda la IA en la máquina donde ya está el material y codificación por hardware. En versión preliminar privada.">
 
@@ -108,6 +116,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -158,6 +167,8 @@
       "@id": "https://spinnesoftware.com/es/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle es un editor de vídeo de escritorio: renderizado por GPU, casi toda la IA en la máquina donde ya está el material y codificación por hardware. En versión preliminar privada.",
       "url": "https://sparkle.software",
       "publisher": {
@@ -344,6 +355,7 @@
         <h2 id="hood">Bajo el capó</h2>
 
         <dl class="identity">
+          <div><dt>Plataformas</dt><dd>macOS en Apple Silicon e Intel; Windows de 64 bits, en beta</dd></div>
           <div><dt>Renderizado</dt><dd>Shaders de GPU en la vista previa; transiciones del codificador en la exportación</dd></div>
           <div><dt>IA local</dt><dd>ONNX Runtime — recorte, segmentación, profundidad</dd></div>
           <div><dt>Voz</dt><dd>En local o en la nube, sincronía por palabra</dd></div>

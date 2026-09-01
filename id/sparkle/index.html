@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle — editor video dengan mesin di bawahnya</title>
   <meta name="description" content="Sparkle adalah editor video desktop: rendering GPU, sebagian besar AI di mesin tempat rekamannya berada, encoding perangkat keras. Dalam pratinjau privat.">
 
@@ -108,6 +116,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -158,6 +167,8 @@
       "@id": "https://spinnesoftware.com/id/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle adalah editor video desktop: rendering GPU, sebagian besar AI di mesin tempat rekamannya berada, encoding perangkat keras. Dalam pratinjau privat.",
       "url": "https://sparkle.software",
       "publisher": {
@@ -344,6 +355,7 @@
         <h2 id="hood">Di balik kap mesin</h2>
 
         <dl class="identity">
+          <div><dt>Platform</dt><dd>macOS pada Apple Silicon dan Intel; Windows 64-bit, dalam versi beta</dd></div>
           <div><dt>Rendering</dt><dd>Shader GPU di pratinjau; transisi encoder saat ekspor</dd></div>
           <div><dt>AI lokal</dt><dd>ONNX Runtime — matting, segmentasi, kedalaman</dd></div>
           <div><dt>Ucapan</dt><dd>Di perangkat atau cloud, penanda waktu per kata</dd></div>

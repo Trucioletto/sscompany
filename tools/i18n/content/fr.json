@@ -123,6 +123,8 @@
       "status_p1": "Sparkle est en <strong>préversion privée</strong>. Le logiciel, les services cloud, les comptes et la facturation sont construits et en service ; l'accès s'ouvre progressivement, parce qu'un logiciel qui manipule les images et l'argent des autres mérite d'être lâché lentement. Si vous montez pour vivre et que vous voulez en être, écrivez-nous et dites-nous ce que vous montez.",
       "rail_hood": "Sous le capot",
       "spec": {
+        "platforms": "Plateformes",
+        "platforms_v": "macOS sur Apple Silicon et Intel ; Windows 64 bits, en bêta",
         "rendering": "Rendu",
         "rendering_v": "Shaders GPU à l'aperçu ; transitions de l'encodeur à l'export",
         "local_ai": "IA locale",

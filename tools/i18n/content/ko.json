@@ -123,6 +123,8 @@
       "status_p1": "Sparkle은 <strong>비공개 프리뷰</strong> 단계입니다. 편집기, 클라우드 서비스, 계정, 결제는 모두 만들어져 돌아가고 있습니다. 접근 권한은 천천히 열립니다. 남의 촬영본과 남의 돈을 다루는 소프트웨어는 천천히 내보낼 자격이 있기 때문입니다. 편집으로 먹고사는 분이고 들어와 보고 싶다면, 무엇을 편집하는지 적어 보내 주십시오.",
       "rail_hood": "내부 구조",
       "spec": {
+        "platforms": "플랫폼",
+        "platforms_v": "macOS는 Apple Silicon과 Intel, Windows 64비트는 베타",
         "rendering": "렌더링",
         "rendering_v": "미리보기는 GPU 셰이더, 내보내기는 인코더 트랜지션",
         "local_ai": "로컬 AI",

@@ -123,6 +123,8 @@
       "status_p1": "Sparkle berada dalam <strong>pratinjau privat</strong>. Editor, layanan cloud, akun, dan penagihan sudah dibangun dan berjalan; akses dibuka bertahap, sebab perangkat lunak yang menangani rekaman orang lain dan uang orang lain layak dilepas perlahan. Jika Anda menyunting video sebagai mata pencaharian dan ingin ikut, tulislah kepada kami dan ceritakan apa yang Anda sunting.",
       "rail_hood": "Di balik kap mesin",
       "spec": {
+        "platforms": "Platform",
+        "platforms_v": "macOS pada Apple Silicon dan Intel; Windows 64-bit, dalam versi beta",
         "rendering": "Rendering",
         "rendering_v": "Shader GPU di pratinjau; transisi encoder saat ekspor",
         "local_ai": "AI lokal",

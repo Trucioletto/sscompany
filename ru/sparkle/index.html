@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle — видеоредактор с движком внутри</title>
   <meta name="description" content="Sparkle — настольный видеоредактор: рендеринг на GPU, большая часть ИИ — на машине, где уже лежит материал, аппаратное кодирование под ваше железо. Закрытое превью.">
 
@@ -107,6 +115,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -157,6 +166,8 @@
       "@id": "https://spinnesoftware.com/ru/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle — настольный видеоредактор: рендеринг на GPU, большая часть ИИ — на машине, где уже лежит материал, аппаратное кодирование под ваше железо. Закрытое превью.",
       "url": "https://sparkle.software",
       "publisher": {
@@ -343,6 +354,7 @@
         <h2 id="hood">Под капотом</h2>
 
         <dl class="identity">
+          <div><dt>Платформы</dt><dd>macOS на Apple Silicon и Intel; Windows 64-бит, в бете</dd></div>
           <div><dt>Рендеринг</dt><dd>Шейдеры GPU в превью; переходы кодировщика на экспорте</dd></div>
           <div><dt>Локальный ИИ</dt><dd>ONNX Runtime — маттинг, сегментация, глубина</dd></div>
           <div><dt>Речь</dt><dd>На устройстве или в облаке, тайминг по словам</dd></div>

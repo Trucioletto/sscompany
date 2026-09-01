@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle — um editor de vídeo com um motor por baixo</title>
   <meta name="description" content="Sparkle é um editor de vídeo para desktop: renderização em GPU, a maior parte da IA na máquina onde o material já está, codificação por hardware. Em prévia privada.">
 
@@ -108,6 +116,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -158,6 +167,8 @@
       "@id": "https://spinnesoftware.com/pt-BR/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle é um editor de vídeo para desktop: renderização em GPU, a maior parte da IA na máquina onde o material já está, codificação por hardware. Em prévia privada.",
       "url": "https://sparkle.software",
       "publisher": {
@@ -344,6 +355,7 @@
         <h2 id="hood">Por baixo do capô</h2>
 
         <dl class="identity">
+          <div><dt>Plataformas</dt><dd>macOS em Apple Silicon e Intel; Windows 64 bits, em beta</dd></div>
           <div><dt>Renderização</dt><dd>Shaders de GPU na prévia; transições do codificador na exportação</dd></div>
           <div><dt>IA local</dt><dd>ONNX Runtime — matting, segmentação, profundidade</dd></div>
           <div><dt>Fala</dt><dd>No dispositivo ou na nuvem, tempo por palavra</dd></div>

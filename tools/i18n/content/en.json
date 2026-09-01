@@ -123,6 +123,8 @@
       "status_p1": "Sparkle is in <strong>private preview</strong>. Editor, cloud services, accounts and billing are built and running; access opens gradually, because software that handles other people's footage and other people's money deserves to be let out slowly. If you cut for a living and want in, write and say what you cut.",
       "rail_hood": "Under the hood",
       "spec": {
+        "platforms": "Platforms",
+        "platforms_v": "macOS on Apple Silicon and Intel; Windows 64-bit, in beta",
         "rendering": "Rendering",
         "rendering_v": "GPU shaders in preview; encoder transitions on export",
         "local_ai": "Local AI",

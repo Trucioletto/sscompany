@@ -310,6 +310,7 @@ def jsonld(lang: str, page_key: str, page_path: str, data: dict) -> str:
          "founder": {"@type": "Person", "name": "Manuel Luci"},
          "knowsLanguage": [l["code"] for l in LANGS],
          "areaServed": {"@type": "Country", "name": "Italy"},
+         "alternateName": "Spinne",
          "sameAs": ["https://www.linkedin.com/company/spinne-software/"]},
         {"@type": "WebSite", "@id": SITE_ID, "name": "Spinne Software",
          "url": f"{SITE}/", "inLanguage": lang,
@@ -341,6 +342,15 @@ def jsonld(lang: str, page_key: str, page_path: str, data: dict) -> str:
     if page_key == "sparkle":
         graph.append({"@type": "SoftwareApplication", "@id": f"{canonical}#software",
                       "name": "Sparkle", "applicationCategory": "MultimediaApplication",
+                      # The category vocabulary has no term for what this is, and
+                      # "MultimediaApplication" covers a photo viewer just as well.
+                      # applicationSubCategory is free text and is the only field on
+                      # the page that can carry the noun somebody actually types.
+                      "applicationSubCategory": "Video Editor",
+                      # Stated because a desktop application that never names an
+                      # operating system cannot be answered about by a machine.
+                      # Matches the platforms row on the answers page.
+                      "operatingSystem": "macOS, Windows",
                       "description": page["description"],
                       "url": "https://sparkle.software", "publisher": {"@id": ORG}})
     return json.dumps({"@context": "https://schema.org", "@graph": graph},

@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle — নিচে ইঞ্জিন বসানো একটি ভিডিও এডিটর</title>
   <meta name="description" content="Sparkle একটি ডেস্কটপ ভিডিও এডিটর: GPU রেন্ডারিং, AI-এর বেশির ভাগটাই চলে ফুটেজ যেখানে আছে সেই মেশিনে, আর হার্ডওয়্যার এনকোডিং। প্রাইভেট প্রিভিউতে।">
 
@@ -106,6 +114,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -156,6 +165,8 @@
       "@id": "https://spinnesoftware.com/bn/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle একটি ডেস্কটপ ভিডিও এডিটর: GPU রেন্ডারিং, AI-এর বেশির ভাগটাই চলে ফুটেজ যেখানে আছে সেই মেশিনে, আর হার্ডওয়্যার এনকোডিং। প্রাইভেট প্রিভিউতে।",
       "url": "https://sparkle.software",
       "publisher": {
@@ -342,6 +353,7 @@
         <h2 id="hood">ভেতরের কাঠামো</h2>
 
         <dl class="identity">
+          <div><dt>প্ল্যাটফর্ম</dt><dd>Apple Silicon ও Intel-এ macOS; Windows 64-বিট, বিটা পর্যায়ে</dd></div>
           <div><dt>রেন্ডারিং</dt><dd>প্রিভিউতে GPU শেডার; এক্সপোর্টে এনকোডারের ট্রানজিশন</dd></div>
           <div><dt>লোকাল AI</dt><dd>ONNX Runtime — ম্যাটিং, সেগমেন্টেশন, ডেপথ</dd></div>
           <div><dt>স্পিচ</dt><dd>ডিভাইসে বা ক্লাউডে, শব্দ-পর্যায়ের টাইমিং</dd></div>

@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle — एक वीडियो एडिटर, जिसके नीचे इंजन है</title>
   <meta name="description" content="Sparkle एक डेस्कटॉप वीडियो एडिटर है: GPU रेंडरिंग, ज़्यादातर AI उसी मशीन पर जहाँ फ़ुटेज पहले से है, और हार्डवेयर एन्कोडिंग। प्राइवेट प्रीव्यू में।">
 
@@ -106,6 +114,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -156,6 +165,8 @@
       "@id": "https://spinnesoftware.com/hi/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle एक डेस्कटॉप वीडियो एडिटर है: GPU रेंडरिंग, ज़्यादातर AI उसी मशीन पर जहाँ फ़ुटेज पहले से है, और हार्डवेयर एन्कोडिंग। प्राइवेट प्रीव्यू में।",
       "url": "https://sparkle.software",
       "publisher": {
@@ -342,6 +353,7 @@
         <h2 id="hood">अंदर क्या है</h2>
 
         <dl class="identity">
+          <div><dt>प्लैटफ़ॉर्म</dt><dd>Apple Silicon और Intel पर macOS; Windows 64-बिट, बीटा में</dd></div>
           <div><dt>रेंडरिंग</dt><dd>प्रीव्यू में GPU शेडर; एक्सपोर्ट पर एन्कोडर के ट्रांज़िशन</dd></div>
           <div><dt>लोकल AI</dt><dd>ONNX Runtime — मैटिंग, सेगमेंटेशन, डेप्थ</dd></div>
           <div><dt>स्पीच</dt><dd>डिवाइस पर या क्लाउड में, शब्द-स्तर टाइमिंग</dd></div>

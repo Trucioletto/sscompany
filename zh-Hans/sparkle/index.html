@@ -15,6 +15,14 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
 
+  <!-- Without this Google runs on its own conservative defaults: a snippet it
+       decides the length of, and a thumbnail it decides the size of. The pages
+       here are written to be quoted — the answers page exists for exactly that
+       — so the limits are lifted rather than left to a default nobody chose.
+       max-video-preview is set for completeness; there is no video on the site
+       yet, and the day there is, this will already be right. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
   <title>Sparkle——一款下面装着引擎的视频剪辑软件</title>
   <meta name="description" content="Sparkle是一款桌面视频剪辑软件：GPU渲染，大部分AI跑在素材本来就在的那台机器上，硬件编码随你的芯片而变。目前为不公开预览。">
 
@@ -106,6 +114,7 @@
         "@type": "Country",
         "name": "Italy"
       },
+      "alternateName": "Spinne",
       "sameAs": [
         "https://www.linkedin.com/company/spinne-software/"
       ]
@@ -156,6 +165,8 @@
       "@id": "https://spinnesoftware.com/zh-Hans/sparkle/#software",
       "name": "Sparkle",
       "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Video Editor",
+      "operatingSystem": "macOS, Windows",
       "description": "Sparkle是一款桌面视频剪辑软件：GPU渲染，大部分AI跑在素材本来就在的那台机器上，硬件编码随你的芯片而变。目前为不公开预览。",
       "url": "https://sparkle.software",
       "publisher": {
@@ -342,6 +353,7 @@
         <h2 id="hood">引擎盖之下</h2>
 
         <dl class="identity">
+          <div><dt>平台</dt><dd>macOS支持Apple Silicon与Intel；Windows 64位，测试版</dd></div>
           <div><dt>渲染</dt><dd>预览用GPU着色器；导出用编码器转场</dd></div>
           <div><dt>本地AI</dt><dd>ONNX Runtime——抠像、分割、深度</dd></div>
           <div><dt>语音</dt><dd>本地或云端，逐词时间码</dd></div>

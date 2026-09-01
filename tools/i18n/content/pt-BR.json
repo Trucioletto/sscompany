@@ -123,6 +123,8 @@
       "status_p1": "O Sparkle está em <strong>prévia privada</strong>. Editor, serviços de nuvem, contas e cobrança estão construídos e em operação; o acesso é liberado aos poucos, porque um software que lida com o material dos outros e com o dinheiro dos outros merece ser solto devagar. Se você edita para viver e quer entrar, escreva e conte o que você edita.",
       "rail_hood": "Por baixo do capô",
       "spec": {
+        "platforms": "Plataformas",
+        "platforms_v": "macOS em Apple Silicon e Intel; Windows 64 bits, em beta",
         "rendering": "Renderização",
         "rendering_v": "Shaders de GPU na prévia; transições do codificador na exportação",
         "local_ai": "IA local",
