@@ -47,3 +47,10 @@ skills-lock.json
 # Content audit notes. Same rule as GEO-STRATEGY.md: the repo root is served
 # from the public domain, so internal notes must never be published.
 CONTENT-AUDIT.md
+
+# Scratch harnesses and probes. Everything in the repo root is served from
+# spinnesoftware.com, so a debugging page left here is a debugging page on the
+# public site — and check.sh rightly fails on it for having no canonical and no
+# sitemap entry. The underscore prefix is the convention; keep using it.
+_*.html
+_*.js

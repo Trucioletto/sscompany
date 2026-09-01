@@ -293,10 +293,33 @@ body {
    takes no focus and a skip link that cannot be focused is decoration. It comes
    back at the top-left on focus, over everything, with the same focus ring the
    rest of the page uses. */
+/* NOT `left: -9999px`, AND THE REASON IS THE ARABIC PAGE'S SCROLLBAR.
+
+   Parking the link 9999px to the physical left is the classic recipe and it is
+   invisible in fourteen languages, because a browser does not make overflow
+   past the inline-START edge scrollable. In RTL that edge is the other one:
+   with `dir="rtl"`, -9999px is 9999px past the END, so it IS scrollable, and
+   `document.scrollWidth` on /ar/ and /ur/ measured 10389px against a 390px
+   viewport. `overflow-x: clip` is on `body` and does not contain it — the
+   viewport scrolling box is the root. Every Arabic and Urdu page could be
+   swiped ten thousand pixels sideways into nothing, on a phone, from the first
+   frame, for a link nobody could see.
+
+   So the link is taken out of flow by the same 1px-and-clip-path device
+   `.visually-hidden` already uses twelve lines above, which reaches no edge in
+   either direction and keeps the element focusable — which was the whole point
+   of not using `display: none`. On focus it unclips and lands at the
+   inline-start corner, logical, so it arrives on the reading side in both
+   directions rather than always on the physical left. */
 .skip-link {
   position: absolute;
-  left: -9999px;
+  inset-inline-start: 0;
   top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
   z-index: 100;
   padding: var(--s-1) var(--s-2);
   background: var(--bg);
@@ -307,7 +330,11 @@ body {
 
 .skip-link:focus,
 .skip-link:focus-visible {
-  left: var(--s-2);
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  inset-inline-start: var(--s-2);
   outline: 2px solid var(--brand-ink);
   outline-offset: var(--s-0);
 }
@@ -1048,9 +1075,16 @@ a:hover {
    So: one action, at a size the reading column does not otherwise use, and the
    outbound link demoted to an annotation underneath it. Colour carries the rank
    — blue for the thing to do, grey for the note about where else it lives. */
+/* The `margin-bottom: 0` that used to be here was written for the case where
+   .more ends the article, and `.doc > *:last-child` (see the note under `main`)
+   already owns that case for every page. What it also did was fire in the
+   middle of a column: on /sparkle/ the block sits between two paragraphs, and
+   the gap under it measured 0px against the 24 every other paragraph gets — two
+   paragraphs touching, with only the anchor's own 8px of padding between the
+   lines. A rule for a last child should not be written as a rule for the
+   element. */
 .more {
   display: block;
-  margin-bottom: 0;
 }
 
 .more a {
@@ -1210,21 +1244,54 @@ li {
    the block below, belonging to neither, which is the exact failure the rule
    was written to prevent. `h2 + *` cannot fall out of step with the block
    vocabulary the way a list of two selectors did. */
-h2 + * {
+/* `h2 + *` IS (0,0,1) AND EVERY BLOCK IT HAS TO BEAT IS (0,1,0).
+
+   The paragraph above was written as though this selector had settled the
+   question. It had not, and the two elements it names by way of example are
+   both still wrong: `.home-what` (48px), `.identity` (48), `.answer` (48) and
+   `.summary` (48) each set `margin: var(--s-6) 0` under a class, so a single
+   type-and-combinator selector never applied to any of them. Measured before
+   this line existed and after it, unchanged:
+
+       h2 -> p                16    the value this rule declares
+       h2 -> .home-what       48    index
+       h2 -> .identity        48    about, how-we-build, sparkle
+       h2 -> .answer          48    answers, twice
+
+   64 above and 48 below is the "equidistant, belonging to neither" failure
+   named above, live on five of the seven page types in all fifteen languages.
+
+   `h2 + [class]` is (0,1,1): one attribute selector, no class names in it, so
+   it beats any single-class block margin without listing the four that exist
+   today or going stale when a fifth is added. Both selectors are kept — the
+   bare one for unclassed prose, the attribute one for everything else. */
+h2 + *,
+h2 + [class] {
   margin-top: var(--s-3);
 }
 
-/* 42rem: the width at which the container reaches its cap and there is gutter
-   for the rule to hang in. Below it the container is fluid and its 24px of
-   padding is all that keeps the text off the screen edge, so nothing may reach
-   into it. The negative margin has to cancel the padding AND the rule it hangs
-   off, or the quote's text sits 2px inside the spine the rest of the page holds.
+/* 42.25rem, NOT 42rem, AND THE 4px IN BETWEEN IS WHY.
+
+   42rem = 672px is the width at which the container reaches its cap, and the
+   old comment here called that "the width at which there is gutter for the rule
+   to hang in". At exactly the cap there is none: the box fills the viewport, so
+   the -26px hangs the rule off the outside of the screen. Solved for the border
+   box, x = (V - 672) / 2 - 2, which is negative for every V below 676 —
+   measured at 672 the rule sat at -2.0..0.0 and `overflow-x: clip` on body ate
+   it. Four pixels of viewport where the one blue mark on the page silently is
+   not drawn, in the block whose entire device is that mark.
+
+   676px is where the rule's outer edge reaches x = 0. Below it the container is
+   fluid and its 24px of padding is all that keeps the text off the screen edge,
+   so nothing may reach into it. The negative margin has to cancel the padding
+   AND the rule it hangs off, or the quote's text sits 2px inside the spine the
+   rest of the page holds.
 
    The quote also used to carry `max-width: 26ch`, which made it 414px at 1440,
    394 at 1024 and 364 at 768 — a fourth column width, computed from a font
    metric, moving with the viewport and different in every language. It is a
    paragraph of the page it interrupts and it now measures like one. */
-@media (min-width: 42rem) {
+@media (min-width: 42.25rem) {
   .pull {
     margin-inline-start: calc(-1 * (var(--s-4) + 2px));
   }
@@ -1365,9 +1432,16 @@ h2 + * {
   border-top-color: var(--rule);
 }
 
-.close .cta {
-  margin-top: var(--s-1);
-}
+/* AND THEN 8 MORE WERE PUT BACK, WHICH MAKES IT 64 AND 41.
+
+   The paragraph above deletes an interval that "was two numbers added up" and
+   the next declaration in the block added a third. `.cta` is `display:
+   inline-flex` — an atomic inline whose margin box sets the line box — so
+   `padding-top: 32` and `margin-top: 8` do not collapse into each other the way
+   two block margins would. Measured from the hairline to the top of the button
+   on every page that has one: 41.0px, against the 32 the comment above states
+   and the 32 the padding declares. 41 is not on the scale and nothing asked for
+   it. The padding already owns this gap. */
 
 /* .cta-note appears on four pages and had no rule anywhere — it fell through to
    the rail's paragraph style, whose margin-bottom trapped 16px at the end of the
@@ -1439,6 +1513,23 @@ h2 + * {
   color: var(--text-muted);
 }
 
+/* THE PANEL IS 24 AT THE TOP AND WAS 32 AT THE BOTTOM.
+
+   `padding: var(--s-4) 0` declares 24 on both edges, and `.summary ul` zeroes
+   the list's own margin, so the block looks closed. It was not: the separation
+   between items comes from `li + li` below, but the bare `li` rule further up
+   still puts `margin-bottom: var(--s-1)` on EVERY item including the last, and
+   padding does not collapse a child's margin away. Measured from the rules to
+   the ink, 25.0 above and 33.0 below — an 8px lean nothing declared, on a
+   device whose whole point is a pair of matched hairlines.
+
+   Zeroed here rather than by changing the bare `li` rule, which is correct for
+   prose lists that end above 24px of paragraph margin. Same two lines under
+   `.answer`, same reason. */
+.summary li {
+  margin-bottom: 0;
+}
+
 .summary li + li {
   margin-top: var(--s-1);
 }
@@ -1485,6 +1576,11 @@ h2 + * {
   line-height: 1.5;
   color: #0e1220;
   color: var(--text);
+}
+
+/* The 8px trapped against the bottom rule — see the note under `.summary li`. */
+.answer li {
+  margin-bottom: 0;
 }
 
 .answer li + li {
@@ -1646,8 +1742,15 @@ h2 + * {
 /* Stacked below 37rem: one column, the label above its value, and the rule only
    under the pair rather than under each cell. 37rem and not 32 so that every
    two-track block on the site — this table, the values grid, the footer —
-   folds at the same width instead of at three. */
-@media (max-width: 37rem) {
+   folds at the same width instead of at three.
+
+   36.9375rem = 591px, not 37rem, because `max-width: 37rem` and the
+   `min-width: 37rem` that unfolds the values grid, the footer and the colophon
+   are BOTH true at exactly 592px. Measured there: this table one column while
+   the other two were already two. One pixel of viewport at which the site has
+   the three seams this comment says it does not have. A max-width bound has to
+   stop one step below the min-width bound it pairs with, not on it. */
+@media (max-width: 36.9375rem) {
   .identity {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1766,9 +1869,14 @@ footer {
     grid-column: 1 / -1;
   }
 
-  .footer-col:first-child p {
-    max-width: 34rem;
-  }
+  /* NO CAP. This was `max-width: 34rem`, the last survivor of the two-measure
+     layout the container note at the top of this file describes tearing out,
+     and .colophon's own note two hundred lines below says the same thing again:
+     "the container is the measure, so this line ends where every other line on
+     the page ends." This one did not. Spanning the full band, the column is
+     624px at 1440 and the cap stopped its text at 544 — 80px short of the
+     right edge that the colophon directly beneath it reaches, which reads as a
+     ragged second margin in the one block whose job is to look settled. */
 
   /* Everything the phone footer folds, unfolded: three labelled tracks, one
      page per line, one address per line. */
@@ -1829,6 +1937,17 @@ footer {
      12px under a finger), so the rows are separated by that and adding to it
      would reopen the spacing this rule closes. */
   row-gap: 0;
+}
+
+/* THREE LABELS, ONE DISTANCE. The footer's label rule declares 12px under the
+   caps (`.footer-col h2`, margin-bottom var(--s-2)), and the two columns that
+   hold paragraphs get exactly that. This one held a nav, and a nav carries a
+   class, so `h2 + [class]` up in the prose section put 16 on it and the larger
+   margin won the collapse: PAGES sat 16px above its list while CONTACT and the
+   company name sat 12 above theirs. The heading-binds-down rule is for the
+   reading column; a footer track sets its own, tighter, and says so here. */
+.footer-col h2 + .footer-nav {
+  margin-top: 0;
 }
 
 /* Only while they sit on one line. A label that wraps mid-word in a row of

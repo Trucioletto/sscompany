@@ -283,6 +283,27 @@ else
   bad "lang.js ENGLISH_ONLY is [$(echo $langjs_list)] but build.py publishes [$(echo $build_list)] in English only"
 fi
 
+say "nothing is parked past a physical edge"
+# `left: -9999px` is the classic way to hide a focusable element, and it is a bug
+# in half the languages here. A browser does not make overflow past the inline
+# START edge scrollable — but with dir="rtl" the physical left IS the end, so the
+# page becomes 9999px wide. The Arabic and Urdu pages shipped like that: 10613px
+# of scrollWidth against a 614px viewport, swipeable sideways into nothing, for a
+# link nobody could see. Hide focusable things with the 1px-and-clip-path device
+# instead, and position them with inset-inline-* so they land on the reading side.
+# Comments are stripped first: the note above the skip link explains why NOT to do
+# this and says `left: -9999px` in prose, which a naive grep reads as the defect.
+if python3 - <<'PYEOF'
+import re, sys
+css = re.sub(r'/\*.*?\*/', '', open('style.css').read(), flags=re.S)
+sys.exit(0 if re.search(r'(left|right)\s*:\s*-\d{4,}px', css) else 1)
+PYEOF
+then
+  bad "style.css parks something at a large negative physical offset — in RTL that is scrollable overflow, not a hiding place"
+else
+  ok "no large negative left/right in style.css"
+fi
+
 say "asset URLs carry the hash of the asset they point at"
 # The pages ask for /style.css?v=<hash>. If somebody edits an asset and does not
 # rebuild, the pages keep asking for the old hash — and because that URL is
