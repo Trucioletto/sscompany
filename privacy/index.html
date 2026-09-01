@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -297,6 +297,38 @@
 
         <p class="lede">This website is built to learn as little about you as is technically possible. It sets no cookies, runs no analytics and embeds no third-party content, so it builds no profile of you and nothing about you leaves this site. The only data anyone receives when you read a page is the handful of technical details every web server needs in order to send it to you. They are described in full below.</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">In this notice</h2>
+          <ul>
+            <li><a href="#who">Who is responsible</a></li>
+            <li><a href="#what">What is processed, and why</a></li>
+            <li><a href="#basis">Legal basis</a></li>
+            <li><a href="#host">Who hosts the site</a></li>
+            <li><a href="#retention">How long anything is kept</a></li>
+            <li><a href="#mail">If you write to us</a></li>
+            <li><a href="#children">Children</a></li>
+            <li><a href="#absent">What is not here</a></li>
+            <li><a href="#rights">Your rights</a></li>
+            <li><a href="#outside">Visitors outside Europe</a></li>
+            <li><a href="#language">Language of this notice</a></li>
+            <li><a href="#changes">Changes</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -311,22 +343,22 @@
           </ul>
         </div>
 
-        <h2>Who is responsible</h2>
+        <h2 id="who">Who is responsible</h2>
         <p>
           The data controller is <strong>Spinne Software di Luci Manuel</strong>, a sole proprietorship registered in Italy, VAT no. IT 18636231005, Rome Register of Companies REA no. RM-1797481. You can reach the controller at
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>, or at
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> if you need certified email, for any question about this notice or to exercise the rights listed below.
         </p>
 
-        <h2>What is processed, and why</h2>
+        <h2 id="what">What is processed, and why</h2>
         <p>To send you this page, the server that hosts it necessarily receives your IP address, along with the date and time of the request, the page requested and your browser's user-agent string. This is a technical requirement of the internet, not a choice: without your IP address there is no return address to deliver the page to.</p>
         <p>These entries are written to the hosting provider's server logs and are used only to deliver the site and to protect it from abuse, such as denial-of-service attacks. They are never used to profile you and never combined with other data.</p>
         <p>We do not sell your personal information, and we do not share it for cross-context behavioural advertising, as those terms are used under California law. There is no mechanism on this site to do either.</p>
 
-        <h2>Legal basis</h2>
+        <h2 id="basis">Legal basis</h2>
         <p>The legal basis is the controller's legitimate interest under Article 6(1)(f) GDPR in operating the website and keeping it secure. No consent is requested because none is required for this processing, and because no cookies or tracking technologies are used.</p>
 
-        <h2>Who hosts the site</h2>
+        <h2 id="host">Who hosts the site</h2>
         <p>
           The site is hosted on GitHub Pages and served through the Fastly content delivery network, and it reaches you through Cloudflare, which sits in front of both and terminates the connection your browser makes — so Cloudflare is the first party to receive your IP address. All three act as data processors and all three are established in the United States, so delivering any page necessarily moves the technical data above across borders. Where that data originates in a region that restricts such transfers — the European Union, for example — the transfer relies on the providers' certification under the EU–U.S. Data Privacy Framework and on the European Commission's adequacy decision of 10 July 2023. Their handling of the data is described in the
           <!-- Three processors, so three policies: the separators hang off the
@@ -336,38 +368,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>.
         </p>
 
-        <h2>How long anything is kept</h2>
+        <h2 id="retention">How long anything is kept</h2>
         <p>The controller keeps no logs and no copy of them. The entries described above exist only for as long as the hosting and content delivery providers retain them under their own policies, linked above; the controller sets no separate period and can neither extend nor shorten theirs.</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>If you write to us</h2>
+        <h2 id="mail">If you write to us</h2>
         <p>The addresses above are ordinary mailboxes. If you write, the controller receives whatever the message contains — at least your address, and your name if you sign it — and uses it to answer you and to keep a record of what was asked. Mail to the spinnesoftware.com address is routed by Cloudflare and delivered to an external mail provider; certified mail to the PEC address is handled by that provider. The legal basis is the controller's legitimate interest under Article 6(1)(f) GDPR in replying to correspondence, and a legal obligation under Article 6(1)(c) GDPR where the message exercises one of the rights below. Correspondence is kept indefinitely: a mailbox is not cleared on a schedule, and describing a retention period here that nobody operates would be worse than saying so. You can ask for a message to be deleted at any time.</p>
 
-        <h2>Children</h2>
+        <h2 id="children">Children</h2>
         <p>This site is not directed at children and asks nobody for personal data. The technical log entries described above are the only data recorded, and they are not used to identify anyone, child or adult.</p>
 
-        <h2>What is not here</h2>
+        <h2 id="absent">What is not here</h2>
         <p>No cookies. No local or session storage. No analytics or measurement of any kind. No advertising or tracking pixels. No embedded videos, maps or social widgets. No contact form. No newsletter. The typeface is served from this same domain rather than from a font provider, so no request about you leaves this site. There are two scripts, both served from this domain. One reads the language your browser asks for and, if this site is published in it, replaces the address with that version; the setting is read once, not stored and not sent anywhere. The other replaces the browser's bounce at the top edge of the page. Neither sets a cookie, uses any storage, or records anything.</p>
         <p>
           Apart from the references in this notice, the pages link out to two places: a LinkedIn company profile, and
           <a href="https://sparkle.software">sparkle.software</a>, which is a separate website operated by the same controller. Nothing is sent to either unless you choose to click, at which point that site's own privacy notice applies. The Sparkle logo shown on these pages is served from this domain like every other image here, so displaying it contacts nobody.
         </p>
 
-        <h2>Your rights</h2>
+        <h2 id="rights">Your rights</h2>
         <p>Under Articles 15 to 22 GDPR you may ask the controller for access to your personal data, or for its correction, erasure or restriction, and you may object to processing based on legitimate interest. Given that the only data the website itself processes is a server log entry that is not linked to your identity, the controller will usually be unable to locate any data relating to you without further information from you.</p>
         <p>
           You also have the right to lodge a complaint with a data protection supervisory authority. Because the controller is established in Italy, the competent authority is the Italian
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>; residents of the European Economic Area may also contact the authority in their own country.
         </p>
 
-        <h2>Visitors outside Europe</h2>
+        <h2 id="outside">Visitors outside Europe</h2>
         <p>This site is operated from the European Union. It is not directed at, and does not offer goods or services to, people in any particular country outside it. Wherever you read this from, the commitments above are the same: the only data the website itself processes is a server-log entry, it is used solely to deliver and secure the site, it is never used to profile you, and it is never sold. Write to the address above with any request about your data, whichever law you rely on.</p>
 
-        <h2>Language of this notice</h2>
+        <h2 id="language">Language of this notice</h2>
         <p>This notice is published in several languages for convenience. The English version is the authoritative one: if a translation and the English text disagree, the English text is what the controller is bound by. Any request may be sent in Italian or English, and will be answered in the same language.</p>
 
-        <h2>Changes</h2>
+        <h2 id="changes">Changes</h2>
         <p>If this notice changes, the revised version will be published on this page. It was last updated on 25 August 2026.</p>
       </article>
 

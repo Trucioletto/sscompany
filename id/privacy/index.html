@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -297,6 +297,38 @@
 
         <p class="lede">Situs web ini dibangun untuk mengetahui tentang Anda sesedikit mungkin secara teknis. Situs ini tidak menyetel cookie, tidak menjalankan analitik, dan tidak menyematkan konten pihak ketiga, sehingga tidak menyusun profil tentang Anda dan tidak ada apa pun tentang Anda yang keluar dari situs ini. Satu-satunya data yang diterima siapa pun saat Anda membaca sebuah halaman adalah segelintir detail teknis yang dibutuhkan setiap server web untuk mengirimkan sebuah halaman kepada Anda. Semuanya diuraikan selengkapnya di bawah ini.</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">Isi pemberitahuan</h2>
+          <ul>
+            <li><a href="#who">Siapa yang bertanggung jawab</a></li>
+            <li><a href="#what">Apa yang diproses, dan mengapa</a></li>
+            <li><a href="#basis">Dasar hukum</a></li>
+            <li><a href="#host">Siapa yang menampung situs ini</a></li>
+            <li><a href="#retention">Berapa lama data disimpan</a></li>
+            <li><a href="#mail">Jika Anda menulis kepada kami</a></li>
+            <li><a href="#children">Anak-anak</a></li>
+            <li><a href="#absent">Apa yang tidak ada di sini</a></li>
+            <li><a href="#rights">Hak-hak Anda</a></li>
+            <li><a href="#outside">Pengunjung di luar Eropa</a></li>
+            <li><a href="#language">Bahasa pemberitahuan ini</a></li>
+            <li><a href="#changes">Perubahan</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -311,22 +343,22 @@
           </ul>
         </div>
 
-        <h2>Siapa yang bertanggung jawab</h2>
+        <h2 id="who">Siapa yang bertanggung jawab</h2>
         <p>
           Pengendali data adalah <strong>Spinne Software di Luci Manuel</strong>, usaha perseorangan yang terdaftar di Italia, No. PPN IT 18636231005, Daftar Perusahaan Roma REA No. RM-1797481. Pengendali data dapat dihubungi di
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>, atau di
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> jika Anda memerlukan email tersertifikasi, untuk pertanyaan apa pun mengenai pemberitahuan ini atau untuk menggunakan hak-hak yang tercantum di bawah.
         </p>
 
-        <h2>Apa yang diproses, dan mengapa</h2>
+        <h2 id="what">Apa yang diproses, dan mengapa</h2>
         <p>Untuk mengirimkan halaman ini kepada Anda, server yang menampungnya mau tidak mau menerima alamat IP Anda, beserta tanggal dan waktu permintaan, halaman yang diminta, dan string user-agent peramban Anda. Ini adalah keharusan teknis internet, bukan sebuah pilihan: tanpa alamat IP Anda tidak ada alamat balasan untuk mengirimkan halaman itu.</p>
         <p>Entri tersebut ditulis ke log server penyedia hosting dan digunakan hanya untuk mengirimkan situs ini dan melindunginya dari penyalahgunaan, seperti serangan penolakan layanan. Entri itu tidak pernah digunakan untuk menyusun profil Anda dan tidak pernah digabungkan dengan data lain.</p>
         <p>Kami tidak menjual informasi pribadi Anda, dan kami tidak membagikannya untuk iklan perilaku lintas konteks, sebagaimana istilah-istilah itu digunakan menurut hukum California. Tidak ada mekanisme di situs ini untuk melakukan salah satu di antaranya.</p>
 
-        <h2>Dasar hukum</h2>
+        <h2 id="basis">Dasar hukum</h2>
         <p>Dasar hukumnya adalah kepentingan yang sah dari pengendali data menurut Pasal 6(1)(f) GDPR untuk mengoperasikan situs web ini dan menjaga keamanannya. Tidak ada persetujuan yang diminta karena pemrosesan ini tidak memerlukannya, dan karena tidak ada cookie maupun teknologi pelacakan yang digunakan.</p>
 
-        <h2>Siapa yang menampung situs ini</h2>
+        <h2 id="host">Siapa yang menampung situs ini</h2>
         <p>
           Situs ini ditampung di GitHub Pages dan disajikan melalui jaringan pengiriman konten Fastly, dan sampai kepada Anda melalui Cloudflare, yang berada di depan keduanya dan mengakhiri koneksi yang dibuka peramban Anda — jadi Cloudflare-lah yang pertama menerima alamat IP Anda. Ketiganya bertindak sebagai pemroses data dan ketiganya berkedudukan di Amerika Serikat, sehingga mengirimkan halaman apa pun mau tidak mau memindahkan data teknis di atas melintasi batas negara. Bila data itu berasal dari kawasan yang membatasi transfer semacam itu — Uni Eropa, misalnya — transfer tersebut bersandar pada sertifikasi para penyedia di bawah EU–U.S. Data Privacy Framework dan pada keputusan kecukupan Komisi Eropa tertanggal 10 Juli 2023. Cara mereka menangani data itu diuraikan dalam
           <!-- Three processors, so three policies: the separators hang off the
@@ -336,38 +368,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>.
         </p>
 
-        <h2>Berapa lama data disimpan</h2>
+        <h2 id="retention">Berapa lama data disimpan</h2>
         <p>Pengendali data tidak menyimpan log maupun salinannya. Entri yang diuraikan di atas hanya ada selama penyedia hosting dan penyedia jaringan pengiriman konten menyimpannya menurut kebijakan mereka sendiri, yang ditautkan di atas; pengendali data tidak menetapkan jangka waktu tersendiri dan tidak dapat memperpanjang maupun memperpendek jangka waktu mereka.</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>Jika Anda menulis kepada kami</h2>
+        <h2 id="mail">Jika Anda menulis kepada kami</h2>
         <p>Alamat-alamat di atas adalah kotak surat biasa. Jika Anda menulis, pengendali data menerima apa pun yang ada di dalam pesan itu — sekurang-kurangnya alamat Anda, dan nama Anda bila Anda menandatanganinya — dan memakainya untuk menjawab Anda serta menyimpan catatan tentang apa yang ditanyakan. Surat ke alamat di spinnesoftware.com dirutekan oleh Cloudflare dan dikirimkan ke penyedia surel eksternal; surat tersertifikasi ke alamat PEC ditangani oleh penyedia tersebut. Dasar hukumnya adalah kepentingan sah pengendali data menurut Pasal 6(1)(f) GDPR untuk menjawab surat, dan kewajiban hukum menurut Pasal 6(1)(c) GDPR bila pesan itu menjalankan salah satu hak yang disebut di bawah. Surat-menyurat disimpan tanpa batas waktu: kotak surat tidak dibersihkan menurut jadwal, dan menuliskan di sini masa simpan yang tidak dijalankan siapa pun akan lebih buruk daripada mengatakannya. Anda dapat meminta sebuah pesan dihapus kapan saja.</p>
 
-        <h2>Anak-anak</h2>
+        <h2 id="children">Anak-anak</h2>
         <p>Situs ini tidak ditujukan kepada anak-anak dan tidak meminta data pribadi dari siapa pun. Entri log teknis yang diuraikan di atas adalah satu-satunya data yang direkam, dan entri itu tidak digunakan untuk mengidentifikasi siapa pun, anak-anak maupun orang dewasa.</p>
 
-        <h2>Apa yang tidak ada di sini</h2>
+        <h2 id="absent">Apa yang tidak ada di sini</h2>
         <p>Tanpa cookie. Tanpa penyimpanan lokal maupun penyimpanan sesi. Tanpa analitik atau pengukuran dalam bentuk apa pun. Tanpa piksel iklan atau pelacakan. Tanpa video, peta, atau widget media sosial yang disematkan. Tanpa formulir kontak. Tanpa buletin. Jenis hurufnya disajikan dari domain yang sama ini, bukan dari penyedia font, sehingga tidak ada permintaan tentang Anda yang keluar dari situs ini. Ada dua skrip, keduanya disajikan dari domain ini. Yang satu membaca bahasa yang diminta peramban dan, bila situs ini terbit dalam bahasa itu, mengganti alamatnya dengan versi tersebut; setelan itu dibaca sekali, tidak disimpan dan tidak dikirim ke mana pun. Yang lain menggantikan pantulan bawaan peramban di tepi atas halaman. Keduanya tidak menyetel cookie, tidak memakai penyimpanan apa pun, dan tidak mencatat apa pun.</p>
         <p>
           Selain rujukan di dalam pemberitahuan ini, halaman-halaman ini menautkan ke dua tempat: profil perusahaan di LinkedIn, dan
           <a href="https://sparkle.software">sparkle.software</a>, yaitu situs web terpisah yang dioperasikan oleh pengendali data yang sama. Tidak ada apa pun yang dikirim ke salah satunya kecuali Anda memilih untuk mengeklik, dan pada saat itu pemberitahuan privasi situs tersebut yang berlaku. Logo Sparkle yang ditampilkan pada halaman-halaman ini disajikan dari domain ini seperti setiap gambar lain di sini, sehingga menampilkannya tidak menghubungi siapa pun.
         </p>
 
-        <h2>Hak-hak Anda</h2>
+        <h2 id="rights">Hak-hak Anda</h2>
         <p>Berdasarkan Pasal 15 sampai 22 GDPR, Anda dapat meminta pengendali data memberikan akses ke data pribadi Anda, atau melakukan pembetulan, penghapusan, atau pembatasan pemrosesannya, dan Anda dapat mengajukan keberatan atas pemrosesan yang didasarkan pada kepentingan yang sah. Mengingat satu-satunya data yang diproses situs ini sendiri adalah entri log server yang tidak terhubung dengan identitas Anda, pengendali data biasanya tidak akan dapat menemukan data apa pun yang berkaitan dengan Anda tanpa informasi lebih lanjut dari Anda.</p>
         <p>
           Anda juga berhak mengajukan pengaduan kepada otoritas pengawas pelindungan data. Karena pengendali data berkedudukan di Italia, otoritas yang berwenang adalah lembaga Italia
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>; penduduk Kawasan Ekonomi Eropa juga dapat menghubungi otoritas di negaranya sendiri.
         </p>
 
-        <h2>Pengunjung di luar Eropa</h2>
+        <h2 id="outside">Pengunjung di luar Eropa</h2>
         <p>Situs ini dioperasikan dari Uni Eropa. Situs ini tidak ditujukan kepada, dan tidak menawarkan barang atau jasa kepada, orang di negara mana pun di luar Uni Eropa. Dari mana pun Anda membacanya, komitmen di atas tetap sama: satu-satunya data yang diproses situs ini sendiri adalah entri log server, data itu digunakan semata-mata untuk mengirimkan dan mengamankan situs, tidak pernah digunakan untuk menyusun profil Anda, dan tidak pernah dijual. Tulislah ke alamat di atas untuk permintaan apa pun mengenai data Anda, hukum mana pun yang Anda jadikan dasar.</p>
 
-        <h2>Bahasa pemberitahuan ini</h2>
+        <h2 id="language">Bahasa pemberitahuan ini</h2>
         <p>Pemberitahuan ini diterbitkan dalam beberapa bahasa demi kemudahan. Versi bahasa Inggris adalah versi yang berlaku: jika terjemahan dan teks bahasa Inggris berbeda, teks bahasa Inggris itulah yang mengikat pengendali data. Permintaan apa pun dapat dikirim dalam bahasa Italia atau Inggris, dan akan dijawab dalam bahasa yang sama.</p>
 
-        <h2>Perubahan</h2>
+        <h2 id="changes">Perubahan</h2>
         <p>Jika pemberitahuan ini berubah, versi revisinya akan diterbitkan di halaman ini. Terakhir diperbarui pada 25 Agustus 2026.</p>
       </article>
 

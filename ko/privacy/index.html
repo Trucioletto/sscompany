@@ -72,7 +72,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -295,6 +295,38 @@
 
         <p class="lede">이 웹사이트는 기술적으로 가능한 한 이용자에 관해 적게 알도록 만들어졌습니다. 쿠키를 설정하지 않고, 분석 도구를 돌리지 않으며, 제3자 콘텐츠를 삽입하지 않습니다. 따라서 이용자에 관한 프로필을 만들지 않고, 이용자에 관한 어떤 것도 이 사이트를 벗어나지 않습니다. 페이지를 읽을 때 누구든 수신하는 데이터는 웹 서버가 페이지를 보내기 위해 필요로 하는 몇 가지 기술적 정보뿐이며, 아래에 전부 설명합니다.</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">본 고지의 목차</h2>
+          <ul>
+            <li><a href="#who">책임 주체</a></li>
+            <li><a href="#what">무엇이 처리되며, 왜 처리되는가</a></li>
+            <li><a href="#basis">법적 근거</a></li>
+            <li><a href="#host">사이트를 호스팅하는 곳</a></li>
+            <li><a href="#retention">무엇이 얼마나 보관되는가</a></li>
+            <li><a href="#mail">메일을 보내는 경우</a></li>
+            <li><a href="#children">아동</a></li>
+            <li><a href="#absent">여기에 없는 것</a></li>
+            <li><a href="#rights">이용자의 권리</a></li>
+            <li><a href="#outside">유럽 밖의 방문자</a></li>
+            <li><a href="#language">본 고지의 언어</a></li>
+            <li><a href="#changes">변경</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -309,22 +341,22 @@
           </ul>
         </div>
 
-        <h2>책임 주체</h2>
+        <h2 id="who">책임 주체</h2>
         <p>
           개인정보처리자는 <strong>Spinne Software di Luci Manuel</strong>이며, 이탈리아에 등록된 개인사업자입니다. 부가가치세 번호는 IT 18636231005, 로마 기업등록부 REA 번호는 RM-1797481입니다. 본 고지에 관한 문의나 아래에 열거된 권리의 행사를 위해서는
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>으로, 인증 전자우편이 필요한 경우에는
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a>으로 연락하시기 바랍니다.
         </p>
 
-        <h2>무엇이 처리되며, 왜 처리되는가</h2>
+        <h2 id="what">무엇이 처리되며, 왜 처리되는가</h2>
         <p>이 페이지를 보내기 위해, 사이트를 호스팅하는 서버는 필연적으로 이용자의 IP 주소와 함께 요청 일시, 요청된 페이지, 브라우저의 user-agent 문자열을 수신합니다. 이는 선택이 아니라 인터넷의 기술적 요건입니다. IP 주소가 없으면 페이지를 보낼 회신 주소가 없습니다.</p>
         <p>이 기록은 호스팅 사업자의 서버 로그에 기재되며, 사이트를 전송하고 서비스 거부 공격 같은 남용으로부터 사이트를 보호하는 데에만 사용됩니다. 이용자를 프로파일링하는 데 사용되지 않으며, 다른 데이터와 결합되지도 않습니다.</p>
         <p>당사는 캘리포니아주 법에서 쓰이는 의미에서 이용자의 개인정보를 판매하지 않으며, 맥락 간 행태 광고를 위해 공유하지도 않습니다. 이 사이트에는 그 어느 쪽도 할 수 있는 수단이 없습니다.</p>
 
-        <h2>법적 근거</h2>
+        <h2 id="basis">법적 근거</h2>
         <p>법적 근거는 웹사이트를 운영하고 안전하게 유지하는 데 있는, GDPR 제6조 제1항 (f)호에 따른 개인정보처리자의 정당한 이익입니다. 이 처리에는 동의가 필요하지 않고 쿠키나 추적 기술을 사용하지도 않으므로, 동의를 요구하지 않습니다.</p>
 
-        <h2>사이트를 호스팅하는 곳</h2>
+        <h2 id="host">사이트를 호스팅하는 곳</h2>
         <p>
           이 사이트는 GitHub Pages에서 호스팅되고 Fastly 콘텐츠 전송 네트워크를 통해 제공되며, Cloudflare를 거쳐 여러분에게 도달합니다. Cloudflare는 두 사업자 앞단에 위치해 브라우저가 맺는 연결을 종료하므로, IP 주소를 가장 먼저 받는 곳은 Cloudflare입니다. 세 사업자는 모두 수탁처리자로서 미국에 설립되어 있으므로, 페이지를 전송하는 일 자체가 위에 적은 기술적 데이터를 국경 너머로 이전하게 됩니다. 그러한 이전을 제한하는 지역, 예컨대 유럽연합에서 그 데이터가 발생하는 경우, 해당 이전은 세 사업자의 EU–U.S. Data Privacy Framework 인증과 2023년 7월 10일자 유럽위원회 적정성 결정에 근거합니다. 세 사업자의 데이터 취급 방식은 다음 문서에 설명되어 있습니다:
           <!-- Three processors, so three policies: the separators hang off the
@@ -334,38 +366,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>.
         </p>
 
-        <h2>무엇이 얼마나 보관되는가</h2>
+        <h2 id="retention">무엇이 얼마나 보관되는가</h2>
         <p>개인정보처리자는 로그도, 그 사본도 보관하지 않습니다. 위에 설명한 기록은 위에 링크한 호스팅 사업자와 콘텐츠 전송 사업자가 각자의 방침에 따라 보관하는 기간 동안만 존재합니다. 개인정보처리자는 별도의 기간을 정하지 않으며, 그들의 기간을 늘리거나 줄일 수도 없습니다.</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>메일을 보내는 경우</h2>
+        <h2 id="mail">메일을 보내는 경우</h2>
         <p>위의 주소는 평범한 메일함입니다. 메일을 보내면 개인정보처리자는 그 안에 담긴 것을 받습니다. 최소한 보내는 사람의 주소, 서명을 남기면 이름까지 받으며, 답장을 하고 무엇을 물었는지 기록을 남기는 데에만 씁니다. spinnesoftware.com 주소로 보낸 메일은 Cloudflare가 중계해 외부 메일 사업자에게 전달하고, PEC 주소로 보낸 인증 메일은 그 사업자가 처리합니다. 법적 근거는 서신에 답하는 데 대한 GDPR 제6조 제1항 (f)호의 정당한 이익이며, 아래에 적힌 권리 중 하나를 행사하는 메일이라면 GDPR 제6조 제1항 (c)호의 법적 의무입니다. 주고받은 메일은 기한을 두지 않고 보관합니다. 메일함은 일정에 맞춰 비우는 것이 아니고, 아무도 지키지 않는 보관 기간을 여기에 적는 편이 이렇게 말하는 것보다 나쁘기 때문입니다. 특정 메일의 삭제는 언제든 요청할 수 있습니다.</p>
 
-        <h2>아동</h2>
+        <h2 id="children">아동</h2>
         <p>이 사이트는 아동을 대상으로 하지 않으며 누구에게도 개인정보를 요구하지 않습니다. 위에 설명한 기술적 로그 기록이 기록되는 유일한 데이터이고, 아동이든 성인이든 누군가를 식별하는 데 사용되지 않습니다.</p>
 
-        <h2>여기에 없는 것</h2>
+        <h2 id="absent">여기에 없는 것</h2>
         <p>쿠키가 없습니다. 로컬 저장소나 세션 저장소가 없습니다. 어떤 종류의 분석이나 측정도 없습니다. 광고나 추적 픽셀이 없습니다. 삽입된 영상, 지도, 소셜 위젯이 없습니다. 문의 양식이 없습니다. 뉴스레터가 없습니다. 서체는 폰트 제공자가 아니라 바로 이 도메인에서 제공되므로, 이용자에 관한 요청은 이 사이트를 벗어나지 않습니다. 스크립트는 두 개이고 둘 다 이 도메인에서 제공됩니다. 하나는 브라우저가 요청하는 언어를 읽어, 그 언어로 된 판이 있으면 주소를 그쪽으로 바꿉니다. 설정은 한 번만 읽고 저장하지도 보내지도 않습니다. 다른 하나는 페이지 위쪽 끝에서 브라우저가 튕기는 동작을 대신합니다. 둘 다 쿠키를 설정하지 않고, 어떤 저장소도 쓰지 않으며, 아무것도 기록하지 않습니다.</p>
         <p>
           이 고지에서 인용한 문서를 빼면, 이 페이지들이 바깥으로 연결하는 곳은 두 군데입니다. LinkedIn 회사 프로필, 그리고 같은 개인정보처리자가 운영하는 별도의 웹사이트인
           <a href="https://sparkle.software">sparkle.software</a>입니다. 이용자가 직접 클릭하지 않는 한 어느 쪽으로도 아무것도 전송되지 않으며, 클릭한 시점부터는 해당 사이트의 개인정보 고지가 적용됩니다. 이 페이지들에 표시되는 Sparkle 로고는 여기 있는 다른 모든 이미지와 마찬가지로 이 도메인에서 제공되므로, 로고를 표시해도 어디와도 통신하지 않습니다.
         </p>
 
-        <h2>이용자의 권리</h2>
+        <h2 id="rights">이용자의 권리</h2>
         <p>GDPR 제15조부터 제22조까지의 규정에 따라 이용자는 개인정보처리자에게 자신의 개인정보에 대한 열람, 정정, 삭제 또는 처리 제한을 요구할 수 있고, 정당한 이익에 근거한 처리에 반대할 수 있습니다. 이 사이트 자체가 처리하는 유일한 데이터가 이용자의 신원과 연결되지 않는 서버 로그 기록이라는 점을 고려하면, 개인정보처리자는 이용자로부터 추가 정보를 받지 않는 한 이용자와 관련된 데이터를 찾아내지 못하는 것이 보통입니다.</p>
         <p>
           이용자는 개인정보 감독기관에 불만을 제기할 권리도 있습니다. 개인정보처리자가 이탈리아에 설립되어 있으므로 관할 기관은 이탈리아의
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>입니다. 유럽경제지역 거주자는 자국의 감독기관에 연락할 수도 있습니다.
         </p>
 
-        <h2>유럽 밖의 방문자</h2>
+        <h2 id="outside">유럽 밖의 방문자</h2>
         <p>이 사이트는 유럽연합에서 운영됩니다. 유럽연합 밖의 특정 국가에 있는 사람을 대상으로 하지 않으며, 그들에게 상품이나 서비스를 제공하지도 않습니다. 어디에서 읽든 위의 약속은 동일합니다. 이 사이트 자체가 처리하는 유일한 데이터는 서버 로그 기록이고, 사이트를 전송하고 보호하는 데에만 사용되며, 이용자를 프로파일링하는 데 결코 사용되지 않고, 결코 판매되지 않습니다. 어떤 법에 근거하든 자신의 데이터에 관한 요청은 위의 주소로 보내면 됩니다.</p>
 
-        <h2>본 고지의 언어</h2>
+        <h2 id="language">본 고지의 언어</h2>
         <p>본 고지는 편의를 위해 여러 언어로 게시됩니다. 정본은 영문본입니다. 번역본과 영문본이 서로 다를 경우 개인정보처리자를 구속하는 것은 영문본입니다. 요청은 이탈리아어나 영어로 보낼 수 있으며, 같은 언어로 답변합니다.</p>
 
-        <h2>변경</h2>
+        <h2 id="changes">변경</h2>
         <p>본 고지가 변경되면 개정된 내용을 이 페이지에 게시합니다. 최종 갱신일은 2026년 8월 25일입니다.</p>
       </article>
 

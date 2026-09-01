@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -297,6 +297,38 @@
 
         <p class="lede">Questo sito è costruito per sapere il minimo tecnicamente possibile di chi lo visita. Non installa cookie, non esegue analisi statistiche e non incorpora contenuti di terze parti: non costruisce quindi alcun profilo e nessun dato relativo all'utente esce da questo sito. Gli unici dati che qualcuno riceve leggendo una pagina sono i pochi dettagli tecnici di cui ogni server web ha bisogno per inviare una pagina. Sono descritti per intero qui sotto.</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">Indice dell'informativa</h2>
+          <ul>
+            <li><a href="#who">Chi è il titolare</a></li>
+            <li><a href="#what">Quali dati sono trattati, e perché</a></li>
+            <li><a href="#basis">Base giuridica</a></li>
+            <li><a href="#host">Chi ospita il sito</a></li>
+            <li><a href="#retention">Per quanto tempo sono conservati</a></li>
+            <li><a href="#mail">Se ci si scrive</a></li>
+            <li><a href="#children">Minori</a></li>
+            <li><a href="#absent">Che cosa non c'è</a></li>
+            <li><a href="#rights">Diritti dell'interessato</a></li>
+            <li><a href="#outside">Visitatori fuori dall'Europa</a></li>
+            <li><a href="#language">Lingua di questa informativa</a></li>
+            <li><a href="#changes">Modifiche</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -311,22 +343,22 @@
           </ul>
         </div>
 
-        <h2>Chi è il titolare</h2>
+        <h2 id="who">Chi è il titolare</h2>
         <p>
           Il titolare del trattamento è <strong>Spinne Software di Luci Manuel</strong>, impresa individuale registrata in Italia, partita IVA IT 18636231005, iscritta al Registro Imprese di Roma, REA n. RM-1797481. Il titolare è raggiungibile all'indirizzo
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>, oppure a
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> se serve la posta elettronica certificata, per qualunque domanda su questa informativa o per esercitare i diritti elencati più avanti.
         </p>
 
-        <h2>Quali dati sono trattati, e perché</h2>
+        <h2 id="what">Quali dati sono trattati, e perché</h2>
         <p>Per inviare questa pagina, il server che la ospita riceve necessariamente l'indirizzo IP di chi la richiede, insieme alla data e all'ora della richiesta, alla pagina richiesta e alla stringa user-agent del browser. È un requisito tecnico di internet, non una scelta: senza l'indirizzo IP non esiste un indirizzo a cui consegnare la pagina.</p>
         <p>Queste voci vengono scritte nei log del server del fornitore di hosting e sono usate soltanto per consegnare il sito e per proteggerlo da abusi, come gli attacchi denial-of-service. Non vengono mai usate per profilare nessuno né combinate con altri dati.</p>
         <p>Non vendiamo i dati personali e non li condividiamo per pubblicità comportamentale cross-context, nel significato che questi termini hanno nella legge della California. Su questo sito non esiste alcun meccanismo per fare né l'una né l'altra cosa.</p>
 
-        <h2>Base giuridica</h2>
+        <h2 id="basis">Base giuridica</h2>
         <p>La base giuridica è il legittimo interesse del titolare del trattamento, ai sensi dell'articolo 6, paragrafo 1, lettera f), GDPR, a gestire il sito e a mantenerlo sicuro. Non viene richiesto alcun consenso perché per questo trattamento non è necessario e perché non vengono usati cookie né tecnologie di tracciamento.</p>
 
-        <h2>Chi ospita il sito</h2>
+        <h2 id="host">Chi ospita il sito</h2>
         <p>
           Il sito è ospitato su GitHub Pages e distribuito attraverso la rete di distribuzione dei contenuti Fastly, e arriva al browser passando per Cloudflare, che sta davanti a entrambi e chiude la connessione aperta dal browser: Cloudflare è quindi il primo soggetto a ricevere l'indirizzo IP. Tutti e tre agiscono come responsabili del trattamento e tutti e tre sono stabiliti negli Stati Uniti, quindi la consegna di qualunque pagina comporta necessariamente un trasferimento oltre confine dei dati tecnici descritti sopra. Quando quei dati hanno origine in una regione che limita tali trasferimenti — l'Unione europea, per esempio — il trasferimento si fonda sulla certificazione dei fornitori nell'ambito dell'EU–U.S. Data Privacy Framework e sulla decisione di adeguatezza della Commissione europea del 10 luglio 2023. Il trattamento dei dati da parte loro è descritto nel
           <!-- Three processors, so three policies: the separators hang off the
@@ -336,38 +368,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>.
         </p>
 
-        <h2>Per quanto tempo sono conservati</h2>
+        <h2 id="retention">Per quanto tempo sono conservati</h2>
         <p>Il titolare del trattamento non conserva log né copie di essi. Le voci descritte sopra esistono soltanto per il tempo in cui il fornitore di hosting e quello di distribuzione dei contenuti le conservano secondo le proprie politiche, collegate qui sopra; il titolare non fissa un termine separato e non può né allungare né accorciare il loro.</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>Se ci si scrive</h2>
+        <h2 id="mail">Se ci si scrive</h2>
         <p>Gli indirizzi indicati sopra sono normali caselle di posta. Se si scrive, il titolare del trattamento riceve quello che il messaggio contiene — almeno l'indirizzo di chi scrive, e il nome se il messaggio è firmato — e lo usa per rispondere e per tenere traccia di che cosa è stato chiesto. La posta inviata all'indirizzo spinnesoftware.com passa da Cloudflare ed è consegnata a un fornitore di posta esterno; la posta certificata inviata all'indirizzo PEC è gestita da quel gestore. La base giuridica è il legittimo interesse del titolare, ai sensi dell'articolo 6(1)(f) GDPR, a rispondere alla corrispondenza, e un obbligo legale ai sensi dell'articolo 6(1)(c) GDPR quando il messaggio esercita uno dei diritti elencati sotto. La corrispondenza è conservata a tempo indeterminato: una casella di posta non viene ripulita a scadenza fissa, e indicare qui un periodo di conservazione che nessuno applica sarebbe peggio che dirlo. Si può chiedere in qualsiasi momento la cancellazione di un messaggio.</p>
 
-        <h2>Minori</h2>
+        <h2 id="children">Minori</h2>
         <p>Questo sito non è rivolto ai minori e non chiede dati personali a nessuno. Le voci tecniche di log descritte sopra sono gli unici dati registrati e non vengono usate per identificare nessuno, minore o adulto.</p>
 
-        <h2>Che cosa non c'è</h2>
+        <h2 id="absent">Che cosa non c'è</h2>
         <p>Nessun cookie. Nessun local storage né session storage. Nessuna analisi statistica né misurazione di alcun tipo. Nessun pixel pubblicitario o di tracciamento. Nessun video, mappa o widget social incorporato. Nessun modulo di contatto. Nessuna newsletter. Il carattere tipografico è servito da questo stesso dominio e non da un fornitore di font, quindi nessuna richiesta che riguardi l'utente esce da questo sito. Ci sono due script, entrambi serviti da questo dominio. Il primo legge la lingua che chiede il browser e, se il sito è pubblicato in quella lingua, sostituisce l'indirizzo con quella versione; l'impostazione è letta una volta sola, non viene conservata né inviata da nessuna parte. Il secondo sostituisce il rimbalzo del browser al bordo superiore della pagina. Nessuno dei due imposta cookie, usa alcuna memoria o registra qualcosa.</p>
         <p>
           A parte i riferimenti contenuti in questa informativa, le pagine rimandano all'esterno verso due sole destinazioni: un profilo aziendale LinkedIn e
           <a href="https://sparkle.software">sparkle.software</a>, che è un sito distinto gestito dallo stesso titolare del trattamento. A nessuno dei due viene inviato alcunché a meno che non si scelga di fare clic, momento dal quale si applica l'informativa privacy di quel sito. Il logo Sparkle mostrato in queste pagine è servito da questo dominio come ogni altra immagine, quindi visualizzarlo non contatta nessuno.
         </p>
 
-        <h2>Diritti dell'interessato</h2>
+        <h2 id="rights">Diritti dell'interessato</h2>
         <p>Ai sensi degli articoli da 15 a 22 GDPR l'interessato può chiedere al titolare del trattamento l'accesso ai propri dati personali, oppure la rettifica, la cancellazione o la limitazione del trattamento, e può opporsi al trattamento fondato sul legittimo interesse. Dato che l'unico dato trattato dal sito è una voce di log del server non collegata all'identità di nessuno, di norma il titolare non sarà in grado di individuare dati che riguardino l'interessato senza ulteriori informazioni da parte sua.</p>
         <p>
           L'interessato ha inoltre il diritto di proporre reclamo a un'autorità di controllo per la protezione dei dati. Poiché il titolare del trattamento è stabilito in Italia, l'autorità competente è il
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>; chi risiede nello Spazio economico europeo può rivolgersi anche all'autorità del proprio Paese.
         </p>
 
-        <h2>Visitatori fuori dall'Europa</h2>
+        <h2 id="outside">Visitatori fuori dall'Europa</h2>
         <p>Questo sito è gestito dall'interno dell'Unione europea. Non è rivolto a persone che si trovano in un particolare Paese fuori da essa e non offre loro beni o servizi. Da qualunque luogo lo si legga, gli impegni descritti sopra sono gli stessi: l'unico dato trattato dal sito è una voce di log del server, è usato soltanto per consegnare il sito e renderlo sicuro, non è mai usato per profilare nessuno e non è mai venduto. Per qualunque richiesta sui propri dati si scriva all'indirizzo indicato sopra, qualunque sia la legge su cui ci si fonda.</p>
 
-        <h2>Lingua di questa informativa</h2>
+        <h2 id="language">Lingua di questa informativa</h2>
         <p>Questa informativa è pubblicata in più lingue per comodità. La versione inglese è quella che fa fede: se una traduzione e il testo inglese divergono, è il testo inglese a vincolare il titolare del trattamento. Qualunque richiesta può essere inviata in italiano o in inglese e riceverà risposta nella stessa lingua.</p>
 
-        <h2>Modifiche</h2>
+        <h2 id="changes">Modifiche</h2>
         <p>Se questa informativa cambia, la versione aggiornata verrà pubblicata su questa pagina. Ultimo aggiornamento: 25 agosto 2026.</p>
       </article>
 

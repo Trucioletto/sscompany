@@ -1531,6 +1531,65 @@ h2 + [class] {
    answer before the argument, so its five-line summary goes at the TOP, under
    the lede, rather than in a column beside twelve sections it summarises. Ruled
    above and below and nowhere else: the site draws hairlines, not boxes. */
+/* A CONTENTS LIST, NOT A PANEL.
+   Deliberately without the rules .summary carries: the reason this exists is that
+   on a phone the first screen ended on a closing hairline and read as the whole
+   page, and answering that with a second bordered box directly beneath the first
+   would have made the composition heavier and the problem worse. So it sits in the
+   flow, quiet, and its only job is to be twelve things long.
+
+   Two columns from 34rem, because twelve single-file lines is a lot of vertical
+   for something a reader mostly skims — and on a phone one column is correct, so
+   the query adds the second rather than taking it away. */
+.toc {
+  margin: var(--s-5) 0 var(--s-6);
+}
+
+.toc h2 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5a6478;
+  color: var(--text-muted);
+  margin: 0 0 var(--s-3);
+}
+
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-1) var(--s-4);
+}
+
+@media (min-width: 34rem) {
+  .toc ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.toc a {
+  color: #3d5bfa;
+  color: var(--brand-ink);
+  text-decoration: none;
+  /* The underline arrives on hover rather than sitting there: twelve underlined
+     lines in a column is a fence, and this is meant to be skimmed past as easily
+     as it is used. */
+  border-bottom: 1px solid transparent;
+}
+
+.toc a:hover,
+.toc a:focus-visible {
+  border-bottom-color: currentColor;
+}
+
+/* An anchored heading otherwise lands hard against the top edge of the window. */
+.doc h2[id] {
+  scroll-margin-top: var(--s-4);
+}
+
 .summary {
   margin: var(--s-6) 0;
   padding: var(--s-4) 0;

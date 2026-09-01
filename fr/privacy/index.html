@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -297,6 +297,38 @@
 
         <p class="lede">Ce site est conçu pour en apprendre le moins possible sur vous, dans la limite de ce qui est techniquement faisable. Il ne dépose aucun cookie, n'effectue aucune mesure d'audience et n'intègre aucun contenu tiers : il ne constitue donc aucun profil vous concernant et rien à votre sujet ne quitte ce site. Les seules données que quiconque reçoit lorsque vous lisez une page sont les quelques éléments techniques dont tout serveur web a besoin pour vous envoyer une page. Ils sont décrits intégralement ci-dessous.</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">Dans cette politique</h2>
+          <ul>
+            <li><a href="#who">Qui est responsable</a></li>
+            <li><a href="#what">Ce qui est traité, et pourquoi</a></li>
+            <li><a href="#basis">Base légale</a></li>
+            <li><a href="#host">Qui héberge le site</a></li>
+            <li><a href="#retention">Durée de conservation</a></li>
+            <li><a href="#mail">Si vous nous écrivez</a></li>
+            <li><a href="#children">Enfants</a></li>
+            <li><a href="#absent">Ce qui n'est pas ici</a></li>
+            <li><a href="#rights">Vos droits</a></li>
+            <li><a href="#outside">Visiteurs hors d'Europe</a></li>
+            <li><a href="#language">Langue de la présente politique</a></li>
+            <li><a href="#changes">Modifications</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -311,22 +343,22 @@
           </ul>
         </div>
 
-        <h2>Qui est responsable</h2>
+        <h2 id="who">Qui est responsable</h2>
         <p>
           Le responsable du traitement est <strong>Spinne Software di Luci Manuel</strong>, entreprise individuelle immatriculée en Italie, numéro de TVA IT 18636231005, Registre des entreprises de Rome, REA numéro RM-1797481. Vous pouvez joindre le responsable du traitement à l'adresse
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>, ou à
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> si vous avez besoin d'un courrier électronique certifié, pour toute question relative à la présente politique ou pour exercer les droits énumérés ci-dessous.
         </p>
 
-        <h2>Ce qui est traité, et pourquoi</h2>
+        <h2 id="what">Ce qui est traité, et pourquoi</h2>
         <p>Pour vous envoyer cette page, le serveur qui l'héberge reçoit nécessairement votre adresse IP, ainsi que la date et l'heure de la requête, la page demandée et la chaîne user-agent de votre navigateur. Il s'agit d'une contrainte technique de l'internet, non d'un choix : sans votre adresse IP, il n'existe aucune adresse de retour à laquelle remettre la page.</p>
         <p>Ces entrées sont inscrites dans les journaux du serveur de l'hébergeur et servent uniquement à distribuer le site et à le protéger contre les abus, tels que les attaques par déni de service. Elles ne sont jamais utilisées pour vous profiler ni jamais combinées avec d'autres données.</p>
         <p>Nous ne vendons pas vos informations personnelles et nous ne les partageons pas à des fins de publicité comportementale intercontextuelle, au sens que le droit californien donne à ces termes. Aucun mécanisme sur ce site ne permet l'un ou l'autre.</p>
 
-        <h2>Base légale</h2>
+        <h2 id="basis">Base légale</h2>
         <p>La base légale est l'intérêt légitime du responsable du traitement, au sens de l'article 6, paragraphe 1, point f), du RGPD, à exploiter le site et à en assurer la sécurité. Aucun consentement n'est demandé, parce qu'aucun n'est requis pour ce traitement et parce qu'aucun cookie ni aucune technologie de suivi n'est utilisé.</p>
 
-        <h2>Qui héberge le site</h2>
+        <h2 id="host">Qui héberge le site</h2>
         <p>
           Le site est hébergé sur GitHub Pages et distribué par le réseau de diffusion de contenu Fastly, et il vous parvient via Cloudflare, qui se place devant les deux et termine la connexion ouverte par votre navigateur : Cloudflare est donc le premier à recevoir votre adresse IP. Tous trois agissent en qualité de sous-traitants et tous trois sont établis aux États-Unis : la remise de toute page déplace donc nécessairement les données techniques ci-dessus hors des frontières. Lorsque ces données proviennent d'une région qui restreint de tels transferts — l'Union européenne, par exemple — le transfert repose sur la certification des prestataires au titre du EU–U.S. Data Privacy Framework et sur la décision d'adéquation de la Commission européenne du 10 juillet 2023. Le traitement qu'ils réservent à ces données est décrit dans les documents
           <!-- Three processors, so three policies: the separators hang off the
@@ -336,38 +368,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>.
         </p>
 
-        <h2>Durée de conservation</h2>
+        <h2 id="retention">Durée de conservation</h2>
         <p>Le responsable du traitement ne conserve aucun journal ni aucune copie de ceux-ci. Les entrées décrites ci-dessus n'existent que le temps où l'hébergeur et le fournisseur de diffusion de contenu les conservent au titre de leurs propres politiques, liées ci-dessus ; le responsable du traitement ne fixe aucune durée distincte et ne peut ni allonger ni raccourcir la leur.</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>Si vous nous écrivez</h2>
+        <h2 id="mail">Si vous nous écrivez</h2>
         <p>Les adresses ci-dessus sont des boîtes aux lettres ordinaires. Si vous écrivez, le responsable du traitement reçoit ce que contient le message — au minimum votre adresse, et votre nom si vous le signez — et s'en sert pour vous répondre et pour garder trace de ce qui a été demandé. Le courrier adressé à spinnesoftware.com est acheminé par Cloudflare et remis à un fournisseur de messagerie externe ; le courrier certifié adressé à l'adresse PEC est traité par ce prestataire. La base légale est l'intérêt légitime du responsable, au titre de l'article 6(1)(f) du RGPD, à répondre à la correspondance, et une obligation légale au titre de l'article 6(1)(c) du RGPD lorsque le message exerce l'un des droits énumérés ci-dessous. La correspondance est conservée sans limite de durée : une boîte aux lettres ne se vide pas à échéance fixe, et annoncer ici une durée de conservation que personne n'applique serait pire que de le dire. Vous pouvez demander à tout moment la suppression d'un message.</p>
 
-        <h2>Enfants</h2>
+        <h2 id="children">Enfants</h2>
         <p>Ce site ne s'adresse pas aux enfants et ne demande de données à caractère personnel à personne. Les entrées techniques de journal décrites ci-dessus sont les seules données enregistrées, et elles ne servent à identifier personne, enfant ou adulte.</p>
 
-        <h2>Ce qui n'est pas ici</h2>
+        <h2 id="absent">Ce qui n'est pas ici</h2>
         <p>Aucun cookie. Aucun stockage local ou de session. Aucune analyse ni mesure d'audience d'aucune sorte. Aucun pixel publicitaire ou de suivi. Aucune vidéo, carte ou widget social intégré. Aucun formulaire de contact. Aucune lettre d'information. La police de caractères est servie depuis ce même domaine et non depuis un fournisseur de polices : aucune requête vous concernant ne quitte donc ce site. Il y a deux scripts, tous deux servis depuis ce domaine. Le premier lit la langue demandée par le navigateur et, si le site est publié dans cette langue, remplace l'adresse par cette version ; le réglage est lu une fois, ni conservé ni envoyé nulle part. Le second remplace le rebond du navigateur en haut de la page. Aucun des deux ne dépose de cookie, n'utilise de stockage ni n'enregistre quoi que ce soit.</p>
         <p>
           En dehors des références citées dans la présente politique, les pages renvoient vers deux destinations : une page d'entreprise LinkedIn et
           <a href="https://sparkle.software">sparkle.software</a>, site distinct exploité par le même responsable du traitement. Rien n'est envoyé ni à l'un ni à l'autre à moins que vous ne choisissiez de cliquer, auquel cas la politique de confidentialité propre à ce site s'applique. Le logo Sparkle affiché sur ces pages est servi depuis ce domaine comme toutes les autres images, de sorte que son affichage ne contacte personne.
         </p>
 
-        <h2>Vos droits</h2>
+        <h2 id="rights">Vos droits</h2>
         <p>En vertu des articles 15 à 22 du RGPD, vous pouvez demander au responsable du traitement l'accès à vos données à caractère personnel, ainsi que leur rectification, leur effacement ou la limitation de leur traitement, et vous pouvez vous opposer à un traitement fondé sur l'intérêt légitime. Étant donné que les seules données que le site lui-même traite sont une entrée de journal serveur qui n'est pas reliée à votre identité, le responsable du traitement sera généralement dans l'impossibilité de retrouver la moindre donnée vous concernant sans informations complémentaires de votre part.</p>
         <p>
           Vous avez également le droit d'introduire une réclamation auprès d'une autorité de contrôle en matière de protection des données. Le responsable du traitement étant établi en Italie, l'autorité compétente est le
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a> ; les résidents de l'Espace économique européen peuvent également s'adresser à l'autorité de leur propre pays.
         </p>
 
-        <h2>Visiteurs hors d'Europe</h2>
+        <h2 id="outside">Visiteurs hors d'Europe</h2>
         <p>Ce site est exploité depuis l'Union européenne. Il ne s'adresse pas et n'offre ni biens ni services aux personnes situées dans un pays particulier en dehors de celle-ci. Où que vous le lisiez, les engagements ci-dessus sont les mêmes : les seules données que le site lui-même traite sont une entrée de journal serveur, elles servent uniquement à distribuer et à sécuriser le site, elles ne servent jamais à vous profiler et elles ne sont jamais vendues. Écrivez à l'adresse ci-dessus pour toute demande concernant vos données, quel que soit le droit dont vous vous prévalez.</p>
 
-        <h2>Langue de la présente politique</h2>
+        <h2 id="language">Langue de la présente politique</h2>
         <p>La présente politique est publiée en plusieurs langues par commodité. La version anglaise fait foi : en cas de divergence entre une traduction et le texte anglais, c'est le texte anglais qui lie le responsable du traitement. Toute demande peut être adressée en italien ou en anglais, et recevra une réponse dans la même langue.</p>
 
-        <h2>Modifications</h2>
+        <h2 id="changes">Modifications</h2>
         <p>Si la présente politique est modifiée, la version révisée sera publiée sur cette page. Dernière mise à jour le 25 août 2026.</p>
       </article>
 

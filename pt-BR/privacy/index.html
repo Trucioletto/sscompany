@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -297,6 +297,38 @@
 
         <p class="lede">Este site foi feito para saber sobre você o mínimo tecnicamente possível. Não define cookies, não roda análise de audiência e não incorpora conteúdo de terceiros, de modo que não constrói nenhum perfil seu e nada sobre você sai deste site. Os únicos dados que alguém recebe ao ler uma página são os poucos detalhes técnicos de que todo servidor web precisa para lhe enviar uma página. Estão descritos por completo abaixo.</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">Neste aviso</h2>
+          <ul>
+            <li><a href="#who">Quem é o responsável</a></li>
+            <li><a href="#what">O que é tratado, e por quê</a></li>
+            <li><a href="#basis">Base legal</a></li>
+            <li><a href="#host">Quem hospeda o site</a></li>
+            <li><a href="#retention">Por quanto tempo algo é mantido</a></li>
+            <li><a href="#mail">Se você nos escrever</a></li>
+            <li><a href="#children">Crianças</a></li>
+            <li><a href="#absent">O que não existe aqui</a></li>
+            <li><a href="#rights">Os seus direitos</a></li>
+            <li><a href="#outside">Visitantes de fora da Europa</a></li>
+            <li><a href="#language">Idioma deste aviso</a></li>
+            <li><a href="#changes">Alterações</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -311,22 +343,22 @@
           </ul>
         </div>
 
-        <h2>Quem é o responsável</h2>
+        <h2 id="who">Quem é o responsável</h2>
         <p>
           O controlador dos dados é a <strong>Spinne Software di Luci Manuel</strong>, empresa individual registrada na Itália, IVA nº IT 18636231005, Registro de Empresas de Roma REA nº RM-1797481. Você pode falar com o controlador em
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>, ou em
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> se precisar de e-mail certificado, para qualquer dúvida sobre este aviso ou para exercer os direitos listados abaixo.
         </p>
 
-        <h2>O que é tratado, e por quê</h2>
+        <h2 id="what">O que é tratado, e por quê</h2>
         <p>Para lhe enviar esta página, o servidor que a hospeda necessariamente recebe o seu endereço IP, junto com a data e a hora do pedido, a página solicitada e a cadeia de user-agent do seu navegador. Isso é uma exigência técnica da internet, não uma escolha: sem o seu endereço IP não há endereço de retorno para o qual entregar a página.</p>
         <p>Esses registros são gravados nos logs de servidor do provedor de hospedagem e são usados apenas para entregar o site e para protegê-lo de abusos, como ataques de negação de serviço. Nunca são usados para traçar o seu perfil e nunca são combinados com outros dados.</p>
         <p>Não vendemos as suas informações pessoais e não as compartilhamos para publicidade comportamental entre contextos, no sentido em que esses termos são usados na legislação da Califórnia. Não existe neste site nenhum mecanismo para fazer uma coisa ou a outra.</p>
 
-        <h2>Base legal</h2>
+        <h2 id="basis">Base legal</h2>
         <p>A base legal é o interesse legítimo do controlador, nos termos do artigo 6(1)(f) do GDPR, em operar o site e mantê-lo seguro. Não se pede consentimento porque nenhum é exigido para este tratamento e porque não são usados cookies nem tecnologias de rastreamento.</p>
 
-        <h2>Quem hospeda o site</h2>
+        <h2 id="host">Quem hospeda o site</h2>
         <p>
           O site é hospedado no GitHub Pages e servido pela rede de distribuição de conteúdo Fastly, e chega até você através da Cloudflare, que fica à frente dos dois e encerra a conexão aberta pelo seu navegador: a Cloudflare é, portanto, a primeira a receber o seu endereço IP. Os três atuam como operadores e os três estão estabelecidos nos Estados Unidos, de modo que entregar qualquer página necessariamente move os dados técnicos acima para fora das fronteiras. Quando esses dados têm origem em uma região que restringe tais transferências — a União Europeia, por exemplo —, a transferência se apoia na certificação dos provedores no EU–U.S. Data Privacy Framework e na decisão de adequação da Comissão Europeia de 10 de julho de 2023. O tratamento que eles dão aos dados está descrito nos documentos
           <!-- Three processors, so three policies: the separators hang off the
@@ -336,38 +368,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>.
         </p>
 
-        <h2>Por quanto tempo algo é mantido</h2>
+        <h2 id="retention">Por quanto tempo algo é mantido</h2>
         <p>O controlador não guarda logs nem cópia deles. Os registros descritos acima existem apenas enquanto os provedores de hospedagem e de distribuição de conteúdo os retiverem segundo as próprias políticas, indicadas acima; o controlador não define prazo separado e não pode estender nem encurtar o deles.</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>Se você nos escrever</h2>
+        <h2 id="mail">Se você nos escrever</h2>
         <p>Os endereços acima são caixas de correio comuns. Se você escrever, o controlador recebe o que a mensagem contiver — no mínimo o seu endereço, e o seu nome se você assinar — e usa isso para responder e para manter registro do que foi perguntado. A correspondência enviada ao endereço spinnesoftware.com é roteada pela Cloudflare e entregue a um provedor de e-mail externo; a correspondência certificada enviada ao endereço PEC é tratada por aquele provedor. A base legal é o interesse legítimo do controlador, nos termos do artigo 6(1)(f) do GDPR, em responder à correspondência, e uma obrigação legal nos termos do artigo 6(1)(c) do GDPR quando a mensagem exerce um dos direitos listados abaixo. A correspondência é mantida por tempo indeterminado: uma caixa de correio não é esvaziada em prazo fixo, e anunciar aqui um prazo de guarda que ninguém cumpre seria pior do que dizer isso. Você pode pedir a qualquer momento que uma mensagem seja apagada.</p>
 
-        <h2>Crianças</h2>
+        <h2 id="children">Crianças</h2>
         <p>Este site não é dirigido a crianças e não pede dados pessoais a ninguém. Os registros técnicos de log descritos acima são os únicos dados gravados, e não são usados para identificar ninguém, criança ou adulto.</p>
 
-        <h2>O que não existe aqui</h2>
+        <h2 id="absent">O que não existe aqui</h2>
         <p>Sem cookies. Sem armazenamento local ou de sessão. Sem análise de audiência ou medição de qualquer tipo. Sem pixels de publicidade ou de rastreamento. Sem vídeos, mapas ou widgets sociais incorporados. Sem formulário de contato. Sem newsletter. A fonte tipográfica é servida deste mesmo domínio, e não de um provedor de fontes, de modo que nenhuma requisição sobre você sai deste site. Há dois scripts, ambos servidos a partir deste domínio. Um lê o idioma que o navegador pede e, se o site estiver publicado nele, substitui o endereço por essa versão; a configuração é lida uma vez, não é guardada nem enviada a lugar nenhum. O outro substitui o repique do navegador na borda superior da página. Nenhum dos dois define cookies, usa qualquer armazenamento ou registra nada.</p>
         <p>
           Fora as referências deste aviso, as páginas têm links para dois lugares fora daqui: um perfil de empresa no LinkedIn e
           <a href="https://sparkle.software">sparkle.software</a>, que é um site separado operado pelo mesmo controlador. Nada é enviado a nenhum dos dois a menos que você opte por clicar, momento em que se aplica o aviso de privacidade daquele site. O logo do Sparkle exibido nestas páginas é servido deste domínio como qualquer outra imagem daqui, de modo que exibi-lo não contata ninguém.
         </p>
 
-        <h2>Os seus direitos</h2>
+        <h2 id="rights">Os seus direitos</h2>
         <p>Nos termos dos artigos 15 a 22 do GDPR, você pode pedir ao controlador o acesso aos seus dados pessoais, ou a sua correção, eliminação ou limitação do tratamento, e pode se opor ao tratamento baseado em interesse legítimo. Dado que o único dado que o site trata é um registro de log de servidor que não está vinculado à sua identidade, o controlador normalmente não conseguirá localizar dado algum relativo a você sem mais informações da sua parte.</p>
         <p>
           Você também tem o direito de apresentar reclamação a uma autoridade de controle de proteção de dados. Como o controlador está estabelecido na Itália, a autoridade italiana competente é o
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>; residentes do Espaço Econômico Europeu podem também procurar a autoridade do próprio país.
         </p>
 
-        <h2>Visitantes de fora da Europa</h2>
+        <h2 id="outside">Visitantes de fora da Europa</h2>
         <p>Este site é operado a partir da União Europeia. Não é dirigido a pessoas de nenhum país específico fora dela nem lhes oferece bens ou serviços. De onde quer que você leia isto, os compromissos acima são os mesmos: o único dado que o site trata é um registro de log de servidor, ele é usado exclusivamente para entregar e proteger o site, nunca é usado para traçar o seu perfil e nunca é vendido. Escreva para o endereço acima com qualquer pedido sobre os seus dados, seja qual for a lei em que você se baseie.</p>
 
-        <h2>Idioma deste aviso</h2>
+        <h2 id="language">Idioma deste aviso</h2>
         <p>Este aviso é publicado em vários idiomas por conveniência. A versão em inglês é a que faz fé: se uma tradução e o texto em inglês divergirem, é ao texto em inglês que o controlador está vinculado. Qualquer pedido pode ser enviado em italiano ou em inglês, e será respondido no mesmo idioma.</p>
 
-        <h2>Alterações</h2>
+        <h2 id="changes">Alterações</h2>
         <p>Se este aviso mudar, a versão revisada será publicada nesta página. A última atualização foi em 25 de agosto de 2026.</p>
       </article>
 

@@ -72,7 +72,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -295,6 +295,38 @@
 
         <p class="lede">本网站在技术允许的范围内，尽可能少地了解你。它不设置Cookie、不运行任何数据分析、不嵌入任何第三方内容，因此它不会为你建立画像，关于你的任何信息也不会离开本站。你阅读页面时任何人收到的数据，只有每一台网页服务器为了把页面发送给你所必需的那几项技术细节。下文对它们有完整说明。</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">本声明目录</h2>
+          <ul>
+            <li><a href="#who">谁是责任方</a></li>
+            <li><a href="#what">处理哪些数据，以及为什么</a></li>
+            <li><a href="#basis">法律依据</a></li>
+            <li><a href="#host">谁托管本站</a></li>
+            <li><a href="#retention">数据保留多久</a></li>
+            <li><a href="#mail">如果你写信给我们</a></li>
+            <li><a href="#children">儿童</a></li>
+            <li><a href="#absent">本站没有的东西</a></li>
+            <li><a href="#rights">你的权利</a></li>
+            <li><a href="#outside">欧洲以外的访问者</a></li>
+            <li><a href="#language">本声明的语言</a></li>
+            <li><a href="#changes">变更</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -309,22 +341,22 @@
           </ul>
         </div>
 
-        <h2>谁是责任方</h2>
+        <h2 id="who">谁是责任方</h2>
         <p>
           数据控制者为<strong>Spinne Software di Luci Manuel</strong>，一家在意大利登记的个体工商户，增值税号IT 18636231005，罗马工商登记处REA编号RM-1797481。如对本声明有任何疑问，或需行使下文所列的权利，可通过
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>，或（如需认证电子邮件）通过
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a>与控制者联系。
         </p>
 
-        <h2>处理哪些数据，以及为什么</h2>
+        <h2 id="what">处理哪些数据，以及为什么</h2>
         <p>为了把这个页面发送给你，托管它的服务器必然会收到你的IP地址，以及请求的日期和时间、所请求的页面和你浏览器的user-agent字符串。这是互联网的技术要求，不是一种选择：没有你的IP地址，就没有可以把页面送达的回信地址。</p>
         <p>这些记录被写入托管服务商的服务器日志，仅用于分发本站以及保护本站免受滥用，例如拒绝服务攻击。它们绝不会被用于对你建立画像，也绝不会与其他数据相结合。</p>
         <p>我们不出售你的个人信息，也不为跨情境行为广告而共享它——这些用语依加利福尼亚州法律中的含义使用。本站不存在实现上述任一行为的机制。</p>
 
-        <h2>法律依据</h2>
+        <h2 id="basis">法律依据</h2>
         <p>法律依据是控制者依GDPR第6条第1款(f)项所享有的合法利益，即运营本网站并保障其安全。本站不请求同意，因为此项处理并不需要同意，也因为本站不使用任何Cookie或跟踪技术。</p>
 
-        <h2>谁托管本站</h2>
+        <h2 id="host">谁托管本站</h2>
         <p>
           本站托管于GitHub Pages，并通过Fastly内容分发网络分发，再经由Cloudflare送达你的浏览器——Cloudflare位于两者之前，你的浏览器连接终止在它那里，因此它是第一个拿到你IP地址的一方。三者均作为数据处理者，且均设立于美国，因此分发任何页面都必然使上述技术数据跨境流动。当该数据源自对此类传输设有限制的地区——例如欧盟——传输依据的是这三家服务商在欧盟—美国数据隐私框架（EU–U.S. Data Privacy Framework）下的认证，以及欧盟委员会2023年7月10日的充分性决定。它们对这些数据的处理方式，分别载于
           <!-- Three processors, so three policies: the separators hang off the
@@ -334,38 +366,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>。
         </p>
 
-        <h2>数据保留多久</h2>
+        <h2 id="retention">数据保留多久</h2>
         <p>控制者不保存任何日志，也不保存日志的副本。上文所述的记录，只在托管和内容分发服务商依其自身政策（见上方链接）保留期间存在；控制者不另行设定期限，也无法延长或缩短它们的期限。</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>如果你写信给我们</h2>
+        <h2 id="mail">如果你写信给我们</h2>
         <p>上面的地址是普通邮箱。你写信来，控制者就会收到信里的一切——至少是你的邮件地址，如果你署名，还有你的名字——并用它来回复你，以及留下一份你问了什么的记录。寄往spinnesoftware.com地址的邮件由Cloudflare转发，投递到一个外部邮件服务商；寄往PEC地址的认证邮件由该服务商处理。法律依据是控制者依GDPR第6(1)(f)条对回复来信所享有的合法利益，以及当来信行使下文所列权利之一时，依GDPR第6(1)(c)条所负的法律义务。来往邮件无限期保留：邮箱不会按日程清空，在这里写一个没有人执行的保留期限，比直说更糟。你随时可以要求删除某封邮件。</p>
 
-        <h2>儿童</h2>
+        <h2 id="children">儿童</h2>
         <p>本站不面向儿童，也不向任何人索取个人数据。上文所述的技术日志记录是唯一被记录的数据，它们不被用于识别任何人，无论儿童还是成年人。</p>
 
-        <h2>本站没有的东西</h2>
+        <h2 id="absent">本站没有的东西</h2>
         <p>没有Cookie。没有本地存储或会话存储。没有任何形式的分析或测量。没有广告或跟踪像素。没有嵌入的视频、地图或社交组件。没有联系表单。没有邮件订阅。字体由本域名自行提供，而不是来自字体服务商，因此不会有任何关于你的请求离开本站。脚本有两个，同样都由本域名提供。一个读取浏览器请求的语言，若本站有该语言的版本，就把地址换成那一版；这项设置只读取一次，不保存，也不发往任何地方。另一个替换浏览器在页面顶端的回弹。两者都不设置cookie，不使用任何存储，也不记录任何东西。</p>
         <p>
           除本声明中引用的链接外，本站页面向外链接到两处：一个LinkedIn公司主页，以及
           <a href="https://sparkle.software">sparkle.software</a>，它是由同一控制者运营的另一个网站。除非你主动点击，否则不会有任何数据发送到这两处；一旦点击，就适用该网站自己的隐私声明。这些页面上显示的Sparkle标志与这里其他所有图片一样由本域名提供，因此显示它不会联系任何人。
         </p>
 
-        <h2>你的权利</h2>
+        <h2 id="rights">你的权利</h2>
         <p>依据GDPR第15条至第22条，你可以要求控制者提供对你个人数据的访问，或要求更正、删除或限制处理，并可对基于合法利益的处理提出反对。鉴于本站本身所处理的唯一数据是一条与你的身份并无关联的服务器日志记录，若没有你提供的进一步信息，控制者通常无法定位到与你相关的任何数据。</p>
         <p>
           你还有权向数据保护监管机构提出投诉。由于控制者设立于意大利，主管机构为意大利的
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>；欧洲经济区居民也可以联系本国的监管机构。
         </p>
 
-        <h2>欧洲以外的访问者</h2>
+        <h2 id="outside">欧洲以外的访问者</h2>
         <p>本站在欧盟境内运营。它不面向欧盟以外任何特定国家的人群，也不向其提供商品或服务。无论你从哪里读到这里，上述承诺都是一样的：本站本身所处理的唯一数据是一条服务器日志记录，它仅用于分发和保护本站，绝不会被用于对你建立画像，也绝不会被出售。就你的数据提出任何请求，请写信至上述地址，无论你依据的是哪一部法律。</p>
 
-        <h2>本声明的语言</h2>
+        <h2 id="language">本声明的语言</h2>
         <p>为方便阅读，本声明以多种语言发布。英文版本具有权威效力：若译文与英文文本不一致，控制者受英文文本约束。任何请求均可以意大利语或英语提出，并将以同一语言作答。</p>
 
-        <h2>变更</h2>
+        <h2 id="changes">变更</h2>
         <p>若本声明发生变更，修订后的版本将发布在本页。最近一次更新于2026年8月25日。</p>
       </article>
 

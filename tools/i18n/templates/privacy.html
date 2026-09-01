@@ -4,6 +4,38 @@
 
         <p class="lede">{{page.lede}}</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">{{page.h2_contents}}</h2>
+          <ul>
+            <li><a href="#who">{{page.h2_who}}</a></li>
+            <li><a href="#what">{{page.h2_what}}</a></li>
+            <li><a href="#basis">{{page.h2_basis}}</a></li>
+            <li><a href="#host">{{page.h2_host}}</a></li>
+            <li><a href="#retention">{{page.h2_retention}}</a></li>
+            <li><a href="#mail">{{page.h2_mail}}</a></li>
+            <li><a href="#children">{{page.h2_children}}</a></li>
+            <li><a href="#absent">{{page.h2_absent}}</a></li>
+            <li><a href="#rights">{{page.h2_rights}}</a></li>
+            <li><a href="#outside">{{page.h2_outside}}</a></li>
+            <li><a href="#language">{{page.h2_language}}</a></li>
+            <li><a href="#changes">{{page.h2_changes}}</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -18,22 +50,22 @@
           </ul>
         </div>
 
-        <h2>{{page.h2_who}}</h2>
+        <h2 id="who">{{page.h2_who}}</h2>
         <p>
           {{page.who_a}}<strong>Spinne Software di Luci Manuel</strong>{{page.who_b}}
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a>{{page.who_c}}
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a>{{page.who_d}}
         </p>
 
-        <h2>{{page.h2_what}}</h2>
+        <h2 id="what">{{page.h2_what}}</h2>
         <p>{{page.what_p1}}</p>
         <p>{{page.what_p2}}</p>
         <p>{{page.what_p3}}</p>
 
-        <h2>{{page.h2_basis}}</h2>
+        <h2 id="basis">{{page.h2_basis}}</h2>
         <p>{{page.basis_p1}}</p>
 
-        <h2>{{page.h2_host}}</h2>
+        <h2 id="host">{{page.h2_host}}</h2>
         <p>
           {{page.host_a}}
           <!-- Three processors, so three policies: the separators hang off the
@@ -43,38 +75,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>{{punct.stop}}
         </p>
 
-        <h2>{{page.h2_retention}}</h2>
+        <h2 id="retention">{{page.h2_retention}}</h2>
         <p>{{page.retention_p1}}</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>{{page.h2_mail}}</h2>
+        <h2 id="mail">{{page.h2_mail}}</h2>
         <p>{{page.mail_p1}}</p>
 
-        <h2>{{page.h2_children}}</h2>
+        <h2 id="children">{{page.h2_children}}</h2>
         <p>{{page.children_p1}}</p>
 
-        <h2>{{page.h2_absent}}</h2>
+        <h2 id="absent">{{page.h2_absent}}</h2>
         <p>{{page.absent_p1}}</p>
         <p>
           {{page.absent_links_a}}
           <a href="https://sparkle.software">sparkle.software</a>{{page.absent_links_b}}
         </p>
 
-        <h2>{{page.h2_rights}}</h2>
+        <h2 id="rights">{{page.h2_rights}}</h2>
         <p>{{page.rights_p1}}</p>
         <p>
           {{page.rights_p2a}}
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>{{page.rights_p2b}}
         </p>
 
-        <h2>{{page.h2_outside}}</h2>
+        <h2 id="outside">{{page.h2_outside}}</h2>
         <p>{{page.outside_p1}}</p>
 
-        <h2>{{page.h2_language}}</h2>
+        <h2 id="language">{{page.h2_language}}</h2>
         <p>{{page.language_p1}}</p>
 
-        <h2>{{page.h2_changes}}</h2>
+        <h2 id="changes">{{page.h2_changes}}</h2>
         <p>{{page.changes_p1}}</p>
       </article>
 

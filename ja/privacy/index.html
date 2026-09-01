@@ -72,7 +72,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
+  <link rel="stylesheet" href="/style.css?v=2b5e612c">
 
   <script type="application/ld+json">
 {
@@ -295,6 +295,38 @@
 
         <p class="lede">本ウェブサイトは、技術的に可能な範囲で、訪問者について知ることが最も少なくなるように作られています。クッキーは設定せず、アクセス解析も行わず、第三者のコンテンツも埋め込みません。したがって、訪問者のプロファイルは作られず、訪問者に関する情報が本サイトの外へ出ることもありません。ページを読むときに受け取られるデータは、ページを送るためにどのウェブサーバーにも必要な、ごくわずかな技術情報だけです。その内容は、以下にすべて記載します。</p>
 
+        <!-- WHY THIS IS HERE, AND WHY IT IS NOT A SCROLL CUE.
+             On a phone the first screen of this notice used to end 18px after the
+             digest's closing rule: a bounded panel, a hairline, then the edge of the
+             screen. Measured, not guessed — .summary ended at 709px of a 727px
+             viewport. It read as a finished page, and the notice is eight screens long.
+
+             The fix is not a label telling somebody to scroll. Twelve section names
+             cannot be mistaken for the end of a document, they say how long it is
+             before a reader has to find out, and they are a way in rather than an
+             instruction. Unbordered on purpose: a second closed box under the first
+             would deepen the problem it is here to remove.
+
+             The labels are the section headings themselves, so this costs nothing to
+             translate beyond its own title. -->
+        <nav class="toc" aria-labelledby="toc-label">
+          <h2 id="toc-label">本通知の目次</h2>
+          <ul>
+            <li><a href="#who">責任の所在</a></li>
+            <li><a href="#what">取り扱うデータと、その理由</a></li>
+            <li><a href="#basis">法的根拠</a></li>
+            <li><a href="#host">サイトのホスティング</a></li>
+            <li><a href="#retention">保存期間</a></li>
+            <li><a href="#mail">連絡をいただいた場合</a></li>
+            <li><a href="#children">子どもについて</a></li>
+            <li><a href="#absent">ここにないもの</a></li>
+            <li><a href="#rights">訪問者の権利</a></li>
+            <li><a href="#outside">欧州以外からの訪問者</a></li>
+            <li><a href="#language">本通知の言語</a></li>
+            <li><a href="#changes">変更</a></li>
+          </ul>
+        </nav>
+
         <!-- A reader of a privacy notice wants the answer before the argument,
              so the five lines that are the answer sit here rather than in a
              column beside the twelve sections they summarise. -->
@@ -309,22 +341,22 @@
           </ul>
         </div>
 
-        <h2>責任の所在</h2>
+        <h2 id="who">責任の所在</h2>
         <p>
           データの管理者は <strong>Spinne Software di Luci Manuel</strong> です。イタリアで登記された個人事業主で、付加価値税番号は IT 18636231005、ローマ商業登記簿の REA 番号は RM-1797481 です。本通知に関するご質問、または以下に記載する権利の行使については、
           <a href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a> へ、認証付きメールが必要な場合は
           <a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> へご連絡ください。
         </p>
 
-        <h2>取り扱うデータと、その理由</h2>
+        <h2 id="what">取り扱うデータと、その理由</h2>
         <p>このページを送るために、これをホストするサーバーは、必然的に訪問者の IP アドレス、リクエストの日時、要求されたページ、ブラウザのユーザーエージェント文字列を受け取ります。これは選択ではなく、インターネットの技術的な要件です。IP アドレスがなければ、ページを届ける宛先がありません。</p>
         <p>これらの記録はホスティング事業者のサーバーログに書き込まれ、本サイトを配信する目的と、サービス妨害攻撃などの不正利用から守る目的にのみ使われます。訪問者のプロファイリングに使うことはなく、ほかのデータと結び付けることもありません。</p>
         <p>当社は、カリフォルニア州法にいう意味において、訪問者の個人情報を販売せず、クロスコンテキスト行動広告のために共有することもありません。本サイトには、そのいずれかを行う仕組みがありません。</p>
 
-        <h2>法的根拠</h2>
+        <h2 id="basis">法的根拠</h2>
         <p>法的根拠は、本ウェブサイトを運営し安全に保つことについての、GDPR 第6条第1項（f）に基づく管理者の正当な利益です。この取扱いに同意は必要なく、クッキーその他の追跡技術も使用していないため、同意は求めていません。</p>
 
-        <h2>サイトのホスティング</h2>
+        <h2 id="host">サイトのホスティング</h2>
         <p>
           本サイトは GitHub Pages 上でホストされ、Fastly のコンテンツ配信ネットワークを通じて配信され、Cloudflare を経由してお手元に届きます。Cloudflare は両社の前段にあり、ブラウザからの接続を終端するため、IP アドレスを最初に受け取るのは Cloudflare です。三社はいずれも処理者にあたり、いずれも米国に設立されているため、ページを配信すること自体が、上記の技術データを国境を越えて移転することになります。当該データが、そうした移転を制限する地域（たとえば欧州連合）で生じた場合、その移転は、三社が取得している EU・米国データプライバシーフレームワークの認証と、2023年7月10日の欧州委員会による十分性認定に依拠します。三社によるデータの取扱いを定めた文書は、
           <!-- Three processors, so three policies: the separators hang off the
@@ -334,38 +366,38 @@
           <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>。
         </p>
 
-        <h2>保存期間</h2>
+        <h2 id="retention">保存期間</h2>
         <p>管理者は、ログもその写しも保持していません。上記の記録は、ホスティング事業者とコンテンツ配信事業者が、上記にリンクした各社の方針に基づいて保持する期間だけ存在します。管理者は独自の期間を定めておらず、両社の期間を延ばすことも縮めることもできません。</p>
 
         <!-- The notice invites correspondence in order to exercise a right, so
              the correspondence is itself processing and has to be described. -->
-        <h2>連絡をいただいた場合</h2>
+        <h2 id="mail">連絡をいただいた場合</h2>
         <p>上記のアドレスは、ふつうのメールボックスです。連絡をいただくと、管理者はその文面に含まれるもの——少なくともメールアドレス、署名があればお名前——を受け取り、返信のためと、何を尋ねられたかを記録しておくために使います。spinnesoftware.com のアドレス宛のメールは Cloudflare が中継し、外部のメール事業者へ配送されます。PEC のアドレス宛の認証付きメールは、その事業者が扱います。法的根拠は、返信を行うことについての GDPR 第6条1項(f)に基づく管理者の正当な利益であり、以下に挙げる権利のいずれかを行使する連絡については、GDPR 第6条1項(c)に基づく法的義務です。やり取りは期限を定めずに保管します。メールボックスは日程で空にするものではなく、誰も守らない保管期間をここに書くほうが、そう述べるより悪いからです。特定のメールの削除は、いつでもお申し出いただけます。</p>
 
-        <h2>子どもについて</h2>
+        <h2 id="children">子どもについて</h2>
         <p>本サイトは子どもを対象としておらず、誰に対しても個人データを求めません。記録されるのは上記の技術的なログだけで、子どもか大人かを問わず、個人の特定には使いません。</p>
 
-        <h2>ここにないもの</h2>
+        <h2 id="absent">ここにないもの</h2>
         <p>クッキーはありません。ローカルストレージもセッションストレージもありません。いかなる種類のアクセス解析も計測もありません。広告や追跡用のピクセルもありません。埋め込みの動画、地図、ソーシャルメディアのウィジェットもありません。問い合わせフォームもありません。メールマガジンもありません。書体はフォント事業者ではなく本サイトと同じドメインから配信されるため、訪問者に関するリクエストが本サイトの外へ出ることはありません。スクリプトは2本で、どちらも同じドメインから配信しています。1本はブラウザが求める言語を読み取り、その言語の版があればアドレスをそちらに置き換えます。設定を読むのは一度だけで、保存も送信もしません。もう1本はページ上端でのブラウザの跳ね返りを置き換えます。どちらもクッキーを設定せず、ストレージを使わず、何も記録しません。</p>
         <p>
           本通知の中で参照しているものを除けば、本サイトから外に出るリンクは2か所です。LinkedIn の会社ページと、
           <a href="https://sparkle.software">sparkle.software</a>。後者は、同じ管理者が運営する別のウェブサイトです。クリックしない限り、どちらにも何も送信されません。クリックした時点で、そのサイト自身のプライバシー通知が適用されます。これらのページに表示される Sparkle のロゴも、ほかの画像と同じく本ドメインから配信されるため、表示によってどこかへ通信が発生することはありません。
         </p>
 
-        <h2>訪問者の権利</h2>
+        <h2 id="rights">訪問者の権利</h2>
         <p>GDPR 第15条から第22条に基づき、訪問者は管理者に対し、自身の個人データへのアクセス、その訂正、消去、取扱いの制限を求めることができ、正当な利益に基づく取扱いに異議を唱えることができます。ただし、本サイト自体が取り扱っているデータは本人の身元と結び付いていないサーバーログの記録だけであるため、追加の情報がない限り、管理者が該当するデータを見つけられないことが通常です。</p>
         <p>
           データ保護監督機関に苦情を申し立てる権利もあります。管理者はイタリアに設立されているため、所轄の監督機関はイタリアの 
           <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a> です。欧州経済領域の居住者は、自国の監督機関に連絡することもできます。
         </p>
 
-        <h2>欧州以外からの訪問者</h2>
+        <h2 id="outside">欧州以外からの訪問者</h2>
         <p>本サイトは欧州連合から運営されています。域外の特定の国の人々を対象としておらず、そこで商品やサービスを提供してもいません。どこから読んでいても、上記の約束は同じです。本サイト自体が取り扱うデータはサーバーログの記録だけで、本サイトの配信と保護のためだけに使われ、プロファイリングには使われず、販売されることもありません。データに関するご要望は、どの法律に基づくものであっても、上記の宛先へお送りください。</p>
 
-        <h2>本通知の言語</h2>
+        <h2 id="language">本通知の言語</h2>
         <p>本通知は、便宜のために複数の言語で公開しています。正文は英語版です。翻訳と英語の本文が食い違う場合、管理者が拘束されるのは英語の本文です。ご要望はイタリア語または英語で送ることができ、同じ言語で回答します。</p>
 
-        <h2>変更</h2>
+        <h2 id="changes">変更</h2>
         <p>本通知を変更した場合は、改定後の版を本ページに掲載します。最終更新日は2026年8月25日です。</p>
       </article>
 
