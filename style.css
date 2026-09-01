@@ -519,6 +519,82 @@ main:focus {
   }
 }
 
+/* THE MOTTO, AND IT ARRIVES LAST.
+
+   Three words, in the middle of the field, and they are the same three the home
+   page sets as `h2#name`. Set in Fraunces because that is what carries them
+   there — a Latin brand mark with translate="no" that is byte-identical in all
+   fifteen languages, so the display face is safe here in a way it is not for
+   anything that gets translated.
+
+   UPPERCASE AND TRACKED, WHICH IS THE ONLY NEW TREATMENT IN IT. 13px is the
+   label rank the scale already names, so this invents no size; but every other
+   label on the site is set in Inter, and the note under .footer-col h2 says why
+   — a serif label would sit at the rank of the section headings it stands in
+   front of. Nothing here stands in front of a heading. It is on a blue field
+   above the page, seen for as long as a wheel gesture, so it can be the one
+   place the display face is allowed to be a label, and the wide tracking is
+   what keeps three short words from reading as a caption at that size.
+
+   0.14em of tracking is laid to the RIGHT of every glyph, the last one
+   included, so a centred line sits half a step left of centre. text-indent puts
+   the same measure back at the start; with text-align: center it moves the line
+   by half of what it is given, which is exactly the half step owed.
+
+   direction: ltr unconditionally, and not a paired .is-rtl rule: the string is
+   pure Latin and the same in every language, and the colophon's note near the
+   end of this file records what the bidi algorithm does to a Latin run left in
+   an RTL block. Giving the line its own direction settles the tracking and the
+   indent in both directions at once, and centred text needs no side to be
+   picked for it. */
+.pull-word {
+  position: absolute;
+  inset-inline: 0;
+  /* 60px, not the field's 96. Only the bottom 64 of the field is ever on
+     screen — that is overscroll.js's MAX, and the 32 above it exists so the
+     field's own top edge is never reached. Centring in 96 would put the line
+     16px above the middle of the only part anyone sees. Centring in 60 puts it
+     at 30px off the bottom edge: clear of the masthead, and fully out from
+     under it by the time the pull is 37px in, which is before the web finishes
+     at 54. */
+  bottom: 0;
+  height: 3.75rem;
+  line-height: 3.75rem;
+  text-align: center;
+  direction: ltr;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  /* Not #ffffff, for the reason .pull-net path gives: pure white on this blue
+     is the hardest edge in the composition. This is the same lift applied to a
+     tint rather than to the mesh's stroke, and it measures 4.2:1 against the
+     field where white would measure 4.6 — a floor that governs informative
+     text, which this is not: the field is aria-hidden and the phrase is set as
+     a real heading in the page's own prose a few hundred pixels below. */
+  color: #f0f4ff;
+  /* At rest, gone — the same at-rest state the mesh has, and for the same
+     reason: nothing in this field exists until the reader opens it. */
+  opacity: 0;
+}
+
+/* 330 + 360 = 690ms, which is where .pull-g3 finishes. The words land on the
+   frame the last thread does, so the web is not spun around a line that is
+   already sitting there — the line is what the spinning arrives at. */
+@keyframes pull-word {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Each plane comes to rest out of its own depth on its own clock, and slides
    sideways by its own amount on the way, so the planes shear past each other
    instead of arriving as one picture — the eye gets front-to-back before it
@@ -561,13 +637,15 @@ main:focus {
 .is-pulling .pull-g1 { animation-delay: calc(95ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g2 { animation-delay: calc(185ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g3 { animation-delay: calc(290ms - var(--pull-t, 0ms)); }
+.is-pulling .pull-word { animation: pull-word 360ms cubic-bezier(0.18, 0.88, 0.28, 1) calc(330ms - var(--pull-t, 0ms)) both; }
 
 /* LAST, and it has to be last: the animation shorthand above resets
    play-state along with everything else, so a paused declaration written
    before it is quietly turned back on. Nothing here runs on its own clock —
    --pull-t is the only thing that moves it. */
 .is-pulling .pull-layer,
-.is-pulling .pull-net path {
+.is-pulling .pull-net path,
+.is-pulling .pull-word {
   animation-play-state: paused;
 }
 
@@ -1562,8 +1640,10 @@ h2 + [class] {
   align-items: center;
   gap: var(--s-0);
   pointer-events: none;
-  color: #5a6478;
-  color: var(--text-muted);
+  /* Light on a dark scrim rather than muted grey on white: the veil below is
+     now a shade, and text at --text-muted would sit inside it without being
+     read. */
+  color: #ffffff;
   opacity: 0;
   visibility: hidden;
   transition: opacity 320ms ease, visibility 0s linear 320ms;
@@ -1580,13 +1660,18 @@ h2 + [class] {
   position: absolute;
   inset-inline: 0;
   bottom: calc(var(--s-3) * -1);
-  height: 7rem;
-  background: linear-gradient(to top, #ffffff 30%, transparent);
-  background: linear-gradient(to top, var(--bg) 30%, transparent);
+  height: 9rem;
+  /* The page's own ink, carried down to nothing over seven rems. Asked for as
+     a darkened background, and taken from --text rather than from black so the
+     shade belongs to the palette instead of arriving from outside it. */
+  background: linear-gradient(to top, rgba(14, 18, 32, 0.94) 0%,
+                                      rgba(14, 18, 32, 0.74) 30%,
+                                      rgba(14, 18, 32, 0.34) 62%,
+                                      rgba(14, 18, 32, 0) 100%);
   z-index: -1;
 }
 
-.has-more.at-top .scroll-cue {
+.has-more.at-top:not(.scrolling) .scroll-cue {
   opacity: 1;
   visibility: visible;
   transition: opacity 420ms ease 600ms, visibility 0s;
@@ -1615,7 +1700,7 @@ h2 + [class] {
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue svg { animation: none; }
   .scroll-cue,
-  .has-more.at-top .scroll-cue { transition: none; }
+  .has-more.at-top:not(.scrolling) .scroll-cue { transition: none; }
 }
 
 

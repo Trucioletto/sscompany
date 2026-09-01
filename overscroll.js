@@ -36,6 +36,48 @@
 (function () {
   'use strict';
 
+  /* THE SCROLL CUE, AND IT LIVES ABOVE THE GUARDS BELOW ON PURPOSE.
+
+     Everything after this point is the pull: an animation, correctly switched
+     off for a reader who asked for less motion and for a browser without
+     overscroll-behavior. The cue is not an animation. It is a hint that a long
+     page continues, and a reader with reduced motion needs it at least as much
+     as anyone — so it is set up here, before either guard, and the stylesheet
+     is what takes the drift and the fade away for them.
+
+     Two conditions, both from script, so a reader without any script never
+     gets a label that cannot then go away: the reader is at the top, and there
+     is more than 240px below. The length gate is what keeps it off a page with
+     nothing under it — on a document shorter than the window scrollY is always
+     zero, and without it the label would sit there forever pointing at nothing.
+
+     And it is not there while the page is moving. A hint that rides along under
+     moving text is furniture; the moment it has something to say is when the
+     reader has stopped. The class goes on at the first scroll event and comes
+     off 420ms after the last — long enough to sit out a flick and its momentum,
+     short enough that letting go brings it back without a wait. */
+  var cueDoc = document.documentElement;
+  var cueIdle = 0;
+
+  function syncCue() {
+    cueDoc.classList.toggle('has-more',
+      cueDoc.scrollHeight - window.innerHeight > 240);
+    cueDoc.classList.toggle('at-top', window.scrollY < 24);
+  }
+
+  function markScrolling() {
+    cueDoc.classList.add('scrolling');
+    window.clearTimeout(cueIdle);
+    cueIdle = window.setTimeout(function () {
+      cueDoc.classList.remove('scrolling');
+    }, 420);
+  }
+
+  syncCue();
+  window.addEventListener('scroll', function () { syncCue(); markScrolling(); },
+    { passive: true });
+  window.addEventListener('resize', syncCue, { passive: true });
+
   var mm = window.matchMedia;
   if (mm && mm('(prefers-reduced-motion: reduce)').matches) return;
   if (!window.CSS || !CSS.supports || !CSS.supports('overscroll-behavior-y', 'none')) return;
@@ -90,27 +132,8 @@
     else doc.classList.remove('pull-active');
   }
 
-  /* THE SCROLL CUE'S TWO CONDITIONS, kept apart from pull-active on purpose.
-     pull-active means "the top edge may be pulled" and happens to be true at
-     scrollY 0; the cue needs "the reader is at the top AND there is something
-     below". Reusing one class for both would mean a later change to the pull
-     behaviour silently deciding whether a label appears on every page.
-
-     The length gate is what keeps the cue off a page with nothing under it: on
-     a document shorter than the window scrollY is always 0, so without it the
-     label would sit there forever pointing at nothing. 240px rather than zero
-     because a page that runs a little past the fold does not need telling. */
-  function syncCue() {
-    doc.classList.toggle('has-more',
-      doc.scrollHeight - window.innerHeight > 240);
-    doc.classList.toggle('at-top', window.scrollY < 24);
-  }
-
   syncEdge();
-  syncCue();
-  window.addEventListener('scroll', function () { syncEdge(); syncCue(); },
-    { passive: true });
-  window.addEventListener('resize', syncCue, { passive: true });
+  window.addEventListener('scroll', syncEdge, { passive: true });
 
   /* Asymptotic, so the page gives less the further it is pulled and can never
      pass MAX however hard the gesture is. exp() rather than a linear ratio
