@@ -467,8 +467,7 @@ main:focus {
    DEVICE pixels while reporting layout sizes unscaled, so on a 2x display every
    thread is laid to exactly half its length — invisible to getBoundingClientRect
    and getScreenCTM alike, and visible only in a screenshot. */
-.pull-net path,
-.pull-net text {
+.pull-net path:not(.pull-word) {
   fill: none;
   /* Not #ffffff. Pure white on the brand blue is a harder edge than anything
      else in the composition, and it made the mesh read as wire laid over the
@@ -490,7 +489,12 @@ main:focus {
    field itself read as a surface rather than a band of colour. */
 .pull-l1 { transform: none; }
 
-.pull-l1 path { stroke-width: 1; stroke-opacity: 0.42; }
+/* Every thread EXCEPT the words. `.pull-l1 path` is (0,1,1) and `.pull-word`
+   is (0,1,0), so without the exclusion the layer's weight silently won and the
+   motto's own stroke-opacity below never applied — declared, ignored, and
+   invisible in a diff. The layer sets what a thread looks like; the one path
+   that is not a thread says so here rather than by out-specifying it. */
+.pull-l1 path:not(.pull-word) { stroke-width: 1; stroke-opacity: 0.42; }
 
 /* At rest every line is retracted into nothing, and the mosaic draws itself as
    the field opens: the longest chains of cell wall go down first and the
@@ -520,76 +524,75 @@ main:focus {
   }
 }
 
-/* THE MOTTO, AND IT IS MADE OF THE SAME WIRE.
+/* THE MOTTO, AND THE WEAVE OPENS FOR IT.
 
-   The first version of this was an HTML div laid over the field in the display
-   serif, near-white, at label size. It read as a sticker: the mesh is a faint
-   technical lattice at 42% of a tint, and a bright soft-serif caption sitting
-   on top of it belonged to a different picture. Nothing about it was part of
-   the weave — it did not share the material, the weight, the colour or the way
-   anything else in this field comes into being.
+   Four versions came before this one and tools/i18n/motto.py records what each
+   got wrong. The short of it: a solid word on a lattice with threads running
+   through its counters is a blot, and an opening in the mesh with nothing in it
+   is a bald patch, so the fill and the clearing are one decision and are made
+   together. The mask lives in the shell and is DERIVED — motto.py measures the
+   ink and sizes the ellipse from it, so changing the phrase, the face or the
+   size moves the opening with it rather than leaving it behind.
 
-   So it is not laid over the mesh, it is IN it: a <text> inside the same <svg>,
-   `fill: none`, stroked in the mesh's own colour at the mesh's own width. At a
-   glance it is another run of cell wall; a moment later it is three words. That
-   is the whole idea, and it only works if every value below is the thread's
-   values and not typographic ones — so the colour and the missing fill are
-   declared ONCE, on `.pull-net path, .pull-net text` above, and cannot drift
-   apart. They were not, at first: that rule named only `path`, so this element
-   had no stroke at all and the field came up with its mesh on it and no words.
-   A selector that says `path` does not reach a `text` however much a comment
-   beside it claims the material is shared. The width is restated below because
-   the layer's own rule is scoped to paths too, and a glyph is not one.
+   Nothing is cut at a line. The ellipse is solid black over its middle and
+   clear at the rim, so the threads thin out as they reach the phrase and come
+   back past it: the field parts around the words the way a web parts around
+   anything caught in it, which is the only way an opening in a weave can look
+   like something the weave did rather than something done to it.
 
-   BIG, because an outline has to be. At label size an unfilled letter is a
-   smudge: the counter closes up and the two sides of a stem merge into one
-   mark. The letters have to be large enough that the space inside them reads,
-   which also puts them at the scale of the cells they sit among — 34 units
-   against cells of 44 to 68 — so they sit in the tessellation rather than on
-   it. Uppercase for the same reason: fewer closed counters, and no descenders
-   to collide with the field's bottom edge.
-
-   Inter, not Fraunces. A serif outlined at 1px is mostly bracket and stress —
-   the modelling that makes the face worth having is exactly what disappears
-   when you take the fill away, and what is left reads as a wobble. A grotesque
-   outlined is a clean geometric contour, which is the same drawing as the cell
-   walls beside it. */
+   What ships is a <path> of outlines and no font at all — see motto.py. */
 .pull-word {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 34px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  fill: none;
-  stroke-width: 1;
-  /* Brighter than the threads, and only just: 0.62 against their 0.42. The
-     words have to come forward enough to be read as words rather than dismissed
-     as more mesh, and any further forward they stop being made of the field. */
-  stroke-opacity: 0.62;
+  /* Solid, and one step up from the threads rather than white. The note under
+     .pull-net path says why nothing here is #ffffff: pure white on this blue is
+     the hardest edge in the composition. This is the mesh's own tint at full
+     strength, which against threads held at 0.42 is exactly the distance
+     between a word and the weave it is lying in. */
+  fill: #a9bcff;
+  stroke: none;
+  shape-rendering: geometricPrecision;
 
-  /* 220, MEASURED, and the measurement is the whole reason for the number.
-
-     A glyph outline is a closed subpath and the dash pattern restarts at every
-     moveto, exactly as it does for the seven chains inside one mesh path — so
-     each letter draws itself from its own start, and one value covers all
-     thirteen. The note under .pull-g0 states the hazard: a dasharray shorter
-     than its own contour leaves a line that can never retract, and it would sit
-     on the field at rest as a scratch nobody could explain.
-
-     So it was measured rather than guessed, by holding the offset at the
-     dasharray and looking for ink. Inter's W is the longest contour here and it
-     is just over 200 units at this size; 220 is clean, 200 is not. Checked
-     against the fallbacks too, because font-display is `optional` and a reader
-     whose Inter has not arrived gets a system face with different outlines:
-     -apple-system and Helvetica/Arial are both clean at 200, so Inter is the
-     binding case and 220 clears it.
-
-     And only just, deliberately. The completion point of a contour is L/D of
-     the way through, so a generous D finishes every letter early and leaves the
-     last part of the gesture drawing nothing — which is the failure the build
-     comment above records fixing for the mesh. At 220 the W lands at 95%. */
-  stroke-dasharray: 220;
-  stroke-dashoffset: 220;
+  /* At rest, gone — the same at-rest state the mesh has, and for the same
+     reason: nothing in this field exists until the reader opens it. A fill
+     cannot be laid down the way a stroke can, so this arrives by opacity while
+     the threads around it draw themselves; both are scrubbed by the same
+     --pull-t and both finish on the same frame, so the words settle as the last
+     thread lands rather than before or after it. */
+  opacity: 0;
 }
+
+@keyframes pull-word-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* THE OPENING, AND IT IS FOUR STROKES RATHER THAN A BLUR.
+
+   The mask wants a soft edge and there are two ways to get one. A Gaussian blur
+   is the obvious one and is not used here: this field is live during a wheel
+   gesture, and a filter over a 1440x96 region that the compositor may re-raster
+   on every frame is a cost paid by the exact moment the effect exists for. Four
+   copies of the same outline, each wider and lighter than the last, cost
+   nothing to raster and step the fade finely enough that threads a single pixel
+   thick cannot show the seams.
+
+   White shows the mesh, black hides it. So the widest stroke is the palest —
+   the far edge of the clearing, where the weave is nearly whole — and each
+   narrower one is darker, down to the letters themselves, which are solid black
+   and hide the mesh outright. Round joins, or every angle in the face throws a
+   spike out into the field. */
+.pull-halo {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* 10, and it is the only one that also fills: inside the letters there is
+   nothing to fade toward. */
+.pull-halo-1 { fill: #000; stroke: #000; stroke-width: 10; }
+.pull-halo-2 { stroke: #4a4a4a; stroke-width: 19; }
+.pull-halo-3 { stroke: #8f8f8f; stroke-width: 28; }
+.pull-halo-4 { stroke: #cfcfcf; stroke-width: 38; }
 
 /* Each plane comes to rest out of its own depth on its own clock, and slides
    sideways by its own amount on the way, so the planes shear past each other
@@ -633,7 +636,7 @@ main:focus {
 .is-pulling .pull-g1 { animation-delay: calc(95ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g2 { animation-delay: calc(185ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g3 { animation-delay: calc(290ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-word { animation: pull-lay 360ms linear calc(330ms - var(--pull-t, 0ms)) both; }
+.is-pulling .pull-word { animation: pull-word-in 360ms linear calc(330ms - var(--pull-t, 0ms)) both; }
 
 /* LAST, and it has to be last: the animation shorthand above resets
    play-state along with everything else, so a paused declaration written
@@ -1673,11 +1676,19 @@ h2 + [class] {
   transition: opacity 420ms ease 600ms, visibility 0s;
 }
 
+/* Lighter and less tracked than the other two labels, which is the one place
+   this element should differ from them. .summary h2 and .toc h2 head a panel
+   and a list — things a reader has arrived at. This heads nothing; it is an
+   aside at the edge of the page, and 600 at 0.08em announced it. 500 at 0.06em
+   is the same family spoken more quietly, and the tracking now matches .toc h2
+   rather than exceeding it. Latin scripts only, in effect: uppercase and
+   tracking do nothing in seven of the fifteen locales, which already had the
+   quiet version. */
 .scroll-cue-label {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
