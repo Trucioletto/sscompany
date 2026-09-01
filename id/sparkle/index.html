@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=b4b423a4">
+  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
 
   <script type="application/ld+json">
 {
@@ -322,13 +322,13 @@
 
         <h2 id="preview">Ribuan frame, satu pratinjau</h2>
 
-        <p>Sebagian besar transisi adalah shader yang berjalan di GPU saat Anda menyusuri rekaman — sebuah fade biasa, dan apa pun yang berada di sebelah gambar diam, menempuh jalur yang lebih sederhana. Ekspornya tidak menjalankan satu pun shader itu. Ia memakai kumpulan transisi milik encoder-nya sendiri, dan di sana sekitar sepuluh transisi kami memiliki padanan berdasarkan nama, sedangkan sisanya didekatkan ke look terdekat yang dimilikinya. Pratinjaunya adalah panduan yang dekat terhadap berkas akhirnya, bukan janji atasnya, dan transisi adalah tempat keduanya berpisah.</p>
+        <p>Sparkle menggambar sebagian besar transisi sebagai shader yang berjalan di GPU saat Anda menyusuri rekaman — sebuah fade biasa, dan apa pun yang berada di sebelah gambar diam, menempuh jalur yang lebih sederhana. Ekspornya tidak menjalankan satu pun shader itu. Ia memakai kumpulan transisi milik encoder-nya sendiri, dan di sana sekitar sepuluh transisi kami memiliki padanan berdasarkan nama, sedangkan sisanya didekatkan ke look terdekat yang dimilikinya. Pratinjaunya adalah panduan yang dekat terhadap berkas akhirnya, bukan janji atasnya, dan transisi adalah tempat keduanya berpisah.</p>
 
         <p>Rekaman berat mendapat proxy dan jalur penyusuran yang dibangun untuk timeline panjang, dan itulah perbedaan antara editor tempat Anda bisa berpikir dan editor yang harus Anda tunggu.</p>
 
         <h2 id="ai" class="key">Sebagian besar AI berjalan di mesin Anda</h2>
 
-        <p>Penghapusan latar, segmentasi subjek, dan estimasi kedalaman berjalan sebagai model lokal di perangkat keras Anda sendiri. Rekaman mentah satu sore penuh tidak perlu diunggah agar berguna, dan untuk pekerjaan ini rekaman yang diembargo tetap diembargo.</p>
+        <p>Sparkle menjalankan penghapusan latar, segmentasi subjek, dan estimasi kedalaman sebagai model lokal di perangkat keras Anda sendiri. Rekaman mentah satu sore penuh tidak perlu diunggah agar berguna, dan untuk pekerjaan ini rekaman yang diembargo tetap diembargo.</p>
 
         <p>Pengubahan ucapan menjadi teks juga dapat berjalan secara lokal, pada model Whisper yang diunduh editornya sekali lalu dipakai tanpa jaringan. Pilih model itu, dan audionya tetap di mesin Anda. Biarkan pengaturan mesinnya pada Auto, dan pekerjaannya dikirim ke mesin cloud kapan pun ada yang dikonfigurasi, berapa pun panjang audionya — sehingga ke mana audio Anda pergi adalah sebuah pengaturan, dan pengaturan itu layak Anda tentukan sendiri.</p>
 
@@ -343,7 +343,7 @@
 
         <h2 id="export">Ekspor yang berbicara dengan perangkat keras Anda</h2>
 
-        <p>Encoding memakai akselerator apa pun yang ditemukannya — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — dan turun ke x264, x265, atau SVT-AV1 di perangkat lunak bila tidak ada yang dapat diajak bicara. H.264, HEVC, AV1, dan DNxHR untuk ruang penyuntingan, dengan HDR ditangani, bukan diratakan.</p>
+        <p>Sparkle melakukan encoding dengan akselerator apa pun yang ditemukannya — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — dan turun ke x264, x265, atau SVT-AV1 di perangkat lunak bila tidak ada yang dapat diajak bicara. H.264, HEVC, AV1, dan DNxHR untuk ruang penyuntingan, dengan HDR ditangani, bukan diratakan.</p>
 
         <p>Warna melewati pipeline 3D LUT, sehingga look yang dibangun di tempat lain tiba dalam keadaan utuh. Loudness audionya dapat dinormalkan saat keluar — satu tahap pengukuran menuju master -14 LUFS — sebab pengiriman yang gagal memenuhi spesifikasi loudness adalah pengiriman yang harus dilakukan dua kali. Ini sebuah kotak centang, bukan pengaturan bawaan, jadi ada baiknya Anda menemukannya sekali.</p>
 

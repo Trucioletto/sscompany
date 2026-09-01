@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=b4b423a4">
+  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
 
   <script type="application/ld+json">
 {
@@ -322,13 +322,13 @@
 
         <h2 id="preview">Des milliers d'images, un seul aperçu</h2>
 
-        <p>La plupart des transitions sont des shaders qui s'exécutent sur le GPU pendant le défilement — un simple fondu, et tout ce qui est placé à côté d'une image fixe, passent par un chemin plus simple. L'export n'exécute aucun de ces shaders. Il utilise le jeu de transitions propre à l'encodeur, où une dizaine des nôtres trouvent une correspondance par le nom et les autres sont approximées par l'aspect le plus proche dont il dispose. L'aperçu est un guide fidèle du fichier plutôt qu'une promesse, et c'est sur les transitions que les deux se séparent.</p>
+        <p>Sparkle dessine la plupart des transitions avec des shaders qui s'exécutent sur le GPU pendant le défilement — un simple fondu, et tout ce qui est placé à côté d'une image fixe, passent par un chemin plus simple. L'export n'exécute aucun de ces shaders. Il utilise le jeu de transitions propre à l'encodeur, où une dizaine des nôtres trouvent une correspondance par le nom et les autres sont approximées par l'aspect le plus proche dont il dispose. L'aperçu est un guide fidèle du fichier plutôt qu'une promesse, et c'est sur les transitions que les deux se séparent.</p>
 
         <p>Les images lourdes reçoivent des proxys et un chemin de défilement conçu pour les longues timelines, ce qui fait la différence entre un logiciel dans lequel on pense et un logiciel que l'on attend.</p>
 
         <h2 id="ai" class="key">L'essentiel de l'IA tourne sur votre machine</h2>
 
-        <p>La suppression de l'arrière-plan, la segmentation du sujet et l'estimation de profondeur sont des modèles locaux qui tournent sur votre propre matériel. Un après-midi de rushes n'a pas besoin d'être téléversé pour devenir exploitable, et, pour ce travail-là, des images sous embargo restent sous embargo.</p>
+        <p>Sparkle fait tourner la suppression de l'arrière-plan, la segmentation du sujet et l'estimation de profondeur sous forme de modèles locaux, sur votre propre matériel. Un après-midi de rushes n'a pas besoin d'être téléversé pour devenir exploitable, et, pour ce travail-là, des images sous embargo restent sous embargo.</p>
 
         <p>La transcription de la parole peut elle aussi tourner en local, sur un modèle Whisper que le logiciel télécharge une fois puis utilise sans réseau. Désignez ce modèle et l'audio reste sur la machine. Laissez le moteur sur Auto et il part vers un moteur cloud dès qu'il y en a un de configuré, quelle que soit la durée — la destination de votre audio est donc un réglage, et c'est un réglage qui mérite d'être fait.</p>
 
@@ -343,7 +343,7 @@
 
         <h2 id="export">Un export qui parle à votre matériel</h2>
 
-        <p>L'encodage utilise l'accélérateur qu'il trouve — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — et redescend vers x264, x265 ou SVT-AV1 en logiciel quand il n'a rien à qui parler. H.264, HEVC, AV1 et DNxHR pour la salle de montage, avec le HDR traité plutôt qu'aplati.</p>
+        <p>Sparkle encode avec l'accélérateur qu'il trouve — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — et redescend vers x264, x265 ou SVT-AV1 en logiciel quand il n'a rien à qui parler. H.264, HEVC, AV1 et DNxHR pour la salle de montage, avec le HDR traité plutôt qu'aplati.</p>
 
         <p>La couleur passe par une chaîne 3D LUT : un étalonnage construit ailleurs arrive intact. L'audio peut être normalisé en sonie à la sortie — une passe de mesure vers un master à -14 LUFS — parce qu'une livraison recalée sur la norme de sonie est une livraison que l'on fait deux fois. C'est une case à cocher plutôt qu'un comportement par défaut, et elle vaut la peine d'être trouvée une fois pour toutes.</p>
 

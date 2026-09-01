@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=b4b423a4">
+  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
 
   <script type="application/ld+json">
 {
@@ -322,13 +322,13 @@
 
         <h2 id="preview">Thousands of frames, one preview</h2>
 
-        <p>Most transitions are shaders that run on the GPU while you scrub — a plain fade, and anything sitting next to a still, take a simpler path. The export runs none of those shaders. It uses the encoder's own transition set, where about ten of ours have a match by name and the rest are approximated to the nearest look it has. The preview is a close guide to the file rather than a promise of it, and transitions are where the two come apart.</p>
+        <p>Sparkle draws most transitions as shaders that run on the GPU while you scrub — a plain fade, and anything sitting next to a still, take a simpler path. The export runs none of those shaders. It uses the encoder's own transition set, where about ten of ours have a match by name and the rest are approximated to the nearest look it has. The preview is a close guide to the file rather than a promise of it, and transitions are where the two come apart.</p>
 
         <p>Heavy footage gets proxies and a scrub path built for long timelines, which is the difference between an editor you can think in and one you wait for.</p>
 
         <h2 id="ai" class="key">Most of the AI runs on your machine</h2>
 
-        <p>Background removal, subject segmentation and depth estimation run as local models on your own hardware. An afternoon of rushes does not have to be uploaded to become useful, and for this work footage under embargo stays under embargo.</p>
+        <p>Sparkle runs background removal, subject segmentation and depth estimation as local models on your own hardware. An afternoon of rushes does not have to be uploaded to become useful, and for this work footage under embargo stays under embargo.</p>
 
         <p>Speech to text can run locally too, on a Whisper model the editor fetches once and then runs without a network. Name that model and the audio stays on the machine. Leave the engine on Auto and it goes to a cloud engine whenever one is configured, at any length — so where your audio goes is a setting, and it is one worth setting.</p>
 
@@ -344,7 +344,7 @@
 
         <h2 id="export">Export that talks to your hardware</h2>
 
-        <p>Encoding uses whatever accelerator it finds — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — and drops to x264, x265 or SVT-AV1 in software when there is nothing to talk to. H.264, HEVC, AV1 and DNxHR for the edit suite, with HDR handled rather than flattened.</p>
+        <p>Sparkle encodes with whatever accelerator it finds — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — and drops to x264, x265 or SVT-AV1 in software when there is nothing to talk to. H.264, HEVC, AV1 and DNxHR for the edit suite, with HDR handled rather than flattened.</p>
 
         <p>Colour goes through a 3D LUT pipeline, so a look built elsewhere arrives intact. Audio can be loudness-normalised on the way out — a measurement pass to a -14 LUFS master — because a delivery that fails loudness spec is a delivery you make twice. It is a checkbox rather than a default, so it is worth finding once.</p>
 

@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=b4b423a4">
+  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
 
   <script type="application/ld+json">
 {
@@ -322,13 +322,13 @@
 
         <h2 id="preview">Milhares de quadros, uma prévia</h2>
 
-        <p>A maioria das transições são shaders que rodam na GPU enquanto você percorre a linha do tempo — um fade simples, e qualquer transição encostada em uma imagem estática, seguem um caminho mais simples. A exportação não roda nenhum desses shaders. Ela usa o conjunto de transições do próprio codificador, no qual cerca de dez das nossas têm correspondência pelo nome e as demais são aproximadas para o look mais próximo que ele tiver. A prévia é um guia fiel do arquivo, e não uma promessa dele, e é nas transições que os dois divergem.</p>
+        <p>O Sparkle renderiza a maioria das transições como shaders que rodam na GPU enquanto você percorre a linha do tempo — um fade simples, e qualquer transição encostada em uma imagem estática, seguem um caminho mais simples. A exportação não roda nenhum desses shaders. Ela usa o conjunto de transições do próprio codificador, no qual cerca de dez das nossas têm correspondência pelo nome e as demais são aproximadas para o look mais próximo que ele tiver. A prévia é um guia fiel do arquivo, e não uma promessa dele, e é nas transições que os dois divergem.</p>
 
         <p>Material pesado ganha proxies e um caminho de navegação feito para linhas do tempo longas, o que é a diferença entre um editor em que se pensa e um editor pelo qual se espera.</p>
 
         <h2 id="ai" class="key">A maior parte da IA roda na sua máquina</h2>
 
-        <p>Remoção de fundo, segmentação de sujeito e estimativa de profundidade rodam como modelos locais no seu próprio hardware. Uma tarde de brutos não precisa ser enviada para se tornar útil, e, para esse trabalho, material sob embargo continua sob embargo.</p>
+        <p>O Sparkle roda remoção de fundo, segmentação de sujeito e estimativa de profundidade como modelos locais no seu próprio hardware. Uma tarde de brutos não precisa ser enviada para se tornar útil, e, para esse trabalho, material sob embargo continua sob embargo.</p>
 
         <p>A transcrição de fala também pode rodar localmente, em um modelo Whisper que o editor baixa uma vez e depois usa sem rede. Escolha esse modelo e o áudio fica na máquina. Deixe o motor em Automático e ele vai para um motor em nuvem sempre que houver um configurado, seja qual for a duração — de modo que o destino do seu áudio é uma configuração, e é uma que vale a pena definir.</p>
 
@@ -343,7 +343,7 @@
 
         <h2 id="export">Exportação que conversa com o seu hardware</h2>
 
-        <p>A codificação usa o acelerador que encontrar — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — e cai para x264, x265 ou SVT-AV1 em software quando não há com o que conversar. H.264, HEVC, AV1 e DNxHR para a sala de montagem, com HDR tratado em vez de achatado.</p>
+        <p>O Sparkle codifica com o acelerador que encontrar — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — e cai para x264, x265 ou SVT-AV1 em software quando não há com o que conversar. H.264, HEVC, AV1 e DNxHR para a sala de montagem, com HDR tratado em vez de achatado.</p>
 
         <p>A cor passa por um pipeline de 3D LUT, de modo que um look criado em outro lugar chega intacto. O áudio pode ser normalizado em loudness na saída — uma passagem de medição até um master a -14 LUFS —, porque uma entrega que não passa na especificação de loudness é uma entrega feita duas vezes. É uma caixa de seleção, e não o padrão, então vale a pena encontrá-la uma vez.</p>
 

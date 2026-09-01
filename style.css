@@ -693,10 +693,22 @@ main:focus {
     border-bottom: 0;
   }
 
+  /* box-shadow has no logical form, so this is the one place in the file where a
+     physical direction has to be written out and mirrored by hand. Without the
+     pair below, Arabic and Urdu got `padding-inline-start` on the right — where
+     the reading starts — and the bar on the physical left, so the marker sat
+     against the END of the label with 12px of space opening on the far side
+     from it. Measured on /ar/about/ with the menu open: padding-right 12px,
+     box-shadow inset 2px 0 0. The space and the mark it is for were on opposite
+     edges. */
   .menu[open] ~ .site-nav a[aria-current="page"] {
     border-bottom: 0;
     box-shadow: inset 2px 0 0 var(--brand);
     padding-inline-start: var(--s-2);
+  }
+
+  .is-rtl .menu[open] ~ .site-nav a[aria-current="page"] {
+    box-shadow: inset -2px 0 0 var(--brand);
   }
 
   .menu[open] ~ .lang {
@@ -1248,18 +1260,24 @@ li {
 
    The paragraph above was written as though this selector had settled the
    question. It had not, and the two elements it names by way of example are
-   both still wrong: `.home-what` (48px), `.identity` (48), `.answer` (48) and
-   `.summary` (48) each set `margin: var(--s-6) 0` under a class, so a single
-   type-and-combinator selector never applied to any of them. Measured before
-   this line existed and after it, unchanged:
+   both still wrong: `.home-what` and `.identity` — and `.answer` with them —
+   each set `margin: var(--s-6) 0` under a class, so a single
+   type-and-combinator selector never applied to any of them. Every h2
+   adjacency in the built pages, measured before this line existed and after it,
+   unchanged:
 
-       h2 -> p                16    the value this rule declares
-       h2 -> .home-what       48    index
-       h2 -> .identity        48    about, how-we-build, sparkle
+       h2 -> p                16    350 sites, the value this rule declares
+       h2 -> ul (unclassed)   16    17 sites
+       h2 -> .home-what       48    index, 15 locales
+       h2 -> .identity        48    about, how-we-build, sparkle, 15 locales
        h2 -> .answer          48    answers, twice
+       h2 -> .footer-nav      16    every page, and it wants 12 — see the note
+                                    under .footer-col h2 + .footer-nav
 
    64 above and 48 below is the "equidistant, belonging to neither" failure
    named above, live on five of the seven page types in all fifteen languages.
+   `.summary` sets the same class margin and is NOT in this list: it follows the
+   lede, never a heading, so the rule below neither fixes nor breaks it.
 
    `h2 + [class]` is (0,1,1): one attribute selector, no class names in it, so
    it beats any single-class block margin without listing the four that exist
@@ -1291,8 +1309,40 @@ h2 + [class] {
    394 at 1024 and 364 at 768 — a fourth column width, computed from a font
    metric, moving with the viewport and different in every language. It is a
    paragraph of the page it interrupts and it now measures like one. */
+/* AND THE BOUND IS NOT ONE NUMBER, BECAUSE --page IS NOT ONE NUMBER.
+
+   The paragraph above solves V >= P + 4 and then writes the answer as the
+   constant 676px, which is only the answer for P = 42rem. Three scripts widen
+   the container — `.script-hans, .script-jpan, .script-kore { --page: 48rem }`
+   near the bottom of this file — so for Japanese, Korean and Simplified Chinese
+   the box is still fluid at 676 and the rule hangs off the screen exactly as it
+   did before. Measured on /ja/about/: pull left edge -2.0 at every width from
+   676 to 771, clipped by `overflow-x: clip` the whole way. 96px of viewport on
+   twelve pages, against the 4px this bound was moved to close — the original
+   42rem was wrong here by 100px and the fix narrowed it to 96.
+
+   A media query cannot read a custom property, so the two caps need two
+   queries. Written as two POSITIVE min-width bounds rather than one bound and
+   an exclusion: `max-width` and `min-width` pairs leave a fractional band
+   between them where neither matches, which is the defect the identity table's
+   fold has. Held back at the first bound, released at the second. */
 @media (min-width: 42.25rem) {
   .pull {
+    margin-inline-start: calc(-1 * (var(--s-4) + 2px));
+  }
+
+  .script-hans .pull,
+  .script-jpan .pull,
+  .script-kore .pull {
+    margin-inline-start: 0;
+  }
+}
+
+/* 48.25rem = 772px: the same P + 4, for the 48rem container. */
+@media (min-width: 48.25rem) {
+  .script-hans .pull,
+  .script-jpan .pull,
+  .script-kore .pull {
     margin-inline-start: calc(-1 * (var(--s-4) + 2px));
   }
 }
@@ -1669,10 +1719,12 @@ h2 + [class] {
    it described is no longer in any file, so the matching exception in check.sh
    went with it. --bleed and the .rail h3 selector went the same way. */
 
-.identity {
-  margin: var(--s-4) 0 var(--s-5);
-  font-size: 0.9375rem;
-}
+/* The `.identity { margin: var(--s-4) 0 var(--s-5); font-size: 0.9375rem }`
+   that used to sit here was dead: the real rule 30 lines below has identical
+   specificity, comes later, and sets every one of those properties. It was also
+   the 24/32 that the later rule's own comment names as the defect it fixed —
+   the wrong numbers left in the file, above the note explaining why they are
+   wrong. Computed margin on /about/ measured 16px 0 48px either way. */
 
 /* A GRID, not a magic number.
    This was `.identity dt { min-width: 10.75rem }` — a width measured against
@@ -1744,13 +1796,17 @@ h2 + [class] {
    two-track block on the site — this table, the values grid, the footer —
    folds at the same width instead of at three.
 
-   36.9375rem = 591px, not 37rem, because `max-width: 37rem` and the
+   `not all and (min-width: 37rem)`, not `max-width: 37rem`, and not
+   `max-width: 36.9375rem` either. At `max-width: 37rem` this query and the
    `min-width: 37rem` that unfolds the values grid, the footer and the colophon
-   are BOTH true at exactly 592px. Measured there: this table one column while
-   the other two were already two. One pixel of viewport at which the site has
-   the three seams this comment says it does not have. A max-width bound has to
-   stop one step below the min-width bound it pairs with, not on it. */
-@media (max-width: 36.9375rem) {
+   were BOTH true at exactly 592px: this table one column while the other two
+   were already two — the three seams this comment says the site does not have.
+   Backing off to 36.9375rem fixes the integer width and opens a fractional one,
+   because any viewport in (591, 592) — browser zoom, fractional scaling, a
+   window dragged slowly — then satisfies NEITHER, and the same split reappears
+   the other way round. The exact complement of a min-width bound is its
+   negation, which cannot have a gap or an overlap by construction. */
+@media not all and (min-width: 37rem) {
   .identity {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1941,11 +1997,19 @@ footer {
 
 /* THREE LABELS, ONE DISTANCE. The footer's label rule declares 12px under the
    caps (`.footer-col h2`, margin-bottom var(--s-2)), and the two columns that
-   hold paragraphs get exactly that. This one held a nav, and a nav carries a
-   class, so `h2 + [class]` up in the prose section put 16 on it and the larger
+   hold paragraphs get exactly that, because `.footer-col p` beats the
+   heading-bind rule on specificity. This one holds a nav, which declares no
+   margin of its own, so nothing stood between it and `h2 + *` — and the larger
    margin won the collapse: PAGES sat 16px above its list while CONTACT and the
-   company name sat 12 above theirs. The heading-binds-down rule is for the
-   reading column; a footer track sets its own, tighter, and says so here. */
+   company name sat 12 above theirs. NOT caused by adding `h2 + [class]` beside
+   it: `h2 + *` already matched this nav, class or no class, and had done since
+   the day it was written. The heading-binds-down rule is for the reading
+   column; a footer track sets its own, tighter, and says so here.
+
+   It also closes 16px that could never collapse away on a phone: below 37rem
+   this column's h2 is `display: none` and .footer-col is a grid item, so the
+   nav's margin-top sat at the top of the track with nothing above it to
+   collapse into. The phone footer's first seam goes 40 -> 24. */
 .footer-col h2 + .footer-nav {
   margin-top: 0;
 }
@@ -2632,7 +2696,9 @@ footer {
   padding: var(--s-1) 0;
   list-style: none;
   min-width: 11rem;
-  max-height: 60vh;
+  /* max-height is set below, once, in vh with a dvh fallback pair. It was
+     also declared here as 60vh and overridden every time — measured 560px in
+     an 800px viewport, which is the 70 below, not the 60 here. */
   overflow-y: auto;
   background: #ffffff;
   background: var(--bg);
@@ -2675,16 +2741,15 @@ footer {
 
 /* Below the point where the nav drops to its own row the panel would hang off
    the screen edge, so it anchors to the start instead. */
-@media (max-width: 27.5rem) {
-  .lang {
-    margin-inline-start: 0;
-  }
-
-  .lang ul {
-    inset-inline-end: auto;
-    inset-inline-start: 0;
-  }
-}
+/* There was a `@media (max-width: 27.5rem)` block here setting `.lang`'s
+   inline-start margin to 0 and re-anchoring its menu. Every declaration in it
+   was unreachable. 440px is well inside the phone-menu regime, which starts at
+   33rem = 528px, and below that width `.lang` is either `display: none` when
+   the panel is closed, or inside the open panel — where `.menu[open] ~ .lang`
+   (0,2,0) already sets the same margin and `.menu[open] ~ .lang ul` (0,3,1)
+   already sets the anchor, both outranking a (0,1,x) selector. Verified by
+   computed style at 360, 390 and 430px, menu open: identical with the block
+   and without it. */
 
 /* Print: a paper page has one language and no way to change it. */
 @media print {

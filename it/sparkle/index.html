@@ -74,7 +74,7 @@
 
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=b4b423a4">
+  <link rel="stylesheet" href="/style.css?v=cc7ebab4">
 
   <script type="application/ld+json">
 {
@@ -322,13 +322,13 @@
 
         <h2 id="preview">Migliaia di fotogrammi, una sola anteprima</h2>
 
-        <p>Gran parte delle transizioni sono shader che girano sulla GPU mentre si scorre la timeline — una dissolvenza semplice, e qualunque transizione accanto a un fermo immagine, seguono un percorso più semplice. L'esportazione quegli shader non li esegue: usa il set di transizioni dell'encoder, dove circa dieci delle nostre trovano una corrispondenza per nome e le altre vengono approssimate al look più simile fra quelli che ha. L'anteprima è una guida fedele al file, non una promessa, e le transizioni sono il punto in cui le due cose si separano.</p>
+        <p>Sparkle disegna gran parte delle transizioni come shader che girano sulla GPU mentre si scorre la timeline — una dissolvenza semplice, e qualunque transizione accanto a un fermo immagine, seguono un percorso più semplice. L'esportazione quegli shader non li esegue: usa il set di transizioni dell'encoder, dove circa dieci delle nostre trovano una corrispondenza per nome e le altre vengono approssimate al look più simile fra quelli che ha. L'anteprima è una guida fedele al file, non una promessa, e le transizioni sono il punto in cui le due cose si separano.</p>
 
         <p>Il girato pesante passa dai proxy e da un percorso di scorrimento pensato per timeline lunghe, che è la differenza fra un editor dentro cui si può pensare e uno che si aspetta.</p>
 
         <h2 id="ai" class="key">Gran parte dell'AI gira in locale</h2>
 
-        <p>Rimozione dello sfondo, segmentazione del soggetto e stima della profondità girano come modelli locali sul proprio hardware. Un pomeriggio di riprese non deve essere caricato per diventare utile, e per questo lavoro il girato sotto embargo resta sotto embargo.</p>
+        <p>Sparkle esegue la rimozione dello sfondo, la segmentazione del soggetto e la stima della profondità come modelli locali sul proprio hardware. Un pomeriggio di riprese non deve essere caricato per diventare utile, e per questo lavoro il girato sotto embargo resta sotto embargo.</p>
 
         <p>Anche la trascrizione del parlato può girare in locale, su un modello Whisper che l'editor scarica una volta e poi usa senza rete. Se si indica quel modello, l'audio resta sulla macchina. Se si lascia il motore su Auto, l'audio va a un motore cloud ogni volta che ce n'è uno configurato, qualunque sia la durata del file — quindi dove va a finire l'audio è un'impostazione, ed è una di quelle che conviene impostare.</p>
 
@@ -343,7 +343,7 @@
 
         <h2 id="export">Un'esportazione che parla con l'hardware</h2>
 
-        <p>La codifica usa qualunque acceleratore trovi — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — e ripiega su x264, x265 o SVT-AV1 via software quando non c'è nulla con cui parlare. H.264, HEVC, AV1 e DNxHR per la sala di montaggio, con l'HDR gestito invece che appiattito.</p>
+        <p>Sparkle codifica con qualunque acceleratore trovi — NVIDIA NVENC, Intel Quick Sync, AMD, Apple VideoToolbox — e ripiega su x264, x265 o SVT-AV1 via software quando non c'è nulla con cui parlare. H.264, HEVC, AV1 e DNxHR per la sala di montaggio, con l'HDR gestito invece che appiattito.</p>
 
         <p>Il colore passa da una pipeline 3D LUT, quindi un look costruito altrove arriva intatto. In uscita l'audio può essere normalizzato nel loudness — un passaggio di misura verso un master a -14 LUFS — perché una consegna che non rispetta le specifiche di loudness è una consegna che si fa due volte. È una casella da spuntare, non un'impostazione predefinita, quindi conviene trovarla una volta per tutte.</p>
 
