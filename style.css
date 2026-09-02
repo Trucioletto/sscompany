@@ -2463,6 +2463,31 @@ footer {
   text-decoration: none;
 }
 
+/* THE ACCOUNTS, ON THEIR OWN LINE.
+
+   flex-basis rather than a margin, because the contact column is a wrapping
+   flex row — the address and the PEC sit side by side on a wide screen — and a
+   fifth of a line of social names tucked in beside them would read as a third
+   address. 100% takes the row it needs; the margin above is what makes it a
+   different KIND of thing from the two lines over it rather than a third of the
+   same kind.
+
+   Not icons. The footer is built entirely out of text at one weight in one
+   grey, and five glyphs from five different brand systems would be the loudest
+   thing in it — see .footer-product img, where a single mark already had to be
+   dimmed to sit beside this type. */
+.footer-social {
+  flex-basis: 100%;
+  margin-top: var(--s-2);
+}
+
+/* #a1a8b4 is not a new colour: it is the one .footer-col a.is-plain already
+   underlines with, which is exactly the job here — present, structural, and a
+   step behind the words it separates. */
+.footer-social span {
+  color: #a1a8b4;
+}
+
 /* The product line under the company description. It also gives the first
    footer column something to occupy the height the Pages list sets, which it
    previously spent on nothing. */

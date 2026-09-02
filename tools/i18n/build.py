@@ -311,7 +311,30 @@ def jsonld(lang: str, page_key: str, page_path: str, data: dict) -> str:
          "knowsLanguage": [l["code"] for l in LANGS],
          "areaServed": {"@type": "Country", "name": "Italy"},
          "alternateName": "Spinne",
-         "sameAs": ["https://www.linkedin.com/company/spinne-software/"]},
+         # ONE ENTITY, ONE LIST OF PROFILES.
+         # sparkle.software publishes an Organization node under this exact
+         # @id — byte for byte, which is how the two domains say they describe
+         # the same company rather than two — and it listed four accounts this
+         # one did not while this one listed a fifth it did not. Same
+         # identifier, contradictory sameAs, from two sites the same person
+         # controls. A consumer merging the graph has to pick one, and neither
+         # was complete.
+         #
+         # All five are the COMPANY's accounts and always were: every handle is
+         # @spinnesoftware, none of them is a product account. Verified as
+         # existing before being written down here rather than after — X,
+         # Instagram, YouTube and TikTok each return the company's own name in
+         # og:title; LinkedIn answers 999 to everything that is not a browser
+         # and has been linked in this footer since before this file did.
+         #
+         # The order is LinkedIn first and it is the same order in
+         # site.routes.mjs, so the two lists read as one list rather than as
+         # two that happen to agree.
+         "sameAs": ["https://www.linkedin.com/company/spinne-software/",
+                    "https://x.com/spinnesoftware",
+                    "https://www.instagram.com/spinnesoftware/",
+                    "https://www.youtube.com/@spinnesoftware",
+                    "https://www.tiktok.com/@spinnesoftware"]},
         {"@type": "WebSite", "@id": SITE_ID, "name": "Spinne Software",
          "url": f"{SITE}/", "inLanguage": lang,
          "publisher": {"@id": ORG}},

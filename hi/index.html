@@ -72,7 +72,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="/style.css?v=1674193e">
+  <link rel="stylesheet" href="/style.css?v=f6edbd58">
 
   <script type="application/ld+json">
 {
@@ -116,7 +116,11 @@
       },
       "alternateName": "Spinne",
       "sameAs": [
-        "https://www.linkedin.com/company/spinne-software/"
+        "https://www.linkedin.com/company/spinne-software/",
+        "https://x.com/spinnesoftware",
+        "https://www.instagram.com/spinnesoftware/",
+        "https://www.youtube.com/@spinnesoftware",
+        "https://www.tiktok.com/@spinnesoftware"
       ]
     },
     {
@@ -397,7 +401,27 @@
           <h2>संपर्क</h2>
           <p><a class="is-plain" href="mailto:hello@spinnesoftware.com">hello@spinnesoftware.com</a></p>
           <p><a href="mailto:spinnesoftware@pec.it">spinnesoftware@pec.it</a> (PEC)</p>
-          <p><a href="https://www.linkedin.com/company/spinne-software/" target="_blank" rel="noopener">LinkedIn</a></p>
+          <!-- One line, five accounts, and the same order as the sameAs list in
+               build.py and in sparkle.software's site.routes.mjs: what a reader
+               sees and what a crawler reads are the same five in the same
+               sequence, so neither can quietly become the other's subset.
+
+               The separators are their own elements rather than ::after on the
+               anchors, because generated content inside a link joins that
+               link's accessible name — "· X" — and takes its hover underline
+               with it. aria-hidden keeps them out of the reading; the spaces
+               around them come from the source newlines, one on each side. -->
+          <p class="footer-social">
+            <a href="https://www.linkedin.com/company/spinne-software/" target="_blank" rel="noopener">LinkedIn</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="https://x.com/spinnesoftware" target="_blank" rel="noopener">X</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="https://www.instagram.com/spinnesoftware/" target="_blank" rel="noopener">Instagram</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="https://www.youtube.com/@spinnesoftware" target="_blank" rel="noopener">YouTube</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="https://www.tiktok.com/@spinnesoftware" target="_blank" rel="noopener">TikTok</a>
+          </p>
         </div>
       </div>
 
