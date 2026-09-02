@@ -1704,7 +1704,7 @@ h2 + [class] {
      visibility still lives here, out-waiting the slowest fade below so that
      nothing is switched off while it is still on screen. */
   visibility: hidden;
-  transition: opacity 320ms ease, visibility 0s linear 320ms;
+  transition: visibility 0s linear 540ms;
 }
 
 /* The label sits over the page, so without this it crosses whatever line of
@@ -1729,12 +1729,92 @@ h2 + [class] {
   background: linear-gradient(to top, #ffffff 0%, #ffffff 34%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(to top, var(--bg) 0%, var(--bg) 34%, transparent 100%);
   z-index: -1;
+  /* At once, and softly. The veil is not an announcement — it is the page
+     admitting it does not stop at the fold, which is as true in the first frame
+     as in the thousandth. It leaves last as well as arriving first: the 120ms
+     of delay below is the words getting out of the way before the edge firms
+     back up. Nothing here ever cuts. */
+  opacity: 0;
+  transition: opacity 420ms ease 120ms;
 }
 
 .has-more:not(.scrolling) .scroll-cue {
-  opacity: 1;
   visibility: visible;
-  transition: opacity 420ms ease 600ms, visibility 0s;
+  transition: visibility 0s;
+}
+
+/* First in, last out. No delay going on — the page is soft at its edge from the
+   moment there is more of it — and 560ms to get there, which is slow enough
+   that nothing about it is an event. */
+.has-more:not(.scrolling) .scroll-cue::before {
+  opacity: 1;
+  transition: opacity 560ms ease;
+}
+
+/* 1500ms, asked for directly, and the number the arrow below follows.
+
+   600 was the old value and it was chosen against nothing: the word arrived
+   while the reader was still taking in the first screen, which is a page
+   telling you to move on before you have started. A second and a half is long
+   enough that the invitation lands on somebody who has finished looking. The
+   veil does not wait with it, because the veil is not an invitation.
+
+   It is a delay on the transition rather than a timer in the script on purpose.
+   The condition — there is more page, and the reader is not moving — is already
+   the script's, and it is written once; the wait is a property of how the thing
+   appears, and belongs where the appearance is. It also means the wait cancels
+   itself for free: start scrolling inside the delay and the class goes, the
+   transition is thrown away, and nothing was scheduled that now has to be
+   unscheduled.
+
+   One asymmetry worth stating rather than discovering. overscroll.js clears
+   .scrolling 1200ms after the last scroll event, so on arrival the word starts
+   appearing at 1500ms, and after a reader stops mid-page at 1200 + 1500. */
+.has-more:not(.scrolling) .scroll-cue-label {
+  opacity: 1;
+  transition: opacity 420ms ease 1500ms;
+}
+
+/* THE ARROW IS DRAWN, IT DOES NOT APPEAR.
+
+   The whole cue used to arrive as one fade: veil, word and chevron all coming
+   up together on the same 420ms, which is the arrival every element on every
+   site has and says nothing about this one.
+
+   The page already contains the answer. Ninety-six pixels of mesh at the top
+   edge are made of lines that lay themselves down along their own length, and
+   this chevron is the only other piece of line art on the page. So it is laid
+   down the same way, off the same idea, and the two ends of the page are made
+   of the same thing. Nothing new is invented for it: a dash the length of the
+   path, retracted at rest and run out when the cue is shown.
+
+   Second, not simultaneous. The veil and the word are the page going quiet at
+   its edge; the arrow is the instruction. It starts 160ms after them and lands
+   160ms after them, so it is the last thing that happens and the eye has
+   somewhere to finish.
+
+   And it un-draws on the way out, on the base transition below — the same
+   symmetry the mesh has, where a thing is drawn on the way out and erased on
+   the way back rather than faded on top of itself. */
+.scroll-cue svg path {
+  /* 19.8 units of chevron — two runs of sqrt(98) — so 20 is the shortest dash
+     that covers the whole of it. Shorter and a stub is left showing at rest. */
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  transition: stroke-dashoffset 260ms ease;
+}
+
+/* From the other end in a right-to-left page. The chevron is symmetrical and
+   nobody would file a bug, but the hand that draws it is not, and the site has
+   already been caught once treating a physical edge as though it were the
+   reading one. */
+[dir="rtl"] .scroll-cue svg path {
+  stroke-dashoffset: -20;
+}
+
+.has-more:not(.scrolling) .scroll-cue svg path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 420ms ease-out 1660ms;
 }
 
 /* Lighter and less tracked than the other two labels, which is the one place
@@ -1746,6 +1826,11 @@ h2 + [class] {
    tracking do nothing in seven of the fifteen locales, which already had the
    quiet version. */
 .scroll-cue-label {
+  /* Its own, so it can wait for the veil it sits on. 260ms out, in step with
+     the arrow beside it: the two of them are one statement and leave together,
+     and the ground they were on stays a moment longer. */
+  opacity: 0;
+  transition: opacity 260ms ease;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
@@ -1755,9 +1840,14 @@ h2 + [class] {
 
 /* A 3px drift, once every two and a half seconds. Enough to be caught by the
    eye at the edge of vision, far short of the bouncing arrow this could have
-   been. It stops the moment the reader scrolls, because the cue goes with it. */
-.scroll-cue svg {
-  animation: cue-drift 2500ms ease-in-out infinite;
+   been. It stops the moment the reader scrolls, because the cue goes with it.
+
+   Under the shown selector rather than unconditional, which it used to be, so
+   that the delay below is real: the drift begins after the chevron has finished
+   being drawn, and begins again from the top every time the cue comes back. A
+   line that is still arriving and already pulsing is two things at once. */
+.has-more:not(.scrolling) .scroll-cue svg {
+  animation: cue-drift 2500ms ease-in-out 2140ms infinite;
 }
 
 @keyframes cue-drift {
@@ -1765,10 +1855,31 @@ h2 + [class] {
   85%           { transform: translateY(3px); }
 }
 
+/* Selectors matched to the ones above, not shortened: every rule here has to
+   outrank the one it is switching off, and the shown state is (0,3,1). */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-cue svg { animation: none; }
+  .scroll-cue svg,
+  .has-more:not(.scrolling) .scroll-cue svg { animation: none; }
   .scroll-cue,
   .has-more:not(.scrolling) .scroll-cue { transition: none; }
+  /* Three parts now hold themselves back, and with transitions off none of
+     them would ever be let go: the dash has to be run out and both opacities
+     opened by the rules themselves, or a reader who asked for no motion gets an
+     empty strip where the cue is. */
+  .scroll-cue svg path,
+  [dir="rtl"] .scroll-cue svg path,
+  .has-more:not(.scrolling) .scroll-cue svg path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .scroll-cue::before,
+  .scroll-cue-label,
+  .has-more:not(.scrolling) .scroll-cue::before,
+  .has-more:not(.scrolling) .scroll-cue-label {
+    opacity: 1;
+    transition: none;
+  }
 }
 
 
