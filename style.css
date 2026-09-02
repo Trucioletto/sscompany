@@ -494,29 +494,43 @@ main:focus {
    motto's own stroke-opacity below never applied — declared, ignored, and
    invisible in a diff. The layer sets what a thread looks like; the one path
    that is not a thread says so here rather than by out-specifying it. */
-.pull-l1 path:not(.pull-word) { stroke-width: 1; stroke-opacity: 0.42; }
+/* THE NET SITS BACK, so that the words can sit forward.
 
-/* At rest every line is retracted into nothing, and the mosaic draws itself as
-   the field opens: the longest chains of cell wall go down first and the
-   shortest last, which is the same order the mosaic would be laid in.
+   This was 1px at 0.42 and the phrase was #a9bcff — the mesh's own tint. Two
+   things at one distance: the type had no more presence than the mesh it lay
+   in, and the field read as a single flat texture with some letters in it.
+   A reader cannot be told what matters by an arrangement in which nothing is
+   nearer than anything else.
+
+   So the net loses a fifth of a pixel and a quarter of its strength. 0.8 rather
+   than 1 matters more than the number suggests: at a whole pixel a line is
+   drawn on the device grid and reads as ruled, and under it the line is laid
+   across two rows of pixels and reads as thread. Together they put the mesh
+   behind the plane the words are on, and cost it nothing a reader would miss —
+   the geometry is unchanged, only its voice.
+
+   0.32 and not the 0.26 this was first set to. Pushed that far the net stopped
+   being quieter than the words and started being faint, which reads as a
+   defect rather than as depth: the distance between the two planes has to come
+   from BOTH of them being where they belong, not from emptying one out. */
+.pull-l1 path:not(.pull-word) { stroke-width: 0.8; stroke-opacity: 0.32; }
+
+/* At rest every line is retracted into nothing, and the net draws itself as the
+   field opens: the longest runs of mesh go down first and the shortest last,
+   which is the same order the net would be strung in.
 
    The length is per GROUP, not per line: lines are bucketed by length, so one
-   number covers a whole bucket and a shorter line simply finishes early. The
-   four numbers are MEASURED off the geometry rather than guessed — the longest
-   chain in each bucket runs 349, 84, 42 and 28 units — because a dasharray
-   shorter than its own path leaves a line that can never fully retract, and
-   would sit there at rest as a scratch.
-
-   Per CHAIN, not per path element: the dash pattern restarts at every moveto,
-   so the seven chains inside one path each get the pattern from their own
-   start. Verified rather than assumed — a path of two 100-unit subpaths with
-   dasharray 100 draws both in full, exactly as two separate elements do.
-   pathLength would have been the obvious way to say this and is silently not
-   honoured for stroke-dasharray here. */
-.pull-g3 { stroke-dasharray: 30; stroke-dashoffset: 30; }
-.pull-g2 { stroke-dasharray: 44; stroke-dashoffset: 44; }
-.pull-g1 { stroke-dasharray: 86; stroke-dashoffset: 86; }
-.pull-g0 { stroke-dasharray: 351; stroke-dashoffset: 351; }
+   number covers a whole bucket and a shorter line simply finishes early.
+   The four numbers are MEASURED off the geometry rather than guessed — a
+   dasharray shorter than its own path leaves a thread that can never fully
+   retract, and would sit there at rest as a scratch nobody could explain.
+   Re-run tools/i18n/mosaic.py after any change to the geometry: it prints the
+   longest chain in each of the four buckets on stderr, and says how many pieces
+   the net is in, which has to be one. */
+.pull-g3 { stroke-dasharray: 29; stroke-dashoffset: 29; }
+.pull-g2 { stroke-dasharray: 50; stroke-dashoffset: 50; }
+.pull-g1 { stroke-dasharray: 83; stroke-dashoffset: 83; }
+.pull-g0 { stroke-dasharray: 478; stroke-dashoffset: 478; }
 
 @keyframes pull-lay {
   to {
@@ -524,32 +538,76 @@ main:focus {
   }
 }
 
-/* THE MOTTO, AND THE WEAVE OPENS FOR IT.
+/* THE MOTTO, AND THE WEAVE GOES BEHIND IT.
 
-   Four versions came before this one and tools/i18n/motto.py records what each
-   got wrong. The short of it: a solid word on a lattice with threads running
-   through its counters is a blot, and an opening in the mesh with nothing in it
-   is a bald patch, so the fill and the clearing are one decision and are made
-   together. The mask lives in the shell and is DERIVED — motto.py measures the
-   ink and sizes the ellipse from it, so changing the phrase, the face or the
-   size moves the opening with it rather than leaving it behind.
+   Five versions came before this one and tools/i18n/motto.py records what each
+   got wrong. The last of them is the one worth reading here, because it looked
+   right and was not.
 
-   Nothing is cut at a line. The ellipse is solid black over its middle and
-   clear at the rim, so the threads thin out as they reach the phrase and come
-   back past it: the field parts around the words the way a web parts around
-   anything caught in it, which is the only way an opening in a weave can look
-   like something the weave did rather than something done to it.
+   The words were filled and the mesh was cut away around them, by a mask that
+   drew the outlines six times at widening strokes: an opening in the weave,
+   fading out as it reached the phrase. It photographs well and it has two
+   faults that only the running page shows.
 
-   What ships is a <path> of outlines and no font at all — see motto.py. */
+   It overshoots. However tight the innermost stroke, the clearing is the
+   letters DILATED, and a fade that starts before the ink means threads are
+   already dimming a few pixels out — so the weave stops short of the words all
+   the way round and the two read as separate objects, one laid over the other.
+   Precision here is not a small halo, it is no halo.
+
+   And the mask was static while the words are not. The phrase fades in from
+   330ms of a 700ms scrub; the mask cut its holes from the first frame. Between
+   200 and 330ms — a third of the gesture, and the part where the weave is still
+   spinning — the field carried a word-shaped void with nothing in it, threads
+   broken along a path a reader could see the shape of and not the reason for.
+
+   Both go away by deleting the mask. The letters are opaque and painted after
+   the mesh, so they occlude it THEMSELVES: exactly their own outline, nothing
+   beyond it, and the occlusion arrives on precisely the frames the letters do
+   because it IS the letters. While they fade in, the threads behind show
+   through them and the words come up out of the weave rather than punching a
+   hole for themselves first.
+
+   What is left is one <path> and no mask, no <use>, no defs — see motto.py. */
 .pull-word {
-  /* Solid, and one step up from the threads rather than white. The note under
-     .pull-net path says why nothing here is #ffffff: pure white on this blue is
-     the hardest edge in the composition. This is the mesh's own tint at full
-     strength, which against threads held at 0.42 is exactly the distance
-     between a word and the weave it is lying in. */
-  fill: #a9bcff;
+  /* Solid, and one tone above the threads. It was the mesh's own #a9bcff,
+     which put the phrase at the same distance as the field it lies in — the
+     flattest possible reading of the thing the field is for.
+
+     AND ONE TONE, NOT THREE. This went to #dfe6ff with a drop shadow under it
+     and that was too much: the words stopped being nearer than the net and
+     started being louder than it, which is a different relationship and a
+     cheaper one. The shadow went with it. A shadow states that there are
+     planes; at this size, on this ground, the statement is louder than the
+     fact, and the fact is enough — #c6d2ff against threads at 0.32 places the
+     phrase in front without anything in the picture announcing that it does.
+     It also leaves the letters their own edges, which a blur takes away. */
+  fill: #c6d2ff;
   stroke: none;
   shape-rendering: geometricPrecision;
+
+  /* CENTRED IN WHAT CAN BE SEEN, NOT IN WHAT EXISTS.
+
+     motto.py draws the line at the middle of the strip when it is fully open —
+     y 64 of a 96 field, because the pull is 64 and the top 32 is margin. That
+     is correct at the end of the gesture and wrong for all of it: the visible
+     strip is only as deep as the page has been pulled, so its middle sits at
+     96 - d/2 and travels UP as the field opens. Left fixed, the words came in
+     hard against the top edge and slid down into place — measured at a 38px
+     pull, the line was clipped through its ascenders; at 24 it was not on
+     screen at all while the mesh below it already was.
+
+     So the type follows the middle: 32 - d/2 is the distance from where it is
+     drawn to where the middle currently is, zero at a full pull by
+     construction. --pull-u is that d in the SVG's own units, written by
+     overscroll.js each frame — see the note over `centre` there for why it is
+     not in pixels.
+
+     The fallback is 64px, which resolves the whole expression to zero. That is
+     the at-rest case, where nothing here is visible anyway, and it means a
+     reader whose script never runs gets the drawn position rather than a line
+     thrown 32px down the field. */
+  transform: translateY(calc(32px - var(--pull-u, 64px) / 2));
 
   /* At rest, gone — the same at-rest state the mesh has, and for the same
      reason: nothing in this field exists until the reader opens it. A fill
@@ -560,39 +618,23 @@ main:focus {
   opacity: 0;
 }
 
+/* The counters, in the field's own colour, painted before the letters. Same
+   class as the type above it, so every rule that governs the phrase — the
+   exclusions from the mesh's stroke, the at-rest opacity, the fade — governs
+   this too and there is nothing to keep in step. Only the fill differs, and it
+   is the ground rather than the ink because a counter is a hole: what should
+   show through it is the field, not a thread. */
+.pull-word-counters {
+  fill: #4563ff;
+  fill: var(--brand);
+}
+
 @keyframes pull-word-in {
   to {
     opacity: 1;
   }
 }
 
-/* THE OPENING, AND IT IS FOUR STROKES RATHER THAN A BLUR.
-
-   The mask wants a soft edge and there are two ways to get one. A Gaussian blur
-   is the obvious one and is not used here: this field is live during a wheel
-   gesture, and a filter over a 1440x96 region that the compositor may re-raster
-   on every frame is a cost paid by the exact moment the effect exists for. Four
-   copies of the same outline, each wider and lighter than the last, cost
-   nothing to raster and step the fade finely enough that threads a single pixel
-   thick cannot show the seams.
-
-   White shows the mesh, black hides it. So the widest stroke is the palest —
-   the far edge of the clearing, where the weave is nearly whole — and each
-   narrower one is darker, down to the letters themselves, which are solid black
-   and hide the mesh outright. Round joins, or every angle in the face throws a
-   spike out into the field. */
-.pull-halo {
-  fill: none;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-/* 10, and it is the only one that also fills: inside the letters there is
-   nothing to fade toward. */
-.pull-halo-1 { fill: #000; stroke: #000; stroke-width: 10; }
-.pull-halo-2 { stroke: #4a4a4a; stroke-width: 19; }
-.pull-halo-3 { stroke: #8f8f8f; stroke-width: 28; }
-.pull-halo-4 { stroke: #cfcfcf; stroke-width: 38; }
 
 /* Each plane comes to rest out of its own depth on its own clock, and slides
    sideways by its own amount on the way, so the planes shear past each other

@@ -7,14 +7,15 @@ them: a solid word on a lattice with threads running through its counters is a
 blot, and an opening in the mesh with nothing in it is a bald patch. Neither
 half works without the other.
 
-Which is why this writes ONE <path> and the shell uses it five times — four
-widening copies inside the mask that open the weave, and the visible one under
-them. The opening is the letters, dilated; there is no second shape to size and
-nothing to keep in step when the phrase or the face changes. An ellipse was
-tried for it first and was the wrong idea rather than the wrong number: sized
-to clear the line on a desktop it swallowed the whole strip on a phone, where
-the words are two thirds of the width and the mesh a reader came for went with
-it.
+Which is why the mesh is not cut away for them. Two shapes were tried for that
+— an ellipse, then the letters dilated into a halo — and both overshoot by
+construction: the clearing is always bigger than the ink, so the weave stops
+short of the words and the two read as separate objects. A mask is also static
+while the phrase fades in, so it cut word-shaped holes into the field a third
+of a gesture before there was anything to put in them.
+
+An opaque shape painted after the mesh needs none of it. It hides exactly its
+own outline, and it hides it on exactly the frames it is visible.
 
 FOUR VERSIONS CAME BEFORE THIS ONE. They are worth recording because each was
 the obvious next thing to try, and the last two were only wrong in a way you
@@ -100,6 +101,54 @@ SHELLS = ("tools/i18n/templates/_shell.html",
           "tools/i18n/templates/_shell-noindex.html")
 
 
+def _contour_area(d):
+    """Signed area of one subpath, from its on-curve points alone.
+
+    The control points are ignored on purpose. This only has to tell an outer
+    contour from a counter, and no bezier ever crosses its own hull far enough
+    to flip that sign.
+    """
+    nums = [float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', d)]
+    pts = list(zip(nums[0::2], nums[1::2]))
+    a = 0.0
+    for i in range(len(pts)):
+        x0, y0 = pts[i]
+        x1, y1 = pts[(i + 1) % len(pts)]
+        a += x0 * y1 - x1 * y0
+    return a / 2
+
+
+def counters_only(d):
+    """The glyph's counters — the holes in it — and nothing else.
+
+    A filled letter hides the mesh behind its INK and not behind its counters:
+    the eye of an `e` is a hole in the shape, so a thread crossing it stays
+    visible inside the letter as a fragment with no cause. Measured on the
+    built page at 8x, that happened in the e of `Weave`, both e's of `the` and
+    `web`, and the bowl of the b.
+
+    So the counters are painted in the field's own colour and the letters go on
+    top. It covers exactly the holes — not a pixel outside the outline, because
+    a counter has no outside — and it belongs to the same element as the type,
+    so it arrives on the frames the type does.
+
+    Counters only, rather than a whole silhouette behind the letters: the ink
+    already covers itself, so a silhouette would be six thousand characters of
+    path data restating what the next path draws anyway. These are six small
+    closed loops.
+
+    They are the contours wound against the largest one in their glyph. In
+    TrueType the two are wound oppositely under the nonzero rule, so the sign of
+    the area is the whole test.
+    """
+    subs = ["M" + part for part in d.split("M") if part.strip()]
+    if len(subs) < 2:
+        return ""
+    areas = [_contour_area(sp) for sp in subs]
+    outer = 1 if max(areas, key=abs) > 0 else -1
+    return "".join(sp for sp, a in zip(subs, areas) if (1 if a > 0 else -1) != outer)
+
+
 def build():
     font = TTFont(FONT)
     upm = font["head"].unitsPerEm
@@ -126,7 +175,7 @@ def build():
     width = sum(advances) - TRACK * size
     x = W / 2 - width / 2
 
-    parts = []
+    parts, solids = [], []
     ink = BoundsPen(glyphs)
     for name, advance in zip(names, advances):
         transform = Transform(scale, 0, 0, -scale, x, baseline)
@@ -135,24 +184,28 @@ def build():
         d = svg.getCommands()
         if d.strip():
             parts.append(d)
+            solids.append(counters_only(d))
             glyphs[name].draw(TransformPen(ink, transform))
         x += advance
 
     x0, y0, x1, y1 = ink.bounds
-    d = "".join(parts)
+    d, solid = "".join(parts), "".join(solids)
     meta = dict(size=round(size, 2), width=round(width, 1), baseline=round(baseline, 2),
                 ink=[round(v, 1) for v in (x0, y0, x1, y1)],
-                chars=len(d))
-    return d, meta
+                chars=len(d), counterChars=len(solid))
+    return d, solid, meta
 
 
 def main():
-    d, meta = build()
-    # ONE definition, five uses: four inside the mask that open the weave, and
-    # the visible one under it. The opening is derived from these same outlines
-    # rather than from a shape of its own — see the halo note in style.css — so
-    # there is nothing here to keep in step with the type.
-    line = f'      <path id="pull-word-d" d="{d}"/>\n'
+    d, solid, meta = build()
+    # One path, painted after the mesh and opaque, which is the whole of it.
+    # There was a mask here that cut the weave open around the letters and it is
+    # gone — see the note over .pull-word in style.css. A solid shape drawn on
+    # top already hides exactly what is behind it, on exactly the frames it is
+    # visible, which is both more precise than a dilated outline and correct
+    # during the fade in a way a static mask cannot be.
+    line = (f'     <path class="pull-word pull-word-counters" d="{solid}"/>\n'
+            f'     <path class="pull-word" d="{d}"/>\n')
     print(json.dumps(meta, indent=1), file=sys.stderr)
     if "--write" not in sys.argv:
         print(line, end="")
@@ -160,7 +213,8 @@ def main():
     for rel in SHELLS:
         p = ROOT / rel
         s = p.read_text()
-        s, n = re.subn(r' *<path id="pull-word-d" d="[^"]*"/>\n', line, s, count=1)
+        s, n = re.subn(r'( *<path class="pull-word pull-word-counters" d="[^"]*"/>\n)?'
+                       r' *<path class="pull-word" d="[^"]*"/>\n', line, s, count=1)
         if n != 1:
             raise SystemExit(f"{rel}: found {n} motto definitions, expected 1")
         p.write_text(s)

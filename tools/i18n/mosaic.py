@@ -22,7 +22,24 @@ import pathlib
 
 W, H = 1440.0, 96.0          # the viewBox the shells declare
 BLEED_X, BLEED_TOP, BLEED_BOT = 70.0, 26.0, 26.0
-R_MID, R_EDGE = 44.0, 68.0   # cell size at the centre and at the left/right edges
+R_MID, R_EDGE = 40.0, 72.0   # cell size at the centre and at the left/right edges
+PATCH = 0.55                 # how far the mesh wanders off that, across the strip
+# AND A CEILING ON IT, which is not taste but arithmetic. The strip is 96 tall,
+# and the sampler rejects any point within one radius of another — so a radius
+# that approaches the height leaves nowhere in the column for a point to land,
+# and the mesh opens a full-height rift and comes apart. It did: at PATCH 0.62
+# the noise peaked near x 1164 with a radius of 98, and the net split into a
+# 122-node body and a 19-node fragment. 76 is the largest cell that still leaves
+# room for a second point above or below it.
+#
+# The ceiling is necessary and not sufficient: at PATCH 0.62 the net still came
+# apart in the same place even clamped, because the gradient underneath was
+# already wide there. 0.55 is the most wander this geometry takes and stays in
+# one piece — checked, and the build prints the count so the next person does
+# not have to remember to.
+R_MAX = 76.0
+BOW = 0.05                   # noise at the middle of an edge
+SAG = 0.05                   # gravity at the middle of an edge
 DARTS = 9000                 # candidate points; sampling stops when they run out
 SEED = 20260831
 GROUPS = 4                   # length buckets, matching .pull-g0..g3 in the CSS
@@ -43,7 +60,23 @@ def radius_at(x: float) -> float:
     middle rather than the same cells pulled sideways.
     """
     t = min(1.0, abs(x - W / 2) / (W / 2))
-    return R_MID + (R_EDGE - R_MID) * (t * t * (3 - 2 * t))
+    r = R_MID + (R_EDGE - R_MID) * (t * t * (3 - 2 * t))
+
+    # AND THEN IT WANDERS, WHICH IS THE DIFFERENCE BETWEEN A NET AND A TILE.
+    #
+    # The gradient above is smooth and monotonic: cells grow steadily from the
+    # middle outward and every neighbourhood matches its neighbour. That is a
+    # tessellation doing what a tessellation does, and it reads as tiling —
+    # regular, machined, the same everywhere. A net that has been handled is not
+    # regular anywhere: it is drawn tight in places and slack in others, and the
+    # eye reads that unevenness as the thing being made of thread.
+    #
+    # Three sines of unrelated wavelength, beating against each other, give a
+    # size that varies in patches with no period a reader can find across the
+    # strip. Deterministic, no dependency, no table.
+    n = (math.sin(x / 149.0 + 0.7) + math.sin(x / 83.0 + 2.1)
+         + math.sin(x / 47.0 + 4.3)) / 3.0
+    return min(r * (1.0 + PATCH * n), R_MAX)
 
 
 def seeds(rng: random.Random):
@@ -220,8 +253,12 @@ def d_attr(pts, rng) -> str:
         mx, my = (ax + bx) / 2, (ay + by) / 2
         dx, dy = bx - ax, by - ay
         n = math.hypot(dx, dy) or 1.0
-        bow = rng.uniform(-0.035, 0.035) * n
+        bow = rng.uniform(-BOW, BOW) * n
         cx, cy = mx - dy / n * bow, my + dx / n * bow
+        # A thread under its own weight sags one way, and only across the
+        # horizontal: scaled by how much of the span is horizontal, or the
+        # near-vertical edges bulge sideways and the whole field leans.
+        cy += SAG * n * (abs(dx) / n)
         out.append(f"Q{f(cx)} {f(cy)} {f(bx)} {f(by)}")
     return "".join(out)
 
@@ -247,10 +284,42 @@ def build():
     return lines, longest
 
 
+def components(ch):
+    """How many separate pieces the net is in. One is the answer.
+
+    Cutting edges to open the cells was tried and it shattered the thing:
+    removing half of them at random left 61 disconnected fragments and 158 loose
+    ends against 40 junctions — arcs floating in a field, not a net. The build
+    prints this so that failure cannot come back unnoticed.
+    """
+    parent = {}
+
+    def find(x):
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def k(p):
+        return (round(p[0], 2), round(p[1], 2))
+
+    for c in ch:
+        for i in range(len(c) - 1):
+            ra, rb = find(k(c[i])), find(k(c[i + 1]))
+            if ra != rb:
+                parent[ra] = rb
+    return len({find(v) for v in parent})
+
+
 def main():
     lines, longest = build()
     for g, ln, n in longest:
         print(f"# g{g}: {n} catene, la piu' lunga {ln:.0f} unita", file=sys.stderr)
+    rng = random.Random(SEED)
+    comps = components([c for c in chains(clip(voronoi_edges(seeds(rng)))) if length(c) > 8])
+    print(f"# la rete e' in {comps} pezzo" + ("" if comps == 1 else "i  <<< dovrebbe essere 1"),
+          file=sys.stderr)
     block = "\n".join(lines)
     if "--write" not in sys.argv:
         print(block)
