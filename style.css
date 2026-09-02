@@ -1108,6 +1108,14 @@ h1 {
   margin-bottom: var(--s-4);
 }
 
+/* No arrival of their own. These two carried a 300ms fade for as long as
+   overscroll.js had a greeting to hang it on — the h1 and the lede being the
+   only two things on the page that differ from the other seventy-six, they were
+   the only two that joined it. The greeting was asked to go, so the reason went
+   with it, and what is left would be main's 300ms fade multiplied by a second
+   300ms fade underneath it: a slower curve nobody chose. main above already
+   brings the page up, once. */
+
 h2 {
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
   font-size: 1.4375rem;
@@ -1683,7 +1691,18 @@ h2 + [class] {
   pointer-events: none;
   color: #5a6478;
   color: var(--text-muted);
-  opacity: 0;
+  /* THE OPACITY IS NOT HERE, AND THAT IS THE WHOLE ARRANGEMENT.
+
+     It used to be, and one opacity on the parent means one schedule for
+     everything under it: veil, word and arrow could only ever arrive together.
+     The ground and the instruction are not the same statement, though — the
+     veil is the page going soft where it continues, which is true from the
+     first frame, and the word is an invitation, which should not be extended
+     before the reader has looked at anything. So each part carries its own,
+     and this element carries only the fact of being there at all.
+
+     visibility still lives here, out-waiting the slowest fade below so that
+     nothing is switched off while it is still on screen. */
   visibility: hidden;
   transition: opacity 320ms ease, visibility 0s linear 320ms;
 }

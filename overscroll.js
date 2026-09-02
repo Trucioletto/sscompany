@@ -90,6 +90,69 @@
   var doc = document.documentElement;
   var body = document.body;
 
+
+  /* WHAT MOVES IS THE PAGE, NOT THE BODY.
+
+     The transform used to sit on <body>, which is one write instead of three
+     and was wrong for a reason CSS states plainly and this file learned the
+     hard way: a transformed element becomes the containing block for every
+     position: fixed descendant under it. There is exactly one on this site —
+     .scroll-cue — and `bottom: 1rem` stopped meaning a rem above the viewport
+     and started meaning a rem above the BOTTOM OF THE DOCUMENT. Measured on
+     /it/sparkle/: the cue's box left y=622 and arrived at y=4687 in a 670px
+     viewport, i.e. it vanished for the whole of every pull and came back
+     afterwards. A reader at the top of the page — which is the only place this
+     gesture works — is exactly the reader that invitation was written for.
+
+     So the three blocks that make up the page carry it instead. They are flex
+     items in a column; a transform on a flex item changes nothing about the
+     layout, the compositor handles all three as cheaply as it handled one, and
+     the scrollable overflow does not grow (checked: scrollHeight is 4735 either
+     way). The skip link is left behind on purpose — it is absolute against the
+     initial containing block, and a focus ring that stays where the eye expects
+     it is better than one that rides an animation down. */
+  var movers = [];
+  (function () {
+    var kids = body.children;
+    for (var i = 0; i < kids.length; i++) {
+      var tag = kids[i].tagName;
+      if (tag === 'HEADER' || tag === 'MAIN' || tag === 'FOOTER') movers.push(kids[i]);
+    }
+  })();
+
+  /* THE PULL, IN THE UNITS THE MOTTO IS DRAWN IN.
+
+     The words are centred on the middle of the strip a reader can actually see,
+     and that strip grows as the page opens — so the centre is a moving target
+     and the type has to follow it. style.css does the following; this supplies
+     the only number it cannot work out for itself.
+
+     Not in CSS pixels, in the SVG's own units. The field declares a 1440x96
+     viewBox with `slice`, so it scales by max(width / 1440, 1): exactly 1 up to
+     a 1440px window and larger past it. A transform on a path inside that
+     viewBox is in user units, so handing CSS the raw pixel distance would
+     over-correct on any window wider than 1440 — by 5px at 1920, which is a
+     quarter of the type's own height. Divided here, where the element that
+     knows the scale is one query away, and cached because it only changes when
+     the window does. */
+  var netScale = 1;
+
+  function measureNet() {
+    var net = document.querySelector('.pull-net');
+    netScale = net ? Math.max(net.clientWidth / 1440, 1) : 1;
+  }
+
+  measureNet();
+  window.addEventListener('resize', measureNet, { passive: true });
+
+  function centre(y) {
+    doc.style.setProperty('--pull-u', (y / netScale).toFixed(2) + 'px');
+  }
+
+  function lift(css) {
+    for (var i = 0; i < movers.length; i++) movers[i].style.transform = css;
+  }
+
   /* 64px of travel against a 96px field: the field stays taller than the
      furthest the page can be pulled, so its own top edge is never reached and
      the white behind it never appears. */
@@ -179,13 +242,16 @@
       done();
       return;
     }
-    body.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0)';
+    lift('translate3d(0,' + y.toFixed(2) + 'px,0)');
     var p = Math.min(1, y / MAX / FULL_AT);
-    /* The same progress said twice, because CSS cannot divide a time by a time.
-       --pull-t scrubs the laying of each thread; --pull-p moves the front that
-       decides WHERE the web has been spun so far. */
+    /* One property, and it used to be two. --pull-p carried the position of the
+       front that decided WHERE the web had been spun so far; the front was the
+       sweep mask, the mask was removed (style.css says why, at length), and the
+       property went on being written every frame for months with no rule
+       anywhere reading it. A number nothing reads is not free — it is a thing
+       the next reader has to prove is dead. */
     doc.style.setProperty('--pull-t', (p * BUILD_MS).toFixed(1) + 'ms');
-    doc.style.setProperty('--pull-p', p.toFixed(3));
+    centre(y);
     if (release) frame = window.requestAnimationFrame(paint);
   }
 
@@ -241,9 +307,9 @@
     rescue = 0;
     release = 0;
     releaseFrom = 0;
-    body.style.transform = '';
+    lift('');
     doc.style.removeProperty('--pull-t');
-    doc.style.removeProperty('--pull-p');
+    doc.style.removeProperty('--pull-u');
     doc.classList.remove('is-pulling');
   }
 
@@ -352,160 +418,25 @@
   window.addEventListener('blur', settle);
 
 
-  /* THE WEB SPINS ITSELF ONCE, ON ARRIVAL.
+  /* NOTHING HAPPENS ON ARRIVAL, AND THAT IS THE INSTRUCTION.
 
-     The edge gesture was the only thing that ever drew the web, so almost
-     nobody learned it was there: nothing on the page suggests the top edge
-     gives. This spins it once, so the affordance has been shown rather than
-     hidden, and then puts it away.
+     There was a greeting here: on an external arrival the page opened itself
+     to 54px, spun the whole web, held it, and put it away again — 2.2 seconds
+     of it — on the reasoning that the edge gesture was the only thing that ever
+     drew the web and so almost nobody learned it was there.
 
-     It reuses the gesture's own path rather than adding a second one. Every
-     animation in the stylesheet is paused and reads --pull-t; writing that from
-     a clock produces exactly the frames a pull produces, in the same order,
-     with no new keyframes and no second definition of what a half-spun web
-     looks like.
+     Asked for directly, and removed: a page that performs at you before you
+     have done anything is a page that opened by itself. The cost is real and
+     is accepted — the top edge is now undiscovered unless a reader pushes
+     against it — and it is the smaller cost of the two.
 
-     IT HAS TO OPEN THE PAGE, AND THAT WAS THE FIRST VERSION'S MISTAKE.
-     This was written once without the translate, on the reasoning that an
-     arrival which shoves the first paragraph down and pulls it back is a jolt
-     dressed as an intention. Then it was rendered: the field is at top:-96px,
-     entirely above the viewport, so with the body left alone there is nothing
-     on screen to see. The web is only ever visible in the space the pull opens.
-     So it opens it — 26px against the gesture's 64, which is enough to show the
-     weave's lower band and little enough to read as a breath. It is a transform
-     on the body, on the compositor, so nothing reflows and no layout shifts.
+     What went with it: GREET_*, the smoothstep, the referrer test that told an
+     arrival from an internal click, and the hand-over in open() that let a
+     gesture take the page over from a greeting mid-flight. None of it has a
+     caller any more. The h1 and the lede keep their own 300ms fade, declared
+     in style.css and owing nothing to this file, which is what they fall back
+     to in every other case as well.
 
-     TO is 0.72, not 1: the whole picture stays something the reader gets by
-     pulling. An introduction that gives away all of what it introduces leaves
-     nothing behind it.
-
-     ONCE PER VISIT, NOT ONCE PER PAGE. A flourish on every internal click stops
-     being a greeting and becomes a tic. The test is the referrer — the same one
-     lang.js uses — with one correction that cost a render to find: lang.js
-     redirects with location.replace(), so a reader who lands on /about/ and is
-     sent to /it/about/ arrives with a SAME-ORIGIN referrer and looked, to the
-     first version of this test, exactly like somebody clicking a link. Compared
-     with the language prefix stripped from both, that redirect reads as what it
-     is: still an arrival. Nothing is stored to decide this — the privacy notice
-     says no storage and it stays true.
-
-     A real gesture during it wins immediately: the frame loop checks whether the
-     pull path has taken ownership and gets out of its way. */
-  var GREET_IN = 1100, GREET_HOLD = 320, GREET_OUT = 780;
-  var GREET_TO = 1, GREET_PX = 42;
-
-  /* Smoothstep, not a cubic ease-out.
-
-     The ease-out put 58% of the build into the first quarter of the opening —
-     205ms of the 820 — so the mesh did not draw, it flashed, and then the
-     remaining three quarters crawled through what was left. Smoothstep is
-     nearly linear through the middle with soft ends, which is what a line being
-     drawn wants: a start you can see begin and a finish you can see land.
-
-     And TO is 1 rather than 0.72. At 0.72 the scrub stopped at 504ms of the
-     stylesheet's 700ms timeline, so the last two groups never finished — the
-     greeting always showed a half-built mesh and then took it away again. The
-     whole picture stays worth pulling for because the pull opens 96px against
-     this 42; the drawing is not the part to hold back. */
-  function smooth(x) { return x * x * (3 - 2 * x); }
-
-  /* The path with a leading /xx/ language segment removed, so the same page in
-     two languages compares equal. */
-  function bare(pathname) {
-    /* Matched by shape rather than against the list of fifteen codes: that list
-       lives in build.py and lang.js, and a third copy here would be the one
-       that goes stale. No real path segment on this site is two letters, so the
-       shape is unambiguous in practice. */
-    var seg = pathname.split('/')[1] || '';
-    return /^[a-z]{2}(-[A-Za-z]+)?$/.test(seg) ? pathname.slice(seg.length + 1) : pathname;
-  }
-
-  function arrivedFromInsideTheSite() {
-    var r = document.referrer;
-    if (!r || r.indexOf(location.origin + '/') !== 0) return false;
-    var from;
-    try { from = new URL(r).pathname; } catch (e) { return false; }
-    /* Same page, different language prefix: that is lang.js, not a reader. */
-    return bare(from) !== bare(location.pathname);
-  }
-
-  /* The greeting owns nothing permanently. Everything it writes, it writes
-     through here, and cleanup is idempotent and guaranteed by three separate
-     paths: the end of the run, a gesture taking over, and a deadline.
-
-     The first version had one exit — `if (raw || release) return` — which left
-     the transform, both custom properties and the class exactly where they
-     were. Any stray wheel tick during the 1.7 seconds killed the loop and the
-     page stayed pushed down with the field half open, permanently, until a
-     reload. It shipped, and it is the reason this is now three paths instead
-     of one clever check. */
-  var greeting = 0;
-  var greetDeadline = 0;
-
-  function greetEnd() {
-    if (!greeting) return;
-    greeting = 0;
-    window.clearTimeout(greetDeadline);
-    greetDeadline = 0;
-    /* Only ever removes what the greeting itself set. If a real gesture has
-       taken over, its own paint() writes these again on the very next frame,
-       so the worst case is one frame of rest — not a page left ajar. */
-    body.style.transform = '';
-    doc.style.removeProperty('--pull-t');
-    doc.style.removeProperty('--pull-p');
-    doc.classList.remove('is-pulling');
-  }
-
-  function greet() {
-    /* Not at the top — a restored scroll position, or a link to an anchor. The
-       field is not on screen and there is nothing to introduce. */
-    if (window.scrollY > 0) return;
-    if (arrivedFromInsideTheSite()) return;
-    /* A gesture is already live: the reader found the edge on their own and is
-       doing the thing this exists to demonstrate. */
-    if (raw || release) return;
-
-    var t0 = 0;
-    var span = GREET_IN + GREET_HOLD + GREET_OUT;
-    greeting = 1;
-
-    /* Third path. requestAnimationFrame does not run in a background tab, and a
-       frame callback that never fires cannot clean up after itself — the same
-       reason settle() carries a rescue timer. */
-    greetDeadline = window.setTimeout(greetEnd, span + 600);
-
-    window.requestAnimationFrame(function step(now) {
-      if (!greeting) return;
-      /* The reader is pulling: hand over, and take our own writes with us. */
-      if (raw || release) { greetEnd(); return; }
-
-      if (!t0) t0 = now;
-      var e = now - t0, p;
-
-      if (e < GREET_IN) {
-        p = smooth(e / GREET_IN);
-      } else if (e < GREET_IN + GREET_HOLD) {
-        p = 1;
-      } else if (e < span) {
-        /* Back through the same frames at the same pace: the mesh unbuilds
-           rather than being taken away. */
-        p = 1 - smooth((e - GREET_IN - GREET_HOLD) / GREET_OUT);
-      } else {
-        greetEnd();
-        return;
-      }
-
-      body.style.transform = 'translate3d(0,' + (p * GREET_PX).toFixed(2) + 'px,0)';
-      var t = p * GREET_TO;
-      doc.style.setProperty('--pull-t', (t * BUILD_MS).toFixed(1) + 'ms');
-      doc.style.setProperty('--pull-p', t.toFixed(3));
-      doc.classList.add('is-pulling');
-      window.requestAnimationFrame(step);
-    });
-  }
-
-  /* After the first paint and after the fonts have had their moment: the web
-     arriving in the same frame as the wordmark makes both look like a loader. */
-  if (document.readyState === 'complete') window.setTimeout(greet, 260);
-  else window.addEventListener('load', function () { window.setTimeout(greet, 260); });
+     Everything below the field is unchanged: pull the top edge and the web
+     spins, exactly as far as the page is open. */
 })();
