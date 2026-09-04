@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import html
 import pathlib
+
+import build
 import re
 import sys
 
@@ -105,13 +107,55 @@ def main() -> int:
         if lang and alts and lang not in alts:
             problems.append(f"page is lang={lang} but lists no hreflang for itself   {rel}")
 
-    # Two languages sharing a title means one was never translated. Product and
-    # company names legitimately repeat, so only flag longer ones.
+    # A PAGE THAT WAS NEVER TRANSLATED HAS THE SAME TITLE AS ENGLISH, and that is
+    # the failure worth catching. What this used to do was flag any title shared
+    # by two "languages" longer than 25 characters, and it was wrong twice over.
+    #
+    # The threshold let both of the site's real collisions through at exactly 25
+    # — "Privacy — Spinne Software" and "Empresa — Spinne Software" — and would
+    # have let an untranslated seven-letter page title through with them: any one
+    # word plus " — Spinne Software" lands on 25 for a seven-letter word.
+    #
+    # And it read the language off the first path segment, `f.split("/")[0]`.
+    # ENGLISH LIVES AT THE ROOT, so `sparkle/index.html` was being treated as a
+    # page in a language called "sparkle". The code list is the authority instead.
+    #
+    # Two NON-English languages sharing a title is not the failure and is not
+    # flagged: es and pt-BR both genuinely call the company page "Empresa", and
+    # forcing them apart would make one of them wrong. Only agreement WITH ENGLISH
+    # is evidence of a page nobody touched.
+    #
+    # Both of these were found by measuring the live domain rather than by this
+    # file, which is the reason the test is now anchored to English instead of to
+    # a number somebody chose.
+    LANG_CODES = {l["code"] for l in build.LANGS} - {"en"}
+
+    # The words a language really does share with English. Italian uses "Privacy"
+    # for this page — its h1 is "Informativa sulla privacy", so the page is
+    # translated and only the title collides.
+    SAME_AS_EN = {("it", "privacy/index.html")}
+
+    def split_lang(rel):
+        """(code, path-within-that-language). English is the root, not a folder."""
+        head, _, rest = rel.partition("/")
+        return (head, rest) if head in LANG_CODES else ("en", rel)
+
+    en_title = {}
     for title, files in titles.items():
-        if len(files) > 1 and len(title) > 25:
-            langs = {f.split("/")[0] if "/" in f else "en" for f in files}
-            if len(langs) > 1:
-                problems.append(f"same title in {sorted(langs)}: {title!r}")
+        for f in files:
+            code, rest = split_lang(f)
+            if code == "en":
+                en_title[rest] = title
+
+    for title, files in titles.items():
+        for f in files:
+            code, rest = split_lang(f)
+            if code == "en" or (code, rest) in SAME_AS_EN:
+                continue
+            if en_title.get(rest) == title:
+                problems.append(
+                    f"title is identical to English, so the page is probably "
+                    f"untranslated: {f} {title!r}")
 
     indexed = len([p for p in pages if 'content="noindex' not in p.read_text(encoding="utf-8")])
     print(f"  {indexed} indexable pages, {sum(len(a[2]) for a in alternates.values())} hreflang links")
