@@ -1,17 +1,17 @@
 # Spinne Software
 
-> Hard technology, simple software. An Italian company building its own products: independent, built to be inherited, honest about what they do.
+> The best software is not the one that does the most things. It is the one where everything works the way it should. The first product is Sparkle.
 
-Spinne Software makes its own software instead of taking contracts. It is one engineer in Rome, and the order of the work is deliberate: build the machinery once, then build the products that stand on it. The ambition is stated plainly — products that hold their own against the best in their category, built by a company small enough to finish them.
+An Italian software company.
 
 ## Pages
 
-- [Spinne Software](https://spinnesoftware.com/): An Italian company that builds its own technology and makes it simple to use. What Spinne Software values, how it decides, and the first product: Sparkle.
-- [A video editor with an engine under it](https://spinnesoftware.com/sparkle/): Sparkle is a desktop video editor: GPU rendering, most of the AI on the machine the footage is already on, hardware encoding that adapts to your silicon. In private preview.
-- [Where the editor ends and the model begins](https://spinnesoftware.com/how-we-build/): How Sparkle is built: one document, one set of operations on it, and an assistant that is another caller rather than another program.
-- [A technology company that ships](https://spinnesoftware.com/about/): Why Spinne Software builds its own products rather than taking contracts, how the work is decided, and the diligence answers — including the ones that are no.
+- [The strength is in the structure](https://spinnesoftware.com/): An Italian software company. The best software is not the one that does the most, but the one where everything works as it should. The first is Sparkle.
+- [The machine takes the labour. You keep the cut.](https://spinnesoftware.com/sparkle/): A desktop video editor. Background removal, segmentation, depth, mask tracking and transcription run on your own machine. Generative work uses the cloud.
+- [The AI uses the same editor you use](https://spinnesoftware.com/how-we-build/): The assistant uses the editor's own tools, so anything it does is an ordinary change you can undo. What runs on your machine, and what needs the cloud.
+- [An independent Italian software company in Rome](https://spinnesoftware.com/about/): An independent Italian software company in Rome. We build and run our own products instead of contracts, and we are clear about what we don't have.
 - [Privacy — Spinne Software](https://spinnesoftware.com/privacy/): How spinnesoftware.com handles personal data. No cookies, no analytics, no third-party services, nothing sold or shared.
-- [Transcribing video without uploading it](https://spinnesoftware.com/answers/transcribe-video-without-uploading/): Whisper runs on your machine. Which Sparkle setting keeps the audio there, why Auto does not, and what the eight-minute threshold actually decides.
+- [Transcribing video without uploading it](https://spinnesoftware.com/answers/transcribe-video-without-uploading/): Whisper runs on your machine. Which Sparkle setting keeps the audio there, why Auto doesn't, and what the eight-minute threshold actually decides.
 
 ## Company
 

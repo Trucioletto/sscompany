@@ -102,6 +102,13 @@ def shape(node, path=""):
         yield path, "str"
 
 
+# Caratteri che il subset dei font (tools/i18n/fonts.py) non contiene.
+_FONT_SUBSET_GAP = {
+    "\u201e": "usa i caporali rivoltati »…«, che stanno in Latin-1",
+    "\u201a": "usa \u2018",
+}
+
+
 def main(argv) -> int:
     src = json.loads((CONTENT / f"{SOURCE}.json").read_text(encoding="utf-8"))
     src_shape = dict(shape(src))
@@ -188,6 +195,15 @@ def main(argv) -> int:
             found = sorted(set(invisible(tr)))
             if found:
                 problems.append(f"invisible {', '.join(found)}   {key}")
+
+        # Il subset dei font spedito non copre tutto il latino esteso. check.sh se ne
+        # accorge, ma solo sull'HTML già costruito: chi traduce lo scopre tardi, o non
+        # lo scopre. Il caso che si ripete è il tedesco, che vuole „…“ e le cui
+        # virgolette basse mancano dal subset; la convenzione scelta per questo sito è
+        # »…«, che sta in Latin-1. Meglio fallire qui, sulla sorgente.
+        for ch, hint in _FONT_SUBSET_GAP.items():
+            if ch in raw:
+                problems.append(f"fuori dal subset dei font {ch!r} — {hint}")
 
         # 7. What scripts does this file actually use? Reported, not judged —
         #    it is how you notice a Cyrillic 'а' hiding in a Latin word.

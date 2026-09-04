@@ -60,9 +60,18 @@ NEG = {
     "ru":      r"не|ни|нет|никогда|ничего|никто|без",
     "id":      r"tidak|bukan|tanpa|tak |belum|jangan|tiada|tak,|takkan",
     "zh-Hans": r"不|没|无|未|非|否|别|从不|并不",
-    "ja":      r"ない|なし|なけれ|なかっ|ありません|ません|ず|なく|いない|不|無|非|以外",
-    "ko":      r"않|없|아니|못|아닙|없습|않습|미|비",
-    "ar":      r"لا|ليس|لم|لن|ما |دون|غير|بلا|ولا|أي ",
+    # «いいえ» e «否» sono la parola giapponese per «no». Mancavano, e la pagina
+    # dice «Where the answer is no, we say that too»: la resa corretta
+    # 「答えが「いいえ」になるところも」 veniva segnalata come negazione persa.
+    "ja":      r"ない|なし|なけれ|なかっ|ありません|ません|ず|なく|いない|いいえ|否|不|無|非|以外",
+    # «안» e il negatore preverbale piu comune del coreano («안 됩니다»), e
+    # non combaciava con «아니»: in NFD la sua ᆫ finale e un jongseong, non
+    # il ᄂ iniziale di 아니. Lo spazio finale evita 안내, 안전 e simili.
+    "ko":      r"않|없|아니|안 |못|아닙|없습|않습|미|비",
+    # «ليس» si coniuga cambiando radice: «لسنا» (non siamo) e «لست» non
+    # contengono «ليس» come sottostringa, quindi sfuggivano. «تعذّر» e una
+    # negazione lessicale — «e risultato impossibile» — senza particella.
+    "ar":      r"لا|ليس|لسنا|لست|لسن|ليسوا|تعذّر|تعذر|لم|لن|ما |دون|غير|بلا|ولا|أي ",
     "ur":      r"نہیں|نہ |بغیر|بلا|کوئی|کبھی|نفی|بجائے",
     "hi":      r"नहीं|न |बिना|कोई|कभी|ना ",
     "bn":      r"না|নয়|নেই|ছাড়া|বিনা|কখনো|কোনো",
@@ -86,8 +95,14 @@ BANNED = {
     "*":       r"\b(?:revolutionary|cutting-edge|game-?changing|best-in-class)\b",
     "it":      r"\b(?:rivoluzionari[oa]|all'avanguardia|senza soluzione di continuità|potenzia)\w*",
     "es":      r"\b(?:revolucionari[oa]|vanguardia|sin fisuras|potenciar|empoderar)\w*",
-    "fr":      r"\b(?:révolutionnaire|de pointe|sans couture|sans faille)\w*",
-    "pt-BR":   r"\b(?:revolucionári[oa]|de ponta|sem emendas|sem costura|empoderar)\w*",
+    # `de pointe` is bounded: the \w* that inflects the others also swallowed the
+    # ordinary verb `pointer`, and a guard against marketing language has no
+    # business flagging "permet de pointer un modèle sur…".
+    "fr":      r"\b(?:révolutionnaire\w*|de pointe\b|sans couture\w*|sans faille\w*)",
+    # `de ponta` è delimitato per la stessa ragione del francese `de pointe`: lo \w*
+    # che flette gli altri termini si mangiava anche «de ponta a ponta», che vuol dire
+    # «da cima a fondo» e non ha niente a che vedere con il marketing.
+    "pt-BR":   r"\b(?:revolucionári[oa]\w*|de ponta\b(?!\s+a\s+ponta)|sem emendas\w*|sem costura\w*|empoderar\w*)",
     "de":      r"\b(?:revolutionär|nahtlos|wegweisend|bahnbrechend)\w*",
     "ru":      r"\b(?:революционн|беспроблемн|бесшовн|передов)\w*",
     "id":      r"\b(?:revolusioner|mulus tanpa|terdepan|canggih)\w*",

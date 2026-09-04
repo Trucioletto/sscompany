@@ -4,6 +4,16 @@
 
         <p class="lede">{{page.lede}}</p>
 
+        <p>{{page.intro_p2}}</p>
+
+        <p>{{page.intro_p3}}</p>
+
+        <p>{{page.intro_p4}}</p>
+
+        <p class="more">
+          <a href="https://sparkle.software">{{page.intro_link}}</a>
+        </p>
+
         <h2 id="problem">{{page.h2_problem}}</h2>
 
         <p>{{page.problem_p1}}</p>
@@ -12,13 +22,9 @@
 
         <p>{{page.problem_p3}}</p>
 
-        <p class="pull">{{page.pull}}</p>
+        <p>{{page.problem_p4}}</p>
 
-        <h2 id="preview">{{page.h2_preview}}</h2>
-
-        <p>{{page.preview_p1}}</p>
-
-        <p>{{page.preview_p2}}</p>
+        <p>{{page.problem_p5}}</p>
 
         <h2 id="ai" class="key">{{page.h2_ai}}</h2>
 
@@ -26,15 +32,63 @@
 
         <p>{{page.ai_p2}}</p>
 
-{{page.answer_link}}
-
         <p>{{page.ai_p3}}</p>
 
         <p>{{page.ai_p4}}</p>
 
-        <h2 id="short">{{page.rail_short}}</h2>
+        <p>{{page.ai_p5}}</p>
 
-        <p>{{page.rail_short_body}}</p>
+        <p>{{page.ai_p6}}</p>
+
+        <h2 id="local">{{page.h2_local}}</h2>
+
+        <p>{{page.local_p1}}</p>
+
+        <p>{{page.local_p2}}</p>
+
+        <ul role="list">
+          <li>{{page.local_items.0}}</li>
+          <li>{{page.local_items.1}}</li>
+          <li>{{page.local_items.2}}</li>
+          <li>{{page.local_items.3}}</li>
+          <li>{{page.local_items.4}}</li>
+        </ul>
+
+        <p>{{page.local_p3}}</p>
+
+        <p>{{page.local_p4}}</p>
+
+        <h2 id="cloud">{{page.h2_cloud}}</h2>
+
+        <p>{{page.cloud_p1}}</p>
+
+        <p>{{page.cloud_p2}}</p>
+
+        <p>{{page.cloud_p3}}</p>
+
+        <p>{{page.cloud_p4}}</p>
+
+        <h2 id="project">{{page.h2_project}}</h2>
+
+        <p>{{page.project_p1}}</p>
+
+        <p>{{page.project_p2}}</p>
+
+        <p>{{page.project_p3}}</p>
+
+        <p>{{page.project_p4}}</p>
+
+        <h2 id="control">{{page.h2_control}}</h2>
+
+        <p>{{page.control_p1}}</p>
+
+        <p>{{page.control_p2}}</p>
+
+        <p>{{page.control_p3}}</p>
+
+        <p>{{page.control_p4}}</p>
+
+        <p>{{page.control_p5}}</p>
 
         <h2 id="export">{{page.h2_export}}</h2>
 
@@ -42,37 +96,43 @@
 
         <p>{{page.export_p2}}</p>
 
-        <!-- The spec, in the flow and at full measure. It is the most checkable
-             thing on the page and it used to be 14px grey in a 264px gutter.
-             Same component as the identity table on /about/: a label and its
-             value, the label column as wide as the widest label THAT LANGUAGE
-             has, computed by the browser. -->
-        <h2 id="hood">{{page.rail_hood}}</h2>
+        <p>{{page.export_p3}}</p>
 
-        <dl class="identity">
-          <div><dt>{{page.spec.platforms}}</dt><dd>{{page.spec.platforms_v}}</dd></div>
-          <div><dt>{{page.spec.rendering}}</dt><dd>{{page.spec.rendering_v}}</dd></div>
-          <div><dt>{{page.spec.local_ai}}</dt><dd>{{page.spec.local_ai_v}}</dd></div>
-          <div><dt>{{page.spec.speech}}</dt><dd>{{page.spec.speech_v}}</dd></div>
-          <div><dt>{{page.spec.encoding}}</dt><dd>NVENC, Quick Sync, AMD, VideoToolbox</dd></div>
-          <div><dt>{{page.spec.formats}}</dt><dd>H.264, HEVC, AV1, DNxHR, HDR</dd></div>
-          <div><dt>{{page.spec.colour}}</dt><dd>{{page.spec.colour_v}}</dd></div>
-          <div><dt>{{page.spec.audio}}</dt><dd>{{page.spec.audio_v}}</dd></div>
-        </dl>
+        <p>{{page.export_p4}}</p>
 
         <h2 id="who">{{page.h2_who}}</h2>
 
         <p>{{page.who_p1}}</p>
 
+        <ul role="list">
+          <li><strong>{{page.who_items.0.name}}</strong> {{page.who_items.0.body}}</li>
+          <li><strong>{{page.who_items.1.name}}</strong> {{page.who_items.1.body}}</li>
+          <li><strong>{{page.who_items.2.name}}</strong> {{page.who_items.2.body}}</li>
+        </ul>
+
+        <h2 id="cost">{{page.h2_cost}}</h2>
+
+        <p>{{page.cost_p1}}</p>
+
+        <p>{{page.cost_p2}}</p>
+
+        <p>{{page.cost_p3}}</p>
+
+        <p>{{page.cost_p4}}</p>
+
         <h2 id="status">{{page.h2_status}}</h2>
 
         <p>{{page.status_p1}}</p>
+
+        <p>{{page.status_p2}}</p>
+
+        <p>{{page.status_p3}}</p>
       </article>
 
       <section class="close">
         <a class="cta" href="https://sparkle.software">
           <img src="/sparkle-mark-white.png" alt="" width="16" height="16" decoding="async">
-          {{cta.open_sparkle}}
+          {{page.request_access}}
         </a>
         <p class="cta-note">
           {{cta.or_write}}

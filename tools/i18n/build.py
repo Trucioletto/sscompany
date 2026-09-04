@@ -229,7 +229,7 @@ def hreflang_block(page_path: str, codes: list[str]) -> str:
     return "\n".join(lines)
 
 
-def switcher(current: str, page_path: str, codes: list[str]) -> str:
+def switcher(current: str, page_path: str, codes: list[str], label: str) -> str:
     """A <details> element, because the site runs no JavaScript and this is the
     only disclosure widget HTML gives you without any. Every entry links to the
     SAME page in another language, not to that language's home page — landing on
@@ -256,9 +256,14 @@ def switcher(current: str, page_path: str, codes: list[str]) -> str:
     # being a way out of the language you are stuck in.
     return (
         '      <details class="lang" translate="no">\n'
-        f'        <summary aria-label="Language — {cur["name"]}">'
+        f'        <summary aria-label="{label} — {cur["name"]}">'
         f'<span lang="{cur["code"]}">{cur["name"]}</span></summary>\n'
-        '        <ul>\n' + "\n".join(items) + "\n        </ul>\n"
+        # role="list", like every other list on the site whose markers the
+        # stylesheet removes. See the note under `.doc > ul:not([class])` in
+        # style.css: WebKit drops the list role when list-style is none, so a
+        # reader on VoiceOver is told neither that this is a list nor how many
+        # languages are in it — which is the one number that matters here.
+        '        <ul role="list">\n' + "\n".join(items) + "\n        </ul>\n"
         "      </details>"
     )
 
@@ -303,8 +308,9 @@ def jsonld(lang: str, page_key: str, page_path: str, data: dict) -> str:
          # made fifteen pages describe the same organisation differently under
          # the same identifier — a consumer merging the graph gets a conflict.
          # Language belongs on WebPage and WebSite, which carry inLanguage.
-         "description": "Italian software company building its own products. "
-                        "Sparkle, an AI video editor, is the first.",
+         "description": "Italian software company. The strength is in the "
+                        "structure: hard technology, simple software. Sparkle, "
+                        "an AI video editor, is the first product.",
          "vatID": "IT18636231005", "identifier": "REA RM-1797481",
          "email": "hello@spinnesoftware.com",
          "founder": {"@type": "Person", "name": "Manuel Luci"},
@@ -432,7 +438,7 @@ def build_page(lang: str, page_key: str, page_path: str, template_name: str,
         "locale": l["locale"],
         "canonical": url_for(lang, page_path),
         "hreflang": hreflang_block(page_path, codes) if indexable else "",
-        "switcher": switcher(lang, page_path, codes),
+        "switcher": switcher(lang, page_path, codes, data["nav"]["language"]),
         "page": page,
         "rtl_class": " is-rtl" if l["dir"] == "rtl" else "",
         "preload": preload_for(l["script"]),

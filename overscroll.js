@@ -147,6 +147,12 @@
 
   function centre(y) {
     doc.style.setProperty('--pull-u', (y / netScale).toFixed(2) + 'px');
+    /* The same distance, undivided. --pull-u is in the SVG's user units because
+       the thing that read it was a path inside a scaled viewBox; the loader is
+       an HTML element in the field and wants CSS pixels. Two properties rather
+       than one arithmetic expression in the stylesheet, because the scale is
+       known here and nowhere else. */
+    doc.style.setProperty('--pull-y', y.toFixed(2) + 'px');
   }
 
   function lift(css) {
@@ -171,6 +177,18 @@
      picture that completes only for the people who shove is a picture most
      people never see finished. */
   var FULL_AT = 0.85;
+  /* FAR ENOUGH TO MEAN IT. 52 of the 64 available: past the point a flick of
+     the wheel reaches, comfortably short of the ceiling nobody can pass. The
+     web is finished at 54 (0.85 of 64), so the ring closes just after the last
+     thread lands — the picture completes, then the page offers to reload. */
+  var ARM = 52;
+  /* The mesh coming apart and going back together: 280ms each way, plus the
+     120 the fourth group trails the first by, plus a little slack so the last
+     thread lands before the field starts moving. The stylesheet lays those two
+     numbers out and they have to agree with this one. */
+  var BREATHE_MS = 700;
+
+  var refreshing = false;
 
   var raw = 0;          /* what the wheel has asked for, before resistance. Only
                            ever positive: this edge is the top one. */
@@ -252,6 +270,10 @@
        the next reader has to prove is dead. */
     doc.style.setProperty('--pull-t', (p * BUILD_MS).toFixed(1) + 'ms');
     centre(y);
+    if (!refreshing) {
+      if (y >= ARM) doc.classList.add('pull-armed');
+      else doc.classList.remove('pull-armed');
+    }
     if (release) frame = window.requestAnimationFrame(paint);
   }
 
@@ -284,6 +306,14 @@
      see, forever. The early return that used to sit here left exactly that. */
   function settle() {
     idleTimer = 0;
+    /* Already going. Every other way a gesture can end — blur, touchcancel, a
+       wheel that stopped — arrives here too, and none of them should restart
+       the spring under a page that is on its way out. */
+    if (refreshing) return;
+    if (doc.classList.contains('pull-armed')) {
+      refresh();
+      return;
+    }
     if (!raw && !release) {
       done();
       return;
@@ -302,6 +332,46 @@
     }, SETTLE_MS + 80);
   }
 
+  /* LET GO PAST THE ARMING POINT.
+
+     The field is NOT sprung back. raw is left exactly where the reader put it
+     and no release is started, so travel() keeps returning the same opening and
+     paint() has nothing left to animate — the web holds, drawn, and the ring
+     spins on it until the navigation takes the document away. Springing home
+     first and reloading after would throw away the one frame that explains what
+     is about to happen. */
+  function refresh() {
+    refreshing = true;
+    doc.classList.remove('pull-armed');
+    doc.classList.add('pull-refreshing');
+    window.clearTimeout(rescue);
+    rescue = 0;
+
+    /* AND THEN IT CLOSES, WHICH IT DID NOT USED TO DO.
+
+       The first version held the field open, breathed, and called reload() from
+       there. So the field never closed: it stood open until the document went
+       away and then was simply not there. That is a cut, not an ending, and it
+       is what made the whole thing feel like it stopped rather than finished.
+
+       It closes on the ordinary spring instead — the same releaseFrom/release
+       pair every other let-go uses, so the field comes home on exactly the
+       curve a reader has already seen a dozen times, and the mesh unwinds
+       through its own frames on the way because paint() keeps writing --pull-t.
+       The navigation happens after that, against a closed edge, where it costs
+       nothing to look at. */
+    window.setTimeout(function () {
+      doc.classList.remove('pull-refreshing');
+      releaseFrom = resisted(raw);
+      raw = 0;
+      release = now();
+      if (!frame) frame = window.requestAnimationFrame(paint);
+      window.setTimeout(function () {
+        window.location.reload();
+      }, SETTLE_MS + 60);
+    }, BREATHE_MS);
+  }
+
   function done() {
     window.clearTimeout(rescue);
     rescue = 0;
@@ -310,7 +380,9 @@
     lift('');
     doc.style.removeProperty('--pull-t');
     doc.style.removeProperty('--pull-u');
+    doc.style.removeProperty('--pull-y');
     doc.classList.remove('is-pulling');
+    doc.classList.remove('pull-armed');
   }
 
   /* deltaMode is pixels on every trackpad and most mice, but a plain wheel can
@@ -323,6 +395,7 @@
   }
 
   function onWheel(e) {
+    if (refreshing) return;
     var d = pixels(e);
     if (!d) return;
 
@@ -381,13 +454,13 @@
   var touchOpen = false;
 
   function onTouchStart(e) {
-    if (e.touches.length !== 1) return;
+    if (refreshing || e.touches.length !== 1) return;
     touchOpen = window.scrollY <= 0;
     touchFrom = e.touches[0].clientY - unresisted(travel());
   }
 
   function onTouchMove(e) {
-    if (!touchOpen || e.touches.length !== 1) return;
+    if (refreshing || !touchOpen || e.touches.length !== 1) return;
 
     var next = e.touches[0].clientY - touchFrom;
     if (next < 0) {

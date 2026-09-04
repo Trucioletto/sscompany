@@ -89,7 +89,26 @@ TARGETS = [
     # ships that a heading cannot use.
     ("fraunces-latin",  "Fraunces.ttf", LATIN,
      {"wght": 600, "opsz": 48, "SOFT": 40, "WONK": 1}, {}),
+    # The italic is a SEPARATE upstream file — Fraunces has no ital axis, so no
+    # amount of instancing the roman produces one, and font-synthesis is off site
+    # wide precisely so the browser does not shear one out of it (see the comment
+    # at the top of style.css). It carries one string, the motto, on the home page
+    # of fifteen languages: same pins as the roman so the two faces sit at the
+    # same optical size and weight, and the same LATIN subset, which is 35 KB.
+    #
+    # Fetch Fraunces-Italic[SOFT,WONK,opsz,wght].ttf from
+    # github.com/undercasetype/Fraunces, rename it Fraunces-Italic.ttf, and put it
+    # beside the other sources. Until it is there this target is skipped rather
+    # than failing the run.
+    ("fraunces-latin-italic", "Fraunces-Italic.ttf", LATIN,
+     {"wght": 600, "opsz": 48, "SOFT": 40, "WONK": 1}, {}),
 ]
+
+# Sources whose absence is not an error. Everything the site ships today is built
+# from Inter.ttf and Fraunces.ttf; the italic carries one string and is a choice,
+# so a machine that has only the two required files can still regenerate the
+# subsets it needs instead of failing on the one it does not want.
+OPTIONAL_SOURCES = {"Fraunces-Italic.ttf"}
 
 
 def codepoints(ranges) -> set[int]:
@@ -128,6 +147,9 @@ def build(src_dir: pathlib.Path) -> int:
     for name, source, ranges, pins, limits in TARGETS:
         src = src_dir / source
         if not src.exists():
+            if source in OPTIONAL_SOURCES:
+                print(f"  skipped {name}: {source} not in {src_dir}")
+                continue
             print(f"  MISSING source: {src}", file=sys.stderr)
             return 1
 
@@ -176,16 +198,20 @@ def build(src_dir: pathlib.Path) -> int:
         still_variable = "fvar" in TTFont(dest)
         family = "Inter" if name.startswith("inter") else "Fraunces"
         weight = "400 600" if family == "Inter" else "600"
-        faces.append((family, weight, f"fonts/{name}.woff2", unicode_range(dest)))
+        # The style comes from the source file, not from a flag: a face built from
+        # Fraunces-Italic.ttf declared font-style: normal would be a second roman
+        # as far as the browser is concerned, and the italic would never be picked.
+        style = "italic" if "Italic" in source else "normal"
+        faces.append((family, style, weight, f"fonts/{name}.woff2", unicode_range(dest)))
         print(f"  {name:<18} {dest.stat().st_size / 1024:6.1f} KB  "
               f"{len(keep):>4} glyphs  {'variable' if still_variable else 'static'}")
 
     print("\n--- @font-face block for style.css "
           "(unicode-range read back from each binary) ---\n")
-    for family, weight, path, urange in faces:
+    for family, style, weight, path, urange in faces:
         print("@font-face {")
         print(f'  font-family: "{family}";')
-        print("  font-style: normal;")
+        print(f"  font-style: {style};")
         print(f"  font-weight: {weight};")
         print("  font-display: optional;")
         print(f'  src: url("{path}") format("woff2");')

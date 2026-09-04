@@ -2,8 +2,12 @@
 # Keep it local: a Disallow rule would only advertise the path.
 README.md
 
-# Local dev helper, not part of the site
+# Local dev helpers, not part of the site. anteprima-telefono.sh serves a copy
+# of the TRACKED files only, on the LAN, so the phone sees what the domain would
+# serve and not the working tree — which is the whole reason it exists and the
+# reason it must not become part of the working tree it is checking.
 avvia-sito.sh
+anteprima-telefono.sh
 
 # Internal strategy notes. Every file in the repo root is served from the public
 # domain, so this must never be published.
@@ -54,3 +58,15 @@ CONTENT-AUDIT.md
 # sitemap entry. The underscore prefix is the convention; keep using it.
 _*.html
 _*.js
+
+# Riscrittura dei testi, settembre 2026: il documento di consegna, il registro di
+# lavorazione e i due dump del testo pubblicato. Stessa regola di GEO-STRATEGY.md e
+# CONTENT-AUDIT.md — la root è servita dal dominio pubblico, e questi quattro sono
+# note interne. RISCRITTURA-TESTI.txt in particolare cita percorsi e numeri di riga
+# del repo Sparkle, i piani tariffari non pubblicati, difetti aperti e un proxy che
+# custodisce chiavi di fornitori: pubblicarlo sarebbe molto peggio che inutile.
+RISCRITTURA-TESTI.txt
+RISCRITTURA-PROGRESS.md
+VOCE-PROGRESS.md
+TESTI-PAGINE.md
+TESTI-PAGINE-TUTTE-LE-LINGUE.txt

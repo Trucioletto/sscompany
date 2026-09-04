@@ -126,6 +126,69 @@
   --s-6: 3rem;
   --s-7: 4rem;
   --s-8: 6rem;
+
+  /* TWO CURVES, BECAUSE THERE ARE TWO DOMAINS, AND ONE CURVE ACROSS BOTH WAS
+     THE DEFECT.
+
+     A transition runs on TIME: the browser owns the clock, the reader waits, and
+     a front-loaded curve reads as the interface answering quickly. A view()
+     animation runs on SCROLL: the reader owns the clock, and every one of its
+     frames is a frame the reader asked for by moving the wheel. Front-loading
+     that is not responsiveness, it is amplification — a small scroll produces a
+     large movement, the block lunges as it enters the range and then crawls the
+     rest of it.
+
+     Both were briefly set to 0.22, 0.75, 0.28, 1, which is 69% of the distance
+     in the first quarter. On the 24px rise below that is 16.6px of the 24 spent
+     before the reader has scrolled a quarter of the range. It read as a snap,
+     which is what it was.
+
+     --ease-scroll: 30% at the first quarter, 67% at half, 93% at three
+     quarters. Against the `ease-out` keyword this file used before (38 / 68 /
+     91) it is SLOWER off the mark and lands in the same place — the entry is
+     calm and the arrest is kept. Against linear (25 / 50 / 75) it still has an
+     arrest at all, which is the objection the note further down raises to
+     linear and which stands.
+
+     --ease: 48% at the first quarter, 84% at half. Front-loaded, because on a
+     100-to-200ms transition it should be, and gentler than what it replaces.
+
+     What the pair buys, on the one gesture a reader watches most: the first
+     quarter of a section's scroll range now moves the heading 2.4px of its 8,
+     against 16.6px of 24 before.
+
+     AND THE TEST THAT PICKED --ease-scroll IS SLOPE, NOT DISTANCE.
+
+     Jerk in a scroll-driven animation is the ratio between how fast the block
+     moves and how fast the reader is scrolling, so the number that matters is
+     the curve's gradient, and the number that matters most is its gradient in
+     the first frames — the moment the block appears is the moment a reader has
+     no expectation to violate except the speed of their own hand. Measured
+     across each candidate at 4000 samples:
+
+         curve                        at entry    peak (where)
+         0.22, 0.75, 0.28, 1  (old)     3.41x     3.41x  at  1%
+         ease-out (before that)         1.69x     1.72x  at  0%
+         0.45, 0.45, 0.55, 1  (this)    1.01x     1.52x  at 39%
+         linear                         1.00x     1.00x  at 100%
+
+     The two rejected curves share a shape: their fastest instant IS their first
+     instant, so the block bolts on the frame it appears and decelerates for the
+     rest of the range. This one enters at 1.01x — the heading moves at exactly
+     the rate the reader is scrolling at the moment it becomes visible, claiming
+     no speed of its own — and takes its peak in the middle, where the eye is
+     already tracking it. Slower curves were tried (0.5, 0.35, 0.55, 1 enters at
+     0.72x) and they trade a calmer entry for a HIGHER mid-range peak, 1.60
+     against 1.52: the block hangs back and then has to catch up.
+
+     Checked on screen as well as in arithmetic, at a matched entry position:
+     under the old curve the heading was already 60% resolved and its rule fully
+     drawn while the block was still in the bottom quarter of the window — which
+     is the exact failure the range note below spends four paragraphs fixing.
+     Under this one the gesture is still running as the block climbs into the
+     reading zone, which is where the ranges were set to put it. */
+  --ease-scroll: cubic-bezier(0.45, 0.45, 0.55, 1);
+  --ease: cubic-bezier(0.33, 0.6, 0.4, 1);
   /* The one step nothing uses. Kept, because a scale with a hole where its top
      step should be is worse than a scale with an unused top step — but said out
      loud, so it is a decision rather than a leftover. */
@@ -165,6 +228,56 @@
      and 624 clears that with the language menu's own 24px margin still on it. */
   --gutter: 1.5rem;
   --page: 42rem;
+
+  /* AND THE MEASURE IS NO LONGER THE CONTAINER, BECAUSE THE TEXT IS CENTRED.
+
+     The note above and the note under .page both end "the container IS the
+     measure", and the second one prices the trade: "624px sets this site's
+     prose at about 68 characters". That price was quoted for text set flush to
+     a start edge. It is not the price centred text pays, and the text is
+     centred now.
+
+     Counted rather than divided out of a font size — a Range walked over every
+     text node in every body paragraph, the lines grouped by the top of their
+     client rects, the last line of each paragraph dropped because it is short
+     by definition. Characters per full line at the 624px container:
+
+                        median   longest
+         /it/             74       81
+         /it/about/       76       80
+         /de/about/       72       78
+         /about/ (en)     73       76
+
+     Not 68. Every one of these is at or past the ceiling of the 45-75 band the
+     note quotes, and that band is quoted for FLUSH text. Centred text is given
+     45-55 by every source that separates the two, for a mechanical reason: the
+     return sweep has no edge to land on, so the eye has to search for the start
+     of the next line, and the distance it searches is the rag — which is half
+     the line-length variance on each side and grows with the measure.
+
+     The same four samples capped at 448px: median 51, 51, 49, 53; longest line
+     56 to 60. That is the middle of 45-55 in all four rather than the edge of
+     it, and the spread between the locales is 4 characters against the 4 they
+     spread at the container — the cap does not favour a language.
+     464px was measured too and gives 52, 55, 52, 53 — inside the band
+     but sitting on its ceiling, so a single content edit walks back out of it.
+     432px gives 49, 50, 48, 49 and buys nothing the 448 does not already have
+     while costing another line of depth per paragraph.
+
+     Measured rag on /it/, standard deviation of full-line width: 31.8px at 624
+     and 29.7px at 448. Nearly the same absolute figure — but a centred line
+     splits its rag between two edges, so what the returning eye searches is
+     half of it against a line that is 176px shorter. 15.9px of search on 624px
+     of travel becomes 14.9px on 448px.
+
+     THIS IS NOT --page AND MUST NOT BECOME IT. The container has a floor the
+     prose does not: the masthead's three atoms need 586px in Indonesian, so
+     narrowing the box narrows the masthead onto two rows in the longest of the
+     fifteen languages. One box, one gutter, one inline-start edge — all still
+     true. What is capped is the running text inside it, and only that; the
+     title, the quote, the lockup, the values grid, the table and the button
+     keep the full 624 and keep the composition the width it was. */
+  --measure: 28rem;
 }
 
 /* NO LAYOUT BREAKPOINT AT ALL, WHICH IS THE POINT.
@@ -216,6 +329,27 @@ body {
   color: #0e1220;
   color: var(--text);
   font-size: 1.0625rem;
+  /* 1.647 STAYS, AND THE MEASURE IS WHY IT DID NOT HAVE TO MOVE.
+
+     Centred text wants more leading than flush text — it has no start edge, so
+     the eye needs the lines further apart to be sure which one it is landing
+     on. Leading is not read in ems, though; it is read against the length of
+     the line it is separating. 1.647 x 17px computes to 28.0px on the rendered
+     page, and against the two measures that is:
+
+         624px container   28.0 / 624 = 4.49%
+         448px --measure   28.0 / 448 = 6.25%
+
+     Narrowing the line by 28% raised the leading the reader actually perceives
+     by 39%, with no declaration and no second number to keep in step.
+
+     Adding leading on top of that was tried at 1.75, which computes to 29.75px.
+     A paragraph break here is the leading plus the 24px margin under `p`, so
+     the interval between two paragraphs against the interval between two lines
+     of one runs 52.0 : 28.0 at 1.647 and 53.8 : 29.8 at 1.75 — 1.86 against
+     1.81. Loosening the line loosens the block toward the break that is meant
+     to separate blocks, and on /it/how-we-build/ the four-paragraph opening
+     read as seven separate sentences at 1.75 and as four paragraphs at 1.647. */
   line-height: 1.647;
   min-height: 100vh;
   min-height: 100dvh;
@@ -467,7 +601,7 @@ main:focus {
    DEVICE pixels while reporting layout sizes unscaled, so on a 2x display every
    thread is laid to exactly half its length — invisible to getBoundingClientRect
    and getScreenCTM alike, and visible only in a screenshot. */
-.pull-net path:not(.pull-word) {
+.pull-net path {
   fill: none;
   /* Not #ffffff. Pure white on the brand blue is a harder edge than anything
      else in the composition, and it made the mesh read as wire laid over the
@@ -489,11 +623,6 @@ main:focus {
    field itself read as a surface rather than a band of colour. */
 .pull-l1 { transform: none; }
 
-/* Every thread EXCEPT the words. `.pull-l1 path` is (0,1,1) and `.pull-word`
-   is (0,1,0), so without the exclusion the layer's weight silently won and the
-   motto's own stroke-opacity below never applied — declared, ignored, and
-   invisible in a diff. The layer sets what a thread looks like; the one path
-   that is not a thread says so here rather than by out-specifying it. */
 /* THE NET SITS BACK, so that the words can sit forward.
 
    This was 1px at 0.42 and the phrase was #a9bcff — the mesh's own tint. Two
@@ -513,7 +642,10 @@ main:focus {
    being quieter than the words and started being faint, which reads as a
    defect rather than as depth: the distance between the two planes has to come
    from BOTH of them being where they belong, not from emptying one out. */
-.pull-l1 path:not(.pull-word) { stroke-width: 0.8; stroke-opacity: 0.32; }
+/* I valori della versione online: 1px a 0.42. Erano stati portati a 0.8/0.32
+   per far stare le parole davanti alla rete. Tolte le parole, la rete torna
+   a essere la cosa che si guarda, e torna al suo peso. */
+.pull-l1 path { stroke-width: 1; stroke-opacity: 0.42; }
 
 /* At rest every line is retracted into nothing, and the net draws itself as the
    field opens: the longest runs of mesh go down first and the shortest last,
@@ -537,104 +669,6 @@ main:focus {
     stroke-dashoffset: 0;
   }
 }
-
-/* THE MOTTO, AND THE WEAVE GOES BEHIND IT.
-
-   Five versions came before this one and tools/i18n/motto.py records what each
-   got wrong. The last of them is the one worth reading here, because it looked
-   right and was not.
-
-   The words were filled and the mesh was cut away around them, by a mask that
-   drew the outlines six times at widening strokes: an opening in the weave,
-   fading out as it reached the phrase. It photographs well and it has two
-   faults that only the running page shows.
-
-   It overshoots. However tight the innermost stroke, the clearing is the
-   letters DILATED, and a fade that starts before the ink means threads are
-   already dimming a few pixels out — so the weave stops short of the words all
-   the way round and the two read as separate objects, one laid over the other.
-   Precision here is not a small halo, it is no halo.
-
-   And the mask was static while the words are not. The phrase fades in from
-   330ms of a 700ms scrub; the mask cut its holes from the first frame. Between
-   200 and 330ms — a third of the gesture, and the part where the weave is still
-   spinning — the field carried a word-shaped void with nothing in it, threads
-   broken along a path a reader could see the shape of and not the reason for.
-
-   Both go away by deleting the mask. The letters are opaque and painted after
-   the mesh, so they occlude it THEMSELVES: exactly their own outline, nothing
-   beyond it, and the occlusion arrives on precisely the frames the letters do
-   because it IS the letters. While they fade in, the threads behind show
-   through them and the words come up out of the weave rather than punching a
-   hole for themselves first.
-
-   What is left is one <path> and no mask, no <use>, no defs — see motto.py. */
-.pull-word {
-  /* Solid, and one tone above the threads. It was the mesh's own #a9bcff,
-     which put the phrase at the same distance as the field it lies in — the
-     flattest possible reading of the thing the field is for.
-
-     AND ONE TONE, NOT THREE. This went to #dfe6ff with a drop shadow under it
-     and that was too much: the words stopped being nearer than the net and
-     started being louder than it, which is a different relationship and a
-     cheaper one. The shadow went with it. A shadow states that there are
-     planes; at this size, on this ground, the statement is louder than the
-     fact, and the fact is enough — #c6d2ff against threads at 0.32 places the
-     phrase in front without anything in the picture announcing that it does.
-     It also leaves the letters their own edges, which a blur takes away. */
-  fill: #c6d2ff;
-  stroke: none;
-  shape-rendering: geometricPrecision;
-
-  /* CENTRED IN WHAT CAN BE SEEN, NOT IN WHAT EXISTS.
-
-     motto.py draws the line at the middle of the strip when it is fully open —
-     y 64 of a 96 field, because the pull is 64 and the top 32 is margin. That
-     is correct at the end of the gesture and wrong for all of it: the visible
-     strip is only as deep as the page has been pulled, so its middle sits at
-     96 - d/2 and travels UP as the field opens. Left fixed, the words came in
-     hard against the top edge and slid down into place — measured at a 38px
-     pull, the line was clipped through its ascenders; at 24 it was not on
-     screen at all while the mesh below it already was.
-
-     So the type follows the middle: 32 - d/2 is the distance from where it is
-     drawn to where the middle currently is, zero at a full pull by
-     construction. --pull-u is that d in the SVG's own units, written by
-     overscroll.js each frame — see the note over `centre` there for why it is
-     not in pixels.
-
-     The fallback is 64px, which resolves the whole expression to zero. That is
-     the at-rest case, where nothing here is visible anyway, and it means a
-     reader whose script never runs gets the drawn position rather than a line
-     thrown 32px down the field. */
-  transform: translateY(calc(32px - var(--pull-u, 64px) / 2));
-
-  /* At rest, gone — the same at-rest state the mesh has, and for the same
-     reason: nothing in this field exists until the reader opens it. A fill
-     cannot be laid down the way a stroke can, so this arrives by opacity while
-     the threads around it draw themselves; both are scrubbed by the same
-     --pull-t and both finish on the same frame, so the words settle as the last
-     thread lands rather than before or after it. */
-  opacity: 0;
-}
-
-/* The counters, in the field's own colour, painted before the letters. Same
-   class as the type above it, so every rule that governs the phrase — the
-   exclusions from the mesh's stroke, the at-rest opacity, the fade — governs
-   this too and there is nothing to keep in step. Only the fill differs, and it
-   is the ground rather than the ink because a counter is a hole: what should
-   show through it is the field, not a thread. */
-.pull-word-counters {
-  fill: #4563ff;
-  fill: var(--brand);
-}
-
-@keyframes pull-word-in {
-  to {
-    opacity: 1;
-  }
-}
-
 
 /* Each plane comes to rest out of its own depth on its own clock, and slides
    sideways by its own amount on the way, so the planes shear past each other
@@ -678,17 +712,75 @@ main:focus {
 .is-pulling .pull-g1 { animation-delay: calc(95ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g2 { animation-delay: calc(185ms - var(--pull-t, 0ms)); }
 .is-pulling .pull-g3 { animation-delay: calc(290ms - var(--pull-t, 0ms)); }
-.is-pulling .pull-word { animation: pull-word-in 360ms linear calc(330ms - var(--pull-t, 0ms)) both; }
 
 /* LAST, and it has to be last: the animation shorthand above resets
    play-state along with everything else, so a paused declaration written
    before it is quietly turned back on. Nothing here runs on its own clock —
    --pull-t is the only thing that moves it. */
 .is-pulling .pull-layer,
-.is-pulling .pull-net path,
-.is-pulling .pull-word {
+.is-pulling .pull-net path {
   animation-play-state: paused;
 }
+
+
+/* THE WEB IS THE LOADING INDICATOR, AND IT REBUILDS ITSELF.
+
+   A spinner lived in this field for a while — four versions of one — and every
+   one was an object placed ON the field. The field already does the only thing
+   an indicator has to do. Released past the arming point, the mesh unwinds and
+   then strings itself again, in the four groups it was strung in the first
+   time, and only then does the page go.
+
+   THREE THINGS WERE WRONG WITH THE FIRST ATTEMPT AT THIS, and only one of them
+   was the property.
+
+   1. `linear`, looping. A thread laid at constant speed is right; a thread that
+      reverses at constant speed is a CORNER, and sixty of them turning together
+      at the same instant reads as a stutter whether or not a frame was dropped.
+      ease-in-out makes each end a turn instead of a bounce.
+   2. `infinite`. It ran until the navigation cut it, so what a reader saw was
+      an arbitrary slice of a loop. Two iterations — unwind, rebuild — is a
+      sentence with a full stop, and the field closes on the end of it.
+   3. The cost. stroke-dashoffset is a PAINT property: every frame re-rasterises
+      the whole SVG on the main thread. That is survivable for the length of one
+      gesture, which is what the pull is, and it is what the pull has always
+      done. It is not survivable as an endless loop next to a pending
+      navigation, which is what this used to be. Bounded, it is the same work
+      the pull already does and no more.
+
+   The middle attempt — fading the whole <svg> — was cheap and smooth and said
+   the wrong thing: a web that fades is a picture being hidden, not a web being
+   spun. The point of this field is that it gets BUILT. */
+.pull-refreshing .pull-net path {
+  /* alternate-reverse, so the first half is the UNWIND. At the moment of
+     release the mesh is already strung — the reader put it there — and a
+     forward animation would begin at its from-frame, blanking the field on the
+     frame the class lands. Reversed, it comes apart from where it stands.
+     Two iterations: apart, then together. */
+  animation: pull-lay 280ms ease-in-out 2 alternate-reverse both;
+  animation-play-state: running;
+}
+
+/* The wave the pull itself uses, tightened. Longest runs first and shortest
+   last is what reads as a web being strung rather than a picture appearing. */
+.pull-refreshing .pull-g0 { animation-delay: 0ms; }
+.pull-refreshing .pull-g1 { animation-delay: 40ms; }
+.pull-refreshing .pull-g2 { animation-delay: 80ms; }
+.pull-refreshing .pull-g3 { animation-delay: 120ms; }
+
+/* FAR ENOUGH TO LET GO, WITH THE SPINNER GONE. The arming point had no signal
+   of its own once the mark was removed, so the mesh carries it: the threads
+   come up half a stop, which is the field's only vocabulary and the same move
+   that separated its planes when there were two.
+
+   stroke-opacity and not stroke-dashoffset, because the offset is what the
+   pull itself writes — an armed rule cannot overrule a running animation on
+   the same property, and this file has the measurement to prove it a few
+   rules above. */
+.pull-armed .pull-l1 path {
+  stroke-opacity: 0.62;
+}
+
 
 /* flex-wrap, because without it the nav has nowhere to go. Measured at 320px:
    the three labels plus their gaps need 306px against the 184px left over after
@@ -960,10 +1052,32 @@ main:focus {
    the opening one and, with the footer's own 32px of padding under the rule,
    about 130px of white between the last sentence and the first word of the
    colophon: a fifth of the screen. */
+/* THE CLOSING INTERVAL IS 32 AND IT IS NOT THE OPENING ONE.
+
+   This was 64 on a phone and 96 from 40rem up, against an opening of 48 and 64
+   — more air at the foot than at the head, which is the ordinary convention for
+   a page that ends in a sentence. Every page here except /404 ends in `.close`
+   instead: a band opened by its own hairline and closed by the footer's. Inside
+   that band the numbers were 33 above the button and 96 below the note, a ratio
+   of 1 : 2.91 — the one action on the page pinned to the top of its container
+   with a void under it. Measured on /it/ at 620px, where the old value is 64,
+   it was still 1 : 1.94 and still read as a block that had been pushed up
+   rather than placed.
+
+   32 makes it 33 : 32 — the 1px is the border the first number includes — so
+   the band is symmetric about its ink at every width, and the pair of hairlines
+   reads as a container rather than as a lid with a gap under it.
+
+   The 96 was defended here as "the whole gap between the end of the page and
+   the footer's rule", and that argument is sound for a page whose last line is
+   prose. It is not what any page does: the footer's rule is drawn, and it
+   carries 32px of the footer's own padding under it, so the boundary the 96 was
+   spending white to build was already drawn twice over. One number now, at
+   every width — the breakpoint override below is gone with it. */
 main {
   flex: 1;
   padding-top: var(--s-6);
-  padding-bottom: var(--s-7);
+  padding-bottom: var(--s-5);
   animation: fade-in 0.3s ease-out both;
 }
 
@@ -980,6 +1094,89 @@ main {
   margin-bottom: 0;
 }
 
+/* THE COLUMN IS CENTRED, SO THE TEXT IN IT IS TOO.
+
+   One declaration for the whole of the article, not one per element: every block
+   it holds — headings, prose, the lockup, the quote, the feature grid, the
+   closing button — sits on the same axis, and a rule per block is how that axis
+   quietly stops being one axis. `.close` is a sibling of `.doc` rather than a
+   child, so it is named here or it keeps the old alignment on its own.
+
+   What this alignment costs is the left edge: ragged-both prose has no spine for
+   the eye to return to, so it is read line by line rather than scanned, and at
+   624px that cost was being paid at 72-76 characters a line — measured, four
+   locales, in the --measure note at the top of this file. It is paid at 49-53
+   now, because the block below caps the running text. Everything after this
+   reads as a consequence of the alignment. The quote's rule moves above the
+   line and shortens, the prose lists lose their markers altogether, and the
+   identity table stops being two tracks, because each of those devices was
+   built to hang off an edge this alignment no longer has. */
+.doc,
+.close {
+  text-align: center;
+}
+
+/* THE PROSE IS CAPPED. THE COMPOSITION IS NOT.
+
+   --measure at the top of this file has the counts; this is the list of what
+   gets it and the argument for the list. The rule is one property applied to
+   the blocks that are RUNNING TEXT — sentences the reader reads left to right
+   and then finds the next line of — and to nothing else.
+
+   What is deliberately NOT here, and why. h1, h2 and .key are two to nine
+   words set at 23-64px: measured on /it/, the longest line any of them draws is
+   the h2 "L'intelligenza deve aiutarti, non sostituirti." at 542.5px and the h1
+   at 438.3px, so a cap at 448 would change nothing except on the one heading
+   long enough to need the room, which is the heading that should have it.
+
+   `.pull` is a `p` and carries a class, so it has to be excluded BY NAME or
+   this selector takes it. It was, for one round, and the quote on /it/ went
+   from two lines to three: the longest line fell from 574.9px to 437.6px and
+   "Il lavoro creativo merita il tuo tempo. / Quello che gli sta intorno, no."
+   became "Il lavoro creativo merita il / tuo tempo. Quello che gli sta /
+   intorno, no." A
+   three-line pull quote is a paragraph in a display face, and `.pull::before`
+   below sizes its mark against "the quote's two lines" — a premise this would
+   have quietly falsified. The quote is one sentence, once per page, at 28-34px.
+   The thing a measure is for does not happen to it.
+
+   .lockup, .cta and .home-what are objects rather than sentences. .toc is a
+   two-column grid of twelve links. The masthead and the footer are not in .doc
+   at all. Capping any of them would narrow the page; capping the prose narrows
+   the line, and those are different things.
+
+   88px of white is added on EACH side of a paragraph, inside a container that
+   is itself centred. That is the symmetric case the .page note argues for; the
+   asymmetric 80px it argues against was 80 on one side and 0 on the other.
+
+   Above 496px of viewport this rule is what sets the line. Below it the column
+   (viewport - 48) is already narrower than 448 and the cap is inert, so the
+   phone composition is untouched and there is no width at which the page
+   changes shape — the same claim the no-breakpoint note at the top makes.
+
+   `.doc p` rather than `.doc > p`: a paragraph inside .summary or .answer is
+   running text too. `.lede` is excluded and keeps the container — at 20-26px it
+   already measures 45-46 characters on /it/ and 51-60 on /it/privacy/, inside
+   the band without help, and 448px would take the home page's standfirst to 40
+   and make the one block that is meant to open the page the narrowest thing on
+   it. `.close` holds exactly one paragraph — `.cta-note`, a row of contact
+   links — and the note beside the panel rules says why it is capped by nothing.
+
+   The two panel lists, .summary and .answer, are capped in their own sections
+   further down and not here. They set `margin: 0` under a (0,1,1) selector, and
+   this rule is (0,1,1) on them too — equal specificity, so source order
+   decides, and their `margin: 0` comes later and wins. Left here the box was
+   capped and NOT re-centred: measured on /it/privacy/, the digest's five items
+   centred on x=660 while the panel's own label centred on x=735, 75px off the
+   only axis this page has. The declarations are placed after the rule they have
+   to beat instead of being given a heavier selector. */
+.doc p:not(.lede):not(.pull),
+.doc > ul:not([class]),
+.doc > ol:not([class]) {
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+}
+
 /* Same trap, smaller: a .footer-col is a grid item, so its last paragraph's 8px
    is added to the colophon's 32px rather than collapsing into it. */
 .footer-col > *:last-child {
@@ -989,7 +1186,6 @@ main {
 @media (min-width: 40rem) {
   main {
     padding-top: var(--s-7);
-    padding-bottom: var(--s-8);
   }
 }
 
@@ -1165,6 +1361,28 @@ p {
   color: var(--text);
   margin-bottom: var(--s-4);
   /* Pulls a one-word last line back up. Ignored where unsupported. */
+  /* PRETTY AND NOT BALANCE, AND AT 448px THAT GOT CLOSER THAN IT WAS.
+
+     A shorter measure buys orphans. Counted over the 36 paragraphs of /it/,
+     last lines under 12 characters:
+
+         624px  default 3   pretty 0   (shortest last line: 7, then 13)
+         448px  default 9   pretty 5   (shortest last line: 5, then  7)
+
+     So the cap trades three orphans for five and pretty is doing more work than
+     it was, not less. `balance` removes all five — and takes the measure with
+     them. Measured on the same 36 paragraphs at the same 448px cap: the mean
+     full line falls from 407.9px to 330.1px, which is 51 characters down to
+     about 40, below the band this whole file just moved the prose into; and the
+     deviation of line width rises from 29.7px to 62.1px, because balance
+     equalises the lines WITHIN a paragraph and therefore gives every paragraph
+     a different width. A column whose edges change from block to block is not a
+     column. Balance is for blocks that are a shape — h1, .home-what, and the
+     two panel lists near the end of this file, each of which says so.
+
+     The five that remain are short last lines in centred text, where every last
+     line is short and centred. In a flush-left column a five-character last
+     line leaves a hole in the right margin; here it is the bottom of a taper. */
   text-wrap: pretty;
 }
 
@@ -1261,7 +1479,7 @@ a:hover {
      element's upright space: listed after, a 3px push would travel along the
      rotated axis and the chevron would drift downward as well as forward. */
   transform: translateY(-2px) rotate(-45deg);
-  transition: transform 0.18s ease;
+  transition: transform 0.18s var(--ease);
 }
 
 .more a:hover::after {
@@ -1310,7 +1528,7 @@ a:hover {
   display: block;
   height: 2.25rem;
   width: auto;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s var(--ease);
 }
 
 .lockup a:hover img {
@@ -1329,27 +1547,107 @@ ol {
   color: var(--text);
   margin: 0 0 var(--s-4);
   padding-inline-start: 0;
-  list-style-position: outside;
-}
-
-/* Except where there is no padding to hang into. */
-@media (max-width: 30rem) {
-  ul,
-  ol {
-    padding-inline-start: var(--s-4);
-  }
+  /* `outside` puts the marker in a hanging indent measured from the box edge —
+     the correct place for a list whose lines all start at one edge, and nowhere
+     at all for one whose lines are centred: the item's box is the full measure,
+     so the marker hangs at the far left with up to 300px of gap between it and
+     the centred line it belongs to. `inside` was the answer to that and it is
+     not the answer either; see the block under `li` below, which measures what
+     it actually did and takes the markers off. This declaration is kept because
+     `outside` is still the worse of the two wherever a marker survives — every
+     classed list in this file sets `list-style: none` of its own (.home-what,
+     .toc ul, .summary ul, .answer ul, .lang ul) and the block below takes the
+     unclassed ones off too, so today that is nowhere; the day somebody adds a
+     list it is `inside` it falls back to. The 30rem query that used to sit here gave
+     the markers padding to hang into on a phone; there is no hanging indent
+     left to give room to. */
+  list-style-position: inside;
 }
 
 li {
   margin-bottom: var(--s-1);
 }
 
+/* NO MARKERS ON A CENTRED LIST, BECAUSE A MARKER CANNOT BE CENTRED.
+
+   `inside` puts the marker in the first line box, so the line that gets
+   centred is marker-plus-text and the TEXT lands half a marker off the axis.
+   Measured on /it/sparkle/ at 1470px, where the article's axis is x=735: every
+   continuation line centres on 735.0 exactly, and every FIRST line centres on
+   746.5. 11.5px, on every item, in the one composition whose whole argument is
+   that there is a single axis. Cloning an item with `list-style: none` puts it
+   back on 735.0, which is where the 23px marker box came from.
+
+   The second defect is the one you see first. The marker sits at the start of
+   its own line, and the lines are different lengths, so the dots do not form a
+   column — on the five-item list on that page they landed at x = 675, 653, 681,
+   650 and 638, a 43px staircase down the left of a block whose lines are
+   supposed to be the only thing moving. A bullet is a device for marking the
+   start of a line in a column of starts. There is no column of starts here.
+
+   Taking them off costs the one thing a bullet buys — knowing where an item
+   ends and the next begins — and that is what the 16px below is for. Item
+   separation has to beat the leading INSIDE an item or a two-line item reads as
+   two items: 17px prose leads at 28.0px, so the bare `li` rule's 8px gave 36px
+   between items against 28px between their lines, a ratio of 1.29 that the eye
+   does not read as a break at all. 16px (--s-3) makes it 44.0 against 28.0, or
+   1.57. A paragraph break on this site is 52.0 against 28.0, or 1.86 — so the
+   interval sits between a line and a paragraph, which is what an item is. 12px
+   (--s-2) was the other candidate and gives 1.43; set side by side on the
+   three-item list on /it/sparkle/, whose items run to two and three lines, the
+   12 read as one block of eight lines and the 16 as three items.
+
+   The 5-item lists on /sparkle/ are 22-34 characters and one line each; the
+   3-item ones open with a <strong> term, so the bold lead-in marks the item
+   even without the space. Both were checked at 1470, 920 and 500px.
+
+   AND THE MARKUP CARRIES role="list", WHICH IS NOT BELT AND BRACES.
+
+   WebKit removes the list role from a ul whose list-style is none — the
+   reasoning being that a list styled as prose was probably never a list — so on
+   Safari with VoiceOver these items stop being announced as a list and the
+   reader loses the count with them. The count is most of what a list is worth
+   to somebody who cannot see its shape: "five items" is the whole reason the
+   local-processing list on /sparkle/ is a list and not a sentence with commas.
+   Firefox and Chrome do not do this, which is why it survives a sighted review.
+
+   The role is restated on EVERY list this file strips: these, `.toc ul`,
+   `.summary ul`, `.answer ul` and the language menu build.py writes. If you add
+   a `list-style: none` here, add the role to the markup in the same commit —
+   the two live in different files and nothing but this paragraph binds them. */
+.doc > ul:not([class]),
+.doc > ol:not([class]) {
+  list-style: none;
+}
+
+.doc > ul:not([class]) > li,
+.doc > ol:not([class]) > li {
+  margin-bottom: var(--s-3);
+  /* The same orphan control the prose gets, for the same reason and now with
+     more need of it: at 448px the third item of the second list on
+     /it/sparkle/ broke 61 / 73 / 7, leaving the word "lavoro." alone in the
+     centre of the column with no marker beside it to explain what it was. */
+  text-wrap: pretty;
+}
+
 /* ---------- Pull quote ---------- */
 
 /* The one place a line is allowed to stop the reader. Set in the display face at
-   headline scale, hanging off the left axis by the width of its own rule, so it
+   headline scale, under a short brand rule that breaks the column above it, so it
    reads as a break in the column rather than another paragraph in it. Once per
-   page — a second one turns the device into a texture and the line into noise. */
+   page — a second one turns the device into a texture and the line into noise.
+
+   THE RULE USED TO BE VERTICAL AND CANNOT BE ANY MORE.
+
+   A rule on the inline-start edge marks the start of every line at once — a true
+   statement about a block whose lines all start there, and a false one about a
+   centred block, whose lines start at nine different places: a mark beside the
+   longest of them is beside nothing the others share. It also broke the only
+   edge the page still had. Measured before this change, `.pull` sat 397px from
+   the viewport's left against 423px for every other block on the page — the one
+   asymmetry in the column, and it was this. Above the quote and centred, the
+   mark keeps both of its jobs — it is the brand's blue, and it stops the column
+   — and takes neither edge. */
 .pull {
   /* 48px, not 64. At 64 the space around a pull quote was identical to the space
      above a heading — measured optically, 80.2px against 79.0px, a 1.2px
@@ -1357,9 +1655,6 @@ li {
      event, so the page's strongest interval was doing two jobs and therefore was
      not the strongest interval. 48 gives the aside its own signature. */
   margin: var(--s-6) 0;
-  padding-inline-start: var(--s-4);
-  border-inline-start: 2px solid #4563ff;
-  border-inline-start-color: var(--brand);
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
   font-size: 1.75rem;
   /* THE PEAK RANK, shared with the one section heading that carries the page.
@@ -1415,63 +1710,32 @@ h2 + [class] {
   margin-top: var(--s-3);
 }
 
-/* 42.25rem, NOT 42rem, AND THE 4px IN BETWEEN IS WHY.
+/* THE MARK. 40px of the brand's blue, centred over the quote.
 
-   42rem = 672px is the width at which the container reaches its cap, and the
-   old comment here called that "the width at which there is gutter for the rule
-   to hang in". At exactly the cap there is none: the box fills the viewport, so
-   the -26px hangs the rule off the outside of the screen. Solved for the border
-   box, x = (V - 672) / 2 - 2, which is negative for every V below 676 —
-   measured at 672 the rule sat at -2.0..0.0 and `overflow-x: clip` on body ate
-   it. Four pixels of viewport where the one blue mark on the page silently is
-   not drawn, in the block whose entire device is that mark.
+   The two media queries that used to stand here are gone with the overhang they
+   managed. They existed because a rule hung 26px outside the container could
+   fall off the screen between 672 and 676px — and again between 768 and 772 for
+   the three scripts that widen `--page` to 48rem — so the negative margin had to
+   be held back at one bound and released at the other, in two queries that could
+   not be collapsed into one because a media query cannot read a custom property.
+   A mark that sits inside the measure has no bound to solve for: it is drawn at
+   every width, in every script, in one declaration.
 
-   676px is where the rule's outer edge reaches x = 0. Below it the container is
-   fluid and its 24px of padding is all that keeps the text off the screen edge,
-   so nothing may reach into it. The negative margin has to cancel the padding
-   AND the rule it hangs off, or the quote's text sits 2px inside the spine the
-   rest of the page holds.
-
-   The quote also used to carry `max-width: 26ch`, which made it 414px at 1440,
-   394 at 1024 and 364 at 768 — a fourth column width, computed from a font
-   metric, moving with the viewport and different in every language. It is a
-   paragraph of the page it interrupts and it now measures like one. */
-/* AND THE BOUND IS NOT ONE NUMBER, BECAUSE --page IS NOT ONE NUMBER.
-
-   The paragraph above solves V >= P + 4 and then writes the answer as the
-   constant 676px, which is only the answer for P = 42rem. Three scripts widen
-   the container — `.script-hans, .script-jpan, .script-kore { --page: 48rem }`
-   near the bottom of this file — so for Japanese, Korean and Simplified Chinese
-   the box is still fluid at 676 and the rule hangs off the screen exactly as it
-   did before. Measured on /ja/about/: pull left edge -2.0 at every width from
-   676 to 771, clipped by `overflow-x: clip` the whole way. 96px of viewport on
-   twelve pages, against the 4px this bound was moved to close — the original
-   42rem was wrong here by 100px and the fix narrowed it to 96.
-
-   A media query cannot read a custom property, so the two caps need two
-   queries. Written as two POSITIVE min-width bounds rather than one bound and
-   an exclusion: `max-width` and `min-width` pairs leave a fractional band
-   between them where neither matches, which is the defect the identity table's
-   fold has. Held back at the first bound, released at the second. */
-@media (min-width: 42.25rem) {
-  .pull {
-    margin-inline-start: calc(-1 * (var(--s-4) + 2px));
-  }
-
-  .script-hans .pull,
-  .script-jpan .pull,
-  .script-kore .pull {
-    margin-inline-start: 0;
-  }
-}
-
-/* 48.25rem = 772px: the same P + 4, for the 48rem container. */
-@media (min-width: 48.25rem) {
-  .script-hans .pull,
-  .script-jpan .pull,
-  .script-kore .pull {
-    margin-inline-start: calc(-1 * (var(--s-4) + 2px));
-  }
+   40px, and it is a ratio rather than a length. The old rule's length was the
+   height of the quote it stood beside, which is why it never needed a number;
+   this one has to choose. 40 is 1.6x the 24px it clears above the first line and
+   just under half the width of the shorter of the quote's two lines — long
+   enough to read as a rule and not a dash, short enough that it cannot be taken
+   for the hairline that opens a `.key` section, which runs the full measure and
+   is grey. */
+.pull::before {
+  content: "";
+  display: block;
+  inline-size: 2.5rem;
+  block-size: 2px;
+  margin: 0 auto var(--s-3);
+  background: #4563ff;
+  background: var(--brand);
 }
 
 /* ---------- Feature block ---------- */
@@ -1578,6 +1842,56 @@ h2 + [class] {
      and clear of the 23-28 h2 below. */
   font-size: 1.75rem;
   font-size: clamp(1.75rem, 1.321rem + 1.071vw, 2.125rem);
+}
+
+/* The motto is not a section heading. It is the one line on the site that is the
+   same in all fifteen languages — translate="no" in the template says so — and at
+   plain h2 it read as just another rank in the run, which is why it needed a
+   paragraph underneath explaining that it was a motto.
+
+   No third face was available to say it: the site ships Inter and Fraunces, and
+   Fraunces is instanced to a single point (wght 600, opsz 48, SOFT 40, WONK 1),
+   so there is no axis left to open and no fourth file worth the request. What
+   was available is tracking and colour, and both do the job a display face would
+   have done. Letters set wide read as a mark rather than as prose — the same
+   move a wordmark makes — and the brand blue is already the rule on .pull, so
+   the page has seen it before and does not read this as a new system.
+
+   Size stays at h2. The four ranks above (h1 34-44, .key and .pull 28-34, h2
+   23-28) were measured against each other and a fifth would flatten them; the
+   distinction here is horizontal, not vertical. */
+.motto {
+  /* No positive tracking. Every Fraunces rank here is set tight — h1 at -0.008
+     and -0.012, h2 at -0.006, the pull quote at -0.01 — and the +0.06em values
+     elsewhere in this file are on uppercase labels in Inter, where letters set
+     wide is the right move. It is not the right move on a high-contrast serif
+     at 23-28px: it unsticks the word, and "Weave the web" came out breathing
+     between every letter. The heading inherits h2's -0.006em and stays there.
+
+     What separates the motto is colour now and the italic later. */
+  color: #4563ff;
+  color: var(--brand);
+
+  /* THE ITALIC IS ONE STEP AWAY, AND DELIBERATELY NOT TAKEN YET.
+
+     Fraunces has no ital axis: the italic is a separate upstream file, and
+     font-synthesis is off above so the browser cannot shear one out of the
+     roman. tools/i18n/fonts.py already has the target and skips it while the
+     source is absent. To turn it on:
+
+       1. Fetch Fraunces-Italic[SOFT,WONK,opsz,wght].ttf from
+          github.com/undercasetype/Fraunces, rename it Fraunces-Italic.ttf, and
+          put it beside Inter.ttf and Fraunces.ttf.
+       2. pip install fonttools brotli
+       3. python3 tools/i18n/fonts.py --src <that directory>
+       4. Paste the @font-face block it prints above, next to the other three.
+          It emits font-style: italic for that face on its own.
+       5. Uncomment the line below.
+
+     Until step 4 has happened, that line would fall through to Georgia's italic
+     — a different face on the one string the site never translates. Which is
+     worse than no italic, so it waits. */
+  /* font-style: italic; */
 }
 
 /* The Sparkle lockup is the home page's turn, and .lockup sets its own margins
@@ -2038,6 +2352,62 @@ h2 + [class] {
   margin-top: var(--s-2);
 }
 
+/* ---------- The two panels' measure ---------- */
+
+/* THE MEASURE IS A CHARACTER COUNT, SO A SMALLER TYPE SIZE NEEDS A SMALLER BOX.
+
+   Both of these sit here, after the `margin: 0` they have to beat, rather than
+   with the prose cap that shares their reasoning — the note there explains why,
+   and it is worth 75px of axis.
+
+   .summary is 15px. In the 624px container its longest wrapping line on
+   /it/privacy/ measured 85 characters: the longest line anywhere on the site,
+   because it is the smallest type in the widest box. --measure would still
+   leave it at 61. 24.5rem is 448 x 15/17 — the same character count as the 17px
+   prose above it, which is the whole point. One measure, expressed in
+   characters, arriving at two lengths because there are two type sizes.
+
+   .answer is 17px at full ink, for the reason its own note gives, so it takes
+   --measure unchanged.
+
+   .cta-note is 15px and is NOT here. It holds two to four contact links
+   separated by middots, not sentences — 47 characters and 285px of ink on
+   /it/sparkle/ — so it has never wrapped, and a cap on it could only ever make
+   it wrap. A measure is for text that has a next line. */
+.summary ul {
+  max-inline-size: 24.5rem;
+  margin-inline: auto;
+}
+
+.answer ul {
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+}
+
+/* BALANCED, NOT PRETTY, AND THIS IS THE ONE PLACE THE DIFFERENCE SHOWS.
+
+   `p` sets `text-wrap: pretty` and the property is inherited, so every
+   paragraph and every standfirst on the site already has it; a `li` does not,
+   because its ancestor is a `ul`. These two lists are the case `balance` was
+   made for and .home-what's note already describes: short self-contained
+   statements, one or two lines, where an unbalanced rag drops a fragment on the
+   last line with nothing beside it. Measured on the five items of the digest on
+   /it/privacy/, characters per line:
+
+       default   41 | 45 | 57,10 | 46,13 | 53,44
+       pretty    41 | 45 | 57,10 | 43,16 | 53,44
+       balance   41 | 45 | 32,35 | 30,29 | 47,50
+
+   pretty rescued one of the two orphans by three characters. balance removed
+   both and left five items that are each a shape rather than a line and a
+   remainder. It is safe here and not in the prose for the reason the note on
+   `p` gives: these items are one and two lines, and balance is a per-block
+   operation that costs a block its measure. */
+.summary li,
+.answer li {
+  text-wrap: balance;
+}
+
 /* ---------- CTA ---------- */
 
 /* The only filled shape on any page, and it appears at most once. */
@@ -2060,7 +2430,10 @@ h2 + [class] {
   text-decoration: none;
   padding: var(--s-2) var(--s-4);
   border-radius: 999px;
-  transition: background 0.2s ease;
+  /* One declaration, not two. There was a second `.cta { transition: ... }`
+     ninety lines below this one that overrode it entirely — the property list
+     here was dead, and the two were 0.2s apart on the same property. */
+  transition: background-color 0.16s var(--ease), transform 0.16s var(--ease);
 }
 
 /* The Sparkle mark inside the button. The asset is mark-white.png from the
@@ -2081,20 +2454,37 @@ h2 + [class] {
   flex: none;
 }
 
-/* The two states an action already had, given the time they were missing.
-   120ms on the press, not 200: a button that eases into being pressed feels
-   like it did not notice. */
-.cta {
-  transition: background-color 0.2s ease, transform 0.12s ease;
-}
+/* HOVER LIFTS, PRESS PUSHES, AND THE TWO ARE THE SAME GESTURE IN OPPOSITE
+   DIRECTIONS.
 
+   The button had a darker blue on hover and a 1px push on press. The press was
+   right and the hover did nothing physical: the colour changed and the shape
+   stayed where it was, so the only filled object on the page acknowledged the
+   cursor the way a paragraph acknowledges a cursor.
+
+   1px up on hover and 1px down on press. The travel between the two states is
+   therefore 2px, which is the distance a real key moves under a finger, and the
+   direction reverses at the moment of the click rather than at the moment of
+   arrival. Not 2px up: at 2 the button reads as detached from the line it sits
+   on, and this page has no shadows to catch it.
+
+   Contrast holds through the cycle, which is the check the resting state was
+   already written for. Measured against white text: #3d5bfa resting is 5.15:1
+   and #2f49d6 on hover is 6.90:1, so the state that moves is also the state
+   with more headroom, and neither is near the 4.5:1 floor for 17px text. */
 .cta:hover {
   background: #2f49d6;
   color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .cta:active {
   transform: translateY(1px);
+  /* 100ms down, not 0 and not the 160 of the lift. Zero was tried and it is a
+     jump rather than a press: the button arrives at the bottom of its travel
+     before the finger has finished moving. 100 is short enough to feel like the
+     answer to the click and long enough to be a movement. */
+  transition-duration: 0.1s;
 }
 
 .cta:focus-visible {
@@ -2154,11 +2544,52 @@ h2 + [class] {
    A block that interrupts prose is one event and it had four spacings: 48/48
    here, 48/48 there, 32/48-plus-24-of-padding on the summary panel, and 24/32
    on this table. */
+/* ONE TRACK, AT EVERY WIDTH, BECAUSE TWO CANNOT BE CENTRED.
+
+   This was 1fr and 1.4fr with the label in the first and its value in the
+   second, and the seam between them is not the middle of the block: at the 624px
+   measure the gutter falls at 260px, so a pair of centred cells centres on two
+   axes and neither of them is the page's. Aligning the label to the end of its
+   track and the value to the start of the next is symmetric about that seam,
+   which is a different claim from symmetric about the column, and the only way
+   to make the two agree is to give the tracks equal widths — at which point the
+   label track is 24 characters wide for the sake of "REA" and the value track
+   cannot hold "Spinne Software di Luci Manuel" on one line.
+
+   Stacked, the pair reads down the centre like everything else on the page. The
+   shape is not new: it is exactly what this table did below 37rem already, so
+   what changed is the bound, not the design. The `not all and (min-width: 37rem)`
+   query that used to carry it is gone, and with it the note about the fractional
+   band a max-width complement would have opened. */
+/* AND ONE TRACK AT 624px IS A LADDER, NOT A TABLE.
+
+   Nine hairlines, each the full width of the container, with 130 to 223px of
+   ink centred between them. Measured on /it/about/ the widest cell in the block
+   — "Spinne Software di Luci Manuel" — is 223.1px against a 624px rule it sits
+   in the middle of: the separator is 2.8 times longer than the longest thing it
+   separates, so what the eye gets is a stack of rules with type in the gaps
+   rather than rows.
+
+   At --measure the same ratio is 2.0 and the rules land where the content is.
+   It is the same 448 the prose takes, not a number of its own: the widest cell
+   in any locale is the Russian legal form, "Индивидуальный предприниматель
+   (impresa individuale), Италия", at 477.5px, and that one row wraps to two
+   lines here — which is what it already does on every phone, and which is the
+   alternative to tuning the block's width to one string in one language. That
+   is the exact failure the note above records for `min-width: 10.75rem`. Every
+   other locale's longest cell clears 448: French 350.7, Spanish 345.7, German
+   339.3, English 325.4.
+
+   In the three dense scripts --measure is `none` — see the note beside the
+   48rem container — so this cap resolves to none there and the table keeps its
+   720px box. Checked rather than assumed: the longest cell on /ja/about/ is
+   307.9px, which puts the ratio at 2.3, between the 2.0 the cap buys and the
+   2.8 it was written to remove. */
 .identity {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  column-gap: var(--s-4);
-  margin: var(--s-6) 0;
+  grid-template-columns: minmax(0, 1fr);
+  max-inline-size: var(--measure);
+  margin: var(--s-6) auto;
   font-size: 0.9375rem;
 }
 
@@ -2166,19 +2597,33 @@ h2 + [class] {
   display: contents;
 }
 
+/* justify-content, not text-align. Each cell is a flex container and its text is
+   an anonymous flex item, which sizes to its content and is placed by the main
+   axis — so `text-align: center` inherited from `.doc` centres the lines inside
+   a box that is already only as wide as its longest line, and moves nothing. */
 .identity dt,
 .identity dd {
   display: flex;
+  justify-content: center;
   align-items: center;
-  min-height: 2.75rem;
   border-bottom: 1px solid #e6e8ef;
   border-bottom-color: var(--rule);
 }
 
+/* The label sits directly on its value, and the rule closes the pair rather than
+   separating the two halves of it. */
+.identity dt {
+  border-bottom: 0;
+  padding-top: var(--s-1);
+}
+
+.identity dd {
+  padding-bottom: var(--s-1);
+}
+
 /* The table was open at the top and closed at the bottom, while the fact list
    beside it on the same page was closed at both. */
-.identity > div:first-child > dt,
-.identity > div:first-child > dd {
+.identity > div:first-child > dt {
   border-top: 1px solid #e6e8ef;
   border-top-color: var(--rule);
 }
@@ -2190,42 +2635,6 @@ h2 + [class] {
   /* VAT and REA numbers are read digit by digit against a register entry, so
      they get tabular figures wherever they appear. */
   font-variant-numeric: tabular-nums;
-}
-
-/* Stacked below 37rem: one column, the label above its value, and the rule only
-   under the pair rather than under each cell. 37rem and not 32 so that every
-   two-track block on the site — this table, the values grid, the footer —
-   folds at the same width instead of at three.
-
-   `not all and (min-width: 37rem)`, not `max-width: 37rem`, and not
-   `max-width: 36.9375rem` either. At `max-width: 37rem` this query and the
-   `min-width: 37rem` that unfolds the values grid, the footer and the colophon
-   were BOTH true at exactly 592px: this table one column while the other two
-   were already two — the three seams this comment says the site does not have.
-   Backing off to 36.9375rem fixes the integer width and opens a fractional one,
-   because any viewport in (591, 592) — browser zoom, fractional scaling, a
-   window dragged slowly — then satisfies NEITHER, and the same split reappears
-   the other way round. The exact complement of a min-width bound is its
-   negation, which cannot have a gap or an overlap by construction. */
-@media not all and (min-width: 37rem) {
-  .identity {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .identity dt {
-    min-height: 0;
-    border-bottom: 0;
-    padding-top: var(--s-1);
-  }
-
-  .identity dd {
-    min-height: 0;
-    padding-bottom: var(--s-1);
-  }
-
-  .identity > div:first-child > dd {
-    border-top: 0;
-  }
 }
 
 /* The spec tables on /sparkle/ and /how-we-build/ used to be .rail-facts: 12px
@@ -2511,7 +2920,7 @@ footer {
   height: auto;
   flex: none;
   opacity: 0.6;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s var(--ease);
 }
 
 .footer-product:hover img {
@@ -2672,10 +3081,32 @@ footer {
        Starting at 15% puts the block's top at 84% of the window when the
        reveal begins and 58% when it ends — it now happens on the way INTO the
        reading zone rather than before it. */
+    /* AND THE RULE GOES FIRST, WHICH IT DID NOT.
+
+       These read block 15-38 and rule 18-45: the heading began rising three
+       points BEFORE the hairline it belongs to began drawing. The comment above
+       calls the two "coordinated gestures, read as one", and simultaneous is one
+       way to read a pair — but the pair here is a rule and the thing the rule
+       introduces, and a page whose argument is that structure comes first should
+       draw the structure first.
+
+       Six points of lead, not three and not twelve. A cover range on a heading in
+       a 900px window is about 940px long, so a point is roughly 9px of scrolling
+       and six is 56px — under a third of a wheel notch on a trackpad.
+
+       What that buys, derived from these ranges and the curve above rather than
+       measured on screen (a view() timeline's progress is not readable through
+       getComputedStyle): at cover 21%, where the heading starts to move, the
+       rule is 0.24 through its own 15-to-40 range, and --ease puts 0.24 of the
+       time at 68% of the distance. So the hairline is two thirds open before the
+       heading has moved a pixel, and complete at cover 40% while the heading is
+       still arriving until 44. The rule finishes first and the heading lands
+       into it. Twelve points read as two separate events waiting on each other;
+       three was inside the noise of a single flick. */
     :root {
       --range-quiet: cover 12% cover 34%;
-      --range-block: cover 15% cover 38%;
-      --range-rule:  cover 18% cover 45%;
+      --range-rule:  cover 15% cover 40%;
+      --range-block: cover 21% cover 44%;
     }
 
     .key,
@@ -2684,46 +3115,78 @@ footer {
       position: relative;
     }
 
-    /* The curtain over a horizontal rule. transform-origin is the END edge, so
-       shrinking it uncovers the rule from the START edge — left to right in
-       English, right to left in Arabic. inset-block-start is -1px because an
-       absolutely positioned box is laid out against the PADDING box, and the
-       border it has to cover sits just outside it. */
+    /* THE RULE OPENS FROM THE CENTRE, IN TWO HALVES.
+
+       There was one curtain across the whole rule, retracting from the end edge
+       so the hairline appeared left to right in English and right to left in
+       Arabic. That was the correct gesture for a column with one start edge.
+       The column does not have one any more: the page is centred, the quote's
+       mark grows from its middle, and a rule that arrives from the left is the
+       last thing on the page still pointing at an edge that was removed. Three
+       origins for one idea.
+
+       Two curtains instead, each covering half and each retracting OUTWARD from
+       the middle, so the hairline opens from its centre to both ends at once —
+       the same construction the page is now built on. It also deletes the
+       direction-specific rule that used to sit below: a symmetric gesture is the
+       same gesture in Arabic, so there is nothing left for `.is-rtl` to say.
+
+       calc(50% + 1px), not 50%: at a fluid container width the two halves land
+       on a fractional boundary, and two boxes that meet at x.5 leave a half-pixel
+       of the rule showing at the centre before the animation has started. The
+       overlap is page-coloured over page-coloured, so it costs nothing.
+
+       inset-block-start is -1px because an absolutely positioned box is laid out
+       against the PADDING box, and the border it has to cover sits just outside
+       it. left/right rather than the logical properties, because the two halves
+       are now physically symmetric and a logical pair would swap them in Arabic
+       to produce the identical result by a longer route. */
     .key::before,
-    .close::before {
+    .key::after,
+    .close::before,
+    .close::after {
       content: "";
       position: absolute;
       inset-block-start: -1px;
-      inset-inline-start: 0;
-      inline-size: 100%;
+      inline-size: calc(50% + 1px);
       block-size: 1px;
       background: #ffffff;
       background: var(--bg);
-      transform-origin: right;
-      animation: uncover-x ease-out both;
+      animation: uncover-x var(--ease-scroll) both;
       animation-timeline: view();
       animation-range: var(--range-rule);
     }
 
-    /* The pull quote's rule is vertical and 2px, so its curtain retracts
-       downward and sits 2px outside the padding box instead of 1. */
-    .pull::before {
-      content: "";
-      position: absolute;
-      inset-block: 0;
-      inset-inline-start: -2px;
-      inline-size: 2px;
-      background: #ffffff;
-      background: var(--bg);
-      transform-origin: bottom;
-      animation: uncover-y ease-out both;
-      animation-timeline: view();
-      animation-range: var(--range-rule);
-    }
-
-    .is-rtl .key::before,
-    .is-rtl .close::before {
+    .key::before,
+    .close::before {
+      left: 0;
       transform-origin: left;
+    }
+
+    .key::after,
+    .close::after {
+      right: 0;
+      transform-origin: right;
+    }
+
+    /* THE MARK IS DRAWN. IT IS NOT UNCOVERED.
+
+       The two rules above are borders, and a border cannot be animated into
+       existence — hence the curtain, a box painted in the ground that retracts
+       off the rule beneath it. The quote's mark is not a border any more; it is
+       the pseudo-element itself, so it can simply scale up, and a curtain over
+       it would have to be a third box painted over the second.
+
+       Growing from the centre rather than from an edge, because the mark is
+       centred: an edge origin makes it arrive from the left in English and from
+       the right in Arabic, which is the correct behaviour for the two rules that
+       run the full measure and the wrong one for a 40px mark whose position is
+       the point. `.is-rtl` needs no companion rule here for the same reason. */
+    .pull::before {
+      transform-origin: center;
+      animation: draw-x var(--ease-scroll) both;
+      animation-timeline: view();
+      animation-range: var(--range-rule);
     }
 
     /* EVERY SECTION HEADING, not only the four moment blocks. With just those
@@ -2742,7 +3205,7 @@ footer {
     .key,
     .pull,
     .close > * {
-      animation: arrive ease-out both;
+      animation: arrive var(--ease-scroll) both;
       animation-timeline: view();
       animation-range: var(--range-block);
     }
@@ -2768,13 +3231,16 @@ footer {
   }
 }
 
-@keyframes uncover-y {
+/* The inverse of uncover-x, and the reason there is no uncover-y any more: the
+   only element that retracted on the block axis was the pull quote's curtain,
+   and the quote draws its mark instead. */
+@keyframes draw-x {
   from {
-    transform: scaleY(1);
+    transform: scaleX(0);
   }
 
   to {
-    transform: scaleY(0);
+    transform: scaleX(1);
   }
 }
 
@@ -2784,10 +3250,20 @@ footer {
    added up to a reveal nobody could report seeing. 24 is one line of body copy
    — far enough to read as arrival, short enough that a reader already looking
    at the line does not watch it slide under them. */
+/* 8px, WHICH IS WHAT THE MOTION NOTE ABOVE HAS ALWAYS SAID IT WAS.
+
+   That note describes the gesture as "the block it belongs to rises 8px into
+   place with it". The keyframe said 24. One of the two drifted and the comment
+   is the one that records a decision, so the value follows it back.
+
+   24px is a third of a section break travelling under a curve the reader does
+   not control the speed of; at 8 the block settles rather than arrives from
+   off-stage, and the rule beside it stays the louder of the two gestures —
+   which is the whole hierarchy the note sets out. */
 @keyframes arrive {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(8px);
   }
 
   to {
@@ -2844,9 +3320,17 @@ footer {
      its ground is a grey bar sitting on a hairline, so there are no curtains
      here — the rules are simply drawn, which is what they were before. */
   .key::before,
+  .key::after,
   .close::before,
-  .pull::before {
+  .close::after {
     display: none;
+  }
+
+  /* NOT `.pull::before`. It was on the list above while it was a curtain; it is
+     the mark now, and hiding it deletes the one device the block has. --brand
+     is not honoured in this mode, so it is named in a system colour that is. */
+  .pull::before {
+    background: CanvasText;
   }
 }
 
@@ -2904,9 +3388,18 @@ footer {
   }
 
   .key::before,
+  .key::after,
   .close::before,
-  .pull::before {
+  .close::after {
     display: none;
+  }
+
+  /* The mark is content on paper, not a curtain to be hidden — but it is also
+     animated, and the reset above names elements, not their pseudo-elements, so
+     without this line it prints at scaleX(0): a mark of no width. */
+  .pull::before {
+    animation: none;
+    transform: none;
   }
 
   h1,
@@ -3028,7 +3521,27 @@ footer {
    scripts keeps the line count per paragraph in the same range. It is the
    container and no longer a separate token, because the container is the
    measure — one number to move instead of two to keep in step. */
-.script-hans, .script-jpan, .script-kore { --page: 48rem; }
+/* The last sentence stopped being true when the prose got its own cap, and Han
+   is the one place the cap must not follow.
+
+   Centring costs a script the rag, and Han has almost none: it breaks between
+   any two characters, so both edges come out all but flush without justifying
+   anything. Measured on /ja/sparkle/, standard deviation of full-line width —
+   2.5px on a 720px line, a range of 706.6 to 714.0. The same measurement on
+   /it/sparkle/ is 31.8px on 624. Twelve times the rag in Latin, and the rag is
+   the whole reason a centred line wants a shorter measure.
+
+   So the three dense scripts pay nothing for the alignment and are given no
+   cap. What they would lose to one is real: 720px is 42 Han characters a line,
+   and 448 would be 26 — half the count this container was widened to protect,
+   in the scripts it was widened for. `none` rather than a number, because there
+   is nothing here to solve for.
+
+   Arabic, Devanagari and Bengali are NOT in this list. They set words with
+   spaces between them and they rag: /ar/sparkle/ measured 22.5px of deviation
+   on 624 against 10.3px at 448, and 15 words a line against 11 — the same
+   count the Latin cap produces. They take --measure as it stands. */
+.script-hans, .script-jpan, .script-kore { --page: 48rem; --measure: none; }
 
 /* ---------- Right to left ---------- */
 
@@ -3095,7 +3608,7 @@ footer {
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: translateY(-0.125rem) rotate(45deg);
-  transition: transform 0.15s ease;
+  transition: transform 0.15s var(--ease);
 }
 
 .lang[open] summary::after {
@@ -3245,6 +3758,40 @@ footer {
    type at full width is a defect, not a correction. Above the container's cap
    nothing needs it: the German h1 that overflowed 327px measures about 440px
    against 544 once the column is full size. */
+/* AND THE GATE WAS 672px, WHICH IS NOT A WIDTH ANY MEASUREMENT WAS TAKEN AT.
+
+   42rem is the CONTAINER. It arrived in this block because it is the number
+   nearby, not because anything was measured against it, and it left the
+   property live across 297px of viewport in which nothing needs it. Because
+   `hyphens: auto` is opportunistic — it hyphenates wherever a break improves
+   the fit of a line, not only where a word will not fit — that dead range is
+   not inert. At 500px the Italian pull quote on /it/ came out as "il tuo
+   tem-/po": "tempo" is 84.0px at the .pull floor, in a 452px column, hyphenated
+   for nothing. That is the same defect the paragraph above describes at 1440px,
+   at a width the gate was supposed to have excluded, and centring makes it
+   worse than it was — a hyphen at the end of a flush line lands on the margin
+   where the eye expects an edge; on a centred line it lands in open space.
+
+   Re-measured properly. Every heading and quote string in all fifteen locales,
+   longest word per rank, set at that rank's CLAMP FLOOR (the size it has below
+   640px, which is the only place this can matter) in the face that locale
+   actually gets — Georgia for Cyrillic, per the note above:
+
+       ru  h1     конфиденциальности     403.9px    needs 451.9px of viewport
+       de  h1     Datenschutzerklärung   359.0px    needs 407.0px
+       ru  h2     экспортироваться       225.2px    needs 273.2px
+       id  .pull  mengelilinginya        211.1px    needs 259.1px
+       it  .pull  tempo                   84.0px    needs 132.0px
+
+   ("needs" is the word's width plus the 48px of fixed gutter.) Only h1 asks for
+   anything a phone does not already give it. h2, h3 and .pull clear the 272px
+   column of a 320px screen — the narrowest this site is built for — by 47px and
+   more, so they are off this list entirely and keep the backstop alone.
+
+   28.5rem = 456px, against the 451.9 the Russian genitive needs: 4px of
+   headroom on a figure measured to a tenth of a pixel, and the next locale down
+   is 49px below that. Above 456 no h1 word on the site fails to fit, so above
+   456 the browser is not asked to break one. */
 /* The backstop is NOT gated: a URL or a compound the dictionary has no break
    for can overflow at any width, and this is the rule that stops it. */
 h1,
@@ -3254,11 +3801,8 @@ h3,
   overflow-wrap: break-word;
 }
 
-@media (max-width: 42rem) {
-  h1,
-  h2,
-  h3,
-  .pull {
+@media (max-width: 28.5rem) {
+  h1 {
     hyphens: auto;
   }
 }

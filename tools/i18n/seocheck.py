@@ -96,7 +96,13 @@ def main() -> int:
                 problems.append(f"hreflang {code} -> {target}, which is not a page   {rel}")
             elif canon not in back[2].values():
                 problems.append(f"hreflang {code} -> {target} does not point back   {rel}")
-        if lang and lang not in alts:
+        # Only for a page that is part of a cluster. build.py emits no hreflang at
+        # all for a page that exists in one language, because a set of alternates
+        # with one member has nothing to describe — see the PAGES table there. So
+        # an empty `alts` is that page keeping its promise, not a page forgetting
+        # itself; demanding a self-link here would ask build.py to advertise a
+        # cluster that does not exist.
+        if lang and alts and lang not in alts:
             problems.append(f"page is lang={lang} but lists no hreflang for itself   {rel}")
 
     # Two languages sharing a title means one was never translated. Product and

@@ -4,28 +4,7 @@
 
         <p class="lede">{{page.lede}}</p>
 
-        <h2 id="values">{{page.h2_values}}</h2>
-
-        <ul class="home-what">
-          <li><strong>{{page.what.0.name}}</strong> {{page.what.0.body}}</li>
-          <li><strong>{{page.what.1.name}}</strong> {{page.what.1.body}}</li>
-          <li><strong>{{page.what.2.name}}</strong> {{page.what.2.body}}</li>
-          <li><strong>{{page.what.3.name}}</strong> {{page.what.3.body}}</li>
-          <li><strong>{{page.what.4.name}}</strong> {{page.what.4.body}}</li>
-          <li><strong>{{page.what.5.name}}</strong> {{page.what.5.body}}</li>
-        </ul>
-
-        <!-- The motto stays in English in every language, like the company name
-             it belongs to: it is a brand line, not a sentence. The paragraph
-             under it is translated, because that is what explains it to a reader
-             who does not speak the motto.
-
-             It sits here, between what the company values and what it has built,
-             and not next to the pull quote further down — both are about the
-             web, and two spider metaphors 400px apart halve each other. -->
-        <h2 id="name" translate="no">{{page.rail_motto}}</h2>
-
-        <p>{{page.rail_motto_body}}</p>
+        <p>{{page.intro_p2}}</p>
 
         <h2 id="sparkle" class="lockup key">
           <a href="https://sparkle.software">
@@ -37,25 +16,96 @@
 
         <p>{{page.sparkle_p2}}</p>
 
+        <p>{{page.sparkle_p3}}</p>
+
+        <!-- The one .pull on the page. style.css says one per page and that it is
+             "the line the page is for" — here the section heading is a logo, so
+             this carries the weight a text h2 would have carried. It used to sit
+             directly under that logo, where `h2 + *` binds the next block 16px
+             below the heading: the quote lost its own 48px signature and read as
+             a caption on the mark rather than a break in the column. Three
+             paragraphs down it gets that interval back, and it lands where it
+             argues — after the work that has to be done, before the product that
+             does it. -->
+        <p class="pull">{{page.sparkle_pull}}</p>
+
+        <p>{{page.sparkle_p4}}</p>
+
+        <p>{{page.sparkle_p5}}</p>
+
+        <p>{{page.sparkle_p6}}</p>
+
         <p class="more">
           <a href="{{nav.sparkle_href}}">{{page.more_internal}}</a>
         </p>
 
-        <h2 id="next">{{page.h2_next}}</h2>
+        <h2 id="assistant">{{page.h2_ai}}</h2>
 
-        <p>{{page.next_p1}}</p>
+        <p>{{page.ai_p1}}</p>
 
-        <p class="pull">{{page.pull}}</p>
+        <p>{{page.ai_p2}}</p>
 
-        <p>{{page.next_p2}}</p>
+        <p>{{page.ai_p3}}</p>
 
-        <h2 id="engineering">{{page.rail_engineering}}</h2>
+        <p>{{page.ai_p4}}</p>
 
-        <p>{{page.rail_engineering_body}}</p>
+        <p>{{page.ai_p5}}</p>
 
         <p class="more">
           <a href="{{nav.how_href}}">{{nav.how}}</a>
         </p>
+
+        <h2 id="local">{{page.h2_local}}</h2>
+
+        <p>{{page.local_p1}}</p>
+
+        <p>{{page.local_p2}}</p>
+
+        <p>{{page.local_p3}}</p>
+
+        <p>{{page.local_p4}}</p>
+
+        <p>{{page.local_p5}}</p>
+
+        <h2 id="build">{{page.h2_build}}</h2>
+
+        <p>{{page.build_p1}}</p>
+
+        <p>{{page.build_p2}}</p>
+
+        <p>{{page.build_p3}}</p>
+
+        <!-- build_p4 ends open: the link and the stop finish the sentence. It is
+             the one place the home names where the claim can be checked. -->
+        <p>{{page.build_p4}} <a href="{{nav.about_href}}#technology">{{page.values_company_link}}</a>{{punct.stop}}</p>
+
+        <h2 id="next">{{page.h2_one}}</h2>
+
+        <p>{{page.one_p1}}</p>
+
+        <p>{{page.one_p2}}</p>
+
+        <p>{{page.one_p3}}</p>
+
+        <p>{{page.one_p4}}</p>
+
+        <p>{{page.one_p5}}</p>
+
+        <p>{{page.one_p6}}</p>
+
+        <!-- The motto stays in English in every language, like the company name
+             it belongs to: it is a brand line, not a sentence. The paragraphs
+             under it are translated, because that is what explains it to a reader
+             who does not speak the motto. It closes the page. -->
+        <h2 id="name" class="motto" translate="no">{{page.rail_motto}}</h2>
+
+        <p>{{page.motto_p1}}</p>
+
+        <p>{{page.motto_p2}}</p>
+
+        <p>{{page.motto_p3}}</p>
+
+        <p>{{page.motto_p4}}</p>
       </article>
 
       <!-- The one action on the page, at the end of the argument rather than in

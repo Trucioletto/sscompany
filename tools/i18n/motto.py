@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# NON PIU' IN USO. Le tre parole che questo file dipingeva nel campo sono state
+# tolte su richiesta: il campo ora porta la rete e il caricatore, e niente
+# testo. Il file resta perche' registra cinque tentativi e le ragioni per cui
+# ognuno era sbagliato, che sono la parte che vale. NON eseguirlo: rimetterebbe
+# i tracciati delle lettere in _shell.html.
 """Set the motto in the pull field, and open the weave to make room for it.
 
 Both halves are here because they are one decision. The three words in the blue
